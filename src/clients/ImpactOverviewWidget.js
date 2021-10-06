@@ -41,9 +41,11 @@ class ImpactOverviewWidget extends BaseWidget {
       this.cacheKey = cacheKey;
       this.input.user = args.user;
       this.input.nonprofit = args.nonprofit;
-      
-      data = await this.makeAPIRequest("/api/v1/impact/all/", {
+      this.input.chain = args.chain;
+
+      data = await this.makeAPIRequest("api/v2/users/impact/community", {
         nonprofit: args.nonprofit,
+        chain: args.chain,
         user: args.user,
         lan: this.options.lan
       });
@@ -51,10 +53,10 @@ class ImpactOverviewWidget extends BaseWidget {
     return data;
   }
 
-  async render(user, nonprofit = null) {
+  async render(user, chain, nonprofit = null) {
     if (!user) throw ReferenceError("Provide user beam ID");
 
-    await super.render({ nonprofit, user }, () => {
+    await super.render({ nonprofit, user, chain }, () => {
       return this.isMobile && !this.options.themeConfig.noWrap
         ? this.buildMobileView()
         : this.buildDesktopView();
