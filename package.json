@@ -1,0 +1,34 @@
+{
+  "name": "beamwidget",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha --require @babel/register tests/**/*.js",
+    "build": "webpack --env.environment=prod",
+    "build-stag": "webpack --env.environment=stag",
+    "build-dev": "webpack --env.environment=dev",
+    "start": "webpack-dev-server --env.environment=dev"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.9.0",
+    "@babel/plugin-transform-runtime": "^7.9.0",
+    "@babel/preset-env": "^7.9.5",
+    "@babel/register": "^7.9.0",
+    "babel-loader": "^8.1.0",
+    "chai": "^4.2.0",
+    "chai-as-promised": "^7.1.1",
+    "jsdom": "^16.2.2",
+    "mocha": "^7.1.1",
+    "sinon": "^9.0.2",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.11",
+    "webpack-dev-server": "^3.11.0"
+  },
+  "dependencies": {
+    "crypto": "^1.0.1"
+  }
+}

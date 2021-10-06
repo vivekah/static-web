@@ -1,0 +1,490 @@
+<main class="main__content" role="main">
+    <div class="step" data-step="thank_you">
+        <div class="step__sections">
+            <div class="section">
+                <form
+                        action="/7537786991/orders/05a1a94d7c117095d947facca6e4bfd3/authenticate"
+                        accept-charset="UTF-8"
+                        method="post"
+                        class="animate-floating-labels"
+                >
+                    <input
+                            type="hidden"
+                            name="authenticity_token"
+                            value="pm4ssWGcmDQOMO6VbzDn2uKZD5MjfBFyXQjD_gaJ9nTHVxP-oxJ0NEQyEW3mc16j628QvZEcW5WKpl_zpQXvcg"
+                    />
+                    <div class="section__header">
+                        <h2 class="section__title">
+                            Log in to view all order details
+                        </h2>
+                        <p class="section__text">
+                            You can find your order number in the receipt you received via
+                            email.
+                        </p>
+                    </div>
+
+                    <div class="section__content">
+                        <div class="fieldset fieldset--inline">
+                            <div class="field field--required">
+                                <div class="field__input-wrapper">
+                                    <label class="field__label field__label--visible" for="email"
+                                    >Email</label
+                                    >
+
+                                    <input
+                                            type="email"
+                                            name="email"
+                                            id="email"
+                                            placeholder="Email"
+                                            class="field__input"
+                                            aria-required="true"
+                                    />
+                                </div>
+                            </div>
+
+                            <div class="field field--required">
+                                <div class="field__input-wrapper">
+                                    <label
+                                            class="field__label field__label--visible"
+                                            for="order_number"
+                                    >Order number</label
+                                    >
+
+                                    <input
+                                            type="text"
+                                            name="order_number"
+                                            id="order_number"
+                                            placeholder="Order number"
+                                            class="field__input"
+                                            aria-required="true"
+                                    />
+                                </div>
+                            </div>
+                            <button name="button" type="submit" class="btn">Log in</button>
+                        </div>
+                    </div>
+                    <input
+                            type="hidden"
+                            name="checkout[client_details][browser_width]"
+                            value="1652"
+                    /><input
+                        type="hidden"
+                        name="checkout[client_details][browser_height]"
+                        value="808"
+                /><input
+                        type="hidden"
+                        name="checkout[client_details][javascript_enabled]"
+                        value="1"
+                /><input
+                        type="hidden"
+                        name="checkout[client_details][color_depth]"
+                        value="30"
+                /><input
+                        type="hidden"
+                        name="checkout[client_details][java_enabled]"
+                        value="false"
+                /><input
+                        type="hidden"
+                        name="checkout[client_details][browser_tz]"
+                        value="-120"
+                />
+                </form>
+            </div>
+
+            <div class="thank-you__additional-content">
+                <!--BEAM START-->
+                <script defer ype="text/javascript">
+                  const fontStyle = document.createElement("style");
+                  fontStyle.innerHTML = `
+          @font-face {
+              font-family: 'Helvetica Neue LT Std';
+              src: url('https://beam-sdk.s3.us-west-2.amazonaws.com/fonts/HelveticaNeueLTStd-HvEx.otf');
+          }
+          @font-face {
+              font-family: 'Haas Grot Text-55 Roman';
+              src: url('https://d1jhb45gnbgj0c.cloudfront.net/fonts/Neue_Haas_Grot_Text_55_Roman.otf');
+          }
+          #beam-logo-header {
+              display: flex;
+              align-items: center;
+          }
+                #beam-post-transaction-button {
+                   background-color: #ff2a00;
+                   color: #fff;
+                 }
+                .button  {
+                  text-overflow: ellipsis;
+                  overflow: visible;
+                  display: inline-block;
+                  margin: 0;
+                  line-height: 0;
+                  text-decoration: none;
+                  text-align: center;
+                  vertical-align: middle;
+                  white-space: nowrap;
+                  border: none;
+                  cursor: pointer;
+                  user-select: none;
+                  border-radius: 5px;
+                  background-color: #000;
+                  color: #fff;
+                  transition: background-color 0.5s cubic-bezier(0.215, 0.61, 0.355, 1);
+                  padding: 1.6rem 1.4rem;
+                  min-width: 100px;
+                  font-style: normal;
+                  text-transform: uppercase;
+                  letter-spacing: 1px;
+                  font-weight: bold;
+                  font-size: normal;
+                  font-family: "Helvetica Neue", sans-serif;
+                }
+                .button:hover {
+                  color: #fff;
+                }
+              `;
+                  document.head.appendChild(fontStyle);
+                </script>
+                <script src="http://localhost:8001/static/core/js/paradeThankYou.js"></script>
+                <script defer>
+
+                  const cartTotal = "$127.5";//"{{ checkout.line_items_subtotal_price | money }}";
+                  const beamUser = "5477836816579";//"{{ beam_meta.user }}".trim();
+                  const orderId = "4023181443267" //"{{checkout.order_id}}";
+                  const customerId = "5182663262342";//"{{ checkout.customer.id }}";
+                  const customerFirstName = "TestName";//"{{ checkout.customer.first_name }}";
+                  const customerLastName = "TestSurname"//"{{ checkout.customer.last_name }}";
+                  const customerEmail = "snezana.dichevska+5@gmail.com";//"{{ checkout.customer.email }}";
+                  const customerPhone = "229394958632";//"{{ checkout.customer.phone }}";
+                  const customerZipCode = "10013";//"{{ checkout.customer.default_address.zip }}";
+                  const customerCountryCode = "US";//"{{ checkout.customer.default_address.country_code }}";
+                  const widgetId = 'e9738b7ffed2476bbec748b1ccc1a046';
+                  const shopName = '6';
+                  const shopDomain = 'beam-impact-store.myshopify.com';
+                  const containerId = "beam-widget-wrapper";
+                  const beamWebSdkBaseUrl = 'https://webstaging.sdk.beamimpact.com';
+                  const communityImpactUrl = "https://superetteshop.com/pages/about#community"
+
+                  execThankYouScript(cartTotal, beamUser, orderId,
+                    customerId, customerFirstName, customerLastName, customerEmail,
+                    customerPhone, customerZipCode, customerCountryCode, beamWebSdkBaseUrl, containerId, shopDomain,
+                    shopName, widgetId, communityImpactUrl);
+                  console.log(" execThankYouScript ")
+                </script>
+                <!--BEAM END-->
+            </div>
+
+            <div class="section">
+                <div class="section__content">
+                    <div>
+                        <div
+                                class="content-box thank-you-page-asset"
+                                style="margin-top: 1em;"
+                        >
+                            <link
+                                    rel="stylesheet"
+                                    type="text/css"
+                                    href="https://route-cdn.s3.amazonaws.com/route-protection-widget/thank-you-page-assets/theme-22/assets/css/text-app-asset.css"
+                            />
+                            <script
+                                    type="text/javascript"
+                                    src="https://route-cdn.s3.amazonaws.com/route-protection-widget/thank-you-page-assets/theme-22/assets/js/text-app-asset.js"
+                            ></script>
+                            <div class="content-box__row content-box__row--no-border">
+                                <h2>Order updates</h2>
+                            </div>
+                            <div class="content-box__row">
+                                <div class="section__content">
+                                    <div>
+                                        <div class="asset-container">
+                                            <h3 class="asset-title">Order updates</h3>
+                                            <div class="asset-content">
+                                                <h4 class="asset-subtitle">
+                                                    <span class="highlight">What’s Next?</span> Now start
+                                                    tracking your order or resolve shipping issues in the
+                                                    Route app.
+                                                </h4>
+                                                <!-- group 1 -->
+                                                <div class="asset-form-1">
+                                                    <!-- step 1 -->
+                                                    <div
+                                                            class="asset-steps-1 asset-step-1"
+                                                            style="display: block"
+                                                    >
+                                                        <button
+                                                                class="asset-button"
+                                                                type="button"
+                                                                onclick="javascript: NotificationSMSApp.next();"
+                                                        >
+                                                            <div class="asset-brand-icon"></div>
+                                                            <div class="asset-brand-logo"></div>
+                                                            <span>
+                                Track Your Order
+                                <span class="hidden-mobile">With Route</span>
+                              </span>
+                                                        </button>
+                                                    </div>
+                                                    <!-- step 2 -->
+                                                    <div
+                                                            class="asset-steps-1 asset-step-2"
+                                                            style="display: none"
+                                                    >
+                                                        <form
+                                                                action="https://api.route.com/v1/notifications/sms-app"
+                                                                method="POST"
+                                                                class="asset-form"
+                                                                onsubmit="javascript: NotificationSMSApp.submit(event); return false;"
+                                                        >
+                                                            <i class="asset-flag"></i>
+                                                            <input
+                                                                    type="tel"
+                                                                    id="phone"
+                                                                    name="phone"
+                                                                    class="asset-phone"
+                                                                    placeholder="(###)-###-####"
+                                                                    required=""
+                                                            />
+                                                            <input
+                                                                    type="hidden"
+                                                                    id="validationToken"
+                                                                    class="asset-token"
+                                                                    value="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MjU1OTQyNzQsImppdCI6IjhhOTQ5N2Y1LTQxMGYtNDBkYi05YmUyLTU0NmQwOTdhNzNiMyIsInN1YiI6InNtcy1hcHAifQ.n4GPyRAIvcFPLKZXJksKf30vJKzhXg1I-3o_WSPGixU"
+                                                            />
+                                                            <button class="asset-button" type="submit">
+                                                                <span>Send Link</span>
+                                                            </button>
+                                                        </form>
+                                                    </div>
+                                                    <!-- step 3 -->
+                                                    <div
+                                                            class="asset-steps-1 asset-step-3"
+                                                            style="display: none"
+                                                    >
+                                                        <button class="asset-button-simple" type="button">
+                                                            <span>Text Sent!</span>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="asset-footer">
+                                                <div class="asset-brand">
+                                                    <small class="asset-brand-text"
+                                                    >Powered By <b>Route</b></small
+                                                    >
+                                                    <small class="asset-route-logo"></small>
+                                                </div>
+                                                <div class="hidden-mobile">
+                                                    <div class="asset-footer-copy">
+                                                        Over <span>100,000,000</span> Orders Tracked &amp;
+                                                        Counting
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="asset-mobile-container">
+                                            <div class="asset-mobile-content">
+                                                <div class="asset-content-header">
+                                                    <div class="asset-card">
+                                                        <div class="asset-progress-tracker">
+                                                            <div class="asset-progress-tracker-image"></div>
+                                                            <div class="asset-progress-tracker-steps">
+                                <span
+                                        class="asset-progress-tracker-text-active"
+                                >
+                                  Order Received
+                                </span>
+                                                                <span class="asset-progress-tracker-text"
+                                                                >In Transit</span
+                                                                >
+                                                                <span class="asset-progress-tracker-text"
+                                                                >Delivered!</span
+                                                                >
+                                                            </div>
+                                                        </div>
+
+                                                        <hr/>
+
+                                                        <div class="asset-form">
+                                                            <div class="asset-steps-1 asset-step-1">
+                                                                <button
+                                                                        class="asset-button"
+                                                                        type="button"
+                                                                        onclick="javascript: NotificationSMSApp.next('https://route.onelink.me/gibK?pid=Merchants&amp;af_web_dp=https://route.com&amp;c=superette-shop.myshopify.com&amp;af_adset=v22');"
+                                                                >
+                                                                    <div class="asset-brand-logo"></div>
+                                                                    <span> Track Your Order </span>
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div>
+                                                    <div class="asset-mobile-pin">
+                                                        <img
+                                                                class="asset-mobile-pin-logo"
+                                                                src="https://res.cloudinary.com/route/image/upload/v1614887843/route-logos/superetteshop.com.png"
+                                                        />
+                                                    </div>
+                                                </div>
+
+                                                <div class="asset-content-footer">
+                                                    <div class="asset-card">
+                            <span class="asset-title"
+                            >Hi<span id="asset-customer-name"></span>,</span
+                            >
+                                                        <span class="asset-subtitle">
+                              your order is getting ready 🙌</span
+                                                        >
+                                                    </div>
+
+                                                    <div class="asset-footer">
+                                                        <div class="asset-brand">
+                                                            <small class="asset-brand-text"
+                                                            >Powered By <b>Route</b></small
+                                                            >
+                                                            <small class="asset-route-logo"></small>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <script>
+                                              window.dataLayer = window.dataLayer || [];
+
+                                              function gtag() {
+                                                dataLayer.push(arguments);
+                                              }
+
+                                              gtag('js', new Date());
+                                              gtag('config', 'G-T5GWMCZSVX');
+                                              gtag('event', 'widget_installed', {
+                                                'domain': 'superetteshop.com',
+                                                'store_name': 'Superette',
+                                                'version': 'v22',
+                                                'env': 'prod',
+                                              });
+                                            </script>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="content-box">
+                        <div class="content-box__row text-container">
+                            <h2 class="heading-2 os-step__title">
+                                Your order has been canceled
+                            </h2>
+                            <p class="os-step__description">
+                                Your order was canceled on June 3. Contact us if you have any
+                                questions.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="content-box" data-order-updates="true">
+                        <div class="content-box__row text-container">
+                            <h2 class="heading-2">Order updates</h2>
+                            <div class="placeholder-line placeholder-line--100"></div>
+                            <div class="placeholder-line placeholder-line--90"></div>
+                        </div>
+                    </div>
+
+                    <div class="content-box">
+                        <div class="content-box__row content-box__row--no-border">
+                            <h2>Customer information</h2>
+                        </div>
+                        <div class="content-box__row">
+                            <div class="section__content">
+                                <div
+                                        class="section__content__column section__content__column--half"
+                                >
+                                    <div class="text-container">
+                                        <h3 class="heading-3">Shipping address</h3>
+                                        <p class="visually-hidden">
+                                            Log in to view all customer information.
+                                        </p>
+
+                                        <div class="placeholder-line placeholder-line--60"></div>
+                                        <div class="placeholder-line placeholder-line--75"></div>
+                                        <div class="placeholder-line placeholder-line--70"></div>
+
+                                        <h3 class="heading-3">Shipping method</h3>
+                                        <p class="visually-hidden">
+                                            Log in to view all customer information.
+                                        </p>
+
+                                        <div class="placeholder-line placeholder-line--60"></div>
+                                    </div>
+                                </div>
+                                <div
+                                        class="section__content__column section__content__column--half"
+                                >
+                                    <div class="text-container">
+                                        <h3 class="heading-3">Billing address</h3>
+                                        <p class="visually-hidden">
+                                            Log in to view all customer information.
+                                        </p>
+
+                                        <div class="placeholder-line placeholder-line--60"></div>
+                                        <div class="placeholder-line placeholder-line--75"></div>
+                                        <div class="placeholder-line placeholder-line--70"></div>
+
+                                        <h3 class="heading-3">Payment method</h3>
+                                        <p class="visually-hidden">
+                                            Log in to view all customer information.
+                                        </p>
+
+                                        <div class="placeholder-line placeholder-line--90"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="step__footer">
+            <a
+                    href="http://superetteshop.com/"
+                    data-osp-continue-button=""
+                    class="step__footer__continue-btn btn"
+            >
+                <span class="btn__content">Continue shopping</span>
+                <svg
+                        class="icon-svg icon-svg--size-18 btn__spinner icon-svg--spinner-button"
+                        aria-hidden="true"
+                        focusable="false"
+                >
+                    <use xlink:href="#spinner-button"></use>
+                </svg>
+            </a>
+            <p class="step__footer__info">
+                Need help?
+                <a data-contact-us-link="true" href="mailto:Info@superetteshop.com"
+                >Contact us</a
+                >
+            </p>
+        </div>
+    </div>
+
+    <div class="hidden">
+    <span class="visually-hidden" id="forwarding-external-new-window-message">
+      Opens external website in a new window.
+    </span>
+
+        <span class="visually-hidden" id="forwarding-new-window-message">
+      Opens in a new window.
+    </span>
+
+        <span class="visually-hidden" id="forwarding-external-message">
+      Opens external website.
+    </span>
+
+        <span class="visually-hidden" id="checkout-context-step-one">
+      Customer information - Superette - Checkout
+    </span>
+    </div>
+</main>
+
