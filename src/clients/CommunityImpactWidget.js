@@ -470,6 +470,7 @@ class CommunityImpactWidget extends BaseImpactWidget {
                       new components.BeamContainer({
                         width: this.options.themeConfig.impactCardWidth || "400px",
                         margin: this.options.themeConfig.impactCardColumn2Margin || "0",
+                        border: '0px',
                         children: [this.outerCard(nonprofit2)],
                       }),
                     ],
