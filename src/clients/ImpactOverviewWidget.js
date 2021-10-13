@@ -10,6 +10,7 @@ class ImpactOverviewWidget extends BaseWidget {
     this.input = {
       user: null,
       nonprofit: null,
+      chain: null
     };
 
     let themeSkin = this.skins[this.options.themeConfig.id];
@@ -41,20 +42,22 @@ class ImpactOverviewWidget extends BaseWidget {
       this.cacheKey = cacheKey;
       this.input.user = args.user;
       this.input.nonprofit = args.nonprofit;
-      
-      data = await this.makeAPIRequest("/api/v1/impact/all/", {
+      this.input.chain = args.chain;
+
+      data = await this.makeAPIRequest("api/v2/users/impact/community", {
         nonprofit: args.nonprofit,
         user: args.user,
-        lan: this.options.lan
+        lan: this.options.lan,
+        chain: args.chain
       });
     }
     return data;
   }
 
-  async render(user, nonprofit = null) {
+  async render(user, nonprofit = null, chain) {
     if (!user) throw ReferenceError("Provide user beam ID");
 
-    await super.render({ nonprofit, user }, () => {
+    await super.render({ nonprofit, user, chain }, () => {
       return this.isMobile && !this.options.themeConfig.noWrap
         ? this.buildMobileView()
         : this.buildDesktopView();
