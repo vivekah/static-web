@@ -97,6 +97,7 @@ class BaseWidget {
     this.data = null;
     this.cacheKey = null;
     this.baseUrl = process.env.BEAM_BACKEND_BASE_URL;
+    this.webBaseUrl = process.env.WEB_BASE_URL;
     console.log("BEAM_BACKEND_BASE_URL: ", this.baseUrl)
     this.renderViewRef = null;
     this.maxContainerWidth = 750;
@@ -148,7 +149,8 @@ class BaseWidget {
   }
 
   getAsset(fileName) {
-    return `${this.baseUrl}/static/core/img/${fileName}`;
+    console.log("assets: ", `${this.webBaseUrl}/assets/img/${fileName}`)
+    return `${this.webBaseUrl}/assets/img/${fileName}`;
   }
 
   get isMobile() {
