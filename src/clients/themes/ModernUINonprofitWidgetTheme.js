@@ -1,5 +1,6 @@
 import BaseTheme from "./BaseTheme";
 import * as components from "../../components";
+import {BeamInfoIcon} from "../../components";
 
 
 const CARD_DEFAULT_BG_COLOR_ON_HOVER = "#F5F5F5";
@@ -22,7 +23,7 @@ class ModernUINonprofitWidgetTheme extends BaseTheme {
         padding: "10px",
         margin: '10px 0 10px 0 ',
         color: 'black',
-        fontFamily: this.options?.headerTextStyle.fontFamily,
+        fontFamily: this.options?.headerTextStyle?.fontFamily,
         fontSize: "medium",
         fontWeight: "normal",
         ...this.options.headerTextStyle,
@@ -94,157 +95,7 @@ class ModernUINonprofitWidgetTheme extends BaseTheme {
             ...this.options?.card?.textWrapperStyle,
             ...this.isMobile ? this.options?.card?.textWrapperMobileStyle : {},
           },
-          children: [
-            //title
-            new components.BeamFlexWrapper({
-              children: [
-                new components.BeamFlexWrapper({
-                  style: {
-                    flexGrow: 2,
-                    ...this.options?.cardTitle?.wrapperStyle,
-                    ...this.isMobile ? this.options?.cardTitle?.wrapperMobileStyle : {},
-                  },
-                  children: [
-                    // card  title
-                    new components.BeamText({
-                      tag: "h4",
-                      text: nonprofit.cause,
-                      style: {
-                        fontFamily: "inherit",
-                        fontWeight: "bold",
-                        fontSize: "12px",
-                        color: "black",
-                        margin: "0 18px 0 0",
-                        ...this.options?.cardTitle?.textStyle,
-                        ...this.isMobile ? this.options?.cardTitle?.textMobileStyle : {},
-                      }
-                    })]
-                }), new components.BeamFlexWrapper({
-                  style: {
-                    flexShrink: 1,
-                    ...this.options?.checkbox?.wrapperStyle,
-                    ...this.isMobile ? this.options?.checkbox?.wrapperMobileStyle : {},
-                  },
-                  children: [
-                    new components.BeamRoundCheckbox({
-                      noSelections: !selectedNonprofit,
-                      isSelected: selectedNonprofit && nonprofit.id === selectedNonprofit.id,
-                      style: {
-                        color: '#262626FF',
-                        position: 'absolute',
-                        right: '10px',
-                        top: '10px',
-                        ...this.options?.checkbox?.style,
-                        ...this.isMobile ? this.options?.checkbox?.mobileStyle : {},
-                      }
-                    }),
-                  ]
-                }),
-              ]
-            }),
-            // description wrapper
-            new components.BeamContainer({
-              children: [
-                // text wrapper
-                new components.BeamContainer({
-                  style: {
-                    flexGrow: 3,
-                    width: "100%",
-                    ...this.options?.description?.wrapperStyle
-                  },
-                  children: [
-                    // description
-                    new components.BeamText({
-                      text: (this.options.lan ? nonprofit.impact_description + " via " + nonprofit.name : "Fund " + nonprofit.impact_description) + " via " + nonprofit.name,
-                      style: {
-                        overflow: "hidden",
-                        textOverflow: "ellipsis",
-                        display: "-webkit-box",
-                        margin: '3px 0 0 0',
-                        fontFamily: 'inherit',
-                        fontSize: "10px",
-                        lineHeight: "1.4em",
-                        color: "black",
-                        ...this.options?.description?.style,
-                        ...this.isMobile ? this.options?.description?.mobileStyle : {},
-                      }
-                    }),
-                  ],
-                }),
-              ],
-            }),
-            //cause
-            new components.BeamContainer({
-              style: {
-                flexWrap: 'nowrap !important',
-                paddingTop: '15px',
-                justifyContent: "space-between",
-                marginTop: "auto",
-                alignItems: 'flex-end',
-                ...this.options?.cause?.wrapperStyle,
-                ...this.isMobile ? this.options?.cause?.wrapperMobileStyle : {},
-              },
-              children: [
-                new components.BeamText({
-                  text: nonprofit.cause,
-                  style: {
-                    overflow: "hidden",
-                    margin: '3px 0 0 0',
-                    fontFamily: 'inherit',
-                    fontSize: "12px",
-                    lineHeight: "1.4em",
-                    color: "black",
-                    ...this.options?.cause?.style,
-                    ...this.isMobile ? this.options?.cause?.mobileStyle : {},
-                  }
-                }),
-              ]
-            }),
-            // progress wrapper
-            new components.BeamFlexWrapper({
-              style: {
-                flexWrap: 'nowrap !important',
-                paddingTop: '15px',
-                justifyContent: "space-between",
-                marginTop: "auto",
-                alignItems: 'flex-end',
-                ...this.options?.progressBar?.wrapperStyle,
-                ...this.isMobile ? this.options?.progressBar?.wrapperMobileStyle : {},
-              },
-              children: [
-                // progress
-                new components.BeamProgressWrapper({
-                  percentage: nonprofit?.impact?.percentage,
-                  style: {
-                    height: '7px',
-                    backgroundColor: '#fff',
-                    border: '1px solid #D0D0D0',
-                    fontSize: '10px',
-                    flex: '1 0 auto',
-                    ...this.options?.progressBar?.style,
-                    ...this.isMobile ? this.options?.progressBar?.mobileStyle : {},
-
-                  }
-                }),
-                // percentage text
-                new components.BeamText({
-                  text: `${nonprofit?.impact?.percentage}%`,
-                  style: {
-                    textAlign: "left",
-                    fontFamily: "inherit",
-                    color: "#C0C0C0",
-                    fontWeight: "bold",
-                    fontSize: "10px",
-                    margin: "auto 0 0 5px",
-                    whiteSpace: 'nowrap',
-                    ...this.options?.progressBar?.textStyle,
-                    ...this.isMobile ? this.options?.progressBar?.textMobileStyle : {},
-
-                  },
-                }),
-              ],
-            }),
-          ],
+          children: this.getOrderedContent(nonprofit, margin, selectedNonprofit),
         }),
       ]
     });
@@ -261,6 +112,241 @@ class ModernUINonprofitWidgetTheme extends BaseTheme {
         ...this.isMobile ? this.options.card?.backgroundMobileStyle : {},
       },
       children: [cardContent],
+    });
+  }
+
+  getOrderedContent(nonprofit, margin = "0", selectedNonprofit) {
+    return [
+      this.getRegion(nonprofit, margin = "0", selectedNonprofit),
+      this.getTitle(nonprofit, margin = "0", selectedNonprofit),
+      this.getCause(nonprofit, margin = "0", selectedNonprofit),
+      this.getDescription(nonprofit, margin = "0", selectedNonprofit),
+      this.getProgressBar(nonprofit, margin = "0", selectedNonprofit),
+    ]
+  }
+
+  getLearnMore() {
+    return new components.BeamContainer({
+        children: [
+          new components.BeamInfoIcon({
+            style: {
+              display: 'inline',
+              paddingTop: '4px',
+              ...this.options.learnMore?.icon?.style
+            }
+          }),
+          new components.BeamText({
+            text: `Learn more`,
+            style: {
+              display: 'inline',
+              color: "#999",
+              fontFamily: this.options.fontFamily,
+              fontSize: "12px",
+              paddingLeft: '5px',
+              fontWeight: '100',
+              ...this.options.learnMore?.style
+            }
+          })
+        ]
+      }
+    )
+      ;
+  }
+
+  getPoweredByBeam() {
+    return !this.options.hidePoweredBy &&
+      new components.BeamContainer({
+        children: [
+          new components.BeamText({
+            text: this.options.poweredByText || "Powered by Beam Impact",
+            color: this.options.poweredByTextColor || "#999",
+            fontFamily: this.options.fontFamily,
+            fontWeight: '100',
+            fontSize: this.options.poweredByFontSize || "12px",// this.options.tileCauseFontSize || "small",
+            style: {...this.options.poweredBy?.style}
+          })
+        ]
+      });
+  }
+
+  getRegion(nonprofit, margin = "0", selectedNonprofit) {
+    return new components.BeamFlexWrapper({
+      style: {
+        display: 'none',
+        ...this.options.region?.style
+      },
+      children: [
+        // region text
+        new components.BeamText({
+          tag: "h4",
+          text: (nonprofit.regions && (nonprofit.regions.length > 0) ? nonprofit.regions[0] : 'National') + " nonprofit",
+          style: {
+            fontFamily: "inherit",
+            fontWeight: "bold",
+            fontSize: "12px",
+            color: "black",
+            margin: "0 18px 0 0",
+            ...this.options?.region?.textStyle,
+            ...this.isMobile ? this.options?.region?.textMobileStyle : {},
+          }
+        })]
+    });
+  }
+
+  getTitle(nonprofit, margin = "0", selectedNonprofit) {
+    return new components.BeamFlexWrapper({
+      children: [
+        new components.BeamFlexWrapper({
+          style: {
+            flexGrow: 2,
+            ...this.options?.cardTitle?.wrapperStyle,
+            ...this.isMobile ? this.options?.cardTitle?.wrapperMobileStyle : {},
+          },
+          children: [
+            // card  title
+            new components.BeamText({
+              tag: "h4",
+              text: nonprofit.name,
+              style: {
+                fontFamily: "inherit",
+                fontWeight: "bold",
+                fontSize: "12px",
+                color: "black",
+                margin: "0 18px 0 0",
+                ...this.options?.cardTitle?.textStyle,
+                ...this.isMobile ? this.options?.cardTitle?.textMobileStyle : {},
+              }
+            })]
+        }), new components.BeamFlexWrapper({
+          style: {
+            flexShrink: 1,
+            ...this.options?.checkbox?.wrapperStyle,
+            ...this.isMobile ? this.options?.checkbox?.wrapperMobileStyle : {},
+          },
+          children: [
+            new components.BeamRoundCheckbox({
+              noSelections: !selectedNonprofit,
+              isSelected: selectedNonprofit && nonprofit.id === selectedNonprofit.id,
+              style: {
+                color: '#262626FF',
+                position: 'absolute',
+                right: '10px',
+                top: '10px',
+                ...this.options?.checkbox?.style,
+                ...this.isMobile ? this.options?.checkbox?.mobileStyle : {},
+              }
+            }),
+          ]
+        }),
+      ]
+    });
+  }
+
+  getDescription(nonprofit, margin = "0", selectedNonprofit) {
+    return new components.BeamContainer({
+      children: [
+        // text wrapper
+        new components.BeamContainer({
+          style: {
+            flexGrow: 3,
+            width: "100%",
+            ...this.options?.description?.wrapperStyle
+          },
+          children: [
+            // description
+            new components.BeamText({
+              text: (this.options.lan ? nonprofit.impact_description + " via " + nonprofit.name : "Fund " + nonprofit.impact_description) + " via " + nonprofit.name,
+              style: {
+                overflow: "hidden",
+                textOverflow: "ellipsis",
+                display: "-webkit-box",
+                margin: '3px 0 0 0',
+                fontFamily: 'inherit',
+                fontSize: "10px",
+                lineHeight: "1.4em",
+                color: "black",
+                ...this.options?.description?.style,
+                ...this.isMobile ? this.options?.description?.mobileStyle : {},
+              }
+            }),
+          ],
+        }),
+      ],
+    });
+  }
+
+  getCause(nonprofit, margin = "0", selectedNonprofit) {
+    return new components.BeamContainer({
+      style: {
+        flexWrap: 'nowrap !important',
+        paddingTop: '15px',
+        justifyContent: "space-between",
+        marginTop: "auto",
+        alignItems: 'flex-end',
+        ...this.options?.cause?.wrapperStyle,
+        ...this.isMobile ? this.options?.cause?.wrapperMobileStyle : {},
+      },
+      children: [
+        new components.BeamText({
+          text: nonprofit.cause,
+          style: {
+            overflow: "hidden",
+            margin: '3px 0 0 0',
+            fontFamily: 'inherit',
+            fontSize: "12px",
+            lineHeight: "1.4em",
+            color: "black",
+            ...this.options?.cause?.style,
+            ...this.isMobile ? this.options?.cause?.mobileStyle : {},
+          }
+        }),
+      ]
+    });
+  }
+
+  getProgressBar(nonprofit, margin = "0", selectedNonprofit) {
+    return new components.BeamFlexWrapper({
+      style: {
+        flexWrap: 'nowrap !important',
+        paddingTop: '15px',
+        justifyContent: "space-between",
+        marginTop: "auto",
+        alignItems: 'flex-end',
+        ...this.options?.progressBar?.wrapperStyle,
+        ...this.isMobile ? this.options?.progressBar?.wrapperMobileStyle : {},
+      },
+      children: [
+        // progress
+        new components.BeamProgressWrapper({
+          percentage: nonprofit?.impact?.percentage,
+          style: {
+            height: '7px',
+            backgroundColor: '#fff',
+            border: '1px solid #D0D0D0',
+            fontSize: '10px',
+            flex: '1 0 auto',
+            ...this.options?.progressBar?.style,
+            ...this.isMobile ? this.options?.progressBar?.mobileStyle : {},
+
+          }
+        }),
+        // percentage text
+        new components.BeamText({
+          text: `${nonprofit?.impact?.percentage}%`,
+          style: {
+            textAlign: "left",
+            fontFamily: "inherit",
+            color: "#C0C0C0",
+            fontWeight: "bold",
+            fontSize: "10px",
+            margin: "auto 0 0 5px",
+            whiteSpace: 'nowrap',
+            ...this.options?.progressBar?.textStyle,
+            ...this.isMobile ? this.options?.progressBar?.textMobileStyle : {},
+
+          },
+        }),
+      ],
     });
   }
 
@@ -343,12 +429,23 @@ class ModernUINonprofitWidgetTheme extends BaseTheme {
           alignItems: "center",
           justifyContent: 'center',
           flexDirection: 'column',
-          children: nonprofits.map((nonprofit, index) =>
-            column(
-              nonprofit,
-              selectedNonprofit
-            )
-          ),
+          children: [
+            new components.BeamFlexWrapper({
+              style: {
+                display: 'none',
+                ...this.options.infoArea?.style
+              },
+              children: [
+                this.getLearnMore(),
+                this.getPoweredByBeam()
+              ]
+            }),
+            ...nonprofits.map((nonprofit, index) =>
+              column(
+                nonprofit,
+                selectedNonprofit
+              )
+            )]
         }),
       ]
     };

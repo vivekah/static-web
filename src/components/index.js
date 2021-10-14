@@ -17,4 +17,5 @@ export { default as BeamCheckBox } from "./CheckBox";
 export { default as BeamCardBody } from "./CardBody";
 export { default as BeamAnchor } from "./Anchor";
 export { default as BeamRoundCheckbox } from "./RoundCheckbox";
+export { default as BeamInfoIcon } from "./infoIcon";
 

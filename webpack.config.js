@@ -31,6 +31,7 @@ module.exports = (env) => {
       // theVintageTwinThankYou: './src/thank-you-scripts/clients/the-vintage-twin-thank-you.js',
       // paradeThankYou: './src/thank-you-scripts/clients/parade-thank-you.js',
        roots: './src/client-integrations/roots/index.js',
+       instacart: './src/client-integrations/instacart/index.js',
       // foriaThankYou: './src/thank-you-scripts/clients/foria-thank-you.js'
     },
     output: {

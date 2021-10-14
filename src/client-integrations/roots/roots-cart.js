@@ -3,14 +3,13 @@ import * as App from 'widgets';
 window.execCardIntegration = async function execCardIntegration(cartTotal,
                                                                 beamWebSdkBaseUrl, containerId, shopDomain,
                                                                 widgetId, storeId, callback = () => {
-  }) {
+  },chainId) {
   console.log(" execCardIntegration FOR ROOTS")
 
   addStylesheets();
   // shop config
   const fontFamily = 'Centra No1 Bold';
   const fontFamilyRootsRegular = 'Centra No1';
-  const chainId = 58;
   // widget config
   let beamUser = null;
   const key = `beam_transaction_key_${widgetId}`;

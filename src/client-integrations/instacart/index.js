@@ -1,0 +1,1 @@
+export {default as CartIntegration} from './intacart-nonprofit-selection';
