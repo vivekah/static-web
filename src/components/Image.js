@@ -1,4 +1,5 @@
 import Component from "./BaseComponent";
+import {styleUtil} from "../utils";
 
 class Image extends Component {
   constructor(options = {}) {
@@ -13,6 +14,9 @@ class Image extends Component {
     if (options.alignSelf) this._element.style.alignSelf = options.alignSelf;
     this._element.src = options.src || "";
     this._element.alt = options.alt || "";
+    if (options.style) {
+      this._element.style.cssText += styleUtil.styleToString(options.style);
+    }
   }
 }
 

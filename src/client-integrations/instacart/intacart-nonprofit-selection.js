@@ -115,7 +115,7 @@ window.execCardIntegration = async function execCardIntegration(userId,
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({userId: userId})
+        body: JSON.stringify({id: userId})
       });
       if (response.status == 200) return await response.json();
     } catch (err) {
