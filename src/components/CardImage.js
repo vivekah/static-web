@@ -9,9 +9,7 @@ class CardImage extends Image {
       ${options.height && `height: ${options.height};`}
       ${options.objectFit && `object-fit: ${options.objectFit};`}
     `;
-    if (options.style) {
-      this._element.style.cssText += styleUtil.styleToString(options.style);
-    }
+    styleUtil.addStyle(this._element, options);
     if (options.pos) {
       this._element.style.position = options.pos.position;
       this._element.style.top = options.pos.top;

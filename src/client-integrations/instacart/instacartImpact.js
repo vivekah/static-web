@@ -1,13 +1,13 @@
 import * as App from 'widgets';
 import * as components from "../../components";
-import {CommunityImpactIntegration} from "./index";
-import {InstacartCommunityImpactWidget} from "../../clients";
+import {screenResolutionUtil} from "../../utils";
 
 window.execCommunityImpact = async function execCommunityImpact(userId,
                                                                 countryCode
 ) {
   const beamImpactWidgetContainerId = 'beam-community-widget-container';
   const chainId = '7';
+  let isMobile = screenResolutionUtil.isMobile();
   //theme
   const themeColorConfig = {
     progressBarColor: '#16ad0b',
@@ -43,12 +43,13 @@ window.execCommunityImpact = async function execCommunityImpact(userId,
   }
 
   function getPartnerSummarySection() {
+
     return new components.BeamFlexWrapper({
       style: {
         flexDirection: 'column',
         justifyContent: 'center',
         margin: 'auto',
-        width: '600px',
+        maxWidth: '600px',
         marginTop: '45px'
       },
       children: [
@@ -58,6 +59,10 @@ window.execCommunityImpact = async function execCommunityImpact(userId,
             fontSize: '40px',
             margin: 'auto',
             fontWeight: '600'
+            ,
+            mobileStyle: {
+              fontSize: '5.9vw'
+            }
           }
         }),
         new components.BeamText({
@@ -68,7 +73,8 @@ window.execCommunityImpact = async function execCommunityImpact(userId,
             color: 'grey',
             margin: 'auto',
             padding: '20px',
-            textAlign: 'center'
+            textAlign: 'center',
+            fontWeight: '200'
           }
         })
       ]
@@ -79,7 +85,7 @@ window.execCommunityImpact = async function execCommunityImpact(userId,
     return new components.BeamFlexWrapper({
       style: {
         borderBottom: '1px solid grey',
-        width: '600px',
+        maxWidth: '600px',
         height: '100px',
         justifyContent: 'center',
         margin: 'auto',
@@ -145,7 +151,7 @@ window.execCommunityImpact = async function execCommunityImpact(userId,
       style: {
         borderRadius: '15px',
         backgroundColor: '#efefef',
-        width: '700px',
+        maxWidth: '700px',
         height: '100px',
         justifyContent: 'center',
         padding: '20px',
@@ -154,13 +160,18 @@ window.execCommunityImpact = async function execCommunityImpact(userId,
         flexDirection: 'row',
         flexWrap: 'nowrap !important'
       },
+      mobileStyle: {
+        flexDirection: 'column !important',
+        backgroundColor: '#fff',
+      },
       children: [
         new components.BeamText({
           text: 'Together we funded 27,571 meals nationwide',
           style: {
             fontSize: '20px',
             fontWeight: '600',
-            marginRight: '10px'
+            marginRight: '10px',
+            textAlign: isMobile ? 'center' : 'left'
           }
         }),
         new components.BeamText({
@@ -169,7 +180,8 @@ window.execCommunityImpact = async function execCommunityImpact(userId,
             fontSize: '14px',
             color: 'gray',
             fontWeight: '200',
-            marginLeft: '10px'
+            marginLeft: '10px',
+            textAlign: isMobile ? 'center' : 'left'
           }
         })
       ]
@@ -178,7 +190,10 @@ window.execCommunityImpact = async function execCommunityImpact(userId,
 
   function getCommunityImpactSection() {
     return new components.BeamContainer({
-      id: beamImpactWidgetContainerId
+      id: beamImpactWidgetContainerId,
+      style: {
+        width: '100%'
+      }
     });
   }
 
@@ -215,6 +230,7 @@ window.execCommunityImpact = async function execCommunityImpact(userId,
       widgetId: widgetId,
       containerId: beamImpactWidgetContainerId,
       themeConfig: {
+        hideLogo: true,
         noWrap: false,
         impactCardWidth: '280px',
         tileHeight: '100%',
@@ -263,7 +279,12 @@ window.execCommunityImpact = async function execCommunityImpact(userId,
             // flexFlow: "nowrap !important"
             alignItems: 'flex-start !important',
             margin: 'auto',
-            width: '1200px'
+            maxWidth: '1200px'
+          },
+          mobileStyle: {
+            flexDirection: 'column !important',
+            margin: 'auto',
+            alignItems: 'center !important',
           }
         },
         fontFamily: "inherit",

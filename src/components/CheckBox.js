@@ -1,8 +1,9 @@
 import Component from "./BaseComponent";
+import {styleUtil} from "../utils";
 
 class CheckBox extends Component {
   constructor(options = {}) {
-    super();
+    super(options);
 
     this._element = document.createElement("label");
     this._element.style.cssText = `
@@ -63,7 +64,8 @@ class CheckBox extends Component {
     }
 
     options.changeListener &&
-      this._element.addEventListener("change", options.changeListener);
+    this._element.addEventListener("change", options.changeListener);
+    styleUtil.addStyle(this._element, options);
   }
 }
 

@@ -1,9 +1,10 @@
 import Component from "./BaseComponent";
 import {styleUtil} from "../utils";
 
+
 class Image extends Component {
   constructor(options = {}) {
-    super();
+    super(options);
     this._element = document.createElement("img");
     if (options.width) this._element.style.width = options.width;
     if (options.height) this._element.style.height = options.height;
@@ -14,9 +15,7 @@ class Image extends Component {
     if (options.alignSelf) this._element.style.alignSelf = options.alignSelf;
     this._element.src = options.src || "";
     this._element.alt = options.alt || "";
-    if (options.style) {
-      this._element.style.cssText += styleUtil.styleToString(options.style);
-    }
+    styleUtil.addStyle(this._element, options);
   }
 }
 

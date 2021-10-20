@@ -3,7 +3,7 @@ import {styleUtil} from "../utils";
 
 class Text extends Component {
   constructor(options = {}) {
-    super();
+    super(options);
     this._element = document.createElement(options.tag || "p");
     this._element.style.cssText = `
       font-family: ${options.fontFamily || "poppins"};
@@ -36,9 +36,7 @@ class Text extends Component {
       this._element.className = options.className;
     }
 
-    if (options.style) {
-      this._element.style.cssText += styleUtil.styleToString(options.style);
-    }
+    styleUtil.addStyle(this._element, options);
   }
 }
 

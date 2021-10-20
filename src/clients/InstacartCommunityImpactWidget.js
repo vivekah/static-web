@@ -376,74 +376,10 @@ class InstacartCommunityImpactWidget extends BaseImpactWidget {
   }
 
   buildMobileView() {
-    console.log(" MOBILE")
-
-    // let container = new components.BeamContainer({
-    //   style: {
-    //     ...this.options?.themeConfig?.widgetContainer?.mobileStyle
-    //   },
-    //   children: [
-    //     new components.BeamContainer({
-    //       margin: "0 0 20px",
-    //       style: {...this.options?.themeConfig?.logoContainer?.mobileStyle},
-    //       children: [
-    //         // header wrapper
-    //         new components.BeamContainer({
-    //           style: {
-    //             display: 'flex',
-    //             flexDirection: 'column-reverse',
-    //             margin: "0 0 20px 10px",
-    //             ...this.options?.themeConfig?.headerContainer?.style
-    //           },
-    //           children: [
-    //             //logo container
-    //             new components.BeamContainer({
-    //               margin: "0 0 0px 10px",
-    //               style: {
-    //                 ...this.options?.themeConfig?.logoContainer?.style
-    //               },
-    //               children: !this.options.themeConfig.hideLogo && [
-    //                 this.headerLogoComponent(
-    //                   this.options.themeConfig.usePartnerRectLogo
-    //                     ? this.data.chain.rect_logo
-    //                     : this.data.chain.logo),
-    //               ],
-    //             }),
-    //             // tabs
-    //             !this.options.themeConfig.hideTabs && new components.BeamFlexWrapper({
-    //               wrap: true,
-    //               style: {
-    //                 alignItems: 'center',
-    //                 margin: '0px 5px 50px 5px',
-    //                 justifyContent: 'center',
-    //                 ...this.options?.themeConfig?.tabsContainer?.style
-    //               },
-    //               children: !this.options.themeConfig.hideTabs && [
-    //                 // causes
-    //                 ...(this.options.themeConfig?.filterByRegion ?
-    //                   this.regions : this.causes).map((tabData) => this.tabs(tabData)),
-    //               ],
-    //             }),
-    //           ]
-    //         }),
-    //       ]
-    //     }),
-    //     ...this.nonprofits.map(
-    //       (nonprofit) =>
-    //         new components.BeamContainer({
-    //           margin: "10px",
-    //           children: [this.outerCard(nonprofit)],
-    //         })
-    //     ),
-    //   ],
-    // });
-
-    // return container.view;
     return this.buildDesktopView();
   }
 
   buildDesktopView() {
-    console.log(" DESTOP")
     let container = new components.BeamContainer({
       style: {
         ...this.options?.themeConfig?.widgetContainer?.style
@@ -462,7 +398,8 @@ class InstacartCommunityImpactWidget extends BaseImpactWidget {
             new components.BeamContainer({
               margin: "0 0 0px 10px",
               style: {
-                ...this.options?.themeConfig?.logoContainer?.style
+                ...this.options?.themeConfig?.logoContainer?.style,
+                display: this.options.themeConfig.hideLogo ? 'none' : 'inherit'
               },
               children: [
                 this.headerLogoComponent(
@@ -491,8 +428,10 @@ class InstacartCommunityImpactWidget extends BaseImpactWidget {
         // nonprofits
         new components.BeamFlexWrapper({
           alignItems: "flex-end",
-          // wrap: !this.options.themeConfig.noWrap,
-          style: {...this.options.themeConfig.nonprofitsContainer?.style},
+          style: {
+            ...this.options.themeConfig.nonprofitsContainer?.style,
+            ...this.isMobile ? this.options.themeConfig.nonprofitsContainer.mobileStyle : {}
+          },
           children: this.options.themeConfig.noWrap
             ? this.nonprofits.map(
               (nonprofit, index) =>

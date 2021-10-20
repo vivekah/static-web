@@ -3,12 +3,10 @@ import {styleUtil} from "../utils";
 
 class InfoIcon extends Component {
   constructor(options = {}) {
-    super();
+    super(options);
     this._element = this.getIcon();
 
-    if (options.style) {
-      this._element.style.cssText += styleUtil.styleToString(options.style);
-    }
+     styleUtil.addStyle(this._element, options);
   }
 
   getIcon() {

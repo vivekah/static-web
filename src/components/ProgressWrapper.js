@@ -15,9 +15,7 @@ class ProgressWrapper extends Container {
       border-radius: ${options.cornerRadius || "7px"};
     `;
 
-     if (options.style) {
-      this._element.style.cssText += styleUtil.styleToString(options.style);
-    }
+    styleUtil.addStyle(this._element, options);
   }
 }
 

@@ -1,9 +1,9 @@
 import Component from "./BaseComponent";
-import {styleUtil} from "../utils";
+import {screenResolutionUtil, styleUtil} from "../utils";
 
 class Container extends Component {
   constructor(options = {}) {
-    super();
+    super(options);
     this._element = document.createElement("div");
     if (options.className) this._element.className = options.className;
     if (options.id) this._element.id = options.id;
@@ -45,14 +45,10 @@ class Container extends Component {
     options.children.forEach((child) => {
       child && this._element.appendChild(child.view);
     });
-
-    if (options.style) {
-      this._element.style.cssText += styleUtil.styleToString(options.style);
-    }
-    if (options.hoverStyle) {
-      styleUtil.addStyleOnHover(this._element, options.hoverStyle);
-    }
+    styleUtil.addStyle(this._element, options);
   }
+
+
 }
 
 export default Container;

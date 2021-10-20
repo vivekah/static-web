@@ -1,8 +1,9 @@
 import Component from "./BaseComponent";
+import {styleUtil} from "../utils";
 
 class LoadingScreen extends Component {
   constructor(options = {}) {
-    super();
+    super(options);
     this._element = document.createElement("div");
     this._element.innerHTML = options.content || "Loading...";
     this._element.style.cssText = `
@@ -24,6 +25,7 @@ class LoadingScreen extends Component {
       font-size: ${options.fontSize || "medium"};
       font-weight: ${options.fontWeight || "normal"};
     `;
+    styleUtil.addStyle(this._element, options);
   }
 }
 

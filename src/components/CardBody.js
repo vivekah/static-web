@@ -12,9 +12,7 @@ class CardBody extends Container {
       border: ${options.border || "none"};
     `;
 
-    if (options.style) {
-      this._element.style.cssText += styleUtil.styleToString(options.style);
-    }
+    styleUtil.addStyle(this._element, options);
   }
 }
 

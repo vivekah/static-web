@@ -1,4 +1,5 @@
 import Container from "./Container";
+import {styleUtil} from "../utils";
 
 class CardOverlay extends Container {
   constructor(options = {}) {
@@ -12,6 +13,7 @@ class CardOverlay extends Container {
       padding: ${options.padding || "1.25rem"};
       background: ${options.background || "rgba(0, 0, 0, 0.39)"};
     `;
+    styleUtil.addStyle(this._element, options);
   }
 }
 

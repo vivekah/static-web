@@ -1,6 +1,5 @@
 import Container from "./Container";
 import {styleUtil} from "../utils";
-
 class FlexWrapper extends Container {
   constructor(options = {}) {
     super(options);
@@ -35,9 +34,8 @@ class FlexWrapper extends Container {
       `width: ${options.width}`
     }
     `;
-    if (options.style) {
-      this._element.style.cssText += styleUtil.styleToString(options.style);
-    }
+     styleUtil.addStyle(this._element, options);
+
   }
 }
 

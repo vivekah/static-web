@@ -3,7 +3,7 @@ import {styleUtil} from "../utils";
 
 class Divider extends Component {
   constructor(options = {}) {
-    super();
+    super(options);
     this._element = document.createElement(options.vertical ? "div" : "hr");
 
     let borderStyle = `${options.borderWidth || "1px"} solid ${
@@ -25,9 +25,7 @@ class Divider extends Component {
       border: ${borderStyle};
     `;
     }
-    if (options.style) {
-      this._element.style.cssText += styleUtil.styleToString(options.style);
-    }
+     styleUtil.addStyle(this._element, options);
   }
 }
 

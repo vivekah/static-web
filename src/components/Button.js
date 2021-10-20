@@ -1,8 +1,9 @@
 import Component from "./BaseComponent";
+import {styleUtil} from "../utils";
 
 class Button extends Component {
   constructor(options = {}) {
-    super();
+    super(options);
     this._element = document.createElement("button");
     this._element.id = options.id;
     this._element.innerHTML = options.text;
@@ -32,7 +33,8 @@ class Button extends Component {
         border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
     `;
     options.clickListener &&
-      this._element.addEventListener("click", options.clickListener);
+    this._element.addEventListener("click", options.clickListener);
+    styleUtil.addStyle(this._element, options);
   }
 }
 

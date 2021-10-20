@@ -3,11 +3,11 @@ import {styleUtil} from "../utils";
 
 class RoundCheckbox extends Component {
   constructor(options = {}) {
-    super();
+    super(options);
     this._element = options.noSelections ? this.getNeverSelectedIcon() : options.isSelected ? this.getSelectedIcon() : this.getUnselectedIcon();
 
     if (options.style) {
-      this._element.style.cssText += styleUtil.styleToString(options.style);
+      styleUtil.addStyle(this._element, options);
       if (options.noSelections) {
         this._element.style.filter = `brightness(550%)`;
       } else if (!options.isSelected) {

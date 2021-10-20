@@ -32,14 +32,7 @@ class Card extends Container {
      `;
     options.clickListener &&
     this._element.addEventListener("click", options.clickListener);
-
-    if (options.style) {
-      this._element.style.cssText += styleUtil.styleToString(options.style);
-    }
-
-    if (options.hoverStyle) {
-      styleUtil.addStyleOnHover(this._element, options.hoverStyle);
-    }
+    styleUtil.addStyle(this._element, options);
   }
 }
 
