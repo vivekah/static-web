@@ -13,6 +13,7 @@ class App {
     this.CarbonOffsetSuccessWidget = clients.CarbonOffsetSuccessWidget;
     this.CommunityImpactCarbonOffsetWidget = clients.CommunityImpactCarbonOffsetWidget;
     this.CommunityImpactCarbonAvoidanceWidget = clients.CommunityImpactCarbonAvoidanceWidget;
+    this.InstacartCommunityImpactWidget = clients.InstacartCommunityImpactWidget;
   }
 }
 

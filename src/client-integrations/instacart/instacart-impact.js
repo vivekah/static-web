@@ -1,9 +1,23 @@
 import * as App from 'widgets';
 import * as components from "../../components";
+import {CommunityImpactIntegration} from "./index";
+import {InstacartCommunityImpactWidget} from "../../clients";
 
 window.execCommunityImpact = async function execCommunityImpact(userId,
                                                                 countryCode
 ) {
+  const beamImpactWidgetContainerId = 'beam-community-widget-container';
+  const chainId = '7';
+  //theme
+  const themeColorConfig = {
+    progressBarColor: '#16ad0b',
+    confirmationButtonColor: '#16ad0b',
+    causeTestColor: '#f0a358',
+    textColor: '#6a6b6d',
+    lightTextColor: '#bbbbbd',
+    progressBarBackgroundColor: '#e3e3e3'
+  }
+
   console.log(" execCardIntegration FOR Instacart")
   const impactData = await getImpactData(userId, countryCode);
   console.log(" IMPACT DATA: ", impactData)
@@ -12,7 +26,6 @@ window.execCommunityImpact = async function execCommunityImpact(userId,
   function renderImpactScreen() {
     let impactScreenContainer = new components.BeamFlexWrapper({
       style: {
-        backgroundColor: 'pink',
         flexDirection: 'column !important',
         flexWrap: 'wrap'
       },
@@ -26,6 +39,7 @@ window.execCommunityImpact = async function execCommunityImpact(userId,
     });
     console.log(" impact container: ", impactScreenContainer);
     document.body.append(impactScreenContainer.view);
+    renderCommunityImpactWidget();
   }
 
   function getPartnerSummarySection() {
@@ -154,7 +168,7 @@ window.execCommunityImpact = async function execCommunityImpact(userId,
           style: {
             fontSize: '14px',
             color: 'gray',
-            fontWeight:'200',
+            fontWeight: '200',
             marginLeft: '10px'
           }
         })
@@ -163,6 +177,9 @@ window.execCommunityImpact = async function execCommunityImpact(userId,
   }
 
   function getCommunityImpactSection() {
+    return new components.BeamContainer({
+      id: beamImpactWidgetContainerId
+    });
   }
 
   async function getImpactData(userId, countryCode) {
@@ -192,4 +209,114 @@ window.execCommunityImpact = async function execCommunityImpact(userId,
     return null;
   }
 
+  function renderCommunityImpactWidget() {
+    let widget = new beamApps.InstacartCommunityImpactWidget({
+      fontFamily: "poppins",
+      widgetId: widgetId,
+      containerId: beamImpactWidgetContainerId,
+      themeConfig: {
+        noWrap: false,
+        impactCardWidth: '280px',
+        tileHeight: '100%',
+        title: {
+          style: {
+            fontSize: '14px',
+            fontWeight: '500',
+            color: themeColorConfig.textColor
+          }
+        },
+        cause: {
+          style: {
+            fontSize: '11px',
+            fontWeight: '500',
+            color: themeColorConfig.causeTestColor
+          }
+        },
+        region: {
+          style: {
+            fontSize: '10px',
+            fontWeight: '300'
+          }
+        },
+        impact: {
+          style: {
+            fontSize: '11px',
+            fontWeight: '300',
+            color: themeColorConfig.textColor
+          }
+        },
+        cardImage: {
+          style: {
+            padding: '10px',
+            borderRadius: '25px'
+          }
+        },
+        cardbody: {
+          style: {
+            padding: '10px'
+          }
+        },
+        border: `1px solid ${themeColorConfig.progressBarBackgroundColor}`,
+        tileOverlayBackground: 'transparent',
+        nonprofitsContainer: {
+          style: {
+            // flexFlow: "nowrap !important"
+            alignItems: 'flex-start !important',
+            margin: 'auto',
+            width: '1200px'
+          }
+        },
+        fontFamily: "inherit",
+        gradientColors: [themeColorConfig.progressBarColor],
+        progressBarColors: [
+          {color: themeColorConfig.progressBarColor, offset: "100%"}
+        ],
+        hideTabs: true,
+        hideBorders: true,
+        textColor: themeColorConfig.textColor,
+        borderRadius: "15px",
+        percentageTextColor: themeColorConfig.textColor,
+        showLink: true,
+        headerPartnerLogoMargin: '0px 0px -23px',
+        headerBeamLogoMargin: '0px 0px 0px 15px',
+        headerContainer: {
+          style: {
+            display: 'flex',
+            justifyContent: 'center',
+          }
+        },
+        progressBar: {
+          style: {
+            height: '6px',
+            border: '0px',
+            backgroundColor: themeColorConfig.progressBarBackgroundColor
+          },
+          textStyle: {
+            color: themeColorConfig.textColor,
+            fontSize: '12px',
+            fontWeight: '300'
+          }
+        },
+        devider: {
+          style: {
+            margin: '15px 0px 5px 0px',
+            borderTop: `1px solid ${themeColorConfig.progressBarBackgroundColor} `,
+            borderBottom: '0'
+          }
+        },
+        goalInfo: {
+          text: 'Help Instacart reach this goal!',
+          completedText: 'Instacart has reached 100% goal!',
+          contributeText: `<a style="color: ${themeColorConfig.progressBarColor}"> Contribute to this effort with your next order > </a>`,
+          style: {
+            fontSize: '11px',
+            color: themeColorConfig.textColor
+          }
+        }
+      }
+
+    });
+    widget.render({chain: chainId});
+  }
 }
+export default window.execCommunityImpact;

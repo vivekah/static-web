@@ -9,3 +9,4 @@ export { default as CarbonOffsetWidget } from "./carbon/CarbonOffsetWidget";
 export { default as CarbonOffsetSuccessWidget } from "./carbon/CarbonSuccessWidget";
 export { default as CommunityImpactCarbonAvoidanceWidget } from "./carbon/CommunityImpactCarbonAvoidanceWidget";
 export { default as CommunityImpactCarbonOffsetWidget } from "./carbon/CommunityImpactCarbonOffsetWidget";
+export { default as InstacartCommunityImpactWidget } from "./InstacartCommunityImpactWidget";
