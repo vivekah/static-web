@@ -102,6 +102,7 @@ class InstacartCommunityImpactWidget extends BaseImpactWidget {
       overflow: "hidden",
       margin: "0",
       style: {...this.options?.themeConfig?.innerCard?.style},
+      mobileStyle: {...this.options.themeConfig.innerCard?.mobileStyle},
       children: [
         // card image
         new components.BeamCardImage({
@@ -114,6 +115,7 @@ class InstacartCommunityImpactWidget extends BaseImpactWidget {
         new components.BeamCardOverlay({
           background: this.options.themeConfig.tileOverlayBackground,
           style: {...this.options?.themeConfig?.cardOverlay?.style},
+          mobileStyle: {...this.options.themeConfig.cardOverlay?.mobileStyle},
           children: [
             // text
             new components.BeamContainer({
@@ -125,6 +127,7 @@ class InstacartCommunityImpactWidget extends BaseImpactWidget {
                 left: "0",
               },
               style: {...this.options?.themeConfig?.textContainer?.style},
+              mobileStyle: {...this.options.themeConfig.textContainer?.mobileStyle},
             }),
           ],
         }),
@@ -148,6 +151,7 @@ class InstacartCommunityImpactWidget extends BaseImpactWidget {
         margin: "10px 10px 10px 10px",
         ...this.options?.themeConfig?.outerCard?.style
       },
+      mobileStyle: {...this.options.themeConfig.outerCard?.mobileStyle},
       children: [
         // inner card
         nonprofit && this.innerCard(nonprofit),
@@ -169,6 +173,7 @@ class InstacartCommunityImpactWidget extends BaseImpactWidget {
       padding: "5px 15px 15px 15px",
       border: this.options.themeConfig.impactBorder,
       style: {...this.options?.themeConfig?.cardbody?.style},
+      mobileStyle: {...this.options.themeConfig.cardbody?.mobileStyle},
       children: [
         region(this.options, nonprofit),
         nonprofitName(this.options, nonprofit),
@@ -184,7 +189,8 @@ class InstacartCommunityImpactWidget extends BaseImpactWidget {
     function region(options, nonprofit) {
       return new components.BeamText({
         text: options.themeConfig.region?.text || 'Local Nonprofit',
-        style: {...options.themeConfig.region?.style}
+        style: {...options.themeConfig.region?.style},
+        mobileStyle: {...options.themeConfig.region?.mobileStyle},
       })
     }
 
@@ -200,6 +206,7 @@ class InstacartCommunityImpactWidget extends BaseImpactWidget {
         lineHeight: options.themeConfig.causeTypeLineHeight,
         margin: options.themeConfig.causeTypeMargin || "0",
         style: {...options?.themeConfig?.cause?.style},
+        mobileStyle: {...options.themeConfig.cause?.mobileStyle},
       });
     }
 
@@ -216,6 +223,7 @@ class InstacartCommunityImpactWidget extends BaseImpactWidget {
         fontSize: options.themeConfig.causeTitleFontSize,
         margin: options.themeConfig.nonprofitTextMargin || "0",
         style: {...options?.themeConfig?.title?.style},
+        mobileStyle: {...options.themeConfig.title?.mobileStyle},
       });
     }
 
@@ -237,7 +245,8 @@ class InstacartCommunityImpactWidget extends BaseImpactWidget {
             color: options.themeConfig.textColor || "#000",
             margin: options.themeConfig.impactDetailsMargin || "0",
             width: "85%",
-            style: {...options.themeConfig?.impact?.style}
+            style: {...options.themeConfig?.impact?.style},
+            mobileStyle: {...options.themeConfig.impact?.mobileStyle},
           }),
         ],
       });
@@ -258,6 +267,7 @@ class InstacartCommunityImpactWidget extends BaseImpactWidget {
                 border: options.themeConfig.progressBarBorder,
                 cornerRadius: options.themeConfig.progressBarBorderRadius || undefined,
                 style: {...options?.themeConfig?.progressBar?.style},
+                mobileStyle: {...options.themeConfig.progressBar?.mobileStyle},
               }),
             ],
           }),
@@ -281,7 +291,8 @@ class InstacartCommunityImpactWidget extends BaseImpactWidget {
     function devider(options) {
       return new components.BeamDivider({
         borderColor: options.themeConfig?.devider?.style?.color,
-        style: {...options.themeConfig?.devider?.style}
+        style: {...options.themeConfig?.devider?.style},
+        mobileStyle: {...options.themeConfig.devider?.mobileStyle},
       });
     }
 
@@ -300,7 +311,8 @@ class InstacartCommunityImpactWidget extends BaseImpactWidget {
               margin: "0",
               href: href,
               color: options.themeConfig.learnMoreTextColor || options.themeConfig.textColor,
-              style: {...options.themeConfig?.link?.style}
+              style: {...options.themeConfig?.link?.style},
+              mobileStyle: {...options.themeConfig.link?.mobileStyle},
             }),
           ],
         });
@@ -340,7 +352,9 @@ class InstacartCommunityImpactWidget extends BaseImpactWidget {
     function goalInfo(options, nonprofit) {
       return new components.BeamText({
         text: (nonprofit?.impact?.percentage === 100 ? options.themeConfig.goalInfo?.completedText : options.themeConfig.goalInfo?.text) + options.themeConfig.goalInfo?.contributeText,
-        style: {...options.themeConfig.goalInfo?.style}
+        style: {...options.themeConfig.goalInfo?.style},
+        mobileStyle: {...options.themeConfig.goalInfo?.mobileStyle},
+
       })
     }
   }
@@ -384,6 +398,7 @@ class InstacartCommunityImpactWidget extends BaseImpactWidget {
       style: {
         ...this.options?.themeConfig?.widgetContainer?.style
       },
+      mobileStyle: {...this.options.themeConfig.widgetContainer?.mobileStyle},
       children: [
         // header wrapper
         new components.BeamContainer({
@@ -393,6 +408,7 @@ class InstacartCommunityImpactWidget extends BaseImpactWidget {
             margin: "40px 0 40px 10px",
             ...this.options?.themeConfig?.headerContainer?.style
           },
+          mobileStyle: {...this.options.themeConfig.headerContainer?.mobileStyle},
           children: [
             //logo container
             new components.BeamContainer({
@@ -401,6 +417,7 @@ class InstacartCommunityImpactWidget extends BaseImpactWidget {
                 ...this.options?.themeConfig?.logoContainer?.style,
                 display: this.options.themeConfig.hideLogo ? 'none' : 'inherit'
               },
+              mobileStyle: {...this.options.themeConfig.logoContainer?.mobileStyle},
               children: [
                 this.headerLogoComponent(
                   this.options.themeConfig.usePartnerRectLogo
@@ -417,6 +434,7 @@ class InstacartCommunityImpactWidget extends BaseImpactWidget {
                 justifyContent: 'center',
                 ...this.options?.themeConfig?.tabsContainer?.style
               },
+              mobileStyle: {...this.options.themeConfig.tabsContainer?.mobileStyle},
               children: !this.options.themeConfig.hideTabs && [
                 // causes
                 ...(this.options.themeConfig?.filterByRegion ?
@@ -429,11 +447,12 @@ class InstacartCommunityImpactWidget extends BaseImpactWidget {
         new components.BeamFlexWrapper({
           alignItems: "flex-end",
           style: {
-            ...this.options.themeConfig.nonprofitsContainer?.style,
-            ...this.isMobile ? this.options.themeConfig.nonprofitsContainer.mobileStyle : {}
+            ...this.options.themeConfig.nonprofitsContainer?.style
           },
-          children: this.options.themeConfig.noWrap
-            ? this.nonprofits.map(
+          mobileStyle: {...this.options.themeConfig.nonprofitsContainer?.mobileStyle},
+          children:
+            this.options.themeConfig.noWrap
+              ? this.nonprofits.map(
               (nonprofit, index) =>
                 new components.BeamContainer({
                   width: "100%",
@@ -444,36 +463,38 @@ class InstacartCommunityImpactWidget extends BaseImpactWidget {
                       : undefined,
                   children: [this.outerCard(nonprofit)],
                 })
-            )
-            : [
-              ...this.nonprofits.map((nonprofit1, index) => {
-                // let nonprofit2 = this.nonprofits[index + 1];
-                // if ((index + 1) % 2 !== 0) {
-                return new components.BeamFlexWrapper({
-                  margin: "0 0 10px",
-                  noWrap: this.options.themeConfig.noWrap,
-                  width: this.options.themeConfig.impactRowWidth || undefined,
-                  style: {...this.options.themeConfig.nonprofitRow?.style},
-                  children: [
-                    // column1
-                    nonprofit1 &&
-                    new components.BeamContainer({
-                      width: this.options.themeConfig.impactCardWidth || "400px",
-                      margin: this.options.themeConfig.impactCardColumn1Margin || "0 10px 0",
-                      children: [this.outerCard(nonprofit1)],
-                    }),
-                    // column2 will add an empty card if number of nonprofits is odd, in order to keep styling consistent
-                    // new components.BeamContainer({
-                    //   width: this.options.themeConfig.impactCardWidth || "400px",
-                    //   margin: this.options.themeConfig.impactCardColumn2Margin || "0",
-                    //   border: '0px',
-                    //   children: [this.outerCard(nonprofit2)],
-                    // }),
-                  ],
-                });
-                // }
-              }),
-            ],
+              )
+              : [
+                ...this.nonprofits.map((nonprofit1, index) => {
+                  // let nonprofit2 = this.nonprofits[index + 1];
+                  // if ((index + 1) % 2 !== 0) {
+                  return new components.BeamFlexWrapper({
+                    margin: "0 0 10px",
+                    noWrap: this.options.themeConfig.noWrap,
+                    width: this.options.themeConfig.impactRowWidth || undefined,
+                    style: {...this.options.themeConfig.nonprofitRow?.style},
+                    children: [
+                      // column1
+                      nonprofit1 &&
+                      new components.BeamContainer({
+                        width: this.options.themeConfig.impactCardWidth || "400px",
+                        margin: this.options.themeConfig.impactCardColumn1Margin || "0 10px 0",
+                        style: {...this.options.themeConfig.impactCard?.style},
+                        mobileStyle: {...this.options.themeConfig.impactCard?.mobileStyle},
+                        children: [this.outerCard(nonprofit1)],
+                      }),
+                      // column2 will add an empty card if number of nonprofits is odd, in order to keep styling consistent
+                      // new components.BeamContainer({
+                      //   width: this.options.themeConfig.impactCardWidth || "400px",
+                      //   margin: this.options.themeConfig.impactCardColumn2Margin || "0",
+                      //   border: '0px',
+                      //   children: [this.outerCard(nonprofit2)],
+                      // }),
+                    ],
+                  });
+                  // }
+                }),
+              ],
         }),
 
       ],

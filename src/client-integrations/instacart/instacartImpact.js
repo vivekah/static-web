@@ -59,22 +59,24 @@ window.execCommunityImpact = async function execCommunityImpact(userId,
             fontSize: '40px',
             margin: 'auto',
             fontWeight: '600'
-            ,
-            mobileStyle: {
-              fontSize: '5.9vw'
-            }
+          },
+          mobileStyle: {
+            fontSize: '30px'
           }
         }),
         new components.BeamText({
           text: "This holiday season, Instacart has partnered with 4 non-profits in support of our mission to create" +
             " a world where everyone has access to the food they love and more time to enjoy it together.",
           style: {
-            fontSize: '14px',
-            color: 'grey',
-            margin: 'auto',
-            padding: '20px',
-            textAlign: 'center',
-            fontWeight: '200'
+            style: {
+              fontSize: '14px',
+              color: 'grey',
+              margin: 'auto',
+              padding: '20px',
+              paddingTop: '10px',
+              textAlign: 'center',
+              fontWeight: '200'
+            }
           }
         })
       ]
@@ -168,10 +170,13 @@ window.execCommunityImpact = async function execCommunityImpact(userId,
         new components.BeamText({
           text: 'Together we funded 27,571 meals nationwide',
           style: {
-            fontSize: '20px',
+            fontSize: '22px',
             fontWeight: '600',
             marginRight: '10px',
             textAlign: isMobile ? 'center' : 'left'
+          },
+          mobileStyle: {
+            textAlign: 'center'
           }
         }),
         new components.BeamText({
@@ -232,7 +237,14 @@ window.execCommunityImpact = async function execCommunityImpact(userId,
       themeConfig: {
         hideLogo: true,
         noWrap: false,
-        impactCardWidth: '280px',
+        impactCard: {
+          style: {
+            width: '280px'
+          },
+          mobileStyle: {
+            width: '340px'
+          }
+        },
         tileHeight: '100%',
         title: {
           style: {
@@ -335,7 +347,6 @@ window.execCommunityImpact = async function execCommunityImpact(userId,
           }
         }
       }
-
     });
     widget.render({chain: chainId});
   }
