@@ -306,7 +306,7 @@ window.execCommunityImpact = async function execCommunityImpact(userId,
         },
         goalInfo: {
           text: 'Help Instacart reach this goal!',
-          completedText: 'Instacart has reached 100% goal!',
+          completedText: '✅ Instacart has reached 100% goal!',
           contributeText: `<a style="color: ${themeColorConfig.progressBarColor}"> Contribute to this effort with your next order > </a>`,
           style: {
             fontSize: '11px',
