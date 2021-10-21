@@ -30,8 +30,8 @@ module.exports = (env) => {
       // sweetNothingsThankYou: './src/thank-you-scripts/clients/sweet-nothings-thank-you.js',
       // theVintageTwinThankYou: './src/thank-you-scripts/clients/the-vintage-twin-thank-you.js',
       // paradeThankYou: './src/thank-you-scripts/clients/parade-thank-you.js',
-       roots: './src/client-integrations/roots/index.js',
-       instacart: './src/client-integrations/instacart/index.js',
+      roots: './src/client-integrations/roots/index.js',
+      instacart: './src/client-integrations/instacart/index.js',
       // foriaThankYou: './src/thank-you-scripts/clients/foria-thank-you.js'
     },
     output: {
@@ -48,6 +48,17 @@ module.exports = (env) => {
             presets: ["@babel/preset-env"],
             plugins: ["@babel/plugin-transform-runtime"],
           },
+        },
+        {
+          test: /\.s[ac]ss$/i,
+          use: [
+            // Creates `style` nodes from JS strings
+            "style-loader",
+            // Translates CSS into CommonJS
+            "css-loader",
+            // Compiles Sass to CSS
+            "sass-loader",
+          ],
         },
       ],
     },
