@@ -28,7 +28,8 @@ class InstacartCommunityImpactWidget extends BaseImpactWidget {
         linkTextFontSize: "small",
         progressBarWidth: "85%",
         progressBarBorder: "none",
-        tileHeight: '300px'
+        tileHeight: '300px',
+        showNational: false
       },
     }
   ) {
@@ -188,7 +189,7 @@ class InstacartCommunityImpactWidget extends BaseImpactWidget {
 
     function region(options, nonprofit) {
       return new components.BeamText({
-        text: nonprofit.regions?.first || 'Local Nonprofit',
+        text: options.themeConfig.showNational ? 'National nonprofit' : (nonprofit.regions?.first || 'Local Nonprofit'),
         style: {...options.themeConfig.region?.style},
         mobileStyle: {...options.themeConfig.region?.mobileStyle},
       })
@@ -352,16 +353,40 @@ class InstacartCommunityImpactWidget extends BaseImpactWidget {
     function goalInfo(options, nonprofit) {
       return new components.BeamText({
         text: (nonprofit?.impact?.percentage === 100 ? options.themeConfig.goalInfo?.completedText : options.themeConfig.goalInfo?.text) + options.themeConfig.goalInfo?.contributeText,
-        style: {...options.themeConfig.goalInfo?.style},
+        style: {
+          display: options.themeConfig.showNational ? 'none' : 'flex',
+          ...options.themeConfig.goalInfo?.style
+        },
         mobileStyle: {...options.themeConfig.goalInfo?.mobileStyle},
 
       })
     }
   }
 
+  titleDevider() {
+    console.log(" NATIONAL DEVIDER, ", this.options.themeConfig.titleDevider.style)
+    return new components.BeamDivider({
+      style: {
+        margin: '15px 20px 5px 20px',
+        borderTop: `1px solid ${this.options.themeConfig.textColor} `,
+        borderBottom: '0',
+        maxWidth: '700px',
+        ...this.options.themeConfig.titleDevider?.style
+      }
+    });
+  }
+
+  titleNonprofits() {
+    return new components.BeamText({
+      text: this.options.themeConfig.titleNonprofits?.text || 'National',
+      style: {...this.options.themeConfig.titleNonprofits?.style}
+    })
+  }
+
   tabs(tabData = null) {
     return new components.BeamContainer({
       margin: "0 20px 0 0",
+      style: {...this.options.themeConfig.tabsContainer?.style},
       children: [
         new components.BeamText({
           text: !tabData ? `${this.options.lan ? translations.translateSeeAll(this.options.lan) : "See All"}` : tabData,
@@ -380,10 +405,13 @@ class InstacartCommunityImpactWidget extends BaseImpactWidget {
           },
         }),
         new components.BeamDivider({
-          borderColor:
-            tabData === this.currentTabData
-              ? this.options.themeConfig.textColor || "#000"
-              : "transparent",
+          style: {
+            borderColor:
+              tabData === this.currentTabData
+                ? this.options.themeConfig.textColor || "#000"
+                : "transparent",
+            ...this.options.themeConfig.tab?.underline?.style
+          }
         }),
       ],
     });
@@ -439,6 +467,9 @@ class InstacartCommunityImpactWidget extends BaseImpactWidget {
                 // causes
                 ...(this.options.themeConfig?.filterByRegion ?
                   this.regions : this.causes).map((tabData) => this.tabs(tabData)),
+                this.options.themeConfig.showNational && this.titleDevider(),
+                this.options.themeConfig.showNational && this.titleNonprofits(),
+
               ],
             }),
           ]
