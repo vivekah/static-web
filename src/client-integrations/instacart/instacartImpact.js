@@ -206,7 +206,7 @@ window.execCommunityImpact = async function execCommunityImpact(userId,
       },
       children: [
         new components.BeamText({
-          text: 'Together we funded 27,571 meals nationwide',
+          text: `Together we funded ${impactData.aggregate_impact || '0'} meals nationwide`,
           style: {
             fontSize: '22px',
             fontWeight: '600',
