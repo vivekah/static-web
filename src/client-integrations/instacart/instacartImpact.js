@@ -147,17 +147,15 @@ window.execCommunityImpact = async function execCommunityImpact(userId,
   function getTutorialSection() {
     let slider = new components.BeamContainer({
       id: beamSliderId,
-      style: {
-      }
     });
     slider.view.innerHTML = `
 <div class="splide">
   <div class="splide__track">
-\t\t<ul class="splide__list">
-\t\t\t<li class="splide__slide"><img class="slider_img " src="https://cdn.pixabay.com/photo/2014/03/22/19/40/gerbera-292793_960_720.jpg"></img></li>
-\t\t\t<li class="splide__slide"><img class="slider_img" src="https://thumbs.dreamstime.com/z/lovely-pink-gerbera-germini-flower-isolated-light-gray-background-isolated-pink-gerbera-germini-flower-99116487.jpg"></img></li>
-\t\t\t<li class="splide__slide"><img class="slider_img" src="https://images.unsplash.com/photo-1495539406979-bf61750d38ad?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjN8fGZyZWV8ZW58MHx8MHx8&ixlib=rb-1.2.1&w=1000&q=80"></img></li>
-\t\t</ul>
+<ul class="splide__list">
+<li class="splide__slide"><img class="slider_img " src="https://cdn.pixabay.com/photo/2014/03/22/19/40/gerbera-292793_960_720.jpg"></img></li>
+<li class="splide__slide"><img class="slider_img" src="https://thumbs.dreamstime.com/z/lovely-pink-gerbera-germini-flower-isolated-light-gray-background-isolated-pink-gerbera-germini-flower-99116487.jpg"></img></li>
+<li class="splide__slide"><img class="slider_img" src="https://images.unsplash.com/photo-1495539406979-bf61750d38ad?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjN8fGZyZWV8ZW58MHx8MHx8&ixlib=rb-1.2.1&w=1000&q=80"></img></li>
+</ul>
   </div>
 </div>
 
@@ -183,7 +181,9 @@ window.execCommunityImpact = async function execCommunityImpact(userId,
   }
 
   function createCarousel() {
-    new Splide('.splide').mount();
+    new Splide('.splide', {
+      arrows: false
+    }).mount();
   }
 
   function getImpactSummarySection() {
