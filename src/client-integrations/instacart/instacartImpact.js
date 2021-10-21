@@ -1,15 +1,14 @@
 import * as App from 'widgets';
 import * as components from "../../components";
 import {screenResolutionUtil} from "../../utils";
-import Glide from "@glidejs/glide";
-// Required Core Stylesheet
 import css from './instacart.scss';
+import Splide from '@splidejs/splide';
 
 window.execCommunityImpact = async function execCommunityImpact(userId,
                                                                 countryCode
 ) {
   const beamImpactWidgetContainerId = 'beam-community-widget-container';
-  const beamSliderClass = 'splide';
+  const beamSliderId = 'beam-slider';
   const chainId = '7';
   let isMobile = screenResolutionUtil.isMobile();
   //theme
@@ -146,29 +145,28 @@ window.execCommunityImpact = async function execCommunityImpact(userId,
   }
 
   function getTutorialSection() {
-    let slider = new components.BeamContainer({id: beamSliderClass});
+    let slider = new components.BeamContainer({
+      id: beamSliderId,
+      style: {
+      }
+    });
     slider.view.innerHTML = `
-<div class="glide">
-  <div class="glide__track" data-glide-el="track">
-    <ul class="glide__slides">
-      <li class="glide__slide">0</li>
-      <li class="glide__slide">1</li>
-      <li class="glide__slide">2</li>
-    </ul>
+<div class="splide">
+  <div class="splide__track">
+\t\t<ul class="splide__list">
+\t\t\t<li class="splide__slide"><img class="slider_img " src="https://cdn.pixabay.com/photo/2014/03/22/19/40/gerbera-292793_960_720.jpg"></img></li>
+\t\t\t<li class="splide__slide"><img class="slider_img" src="https://thumbs.dreamstime.com/z/lovely-pink-gerbera-germini-flower-isolated-light-gray-background-isolated-pink-gerbera-germini-flower-99116487.jpg"></img></li>
+\t\t\t<li class="splide__slide"><img class="slider_img" src="https://images.unsplash.com/photo-1495539406979-bf61750d38ad?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjN8fGZyZWV8ZW58MHx8MHx8&ixlib=rb-1.2.1&w=1000&q=80"></img></li>
+\t\t</ul>
   </div>
-   <div class="glide__arrows" data-glide-el="controls">
-    <button class="glide__arrow glide__arrow--left" data-glide-dir="<">prev</button>
-    <button class="glide__arrow glide__arrow--right" data-glide-dir=">">next</button>
-  </div>
-    <div class="glide__bullets" data-glide-el="controls[nav]">
-    <button class="glide__bullet" data-glide-dir="=0"></button>
-    <button class="glide__bullet" data-glide-dir="=1"></button>
-    <button class="glide__bullet" data-glide-dir="=2"></button>
-  </div>
-</div>`
+</div>
+
+`
     return new components.BeamFlexWrapper({
       style: {
-        flexDirection: 'column !important'
+        flexDirection: 'column !important',
+        width: '100%',
+        height: '100%'
       },
       children: [
         new components.BeamText({
@@ -185,7 +183,7 @@ window.execCommunityImpact = async function execCommunityImpact(userId,
   }
 
   function createCarousel() {
-    new Glide('.glide').mount()
+    new Splide('.splide').mount();
   }
 
   function getImpactSummarySection() {

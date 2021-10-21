@@ -32,7 +32,8 @@ module.exports = (env) => {
       // paradeThankYou: './src/thank-you-scripts/clients/parade-thank-you.js',
       roots: './src/client-integrations/roots/index.js',
       instacart: './src/client-integrations/instacart/index.js',
-      // foriaThankYou: './src/thank-you-scripts/clients/foria-thank-you.js'
+      // foriaThankYou: './src/thank-you-scripts/clients/foria-thank-you.js',
+      styles: './src/client-integrations/instacart/instacart.scss'
     },
     output: {
       path: path.resolve(__dirname, "./public/js"),
