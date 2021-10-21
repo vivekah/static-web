@@ -188,7 +188,7 @@ class InstacartCommunityImpactWidget extends BaseImpactWidget {
 
     function region(options, nonprofit) {
       return new components.BeamText({
-        text: options.themeConfig.region?.text || 'Local Nonprofit',
+        text: nonprofit.regions?.first || 'Local Nonprofit',
         style: {...options.themeConfig.region?.style},
         mobileStyle: {...options.themeConfig.region?.mobileStyle},
       })
