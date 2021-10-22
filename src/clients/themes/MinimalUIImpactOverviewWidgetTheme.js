@@ -120,14 +120,14 @@ class MinimalUIImpactOverviewWidgetTheme extends BaseTheme {
                   children: [
                     // progress
                     new components.BeamProgressWrapper({
-                      percentage: nonprofit.percentage,
+                      percentage: nonprofit?.impact?.percentage,
                       height: "7px",
                     }),
                   ],
                 }),
                 // percentage text
                 new components.BeamText({
-                  text: `${nonprofit.percentage}% ${this.options.lan ? translations.translateFunded(this.options.lan) : 'funded'}`,
+                  text: `${nonprofit?.impact?.percentage}% ${this.options.lan ? translations.translateFunded(this.options.lan) : 'funded'}`,
                   fontFamily: this.options.fontFamily,
                   color: this.options.tileTextColor || "#000",
                   fontSize: this.options.tilePercentageFontSize || "x-small",

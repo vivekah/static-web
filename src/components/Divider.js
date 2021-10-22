@@ -1,4 +1,5 @@
 import Component from "./BaseComponent";
+import {styleUtil} from "../utils";
 
 class Divider extends Component {
   constructor(options = {}) {
@@ -23,6 +24,10 @@ class Divider extends Component {
       width: ${options.width || "100%"};
       border: ${borderStyle};
     `;
+    }
+
+    if (options.style) {
+      this._element.style.cssText += styleUtil.styleToString(options.style);
     }
   }
 }
