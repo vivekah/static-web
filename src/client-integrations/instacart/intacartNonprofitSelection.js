@@ -3,6 +3,7 @@ import * as App from 'widgets';
 window.execCardIntegration = async function execCardIntegration(userId,
                                                                 countryCode,
                                                                 containerId,
+                                                                instacartFontFamily,
                                                                 callback = () => {
                                                                 }) {
   console.log(" execCardIntegration FOR Instacart")
@@ -17,18 +18,18 @@ window.execCardIntegration = async function execCardIntegration(userId,
   const chainId = "7";
   const beamContainerId = 'internal-beam-widget-wrapper';
   const confirmButtonId = "chose-nonprofit-button";
+  const apiKey = 'RFvjWgza1Zic.389a8df3-cd51-4808-b472-c1dc413d1162';
+
   addStylesheets();
   // shop config
-  const fontFamily = 'Centra No1 Bold';
-  const fontFamilyRootsRegular = 'Centra No1';
+  const fontFamily = instacartFontFamily || 'Centra No1 Bold';
 
   // widget config
   let beamUser = null;
   const key = `beam_transaction_key_${widgetId}`;
   const nonprofitKey = `beam_nonprofit_key_${widgetId}`;
-  let storedNonprofitId = window.localStorage.getItem(nonprofitKey) || null;
   let widget = null;
-  let beamNonprofitData = null;
+  let userRegistered = false;
 
   //theme
   const themeColorConfig = {
@@ -73,14 +74,13 @@ window.execCardIntegration = async function execCardIntegration(userId,
         if (persistTransactionRequest.readyState !== 4) return;
 
         if (persistTransactionRequest.status >= 200 && persistTransactionRequest.status < 300) {
-          let transactionId = JSON.parse(persistTransactionRequest.responseText);
-          console.debug("Transaction id:", transactionId);
-          window.localStorage.setItem(key, transactionId);
-          console.debug("widget.transactionData.nonprofit:", widget.transactionData.nonprofit);
-          window.localStorage.setItem(nonprofitKey, widget.transactionData.nonprofit);
-          storedNonprofitId = widget.transactionData.nonprofit
-          widget.lastNonprofit = beamNonprofitData.nonprofits.filter(x => x.id == storedNonprofitId)[0] || null;
-          resolve(persistTransactionRequest);
+          let transaction = JSON.parse(persistTransactionRequest.responseText);
+          console.debug("Transaction id:", transaction.selection_id);
+          window.localStorage.setItem(key, transaction?.selection_id);
+          window.localStorage.setItem(nonprofitKey, JSON.stringify(widget.lastNonprofit));
+          console.debug("lastNonprofit:  ", widget.lastNonprofit)
+          console.debug("persistTransactionRequest:  ", transaction)
+          resolve(transaction.selection_id);
         } else {
           reject({
             status: persistTransactionRequest.status,
@@ -108,18 +108,22 @@ window.execCardIntegration = async function execCardIntegration(userId,
   }
 
   async function registerUser(userId) {
+    console.log("Registering user: ", userId)
     let beam_url = new URL('api/v2/users/register', beamWebSdkBaseUrl).toString();
-    try {
-      let response = await window.fetch(beam_url, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({id: userId})
-      });
-      if (response.status == 200) return await response.json();
-    } catch (err) {
-      console.error(err);
+    let response = await window.fetch(beam_url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Api-Key ${apiKey}`
+      },
+      body: JSON.stringify({id: userId})
+    });
+    if (response.status === 201) {
+      userRegistered = true;
+      return await response.json();
+    } else if (response.status === 200) {
+      userRegistered = true;
+      return response.statusText;
     }
     return null;
   }
@@ -152,7 +156,7 @@ window.execCardIntegration = async function execCardIntegration(userId,
           fontWeight: '600',
           margin: "20px 0 20px 0",
           width: '100%',
-          fontFamily: fontFamilyRootsRegular,
+          fontFamily: fontFamily,
           color: themeColorConfig.lightTextColor
         },
         gradientColors: [themeColorConfig.textColor, themeColorConfig.textColor],
@@ -236,62 +240,41 @@ window.execCardIntegration = async function execCardIntegration(userId,
 
   async function confirmNonProfit() {
     console.log(" PERSIST TRANSACTION")
-    const success = await persistTransaction();
-    if (success) {
+    const selectionId = await persistTransaction();
+    if (selectionId) {
       console.debug("Transaction persisted.");
-      callback({id: nonprofit.id, name: nonprofit.name})
+      callback({id: selectionId})
     } else {
       console.error("Transaction could not be persisted");
       callback({error: "Transaction could not be persisted"});
     }
   }
 
-  function executeBeamWidget() {
+  async function executeBeamWidget() {
 
     widget = getBeamWidget();
-    widget.render({
+    let lastNonprofitInStorage = window.localStorage.getItem(nonprofitKey);
+    if (lastNonprofitInStorage) {
+      userRegistered = true;
+      enableConfirmButton();
+      widget.lastNonprofit = JSON.parse(lastNonprofitInStorage);
+    }
+    return widget.render({
       chain: chainId,
       user: beamUser,
       store: storeId,
-      // cartTotal: cartTotal,
       showCommunityImpact: true,
     });
   }
 
-  function insertBeamWidget() {
-    const thankYouContainer = document.querySelector(containerId ? "#" + containerId : "[data-step='thank_you']");
-    console.log(" thankYouContainer: ", thankYouContainer)
+  async function insertBeamWidget() {
+    const nonprofitWidgetContainer = containerId ? document.querySelector("#" + containerId) : document.body;
+    console.log(" nonprofitWidgetContainer: ", nonprofitWidgetContainer)
 
-    let found = false;
-    if (!containerId) {
-      let observer = new MutationObserver((mutations) => {
-        mutations.forEach((mutation) => {
-          if (!mutation.addedNodes) return
-          mutation.addedNodes.forEach((node) => {
-            if (found) {
-              observer.disconnect();
-              return;
-            }
-            if (node.className === "section__content") {
-              const beamContentBox = getBeamWidgetHTML();
-              node.prepend(beamContentBox);
-              executeBeamWidget();
-              found = true;
-            }
-          });
-        })
-      });
-      observer.observe(thankYouContainer, {
-        childList: true,
-        subtree: true,
-        attributes: false,
-        characterData: false,
-      });
-    } else {
-      const beamContentBox = getBeamWidgetHTML();
-      thankYouContainer.prepend(beamContentBox);
-      executeBeamWidget();
-    }
+    const beamContentBox = getBeamWidgetHTML();
+    nonprofitWidgetContainer.prepend(beamContentBox);
+    await executeBeamWidget();
+    await registerUser(userId);
 
     function getBeamWidgetHTML() {
       const beamContentBox = document.createElement("div");
@@ -306,7 +289,8 @@ window.execCardIntegration = async function execCardIntegration(userId,
                                 Fight food insecurity with instacart</p>
                               </span>
                           
-                              <div id="internal-beam-widget-wrapper" ></div>
+                          <div id="beam-container"  style="max-width: 500px">
+                              <div id="internal-beam-widget-wrapper"></div>
                               <style scoped>
                               @media only screen and (max-width: 600px) {
                                    #chose-nonprofit-button{
@@ -317,12 +301,13 @@ window.execCardIntegration = async function execCardIntegration(userId,
                                   }
                               
                                 </style>
-                              <button id="chose-nonprofit-button" style="background: #e3e3e3; color: #6a6b6d; border-radius:
-                            10px;width: 100%; border: none; height: 40px;">Choose
+                              <button id="chose-nonprofit-button" disabled style="background: #e3e3e3; color: #6a6b6d; border-radius:
+                                 10px;width: 100%; border: none; height: 40px;">Choose
                                 nonprofit
                             </button>
                                 </div>
                               <div id="beam-loading-content" style='display: none;'></div>
+                            </div>
                             </div>
                           </div>
                       </div>`
@@ -334,11 +319,16 @@ window.execCardIntegration = async function execCardIntegration(userId,
   function listenToNonprofitSelectedEvent() {
 
     window.addEventListener(EVENTS.nonProfitSelected, function () {
-      console.log("Nonprofit chosennn");
-      let button = document.getElementById(confirmButtonId);
-      button.style.backgroundColor = themeColorConfig.confirmationButtonColor;
-      button.style.color = '#fff';
+      console.log("Event: Nonprofit selected");
+      enableConfirmButton();
     });
+  }
+
+  function enableConfirmButton() {
+    let button = document.getElementById(confirmButtonId);
+    button.style.backgroundColor = themeColorConfig.confirmationButtonColor;
+    button.style.color = '#fff';
+    button.disabled = false;
   }
 
   function listenToNonprofitConfirmedEvent() {
@@ -353,11 +343,17 @@ window.execCardIntegration = async function execCardIntegration(userId,
     });
 
     window.addEventListener(EVENTS.nonProfitConfirmed, function () {
-      confirmNonProfit();
+      console.log("Event: Nonprofit confirmed");
+      if (userRegistered) {
+        console.log("User is registered, confirmation of nonprofit can be done");
+        confirmNonProfit();
+      } else {
+        console.error(" User is not registered!")
+      }
     });
   }
 
-  insertBeamWidget();
+  await insertBeamWidget();
   listenToNonprofitSelectedEvent();
   listenToNonprofitConfirmedEvent();
 
