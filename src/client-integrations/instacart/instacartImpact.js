@@ -1,6 +1,6 @@
 import * as App from 'widgets';
 import * as components from "../../components";
-import {screenResolutionUtil} from "../../utils";
+import {pathUtil, screenResolutionUtil} from "../../utils";
 import css from './instacart.scss';
 import Splide from '@splidejs/splide';
 
@@ -113,7 +113,7 @@ window.execCommunityImpact = async function execCommunityImpact(userId,
           children: [
             new components.BeamImage({
               alt: 'Beam Logo',
-              src: 'https://d1jhb45gnbgj0c.cloudfront.net/beam_images/Beam+Logo_Vector.png',
+              src: pathUtil.getAsset('instacart_purchase_icon.png'),
               style: {
                 borderRadius: '50%',
                 width: '60px',
