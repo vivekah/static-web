@@ -264,6 +264,7 @@ window.execCardIntegration = async function execCardIntegration(userId,
       user: beamUser,
       store: storeId,
       showCommunityImpact: true,
+      postalCode: countryCode
     });
   }
 
