@@ -14,8 +14,8 @@ window.execCardIntegration = async function execCardIntegration(userId,
   }
   const beamWebSdkBaseUrl = process.env.BEAM_BACKEND_BASE_URL;
   const widgetId = 'e9738b7ffed2476bbec748b1ccc1a046';
-  const storeId = "13";
-  const chainId = "7";
+  const storeId = "89";
+  const chainId = "61";
   const beamContainerId = 'internal-beam-widget-wrapper';
   const confirmButtonId = "chose-nonprofit-button";
   const apiKey = 'RFvjWgza1Zic.389a8df3-cd51-4808-b472-c1dc413d1162';

@@ -37,15 +37,23 @@ class InstacartCommunityImpactWidget extends BaseImpactWidget {
     this.currentTabData = null;
     this.maxContainerWidth = 570;
     this.options.regionsToIgnore = this.options.regionsToIgnore || ['DNS'];
+    this.regions = null;
   }
+
 
   get causes() {
     return [null, ...new Set(this.data.nonprofits.map((x) => x.cause))];
   }
 
-  get regions() {
-    const regions = [].concat(this.data.nonprofits.map((x) => x.regions)).flat(1).filter(e => e);
-    return [null, ...new Set(regions)];
+  async fetchRegions() {
+    console.log(" OPTIONS", this.options)
+    const data = await this.makeAPIRequest("api/v2/chains/impact/regional", {
+      chain: this.options.chainId,
+    });
+
+    console.log(" REGIONS ", Object.keys(data))
+
+    return [null, ...new Set(Object.keys(data))]
   }
 
   get nonprofits() {
@@ -68,6 +76,7 @@ class InstacartCommunityImpactWidget extends BaseImpactWidget {
   }
 
   async render(args) {
+    this.regions = await this.fetchRegions();
     await super.render(args, () => {
       return this.isMobile ? this.buildMobileView() : this.buildDesktopView();
     });
@@ -383,10 +392,10 @@ class InstacartCommunityImpactWidget extends BaseImpactWidget {
     })
   }
 
-  tabs(tabData = null) {
+  tab(tabData = null) {
     return new components.BeamContainer({
       margin: "0 20px 0 0",
-      style: {...this.options.themeConfig.tabsContainer?.style},
+      style: {...this.options.themeConfig.tabContainer?.style},
       children: [
         new components.BeamText({
           text: !tabData ? `${this.options.lan ? translations.translateSeeAll(this.options.lan) : "See All"}` : tabData,
@@ -460,16 +469,26 @@ class InstacartCommunityImpactWidget extends BaseImpactWidget {
                 alignItems: 'center',
                 margin: '0px 90px 50px 90px',
                 justifyContent: 'center',
-                ...this.options?.themeConfig?.tabsContainer?.style
+                ...this.options?.themeConfig?.tabsSection?.style
               },
-              mobileStyle: {...this.options.themeConfig.tabsContainer?.mobileStyle},
+              mobileStyle: {...this.options.themeConfig.tabsSection?.mobileStyle},
               children: !this.options.themeConfig.hideTabs && [
                 // causes
-                ...(this.options.themeConfig?.filterByRegion ?
-                  this.regions : this.causes).map((tabData) => this.tabs(tabData)),
+                new components.BeamFlexWrapper({
+                  style: {
+                    alignItems: 'center',
+                    margin: '0px 90px 50px 90px',
+                    justifyContent: 'center',
+                    ...this.options?.themeConfig?.tabsContainer?.style
+                  },
+                  mobileStyle: {...this.options.themeConfig.tabsContainer?.mobileStyle},
+                  children: [
+                    ...(this.options.themeConfig?.filterByRegion ?
+                      this.regions : this.causes).map((tabData) => this.tab(tabData)),
+                  ]
+                }),
                 this.options.themeConfig.showNational && this.titleDevider(),
                 this.options.themeConfig.showNational && this.titleNonprofits(),
-
               ],
             }),
           ]

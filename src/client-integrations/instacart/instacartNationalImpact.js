@@ -1,11 +1,9 @@
 import * as App from 'widgets';
 import * as components from "../../components";
-import {screenResolutionUtil} from "../../utils";
 
 window.execNationalCommunityImpact = async function execNationalCommunityImpact() {
   const beamImpactWidgetContainerId = 'beam-community-widget-container';
-  const chainId = '7';
-  let isMobile = screenResolutionUtil.isMobile();
+  const chainId = "61";
   //theme
   const themeColorConfig = {
     progressBarColor: '#16ad0b',
@@ -137,6 +135,7 @@ window.execNationalCommunityImpact = async function execNationalCommunityImpact(
       widgetId: widgetId,
       noAjax: true,
       containerId: beamImpactWidgetContainerId,
+      chainId: chainId,
       themeConfig: {
         hideLogo: true,
         showNational: true,
@@ -182,6 +181,8 @@ window.execNationalCommunityImpact = async function execNationalCommunityImpact(
           style: {
             padding: '10px',
             borderRadius: '25px',
+            width: 'auto',
+            height: 'auto'
           }
         },
         cardbody: {
@@ -248,11 +249,18 @@ window.execNationalCommunityImpact = async function execNationalCommunityImpact(
             width: '230px'
           }
         },
-        tabsContainer: {
+        tabsSection: {
           style: {
-            margin: '0px',
+            margin: '0',
             marginBottom: '15px',
             flexDirection: 'column !important',
+            flexWrap: 'wrap !important'
+          }
+        },
+        tabsContainer: {
+          style: {
+            margin: '10px',
+            flexDirection: 'row !important',
             flexWrap: 'wrap !important'
           }
         },

@@ -9,7 +9,7 @@ window.execCommunityImpact = async function execCommunityImpact(userId,
 ) {
   const beamImpactWidgetContainerId = 'beam-community-widget-container';
   const beamSliderId = 'beam-slider';
-  const chainId = '7';
+  const chainId = "61";
   let isMobile = screenResolutionUtil.isMobile();
   //theme
   const themeColorConfig = {
@@ -60,7 +60,7 @@ window.execCommunityImpact = async function execCommunityImpact(userId,
 
       },
       mobileStyle: {
-        maxWidth: '400px',
+        // maxWidth: '400px',
         textAlign: 'center'
       },
       children: [
@@ -284,14 +284,16 @@ window.execCommunityImpact = async function execCommunityImpact(userId,
       widgetId: widgetId,
       containerId: beamImpactWidgetContainerId,
       themeConfig: {
+        id: 'instacart-community-impact',
         hideLogo: true,
+        chainId: chainId,
         noWrap: false,
         impactCard: {
           style: {
             width: '280px'
           },
           mobileStyle: {
-            width: '340px'
+            // width: '340px'
           }
         },
         tileHeight: '100%',
