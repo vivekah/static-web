@@ -6,9 +6,10 @@
   "scripts": {
     "test": "mocha --require @babel/register tests/**/*.js",
     "build": "webpack --env.environment=prod",
-    "build-stag": "webpack --env.environment=stag",
-    "build-dev": "webpack --env.environment=dev",
-    "start": "webpack-dev-server --env.environment=stag"
+    "delete-dist": "rimraf public/js",
+    "build-stag": "npm run delete-dist &&  webpack --env.environment=stag",
+    "build-dev": "npm run delete-dist &&  webpack --env.environment=dev",
+    "start": "npm run delete-dist &&  webpack-dev-server --env.environment=stag"
   },
   "keywords": [],
   "author": "",
