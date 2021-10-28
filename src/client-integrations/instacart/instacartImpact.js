@@ -10,6 +10,7 @@ window.execCommunityImpact = async function execCommunityImpact(userId,
   const beamImpactWidgetContainerId = 'beam-community-widget-container';
   const beamSliderId = 'beam-slider';
   const chainId = "61";
+  const widgetId = "e9738b7ffed2476bbec748b1ccc1a046";
   let isMobile = screenResolutionUtil.isMobile();
   //theme
   const themeColorConfig = {

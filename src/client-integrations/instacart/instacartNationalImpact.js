@@ -4,6 +4,8 @@ import * as components from "../../components";
 window.execNationalCommunityImpact = async function execNationalCommunityImpact() {
   const beamImpactWidgetContainerId = 'beam-community-widget-container';
   const chainId = "61";
+  const widgetId = "e9738b7ffed2476bbec748b1ccc1a046";
+
   //theme
   const themeColorConfig = {
     progressBarColor: '#16ad0b',
