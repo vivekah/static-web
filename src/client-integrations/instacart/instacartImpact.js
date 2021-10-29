@@ -54,7 +54,7 @@ window.execCommunityImpact = async function execCommunityImpact(userId,
       style: {
         flexDirection: 'column',
         justifyContent: 'center',
-        margin: 'auto',
+        // margin: 'auto',
         marginTop: '45px',
         padding: '0px 20px',
         maxWidth: '700px',
@@ -150,29 +150,28 @@ window.execCommunityImpact = async function execCommunityImpact(userId,
       id: beamSliderId,
     });
     slider.view.innerHTML = `
-<div class="splide">
-  <div class="splide__track">
-<ul class="splide__list">
-<li class="splide__slide"><img class="slider_img " src="https://cdn.pixabay.com/photo/2014/03/22/19/40/gerbera-292793_960_720.jpg"></img></li>
-<li class="splide__slide"><img class="slider_img" src="https://thumbs.dreamstime.com/z/lovely-pink-gerbera-germini-flower-isolated-light-gray-background-isolated-pink-gerbera-germini-flower-99116487.jpg"></img></li>
-<li class="splide__slide"><img class="slider_img" src="https://images.unsplash.com/photo-1495539406979-bf61750d38ad?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjN8fGZyZWV8ZW58MHx8MHx8&ixlib=rb-1.2.1&w=1000&q=80"></img></li>
-</ul>
-  </div>
-</div>
-
-`
+          <div class="splide">
+            <div class="splide__track">
+          <ul class="splide__list">
+          <li class="splide__slide"><img class="slider_img " src="https://cdn.pixabay.com/photo/2014/03/22/19/40/gerbera-292793_960_720.jpg"></img></li>
+          <li class="splide__slide"><img class="slider_img" src="https://thumbs.dreamstime.com/z/lovely-pink-gerbera-germini-flower-isolated-light-gray-background-isolated-pink-gerbera-germini-flower-99116487.jpg"></img></li>
+          <li class="splide__slide"><img class="slider_img" src="https://images.unsplash.com/photo-1495539406979-bf61750d38ad?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjN8fGZyZWV8ZW58MHx8MHx8&ixlib=rb-1.2.1&w=1000&q=80"></img></li>
+          </ul>
+            </div>
+          </div>`
     return new components.BeamFlexWrapper({
       style: {
         flexDirection: 'column !important',
-        width: '100%',
-        height: '100%'
+        flexWrap: 'nowrap !important'
+        // width: '100%',
+        // height: '100%'
       },
       children: [
         new components.BeamText({
           text: 'How it works',
           style: {
             fontSize: '20px',
-            margin: 'auto',
+            // margin: 'auto',
             fontWeight: '600'
           }
         }),
@@ -269,7 +268,7 @@ window.execCommunityImpact = async function execCommunityImpact(userId,
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          "Authorization": 'Api-Key RFvjWgza1Zic.389a8df3-cd51-4808-b472-c1dc413d1162'
+          "Authorization": 'Api-Key EH3XEZn1Mtzw.3f1117b0-b193-4656-8161-3cfc3b61a01e'
         }
       });
       if (response.status == 200) return await response.json();
@@ -284,10 +283,10 @@ window.execCommunityImpact = async function execCommunityImpact(userId,
       fontFamily: "poppins",
       widgetId: widgetId,
       containerId: beamImpactWidgetContainerId,
+      chainId: chainId,
       themeConfig: {
         id: 'instacart-community-impact',
         hideLogo: true,
-        chainId: chainId,
         noWrap: false,
         impactCard: {
           style: {
@@ -327,6 +326,7 @@ window.execCommunityImpact = async function execCommunityImpact(userId,
         },
         cardImage: {
           style: {
+            maxHeight: '240px',
             padding: '10px',
             borderRadius: '25px',
           }

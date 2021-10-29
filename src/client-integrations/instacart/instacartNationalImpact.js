@@ -121,7 +121,7 @@ window.execNationalCommunityImpact = async function execNationalCommunityImpact(
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          "Authorization": 'Api-Key RFvjWgza1Zic.389a8df3-cd51-4808-b472-c1dc413d1162'
+          "Authorization": 'Api-Key EH3XEZn1Mtzw.3f1117b0-b193-4656-8161-3cfc3b61a01e'
         }
       });
       if (response.status == 200) return await response.json();
