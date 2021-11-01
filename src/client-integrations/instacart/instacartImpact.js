@@ -293,10 +293,8 @@ window.execCommunityImpact = async function execCommunityImpact(userId,
             width: '280px'
           },
           mobileStyle: {
-            // width: '340px'
           }
         },
-        tileHeight: '100%',
         title: {
           style: {
             fontSize: '14px',
@@ -329,6 +327,8 @@ window.execCommunityImpact = async function execCommunityImpact(userId,
             maxHeight: '240px',
             padding: '10px',
             borderRadius: '25px',
+            width: '100%',
+            objectFit: 'contain'
           }
         },
         cardbody: {

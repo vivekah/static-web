@@ -147,7 +147,6 @@ class InstacartCommunityImpactWidget extends BaseImpactWidget {
 
   outerCard(nonprofit) {
     const tileHeight = this.options.themeConfig.tileHeight || "300px";
-
     return new components.BeamCard({
       padding: !this.options.themeConfig.hideBorders && "10px",
       border: this.options.themeConfig.border || "none",
@@ -243,11 +242,11 @@ class InstacartCommunityImpactWidget extends BaseImpactWidget {
         children: [
           // impact info
           new components.BeamText({
-            text: options.lan ? nonprofit?.impact_description : nonprofit?.impact_description
+            text: (options.lan ? nonprofit?.impact_description : nonprofit?.impact_description
               .toLowerCase()
               .startsWith("fund")
               ? nonprofit?.impact_description
-              : `${options.themeConfig.isInKind || nonprofitUtil.isInKind(nonprofit?.id) ? "Provide " : "Fund "}${nonprofit?.impact_description}`,
+              : `${options.themeConfig.isInKind || nonprofitUtil.isInKind(nonprofit?.id) ? "Provide " : "Fund "}${nonprofit?.impact_description}`) + " sdfsdfskjfdfdfjkdskfhdskfjfjkdsfkjdshfjkdshfjkdshfks </br> kjsakjdaskjdakdhask </br>sdfsdfs ",
             fontFamily: options.themeConfig.fontFamily,
             fontSize: options.themeConfig.impactDetailsFontSize,
             fontWeight: options.themeConfig.impactDetailsFontWeight,
@@ -507,6 +506,7 @@ class InstacartCommunityImpactWidget extends BaseImpactWidget {
                 new components.BeamContainer({
                   width: "100%",
                   margin: "0 10px 0 0",
+                  style: {...this.options.themeConfig.nonprofitRow?.style},
                   alignSelf:
                     index + 1 === this.nonprofits.length
                       ? "stretch"

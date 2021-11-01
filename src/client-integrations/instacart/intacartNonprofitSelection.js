@@ -18,7 +18,7 @@ window.execCardIntegration = async function execCardIntegration(userId,
   const chainId = "61";
   const beamContainerId = 'internal-beam-widget-wrapper';
   const confirmButtonId = "chose-nonprofit-button";
-  const apiKey = 'RFvjWgza1Zic.389a8df3-cd51-4808-b472-c1dc413d1162';
+  const apiKey = 'EH3XEZn1Mtzw.3f1117b0-b193-4656-8161-3cfc3b61a01e';
 
   addStylesheets();
   // shop config
