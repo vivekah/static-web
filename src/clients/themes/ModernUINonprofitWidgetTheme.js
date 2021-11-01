@@ -137,6 +137,7 @@ class ModernUINonprofitWidgetTheme extends BaseTheme {
           }),
           new components.BeamText({
             text: `Learn more`,
+            id: 'learn-more',
             style: {
               display: 'inline',
               color: "#999",
