@@ -246,7 +246,7 @@ class InstacartCommunityImpactWidget extends BaseImpactWidget {
               .toLowerCase()
               .startsWith("fund")
               ? nonprofit?.impact_description
-              : `${options.themeConfig.isInKind || nonprofitUtil.isInKind(nonprofit?.id) ? "Provide " : "Fund "}${nonprofit?.impact_description}`) + " sdfsdfskjfdfdfjkdskfhdskfjfjkdsfkjdshfjkdshfjkdshfks </br> kjsakjdaskjdakdhask </br>sdfsdfs ",
+              : `${options.themeConfig.isInKind || nonprofitUtil.isInKind(nonprofit?.id) ? "Provide " : "Fund "}${nonprofit?.impact_description}`),
             fontFamily: options.themeConfig.fontFamily,
             fontSize: options.themeConfig.impactDetailsFontSize,
             fontWeight: options.themeConfig.impactDetailsFontWeight,

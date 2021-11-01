@@ -202,7 +202,7 @@ window.execNationalCommunityImpact = async function execNationalCommunityImpact(
         tileHeight: 'inherit',
         cardbody: {
           style: {
-            padding: '10px'
+            padding: '0px 10px 10px 10px'
           }
         },
         border: `1px solid ${themeColorConfig.progressBarBackgroundColor}`,
