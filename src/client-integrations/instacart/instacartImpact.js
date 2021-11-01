@@ -5,14 +5,15 @@ import css from './instacart.scss';
 import Splide from '@splidejs/splide';
 
 window.execCommunityImpact = async function execCommunityImpact(userId,
-                                                                countryCode
+                                                                countryCode,
+                                                                lan = 'en_US'
 ) {
   const beamImpactWidgetContainerId = 'beam-community-widget-container';
   const beamSliderId = 'beam-slider';
   const chainId = "61";
   const widgetId = "e9738b7ffed2476bbec748b1ccc1a046";
   let isMobile = screenResolutionUtil.isMobile();
-  let apiKey = 'Fez0xn9XFhur.4c90bd46-40f4-4cd7-a755-4800ea5ad1e';
+  let apiKey = 'MCT5KmLZUJCf.aecf3e1a-c091-481a-89bc-ae9384b3639c';
   //theme
   const themeColorConfig = {
     progressBarColor: '#16ad0b',
@@ -257,7 +258,8 @@ window.execCommunityImpact = async function execCommunityImpact(userId,
     let fullUrl = new URL('api/v2/users/impact/instacart', beamWebSdkBaseUrl);
     const params = {
       user: userId,
-      zip_code: countryCode
+      zip_code: countryCode,
+      lan: lan
     }
     if (params)
       fullUrl.search = new URLSearchParams(params)
@@ -285,6 +287,7 @@ window.execCommunityImpact = async function execCommunityImpact(userId,
       widgetId: widgetId,
       containerId: beamImpactWidgetContainerId,
       chainId: chainId,
+      lan: lan,
       themeConfig: {
         id: 'instacart-community-impact',
         hideLogo: true,

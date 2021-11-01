@@ -4,6 +4,7 @@ window.execCardIntegration = async function execCardIntegration(userId,
                                                                 countryCode,
                                                                 containerId,
                                                                 instacartFontFamily,
+                                                                lan = 'en_US',
                                                                 callback = () => {
                                                                 }) {
   console.log(" execCardIntegration FOR Instacart")
@@ -173,6 +174,7 @@ window.execCardIntegration = async function execCardIntegration(userId,
     return new beamApps.NonprofitWidget({
       widgetId: widgetId,
       containerId: beamContainerId,
+      lan: lan,
       userDidMatchCallback: async (matched, amount) => {
         // process action
         console.log("Not implemented");

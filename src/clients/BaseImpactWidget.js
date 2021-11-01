@@ -41,7 +41,7 @@ class BaseImpactWidget extends BaseWidget {
       data = await this.makeAPIRequest("api/v2/chains/impact/all", {
         // nonprofit: args.nonprofit,
         // user: args.user,
-        // lan: this.options.lan,
+        lan: this.options.lan,
         chain: args.chain
       });
     }
