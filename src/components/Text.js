@@ -35,6 +35,9 @@ class Text extends Component {
     if (options.className) {
       this._element.className = options.className;
     }
+    if(options.id){
+      this._element.id = options.id;
+    }
 
     styleUtil.addStyle(this._element, options);
   }

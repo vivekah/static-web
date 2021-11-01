@@ -20,9 +20,8 @@ window.execCardIntegration = async function execCardIntegration(userId,
   const confirmButtonId = "chose-nonprofit-button";
   const apiKey = 'MCT5KmLZUJCf.aecf3e1a-c091-481a-89bc-ae9384b3639c';
 
-  addStylesheets();
   // shop config
-  const fontFamily = instacartFontFamily || 'Centra No1 Bold';
+  const fontFamily = instacartFontFamily || "'Poppins', sans-serif";
 
   // widget config
   let beamUser = null;
@@ -40,6 +39,7 @@ window.execCardIntegration = async function execCardIntegration(userId,
     lightTextColor: '#bbbbbd',
     progressBarBackgroundColor: '#e3e3e3'
   }
+  addStylesheets();
 
   function addStylesheets() {
     const viewPortMetaTag = document.querySelector("meta[name='viewport']");
@@ -49,20 +49,59 @@ window.execCardIntegration = async function execCardIntegration(userId,
       meta.content = "width=device-width,initial-scale=1.0";
       document.getElementsByTagName('head')[0].appendChild(meta);
     }
-    const fontStyle = document.createElement("style");
-    fontStyle.innerHTML = `
-         @font-face {
-                font-family: 'Centra No1 Bold';
-                font-display: block;
-                src: url('https://beam-sdk.s3.us-west-2.amazonaws.com/fonts/CentraNo1-Bold.otf') format("opentype");
-          }
-         @font-face {
-                font-family: 'Centra No1';
-                font-display: block;
-                src: url('https://beam-sdk.s3.us-west-2.amazonaws.com/fonts/CentraNo1-Book.otf') format("opentype");
-          }
-    `;
-    document.head.appendChild(fontStyle);
+    let link = document.createElement('link');
+    link.setAttribute('rel', 'stylesheet');
+    link.setAttribute('type', 'text/css');
+    link.setAttribute('href', 'https://fonts.googleapis.com/css2?family=Poppins:wght@400&display=swap');
+
+    document.head.appendChild(link);
+    document.head.innerHTML += `
+    <style>
+      /* Tooltip container */
+                              .tooltip {
+                                position: relative;
+                                display: inline-block;
+                                border-bottom: 1px dotted black; /* If you want dots under the hoverable text */
+                                padding-top: 10px;
+                              }
+
+                              /* Tooltip text */
+                              .tooltip .tooltip-text {
+                                visibility: hidden;
+                                width: 180px;
+                                background-color: #1F5A96;
+                                color: #fff;
+                                text-align: center;
+                                padding: 8px 0;
+                                line-height: 1.5;
+                                text-align: left;
+                                border-radius: 6px;
+                                font-family: ${fontFamily};
+                                font-size: 10px;
+                                padding: 8px;
+                                margin-top: 5px;
+                               
+                                /* Position the tooltip text - see examples below! */
+                                position: absolute;
+                                z-index: 1;
+                              }
+                              
+                              /* Show the tooltip text when you mouse over the tooltip container */
+                              .tooltip:hover .tooltip-text {
+                                visibility: visible;
+                              }
+                              .tooltip .tooltip-text::after {
+                                content: " ";
+                                position: absolute;
+                                bottom: 100%;  /* At the top of the tooltip */
+                                left: 50%;
+                                margin-left: -66px;
+                                border-width: 5px;
+                                border-style: solid;
+                                border-color: transparent transparent #1F5A96 transparent;
+                              }
+                              
+    </style>`
   }
 
   function persistTransaction() {
@@ -296,33 +335,6 @@ window.execCardIntegration = async function execCardIntegration(userId,
                               <div id="internal-beam-widget-wrapper"></div>
                               <style scoped>
                               
-                              /* Tooltip container */
-                              .tooltip {
-                                position: relative;
-                                display: inline-block;
-                                border-bottom: 1px dotted black; /* If you want dots under the hoverable text */
-                              }
-                              
-                              /* Tooltip text */
-                              .tooltip .tooltip-text {
-                                visibility: hidden;
-                                width: 120px;
-                                background-color: black;
-                                color: #fff;
-                                text-align: center;
-                                padding: 5px 0;
-                                border-radius: 6px;
-                               
-                                /* Position the tooltip text - see examples below! */
-                                position: absolute;
-                                z-index: 1;
-                              }
-                              
-                              /* Show the tooltip text when you mouse over the tooltip container */
-                              .tooltip:hover .tooltip-text {
-                                visibility: visible;
-                              }
-                              
                               @media only screen and (max-width: 600px) {
                                  #internal-beam-widget-wrapper{
                                   margin-bottom: 70px;
@@ -409,20 +421,32 @@ window.execCardIntegration = async function execCardIntegration(userId,
     });
   }
 
+  function listenToWindowResize() {
+    window.addEventListener('resize', function (event) {
+      addTooltip();
+    }, true);
+  }
+
   await insertBeamWidget();
   listenToNonprofitSelectedEvent();
   listenToNonprofitConfirmedEvent();
+  listenToWindowResize();
 
   function addTooltip() {
-    let learnMoreElem = document.getElementById("learn-more");
-    if (learnMoreElem) {
-      let learnMoreTooltipText = document.createElement('div');
-      learnMoreTooltipText.textContent = `
-      To support local nonprofits across the country, donations are nmade to ParPal Giving Fund, a registered 501(c)(3) nonprofit organization. 
+
+    let beamTooltip = document.getElementById("beam-tooltip");
+    if (!beamTooltip) {
+      let learnMoreElem = document.getElementById("learn-more");
+      if (learnMoreElem) {
+        let learnMoreTooltipText = document.createElement('div');
+        learnMoreTooltipText.id = 'beam-tooltip';
+        learnMoreTooltipText.textContent = `
+      To support local nonprofits across the country, donations are nmade to ParPal Giving Fund, a registered 501(c)(3) nonprofit organization. PPGF receives the donation and distributes 100% to the nonprofit of your choice, with Instacart covering all applicable processing fees. In the extremely rare event your nonprofit shuts down or PPGF is otherwise unable to fund it, PPGF will reassign the funds to similar nonprofit in your area.
       `;
-      learnMoreElem.classList.add('tooltip');
-      learnMoreTooltipText.classList.add('tooltip-text');
-      learnMoreElem.appendChild(learnMoreTooltipText)
+        learnMoreElem.classList.add('tooltip');
+        learnMoreTooltipText.classList.add('tooltip-text');
+        learnMoreElem.appendChild(learnMoreTooltipText)
+      }
     }
   }
 
