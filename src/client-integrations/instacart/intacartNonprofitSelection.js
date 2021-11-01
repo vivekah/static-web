@@ -18,7 +18,7 @@ window.execCardIntegration = async function execCardIntegration(userId,
   const chainId = "61";
   const beamContainerId = 'internal-beam-widget-wrapper';
   const confirmButtonId = "chose-nonprofit-button";
-  const apiKey = 'EH3XEZn1Mtzw.3f1117b0-b193-4656-8161-3cfc3b61a01e';
+  const apiKey = 'MCT5KmLZUJCf.aecf3e1a-c091-481a-89bc-ae9384b3639c';
 
   addStylesheets();
   // shop config
@@ -98,6 +98,7 @@ window.execCardIntegration = async function execCardIntegration(userId,
 
       persistTransactionRequest.open("POST", `${beamWebSdkBaseUrl}/api/v2/users/selection`, true);
       persistTransactionRequest.setRequestHeader('Content-type', 'application/json')
+      persistTransactionRequest.setRequestHeader('Authorization', `Api-Key ${apiKey}`)
       let body = JSON.stringify({
         ...widget.transactionData,
         selection_id: transactionId
@@ -276,6 +277,7 @@ window.execCardIntegration = async function execCardIntegration(userId,
     nonprofitWidgetContainer.prepend(beamContentBox);
     await executeBeamWidget();
     await registerUser(userId);
+    addTooltip();
 
     function getBeamWidgetHTML() {
       const beamContentBox = document.createElement("div");
@@ -293,12 +295,41 @@ window.execCardIntegration = async function execCardIntegration(userId,
                           <div id="beam-container"  style="max-width: 500px">
                               <div id="internal-beam-widget-wrapper"></div>
                               <style scoped>
+                              
+                              /* Tooltip container */
+                              .tooltip {
+                                position: relative;
+                                display: inline-block;
+                                border-bottom: 1px dotted black; /* If you want dots under the hoverable text */
+                              }
+                              
+                              /* Tooltip text */
+                              .tooltip .tooltip-text {
+                                visibility: hidden;
+                                width: 120px;
+                                background-color: black;
+                                color: #fff;
+                                text-align: center;
+                                padding: 5px 0;
+                                border-radius: 6px;
+                               
+                                /* Position the tooltip text - see examples below! */
+                                position: absolute;
+                                z-index: 1;
+                              }
+                              
+                              /* Show the tooltip text when you mouse over the tooltip container */
+                              .tooltip:hover .tooltip-text {
+                                visibility: visible;
+                              }
+                              
                               @media only screen and (max-width: 600px) {
                                  #internal-beam-widget-wrapper{
                                   margin-bottom: 70px;
                                  }
                                    #chose-nonprofit-button{
                                          margin-bottom: 10px;
+                                         width: 90%;
                                         }
                                    #button-wrapper{
                                     position: fixed;
@@ -326,7 +357,7 @@ window.execCardIntegration = async function execCardIntegration(userId,
                                 <div id="button-wrapper">
                                     <div id="button-divider"></div>
                                     <button id="chose-nonprofit-button" disabled style="background: #e3e3e3; color: #6a6b6d; border-radius:
-                                 10px; width: 90%; border: none; height: 40px;">Choose
+                                 10px; width: 100%; border: none; height: 40px;">Choose
                                 nonprofit
                                  </button>
                                 </div>
@@ -382,6 +413,18 @@ window.execCardIntegration = async function execCardIntegration(userId,
   listenToNonprofitSelectedEvent();
   listenToNonprofitConfirmedEvent();
 
+  function addTooltip() {
+    let learnMoreElem = document.getElementById("learn-more");
+    if (learnMoreElem) {
+      let learnMoreTooltipText = document.createElement('div');
+      learnMoreTooltipText.textContent = `
+      To support local nonprofits across the country, donations are nmade to ParPal Giving Fund, a registered 501(c)(3) nonprofit organization. 
+      `;
+      learnMoreElem.classList.add('tooltip');
+      learnMoreTooltipText.classList.add('tooltip-text');
+      learnMoreElem.appendChild(learnMoreTooltipText)
+    }
+  }
 
 }
 

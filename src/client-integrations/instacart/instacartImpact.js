@@ -12,6 +12,7 @@ window.execCommunityImpact = async function execCommunityImpact(userId,
   const chainId = "61";
   const widgetId = "e9738b7ffed2476bbec748b1ccc1a046";
   let isMobile = screenResolutionUtil.isMobile();
+  let apiKey = 'Fez0xn9XFhur.4c90bd46-40f4-4cd7-a755-4800ea5ad1e';
   //theme
   const themeColorConfig = {
     progressBarColor: '#16ad0b',
@@ -268,7 +269,7 @@ window.execCommunityImpact = async function execCommunityImpact(userId,
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          "Authorization": 'Api-Key EH3XEZn1Mtzw.3f1117b0-b193-4656-8161-3cfc3b61a01e'
+          "Authorization": `Api-Key ${apiKey}`
         }
       });
       if (response.status == 200) return await response.json();
