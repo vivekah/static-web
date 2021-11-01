@@ -5,12 +5,13 @@ window.execCardIntegration = async function execCardIntegration(userId,
                                                                 containerId,
                                                                 instacartFontFamily,
                                                                 lan = 'en_US',
-                                                                callback = () => {
+                                                                learnMoreCallback = () => {
+                                                                },
+                                                                chosenNonprofitCallback = () => {
                                                                 }) {
   console.log(" execCardIntegration FOR Instacart")
 
   const EVENTS = {
-    nonProfitConfirmed: 'nonprofit-confirmed',
     nonProfitSelected: 'nonprofit-selected'
   }
   const beamWebSdkBaseUrl = process.env.BEAM_BACKEND_BASE_URL;
@@ -40,7 +41,6 @@ window.execCardIntegration = async function execCardIntegration(userId,
     lightTextColor: '#bbbbbd',
     progressBarBackgroundColor: '#e3e3e3'
   }
-  addStylesheets();
 
   function addStylesheets() {
     const viewPortMetaTag = document.querySelector("meta[name='viewport']");
@@ -192,14 +192,9 @@ window.execCardIntegration = async function execCardIntegration(userId,
       fontFamily: fontFamily,
       themeConfig: {
         id: "modern-ui-nonprofit",
-        headerText: `Choose a cause to contribute to with your next order, and one meal will be donated there at no extra cost to you. <span style="color:${themeColorConfig.progressBarColor}">Learn more </span>`,
+        headerText: "",
         headerTextStyle: {
-          fontSize: '15px',
-          fontWeight: '600',
-          margin: "20px 0 20px 0",
-          width: '100%',
-          fontFamily: fontFamily,
-          color: themeColorConfig.lightTextColor
+          display: 'none'
         },
         gradientColors: [themeColorConfig.textColor, themeColorConfig.textColor],
         progressBarColors: [
@@ -285,10 +280,9 @@ window.execCardIntegration = async function execCardIntegration(userId,
     const selectionId = await persistTransaction();
     if (selectionId) {
       console.debug("Transaction persisted.");
-      callback({id: selectionId})
+      chosenNonprofitCallback({id: selectionId})
     } else {
       console.error("Transaction could not be persisted");
-      callback({error: "Transaction could not be persisted"});
     }
   }
 
@@ -328,10 +322,12 @@ window.execCardIntegration = async function execCardIntegration(userId,
           <div class='row'>
                 <div class='col-sm-8'>
                           <div class='content-box__row' id='beam-widget-content-box'>
-                             <span id='beam-widget-header' style=''>
+                             <p id='beam-widget-header' style=''>
                                 <p style="text-align: left; margin-bottom: -11px; font-size: 20px; font-weight: bold; font-family: inherit;">
                                 Fight food insecurity with instacart</p>
-                              </span>
+                                <p style="font-size: 15px; font-weight: 600; margin: 20px 0 20px 0; width: 100%; font-family: ${fontFamily}; color: ${themeColorConfig.lightTextColor}"> 
+                                Choose a cause to contribute to with your next order, and one meal will be donated there at no extra cost to you. <a id="link-learn-more" style="color:${themeColorConfig.progressBarColor}" href="#">Learn more </a></p>
+                              </p>
                           
                           <div id="beam-container"  style="max-width: 500px">
                               <div id="internal-beam-widget-wrapper"></div>
@@ -386,8 +382,25 @@ window.execCardIntegration = async function execCardIntegration(userId,
     }
   }
 
-  function listenToNonprofitSelectedEvent() {
+  function addTooltip() {
 
+    let beamTooltip = document.getElementById("beam-tooltip");
+    if (!beamTooltip) {
+      let learnMoreElem = document.getElementById("learn-more");
+      if (learnMoreElem) {
+        let learnMoreTooltipText = document.createElement('div');
+        learnMoreTooltipText.id = 'beam-tooltip';
+        learnMoreTooltipText.textContent = `
+      To support local nonprofits across the country, donations are made to PayPal Giving Fund, a registered 501(c)(3) nonprofit organization. PPGF receives the donation and distributes 100% to the nonprofit of your choice, with Instacart covering all applicable processing fees. In the extremely rare event your nonprofit shuts down or PPGF is otherwise unable to fund it, PPGF will reassign the funds to similar nonprofit in your area.
+      `;
+        learnMoreElem.classList.add('tooltip');
+        learnMoreTooltipText.classList.add('tooltip-text');
+        learnMoreElem.appendChild(learnMoreTooltipText)
+      }
+    }
+  }
+
+  function listenToNonprofitSelectedEvent() {
     window.addEventListener(EVENTS.nonProfitSelected, function () {
       console.log("Event: Nonprofit selected");
       enableConfirmButton();
@@ -405,15 +418,6 @@ window.execCardIntegration = async function execCardIntegration(userId,
     let button = document.getElementById(confirmButtonId);
 
     button.addEventListener("click", function () {
-      // create new event
-      let event = new Event(EVENTS.nonProfitConfirmed);
-
-      // Dispatch the event.
-      window.dispatchEvent(event);
-    });
-
-    window.addEventListener(EVENTS.nonProfitConfirmed, function () {
-      console.log("Event: Nonprofit confirmed");
       if (userRegistered) {
         console.log("User is registered, confirmation of nonprofit can be done");
         confirmNonProfit();
@@ -423,34 +427,26 @@ window.execCardIntegration = async function execCardIntegration(userId,
     });
   }
 
+  function listenToLearnMoreLinkClickEvent() {
+    let linkLearnMore = document.getElementById('link-learn-more');
+    linkLearnMore.addEventListener('click', function () {
+      learnMoreCallback();
+    })
+  }
+
   function listenToWindowResize() {
     window.addEventListener('resize', function (event) {
       addTooltip();
     }, true);
   }
 
+  addStylesheets();
   await insertBeamWidget();
   listenToNonprofitSelectedEvent();
   listenToNonprofitConfirmedEvent();
   listenToWindowResize();
+  listenToLearnMoreLinkClickEvent();
 
-  function addTooltip() {
-
-    let beamTooltip = document.getElementById("beam-tooltip");
-    if (!beamTooltip) {
-      let learnMoreElem = document.getElementById("learn-more");
-      if (learnMoreElem) {
-        let learnMoreTooltipText = document.createElement('div');
-        learnMoreTooltipText.id = 'beam-tooltip';
-        learnMoreTooltipText.textContent = `
-      To support local nonprofits across the country, donations are nmade to ParPal Giving Fund, a registered 501(c)(3) nonprofit organization. PPGF receives the donation and distributes 100% to the nonprofit of your choice, with Instacart covering all applicable processing fees. In the extremely rare event your nonprofit shuts down or PPGF is otherwise unable to fund it, PPGF will reassign the funds to similar nonprofit in your area.
-      `;
-        learnMoreElem.classList.add('tooltip');
-        learnMoreTooltipText.classList.add('tooltip-text');
-        learnMoreElem.appendChild(learnMoreTooltipText)
-      }
-    }
-  }
 
 }
 
