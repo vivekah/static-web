@@ -294,19 +294,43 @@ window.execCardIntegration = async function execCardIntegration(userId,
                               <div id="internal-beam-widget-wrapper"></div>
                               <style scoped>
                               @media only screen and (max-width: 600px) {
+                                 #internal-beam-widget-wrapper{
+                                  margin-bottom: 70px;
+                                 }
                                    #chose-nonprofit-button{
-                                             position: fixed;
+                                         margin-bottom: 10px;
+                                        }
+                                   #button-wrapper{
+                                    position: fixed;
                                               bottom: 0;
                                               right: 0; 
-                                        }
+                                              width:100%;
+                                              background-color: white;
+                                              display: flex;
+                                              align-items: center;
+                                              flex-direction: column;
+                                   }   
+                                   #button-divider{
+                                    width: 100%;
+                                    height: 15px;
+                                    margin: 10px 0px;
+                                    background: rgb(241,241,241);
+                                    background: -moz-linear-gradient(0deg, rgba(241,241,241,1) 3%, rgba(255,255,255,1) 98%);
+                                    background: -webkit-linear-gradient(0deg, rgba(241,241,241,1) 3%, rgba(255,255,255,1) 98%);
+                                    background: linear-gradient(0deg, rgba(241,241,241,1) 3%, rgba(255,255,255,1) 98%);
+                                    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#f1f1f1",endColorstr="#ffffff",GradientType=1);
+                                   }  
                                   }
                               
                                 </style>
-                              <button id="chose-nonprofit-button" disabled style="background: #e3e3e3; color: #6a6b6d; border-radius:
-                                 10px;width: 100%; border: none; height: 40px;">Choose
+                                <div id="button-wrapper">
+                                    <div id="button-divider"></div>
+                                    <button id="chose-nonprofit-button" disabled style="background: #e3e3e3; color: #6a6b6d; border-radius:
+                                 10px; width: 90%; border: none; height: 40px;">Choose
                                 nonprofit
-                            </button>
+                                 </button>
                                 </div>
+                      
                               <div id="beam-loading-content" style='display: none;'></div>
                             </div>
                             </div>
