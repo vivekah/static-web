@@ -1,6 +1,7 @@
 import * as App from 'widgets';
 
 window.execCardIntegration = async function execCardIntegration(userId,
+                                                                postalCode,
                                                                 countryCode,
                                                                 containerId,
                                                                 instacartFontFamily,
@@ -169,12 +170,44 @@ window.execCardIntegration = async function execCardIntegration(userId,
     return null;
   }
 
-  function getBeamWidget() {
+
+  async function getNonprofits() {
+    console.log("getNonprofits ", userId)
+    let beam_url = new URL('api/v2/chains/nonprofits', beamWebSdkBaseUrl);
+    let params = {
+      chain: chainId,
+      user: beamUser,
+      store: storeId,
+      showCommunityImpact: true,
+      postalCode: countryCode,
+      lan: lan
+    };
+    if (params)
+      beam_url.search = new URLSearchParams(params)
+        .toString()
+        .replace(/null/g, "")
+        .replace(/undefined/g, "");
+
+    let response = await window.fetch(beam_url, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Api-Key ${apiKey}`
+      },
+    });
+    if (response.status === 200) {
+      return await response.json();
+    } else
+      return null;
+  }
+
+  function getBeamWidget(noAjax, chainDonationType) {
     // initialize nonprofit widget
     return new beamApps.NonprofitWidget({
       widgetId: widgetId,
       containerId: beamContainerId,
       lan: lan,
+      noAjax: noAjax,
       userDidMatchCallback: async (matched, amount) => {
         // process action
         console.log("Not implemented");
@@ -270,6 +303,9 @@ window.execCardIntegration = async function execCardIntegration(userId,
             justifyContent: 'space-between',
             width: '100%'
           }
+        },
+        learnMore: {
+          text: chainDonationType?.compliance_cta || "Learn more"
         }
       }
     });
@@ -288,35 +324,31 @@ window.execCardIntegration = async function execCardIntegration(userId,
     }
   }
 
-  async function executeBeamWidget() {
+  async function executeBeamWidget(data) {
 
-    widget = getBeamWidget();
+    widget = getBeamWidget(true, data?.chain_donation_type);
+    console.log(" DATA nonprogits: ", data)
+    widget.data = data;
     let lastNonprofitInStorage = window.localStorage.getItem(nonprofitKey);
     if (lastNonprofitInStorage) {
       userRegistered = true;
       enableConfirmButton();
       widget.lastNonprofit = JSON.parse(lastNonprofitInStorage);
     }
-    return widget.render({
-      chain: chainId,
-      user: beamUser,
-      store: storeId,
-      showCommunityImpact: true,
-      postalCode: countryCode
-    });
+    return widget.render();
   }
 
-  async function insertBeamWidget() {
+  async function insertBeamWidget(nonprofits) {
     const nonprofitWidgetContainer = containerId ? document.querySelector("#" + containerId) : document.body;
     console.log(" nonprofitWidgetContainer: ", nonprofitWidgetContainer)
 
-    const beamContentBox = getBeamWidgetHTML();
+    const beamContentBox = getBeamWidgetHTML(nonprofits?.chain_donation_type);
     nonprofitWidgetContainer.prepend(beamContentBox);
-    await executeBeamWidget();
+    await executeBeamWidget(nonprofits);
     await registerUser(userId);
-    addTooltip();
+    addTooltip(nonprofits?.chain_donation_type);
 
-    function getBeamWidgetHTML() {
+    function getBeamWidgetHTML(chainDonationType) {
       const beamContentBox = document.createElement("div");
       beamContentBox.className = "content-box";
       beamContentBox.id = "beam-wrapper-content-box";
@@ -326,9 +358,10 @@ window.execCardIntegration = async function execCardIntegration(userId,
                           <div class='content-box__row' id='beam-widget-content-box'>
                              <p id='beam-widget-header' style=''>
                                 <p style="text-align: left; margin-bottom: -11px; font-size: 20px; font-weight: bold; font-family: inherit;">
-                                Fight food insecurity with instacart</p>
-                                <p style="font-size: 15px; font-weight: 600; margin: 20px 0 20px 0; width: 100%; font-family: ${fontFamily}; color: ${themeColorConfig.lightTextColor}"> 
-                                Choose a cause to contribute to with your next order, and one meal will be donated there at no extra cost to you. <a id="link-learn-more" style="color:${themeColorConfig.progressBarColor}" href="#">Learn more </a></p>
+                                ${chainDonationType?.title_web || "Fight food insecurity with instacart"} </p>
+                                <p id="link-learn-more" style="font-size: 15px; font-weight: 600; margin: 20px 0 20px 0; width: 100%; font-family: ${fontFamily}; color: ${themeColorConfig.lightTextColor}"> 
+                                ${chainDonationType?.description_web || `Choose a cause to contribute to with your next order, and one meal will be donated there at no extra cost to you. <a style="color:${themeColorConfig.progressBarColor}" href="#">Learn more </a>`}
+                                </p>
                               </p>
                           
                           <div id="beam-container"  style="max-width: 500px">
@@ -351,7 +384,6 @@ window.execCardIntegration = async function execCardIntegration(userId,
                                  #chose-nonprofit-button {
                                        width: 100%;
                                        max-width: 500px;
-                                       background-color: red;
                                       }
                                   #selection-page-footer{
                                       position: fixed;
@@ -370,6 +402,7 @@ window.execCardIntegration = async function execCardIntegration(userId,
                                    }   
                                    #button-divider{
                                     width: 100%;
+                                    display: inline-block !important;
                                     height: 15px;
                                     background: rgb(241,241,241);
                                     background: -moz-linear-gradient(0deg, rgba(241,241,241,1) 3%, rgba(255,255,255,1) 98%);
@@ -383,8 +416,7 @@ window.execCardIntegration = async function execCardIntegration(userId,
                                 <div id="selection-page-footer">
                                 <div id="button-divider"></div>
                                 <div id="button-wrapper">
-                                    <button id="chose-nonprofit-button" disabled>Choose
-                                nonprofit
+                                    <button id="chose-nonprofit-button" disabled>${chainDonationType?.choose_cta || "Choose nonprofit"}
                                  </button>
                                 </div>
                                 
@@ -400,7 +432,7 @@ window.execCardIntegration = async function execCardIntegration(userId,
     }
   }
 
-  function addTooltip() {
+  function addTooltip(data) {
 
     let beamTooltip = document.getElementById("beam-tooltip");
     if (!beamTooltip) {
@@ -408,7 +440,7 @@ window.execCardIntegration = async function execCardIntegration(userId,
       if (learnMoreElem) {
         let learnMoreTooltipText = document.createElement('div');
         learnMoreTooltipText.id = 'beam-tooltip';
-        learnMoreTooltipText.textContent = `
+        learnMoreTooltipText.textContent = data?.compliance_description_web || `
       To support local nonprofits across the country, donations are made to PayPal Giving Fund, a registered 501(c)(3) nonprofit organization. PPGF receives the donation and distributes 100% to the nonprofit of your choice, with Instacart covering all applicable processing fees. In the extremely rare event your nonprofit shuts down or PPGF is otherwise unable to fund it, PPGF will reassign the funds to similar nonprofit in your area.
       `;
         learnMoreElem.classList.add('tooltip');
@@ -458,8 +490,10 @@ window.execCardIntegration = async function execCardIntegration(userId,
     }, true);
   }
 
-  addStylesheets();
-  await insertBeamWidget();
+  let nonprofits = await getNonprofits();
+    addStylesheets();
+  console.log(" ** NONPROFITS: ", nonprofits)
+  await insertBeamWidget(nonprofits);
   listenToNonprofitSelectedEvent();
   listenToNonprofitConfirmedEvent();
   listenToWindowResize();

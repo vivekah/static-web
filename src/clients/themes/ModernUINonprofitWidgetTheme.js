@@ -136,7 +136,7 @@ class ModernUINonprofitWidgetTheme extends BaseTheme {
             }
           }),
           new components.BeamText({
-            text: `Learn more`,
+            text: `Learn more` || this.options?.learnMore?.text,
             id: 'learn-more',
             style: {
               display: 'inline',
@@ -396,7 +396,7 @@ class ModernUINonprofitWidgetTheme extends BaseTheme {
   desktopListComponent(nonprofits, selectedNonprofit, wrap = false) {
     this.isMobile = wrap;
     this.showProgress = this.options.showCommunityImpact || nonprofits.some(
-      (nonprofit) => parseInt(nonprofit.impact.percentage) > 0
+      (nonprofit) => parseInt(nonprofit?.impact?.percentage) > 0
     );
 
     const column = (nonprofit, selectedNonprofit, margin) => {
