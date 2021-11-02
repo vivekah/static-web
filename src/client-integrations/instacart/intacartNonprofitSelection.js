@@ -4,7 +4,7 @@ window.execCardIntegration = async function execCardIntegration(userId,
                                                                 countryCode,
                                                                 containerId,
                                                                 instacartFontFamily,
-                                                                lan = 'en_US',
+                                                                lan = 'en',
                                                                 learnMoreCallback = () => {
                                                                 },
                                                                 chosenNonprofitCallback = () => {

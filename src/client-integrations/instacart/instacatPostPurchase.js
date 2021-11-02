@@ -2,23 +2,18 @@ import * as App from 'widgets';
 import * as components from "../../components";
 import {pathUtil} from "../../utils";
 
-window.execPostPurchaseView = async function execPostPurchaseView(containerId,
+window.execPostPurchaseView = async function execPostPurchaseView(userId,
+                                                                  containerId,
                                                                   instacartFontFamily,
+                                                                  lan = "en",
                                                                   callback = () => {
                                                                   }) {
   console.log(" execPostPurchaseView FOR Instacart")
-
-  const EVENTS = {
-    nonProfitConfirmed: 'nonprofit-confirmed',
-    nonProfitSelected: 'nonprofit-selected'
-  }
-  const beamWebSdkBaseUrl = process.env.BEAM_BACKEND_BASE_URL;
   const widgetId = 'e9738b7ffed2476bbec748b1ccc1a046';
   const storeId = "13";
   const chainId = "7";
   const beamContainerId = 'internal-beam-widget-wrapper';
-  const confirmButtonId = "chose-nonprofit-button";
-  const apiKey = 'EH3XEZn1Mtzw.3f1117b0-b193-4656-8161-3cfc3b61a01e';
+  const apiKey = 'Fez0xn9XFhur.4c90bd46-40f4-4cd7-a755-4800ea5ad1e3';
 
   // shop config
   const fontFamily = 'Poppins';
@@ -33,7 +28,7 @@ window.execPostPurchaseView = async function execPostPurchaseView(containerId,
     counterColor: 'rgb(253 109 65)'
   }
   addStylesheets();
-  renderView();
+  await renderView();
 
   function addStylesheets() {
     const fontLink = document.createElement('link');
@@ -58,11 +53,9 @@ window.execPostPurchaseView = async function execPostPurchaseView(containerId,
     document.head.appendChild(fontStyle);
   }
 
-  function getFavouriteNonprofit() {
-
-  }
-
-  function renderView() {
+  async function renderView() {
+    let data = await getTransactionInfo();
+    console.log(" DATA: ", data)
     const container = new components.BeamContainer({
       id: "beam-post-purchase-view-container",
       style: {
@@ -205,6 +198,30 @@ window.execPostPurchaseView = async function execPostPurchaseView(containerId,
       });
 
     }
+  }
+
+  async function getTransactionInfo() {
+    const beamWebSdkBaseUrl = process.env.BEAM_BACKEND_BASE_URL;
+    let fullUrl = new URL('api/v2/users/transaction-info', beamWebSdkBaseUrl);
+    const params = {
+      partner_user_id: userId,
+      lan: lan,
+      chain: chainId
+    }
+    if (params)
+      fullUrl.search = new URLSearchParams(params)
+        .toString()
+        .replace(/null/g, "")
+        .replace(/undefined/g, "");
+    let response = await window.fetch(fullUrl, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Api-Key ${apiKey}`
+      }
+    });
+    if (response.status == 200) return await response.json();
+    else return null;
   }
 
 }

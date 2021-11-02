@@ -6,7 +6,7 @@ import Splide from '@splidejs/splide';
 
 window.execCommunityImpact = async function execCommunityImpact(userId,
                                                                 countryCode,
-                                                                lan = 'en_US'
+                                                                lan = 'en'
 ) {
   const beamImpactWidgetContainerId = 'beam-community-widget-container';
   const beamSliderId = 'beam-slider';
