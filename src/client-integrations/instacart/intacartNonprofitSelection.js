@@ -279,8 +279,10 @@ window.execCardIntegration = async function execCardIntegration(userId,
     console.log(" PERSIST TRANSACTION")
     const selectionId = await persistTransaction();
     if (selectionId) {
+      let lastNonprofitInStorage = window.localStorage.getItem(nonprofitKey);
+      let lastNonprofit = JSON.parse(lastNonprofitInStorage);
       console.debug("Transaction persisted.");
-      chosenNonprofitCallback({id: selectionId})
+      chosenNonprofitCallback({nonprofit_id: lastNonprofit.id})
     } else {
       console.error("Transaction could not be persisted");
     }
