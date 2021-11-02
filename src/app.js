@@ -18,3 +18,4 @@ class App {
 }
 
 window.beamApps = new App();
+export default window.beamApps;

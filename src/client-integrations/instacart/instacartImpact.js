@@ -4,16 +4,16 @@ import {pathUtil, screenResolutionUtil} from "../../utils";
 import css from './instacart.scss';
 import Splide from '@splidejs/splide';
 
-window.execCommunityImpact = async function execCommunityImpact(userId,
+window.execCommunityImpact = async function execCommunityImpact(
+  apiKey,
+  userId,
                                                                 countryCode,
                                                                 lan = 'en'
 ) {
   const beamImpactWidgetContainerId = 'beam-community-widget-container';
   const beamSliderId = 'beam-slider';
   const chainId = "61";
-  const widgetId = "e9738b7ffed2476bbec748b1ccc1a046";
   let isMobile = screenResolutionUtil.isMobile();
-  let apiKey = 'MCT5KmLZUJCf.aecf3e1a-c091-481a-89bc-ae9384b3639c';
   //theme
   const themeColorConfig = {
     progressBarColor: '#16ad0b',
@@ -155,7 +155,7 @@ window.execCommunityImpact = async function execCommunityImpact(userId,
           <div class="splide">
             <div class="splide__track">
           <ul class="splide__list">
-          <li class="splide__slide"><img class="slider_img " src="https://cdn.pixabay.com/photo/2014/03/22/19/40/gerbera-292793_960_720.jpg"></img></li>
+          <li class="splide__slide"><img class="slider_img " src="https://images.unsplash.com/photo-1478827217976-7214a0556393?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8dG9wfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&w=1000&q=80"></img></li>
           <li class="splide__slide"><img class="slider_img" src="https://thumbs.dreamstime.com/z/lovely-pink-gerbera-germini-flower-isolated-light-gray-background-isolated-pink-gerbera-germini-flower-99116487.jpg"></img></li>
           <li class="splide__slide"><img class="slider_img" src="https://images.unsplash.com/photo-1495539406979-bf61750d38ad?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjN8fGZyZWV8ZW58MHx8MHx8&ixlib=rb-1.2.1&w=1000&q=80"></img></li>
           </ul>
@@ -284,7 +284,7 @@ window.execCommunityImpact = async function execCommunityImpact(userId,
   function renderCommunityImpactWidget() {
     let widget = new beamApps.InstacartCommunityImpactWidget({
       fontFamily: "poppins",
-      widgetId: widgetId,
+      // widgetId: widgetId,
       containerId: beamImpactWidgetContainerId,
       chainId: chainId,
       lan: lan,

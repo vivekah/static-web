@@ -50,7 +50,7 @@ class BaseWidget {
     };
 
     // check widget ID
-    if (!this.options.widgetId) throw ReferenceError("Provide widget ID");
+    // if (!this.options.widgetId) throw ReferenceError("Provide widget ID");
 
     // initialize widget wrapper
     this.widgetWrapper = document.getElementById(this.options.containerId);

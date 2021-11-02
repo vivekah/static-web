@@ -1,6 +1,7 @@
 import * as App from 'widgets';
 
-window.execCardIntegration = async function execCardIntegration(userId,
+window.execCardIntegration = async function execCardIntegration(apiKey,
+                                                                userId,
                                                                 postalCode,
                                                                 countryCode,
                                                                 containerId,
@@ -16,12 +17,10 @@ window.execCardIntegration = async function execCardIntegration(userId,
     nonProfitSelected: 'nonprofit-selected'
   }
   const beamWebSdkBaseUrl = process.env.BEAM_BACKEND_BASE_URL;
-  const widgetId = 'e9738b7ffed2476bbec748b1ccc1a046';
   const storeId = "89";
   const chainId = "61";
   const beamContainerId = 'internal-beam-widget-wrapper';
   const confirmButtonId = "chose-nonprofit-button";
-  const apiKey = 'MCT5KmLZUJCf.aecf3e1a-c091-481a-89bc-ae9384b3639c';
 
   // shop config
   const fontFamily = instacartFontFamily || "'Poppins', sans-serif";
@@ -205,7 +204,6 @@ window.execCardIntegration = async function execCardIntegration(userId,
   function getBeamWidget(noAjax, chainDonationType) {
     // initialize nonprofit widget
     return new beamApps.NonprofitWidget({
-      widgetId: widgetId,
       containerId: beamContainerId,
       lan: lan,
       noAjax: noAjax,

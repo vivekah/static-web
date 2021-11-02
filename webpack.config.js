@@ -11,10 +11,10 @@ module.exports = (env) => {
       )
     ],
     entry: {
-      widgets: "./src/app.js",
-      roots: './src/client-integrations/roots/index.js',
-      instacart: './src/client-integrations/instacart/index.js',
-      // styles: './src/client-integrations/instacart/instacart.scss'
+      widgets: "./src/index.js",
+      // roots: './src/client-integrations/roots/index.js',
+      // instacart: './src/client-integrations/instacart/index.js',
+      // // styles: './src/client-integrations/instacart/instacart.scss'
     },
     output: {
       path: path.resolve(__dirname, "./public/js"),

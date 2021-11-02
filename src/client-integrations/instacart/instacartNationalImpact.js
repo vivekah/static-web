@@ -1,11 +1,9 @@
 import * as App from 'widgets';
 import * as components from "../../components";
 
-window.execNationalCommunityImpact = async function execNationalCommunityImpact() {
+window.execNationalCommunityImpact = async function execNationalCommunityImpact(apiKey) {
   const beamImpactWidgetContainerId = 'beam-community-widget-container';
   const chainId = "61";
-  const widgetId = "e9738b7ffed2476bbec748b1ccc1a046";
-  const apiKey = "Fez0xn9XFhur.4c90bd46-40f4-4cd7-a755-4800ea5ad1e";
 
   //theme
   const themeColorConfig = {
@@ -135,7 +133,7 @@ window.execNationalCommunityImpact = async function execNationalCommunityImpact(
   function renderCommunityImpactWidget() {
     let widget = new beamApps.InstacartCommunityImpactWidget({
       fontFamily: "poppins",
-      widgetId: widgetId,
+      // widgetId: widgetId,
       noAjax: true,
       containerId: beamImpactWidgetContainerId,
       chainId: chainId,
