@@ -1,15 +1,15 @@
 import * as App from 'widgets';
 
-window.execCardIntegration = async function execCardIntegration(apiKey,
-                                                                userId,
-                                                                postalCode,
-                                                                instacartFontFamily,
-                                                                lan = 'en',
-                                                                learnMoreCallback = () => {
-                                                                },
-                                                                chosenNonprofitCallback = () => {
-                                                                },
-                                                                containerId) {
+window.execNonprofitSelection = async function execNonprofitSelection(apiKey,
+                                                                      userId,
+                                                                      postalCode,
+                                                                      instacartFontFamily,
+                                                                      lan = 'en',
+                                                                      learnMoreCallback = () => {
+                                                                      },
+                                                                      chosenNonprofitCallback = () => {
+                                                                      },
+                                                                      containerId) {
   // console.log(" execCardIntegration FOR Instacart")
 
   const EVENTS = {
@@ -49,12 +49,14 @@ window.execCardIntegration = async function execCardIntegration(apiKey,
       meta.content = "width=device-width,initial-scale=1.0";
       document.getElementsByTagName('head')[0].appendChild(meta);
     }
-    let link = document.createElement('link');
-    link.setAttribute('rel', 'stylesheet');
-    link.setAttribute('type', 'text/css');
-    link.setAttribute('href', 'https://fonts.googleapis.com/css2?family=Poppins:wght@400&display=swap');
+    if (!instacartFontFamily) {
+      let link = document.createElement('link');
+      link.setAttribute('rel', 'stylesheet');
+      link.setAttribute('type', 'text/css');
+      link.setAttribute('href', 'https://fonts.googleapis.com/css2?family=Poppins:wght@400&display=swap');
 
-    document.head.appendChild(link);
+      document.head.appendChild(link);
+    }
     document.head.innerHTML += `
     <style>
       /* Tooltip container */
@@ -534,4 +536,4 @@ window.execCardIntegration = async function execCardIntegration(apiKey,
 
 }
 
-export default window.execCardIntegration;
+export default window.execNonprofitSelection;

@@ -137,7 +137,6 @@ window.execNationalCommunityImpact = async function execNationalCommunityImpact(
   function renderCommunityImpactWidget() {
     let widget = new beamApps.InstacartCommunityImpactWidget({
       fontFamily: fontFamily || 'inherit',
-      // widgetId: widgetId,
       noAjax: true,
       containerId: beamImpactWidgetContainerId,
       chainId: chainId,
