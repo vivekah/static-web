@@ -364,7 +364,9 @@ window.execCardIntegration = async function execCardIntegration(userId,
       beamContentBox.id = "beam-wrapper-content-box";
       beamContentBox.innerHTML = `
  <style>
-                              
+                              #internal-beam-widget-wrapper{
+                               margin: 0px 5px;
+                              }
                               #chose-nonprofit-button{
                                   background: #e3e3e3; 
                                   color: #6a6b6d; 
