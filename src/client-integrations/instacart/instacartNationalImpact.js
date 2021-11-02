@@ -1,7 +1,7 @@
 import * as App from 'widgets';
 import * as components from "../../components";
 
-window.execNationalCommunityImpact = async function execNationalCommunityImpact(apiKey) {
+window.execNationalCommunityImpact = async function execNationalCommunityImpact(apiKey, fontFamily, containerId) {
   const beamImpactWidgetContainerId = 'beam-community-widget-container';
   const chainId = "61";
 
@@ -15,9 +15,8 @@ window.execNationalCommunityImpact = async function execNationalCommunityImpact(
     progressBarBackgroundColor: '#e3e3e3'
   }
 
-  console.log(" execCardIntegration FOR Instacart")
+  // console.log(" execCardIntegration FOR Instacart")
   const impactData = await getImpactData();
-  console.log(" IMPACT DATA: ", impactData)
   renderImpactScreen();
 
   function renderImpactScreen() {
@@ -31,8 +30,13 @@ window.execNationalCommunityImpact = async function execNationalCommunityImpact(
         getCommunityImpactSection()
       ]
     });
-    console.log(" impact container: ", impactScreenContainer);
-    document.body.append(impactScreenContainer.view);
+    let container = document.getElementById(containerId);
+    if (container) {
+      container.append(impactScreenContainer.view);
+    } else {
+      document.body.append(impactScreenContainer.view);
+    }
+
     renderCommunityImpactWidget();
   }
 
@@ -54,7 +58,7 @@ window.execNationalCommunityImpact = async function execNationalCommunityImpact(
       },
       children: [
         new components.BeamText({
-          text: `${'12,345'} meals and counting!`,
+          text: `${impactData.aggregate_impact || '0'} meals and counting!`,
           style: {
             fontSize: '30px',
             margin: 'auto',
@@ -132,7 +136,7 @@ window.execNationalCommunityImpact = async function execNationalCommunityImpact(
 
   function renderCommunityImpactWidget() {
     let widget = new beamApps.InstacartCommunityImpactWidget({
-      fontFamily: "poppins",
+      fontFamily: fontFamily || 'inherit',
       // widgetId: widgetId,
       noAjax: true,
       containerId: beamImpactWidgetContainerId,
@@ -225,7 +229,7 @@ window.execNationalCommunityImpact = async function execNationalCommunityImpact(
             justifyContent: 'center !important'
           }
         },
-        fontFamily: "inherit",
+        fontFamily: fontFamily || "inherit",
         gradientColors: [themeColorConfig.progressBarColor],
         progressBarColors: [
           {color: themeColorConfig.progressBarColor, offset: "100%"}

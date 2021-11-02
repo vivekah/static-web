@@ -7,8 +7,10 @@ import Splide from '@splidejs/splide';
 window.execCommunityImpact = async function execCommunityImpact(
   apiKey,
   userId,
-                                                                countryCode,
-                                                                lan = 'en'
+  countryCode,
+  lan = 'en',
+  fontFamily,
+  containerId
 ) {
   const beamImpactWidgetContainerId = 'beam-community-widget-container';
   const beamSliderId = 'beam-slider';
@@ -24,9 +26,9 @@ window.execCommunityImpact = async function execCommunityImpact(
     progressBarBackgroundColor: '#e3e3e3'
   }
 
-  console.log(" execCardIntegration FOR Instacart")
+  // console.log(" execCardIntegration FOR Instacart")
   const impactData = await getImpactData(userId, countryCode);
-  console.log(" IMPACT DATA: ", impactData)
+  // console.log(" IMPACT DATA: ", impactData)
   renderImpactScreen();
 
   function renderImpactScreen() {
@@ -44,8 +46,12 @@ window.execCommunityImpact = async function execCommunityImpact(
         getCommunityImpactSection()
       ]
     });
-    console.log(" impact container: ", impactScreenContainer);
-    document.body.append(impactScreenContainer.view);
+    let container = document.getElementById(containerId);
+    if (container) {
+      container.append(impactScreenContainer.view);
+    } else {
+      document.body.append(impactScreenContainer.view);
+    }
     createCarousel();
     renderCommunityImpactWidget();
   }
@@ -89,7 +95,8 @@ window.execCommunityImpact = async function execCommunityImpact(
             padding: '20px',
             paddingTop: '10px',
             textAlign: 'center',
-            fontWeight: '200'
+            fontWeight: '200',
+            fontFamily: fontFamily || 'inherit'
           },
           mobileStyle: {
             textAlign: 'center !important'
@@ -109,7 +116,8 @@ window.execCommunityImpact = async function execCommunityImpact(
         marginTop: '0px',
         flexDirection: 'row',
         flexWrap: 'nowrap !important',
-        padding: '0px 20px'
+        padding: '0px 20px',
+        fontFamily: fontFamily || 'inherit'
       },
       children: [
         new components.BeamFlexWrapper({
@@ -133,12 +141,16 @@ window.execCommunityImpact = async function execCommunityImpact(
           },
           children: [
             new components.BeamText({
-              text: 'Join us in the fight against food insecurity'
+              text: 'Join us in the fight against food insecurity',
+              style: {
+                fontFamily: fontFamily || 'inherit'
+              }
             }),
             new components.BeamText({
               text: "Food meals this holiday season by simply placing your order. <a href='' style='color: green;'>Select a nonprofit </a>",
               style: {
-                fontSize: '12px'
+                fontSize: '12px',
+                fontFamily: fontFamily || 'inherit'
               }
             })
           ]
@@ -283,7 +295,7 @@ window.execCommunityImpact = async function execCommunityImpact(
 
   function renderCommunityImpactWidget() {
     let widget = new beamApps.InstacartCommunityImpactWidget({
-      fontFamily: "poppins",
+      fontFamily: fontFamily || 'inherit',
       // widgetId: widgetId,
       containerId: beamImpactWidgetContainerId,
       chainId: chainId,
@@ -296,8 +308,7 @@ window.execCommunityImpact = async function execCommunityImpact(
           style: {
             width: '280px'
           },
-          mobileStyle: {
-          }
+          mobileStyle: {}
         },
         title: {
           style: {
@@ -355,7 +366,7 @@ window.execCommunityImpact = async function execCommunityImpact(
             alignItems: 'center !important',
           }
         },
-        fontFamily: "inherit",
+        fontFamily: fontFamily || "inherit",
         gradientColors: [themeColorConfig.progressBarColor],
         progressBarColors: [
           {color: themeColorConfig.progressBarColor, offset: "100%"}

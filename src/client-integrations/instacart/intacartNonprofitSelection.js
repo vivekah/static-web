@@ -3,15 +3,14 @@ import * as App from 'widgets';
 window.execCardIntegration = async function execCardIntegration(apiKey,
                                                                 userId,
                                                                 postalCode,
-                                                                countryCode,
-                                                                containerId,
                                                                 instacartFontFamily,
                                                                 lan = 'en',
                                                                 learnMoreCallback = () => {
                                                                 },
                                                                 chosenNonprofitCallback = () => {
-                                                                }) {
-  console.log(" execCardIntegration FOR Instacart")
+                                                                },
+                                                                containerId) {
+  // console.log(" execCardIntegration FOR Instacart")
 
   const EVENTS = {
     nonProfitSelected: 'nonprofit-selected'
@@ -143,13 +142,12 @@ window.execCardIntegration = async function execCardIntegration(apiKey,
         nonprofit: widget.transactionData.nonprofit,
         partner_user_id: userId
       });
-      console.log(" BODY: ", body)
       persistTransactionRequest.send(body);
     });
   }
 
   async function registerUser(userId) {
-    console.log("Registering user: ", userId)
+    // console.log("Registering user: ", userId)
     let beam_url = new URL('api/v2/users/register', beamWebSdkBaseUrl).toString();
     let response = await window.fetch(beam_url, {
       method: "POST",
@@ -171,7 +169,7 @@ window.execCardIntegration = async function execCardIntegration(apiKey,
 
 
   async function getNonprofits() {
-    console.log("getNonprofits ", userId)
+    // console.log("getNonprofits ", userId)
     let beam_url = new URL('api/v2/chains/nonprofits', beamWebSdkBaseUrl);
     let params = {
       chain: chainId,
@@ -179,7 +177,6 @@ window.execCardIntegration = async function execCardIntegration(apiKey,
       store: storeId,
       show_community_impact: true,
       postal_code: postalCode,
-      country_code: countryCode,
       lan: lan
     };
     if (params)
@@ -320,7 +317,7 @@ window.execCardIntegration = async function execCardIntegration(apiKey,
   }
 
   async function confirmNonProfit() {
-    console.log(" PERSIST TRANSACTION")
+    // console.log(" PERSIST TRANSACTION")
     const selectionId = await persistTransaction();
     if (selectionId) {
       let lastNonprofitInStorage = window.localStorage.getItem(nonprofitKey);
@@ -335,7 +332,6 @@ window.execCardIntegration = async function execCardIntegration(apiKey,
   async function executeBeamWidget(data) {
 
     widget = getBeamWidget(true, data?.chain_donation_type);
-    console.log(" DATA nonprogits: ", data)
     widget.data = data;
     let lastNonprofitInStorage = window.localStorage.getItem(nonprofitKey);
     if (lastNonprofitInStorage) {
@@ -348,7 +344,6 @@ window.execCardIntegration = async function execCardIntegration(apiKey,
 
   async function insertBeamWidget(nonprofits) {
     const nonprofitWidgetContainer = containerId ? document.querySelector("#" + containerId) : document.body;
-    console.log(" nonprofitWidgetContainer: ", nonprofitWidgetContainer)
 
     const beamContentBox = getBeamWidgetHTML(nonprofits?.chain_donation_type);
     nonprofitWidgetContainer.prepend(beamContentBox);
@@ -491,7 +486,6 @@ window.execCardIntegration = async function execCardIntegration(apiKey,
 
   function listenToNonprofitSelectedEvent() {
     window.addEventListener(EVENTS.nonProfitSelected, function () {
-      console.log("Event: Nonprofit selected");
       enableConfirmButton();
     });
   }
@@ -508,7 +502,7 @@ window.execCardIntegration = async function execCardIntegration(apiKey,
 
     button.addEventListener("click", function () {
       if (userRegistered) {
-        console.log("User is registered, confirmation of nonprofit can be done");
+        // console.log("User is registered, confirmation of nonprofit can be done");
         confirmNonProfit();
       } else {
         console.error(" User is not registered!")
@@ -531,7 +525,6 @@ window.execCardIntegration = async function execCardIntegration(apiKey,
 
   let nonprofits = await getNonprofits();
   addStylesheets();
-  console.log(" ** NONPROFITS: ", nonprofits)
   await insertBeamWidget(nonprofits);
   listenToNonprofitSelectedEvent();
   listenToNonprofitConfirmedEvent();
