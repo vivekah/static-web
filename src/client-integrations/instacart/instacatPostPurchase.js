@@ -91,7 +91,7 @@ window.execPostPurchaseView = async function execPostPurchaseView(userId,
           new components.BeamText({
             text: data?.confirmation_message || 'Your order has funded a meal </br> for someone in need.',
             textAlign: 'center',
-            
+
             fontWeight: '600'
           }),
          data && new components.BeamText({

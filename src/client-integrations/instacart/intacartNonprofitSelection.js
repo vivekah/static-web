@@ -333,18 +333,28 @@ window.execCardIntegration = async function execCardIntegration(userId,
                           
                           <div id="beam-container"  style="max-width: 500px">
                               <div id="internal-beam-widget-wrapper"></div>
-                              <style scoped>
+                              <style>
+                              
+                              #chose-nonprofit-button{
+                                  background: #e3e3e3; 
+                                  color: #6a6b6d; 
+                                  border-radius:10px; 
+                                  width: 100%; 
+                                  border: none; 
+                                  height: 40px;
+                              }
                               
                               @media only screen and (max-width: 600px) {
                                  #internal-beam-widget-wrapper{
                                   margin-bottom: 70px;
                                  }
-                                   #chose-nonprofit-button{
-                                         margin-bottom: 10px;
-                                         width: 90%;
-                                        }
-                                   #button-wrapper{
-                                    position: fixed;
+                                 #chose-nonprofit-button {
+                                       width: 100%;
+                                       max-width: 500px;
+                                       background-color: red;
+                                      }
+                                  #selection-page-footer{
+                                      position: fixed;
                                               bottom: 0;
                                               right: 0; 
                                               width:100%;
@@ -352,11 +362,15 @@ window.execCardIntegration = async function execCardIntegration(userId,
                                               display: flex;
                                               align-items: center;
                                               flex-direction: column;
+                                  }    
+                                   #button-wrapper{
+                                        width: 100%;
+                                        max-width: 500px;
+                                        padding: 10px;
                                    }   
                                    #button-divider{
                                     width: 100%;
                                     height: 15px;
-                                    margin: 10px 0px;
                                     background: rgb(241,241,241);
                                     background: -moz-linear-gradient(0deg, rgba(241,241,241,1) 3%, rgba(255,255,255,1) 98%);
                                     background: -webkit-linear-gradient(0deg, rgba(241,241,241,1) 3%, rgba(255,255,255,1) 98%);
@@ -366,12 +380,14 @@ window.execCardIntegration = async function execCardIntegration(userId,
                                   }
                               
                                 </style>
+                                <div id="selection-page-footer">
+                                <div id="button-divider"></div>
                                 <div id="button-wrapper">
-                                    <div id="button-divider"></div>
-                                    <button id="chose-nonprofit-button" disabled style="background: #e3e3e3; color: #6a6b6d; border-radius:
-                                 10px; width: 100%; border: none; height: 40px;">Choose
+                                    <button id="chose-nonprofit-button" disabled>Choose
                                 nonprofit
                                  </button>
+                                </div>
+                                
                                 </div>
                       
                               <div id="beam-loading-content" style='display: none;'></div>
