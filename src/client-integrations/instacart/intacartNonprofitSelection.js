@@ -26,8 +26,8 @@ window.execNonprofitSelection = async function execNonprofitSelection(apiKey,
 
   // widget config
   let beamUser = null;
-  const key = `beam_transaction_key_${widgetId}`;
-  const nonprofitKey = `beam_nonprofit_key_${widgetId}`;
+  const key = `beam_transaction_key`;
+  const nonprofitKey = `beam_nonprofit_key`;
   let widget = null;
   let userRegistered = false;
 
@@ -107,7 +107,6 @@ window.execNonprofitSelection = async function execNonprofitSelection(apiKey,
   }
 
   function persistTransaction() {
-    let transactionId = window.localStorage.getItem(key);
     let persistTransactionRequest = new XMLHttpRequest();
 
     return new Promise(function (resolve, reject) {
@@ -116,12 +115,12 @@ window.execNonprofitSelection = async function execNonprofitSelection(apiKey,
 
         if (persistTransactionRequest.status >= 200 && persistTransactionRequest.status < 300) {
           let transaction = JSON.parse(persistTransactionRequest.responseText);
-          console.debug("Transaction id:", transaction.selection_id);
-          window.localStorage.setItem(key, transaction?.selection_id);
+          console.debug("Transaction id:", transaction?.id);
+          window.localStorage.setItem(key, transaction?.id);
           window.localStorage.setItem(nonprofitKey, JSON.stringify(widget.lastNonprofit));
           console.debug("lastNonprofit:  ", widget.lastNonprofit)
           console.debug("persistTransactionRequest:  ", transaction)
-          resolve(transaction.selection_id);
+          resolve(transaction.id);
         } else {
           reject({
             status: persistTransactionRequest.status,
@@ -239,15 +238,20 @@ window.execNonprofitSelection = async function execNonprofitSelection(apiKey,
         },
         image: {
           style: {
-            borderRadius: '15px',
+            borderRadius: '12px',
           }
         },
         card: {
           backgroundStyle: {
-            borderRadius: '15px',
+            borderRadius: '12px',
+            height: '124px !important',
+            width: 'width: 508px',
+            padding: '2px !important'
           },
           style: {
-            borderRadius: '15px',
+            borderRadius: '12px',
+            padding: '8px !important'
+
           }
         },
         checkbox: {
@@ -360,7 +364,6 @@ window.execNonprofitSelection = async function execNonprofitSelection(apiKey,
       beamContentBox.innerHTML = `
  <style>
                               #internal-beam-widget-wrapper{
-                               margin: 0px 5px;
                               }
                               #chose-nonprofit-button{
                                   background: #e3e3e3; 
@@ -369,19 +372,35 @@ window.execNonprofitSelection = async function execNonprofitSelection(apiKey,
                                   width: 100%; 
                                   border: none; 
                                   height: 40px;
+                                 font-family: ${fontFamily};
+                              }
+                              #beam-widget-header{
+                              padding: 0 15px;
                               }
                                 #selection-title{
-                                text-align: left; margin-bottom: -11px; font-family: inherit;
+                                margin: 4px 5px;
+                                text-align: left; 
                                 position:static;
                                 left:0px;
                                 top:0px;
-                                font-size:22px;
+                                font-size: 31px !important;
                                 font-weight: 900;
+                                color: #343538 !important;
+                                font-family: ${fontFamily};
+                                line-height:40px !important;
+                                letter-spacing: normal !important;
                                 }
                                 
                                 #link-learn-more{
-                                font-size: 15px; font-weight: 600; margin: 20px 0 20px 0; width: 100%; font-family: ${fontFamily}; color: ${themeColorConfig.lightTextColor}
-                                }
+                                margin: 8px 5px; 
+                                width: 100%;
+                                font-family: ${fontFamily} !important; 
+                                font-size:15px !important;
+                                line-height:22px !important;
+                                color:#72767E;
+                                font-weight: 400!important;
+                                letter-spacing: normal !important;
+                               }
                               @media only screen and (max-width: 600px) {
                                  #internal-beam-widget-wrapper{
                                   margin-bottom: 70px;
@@ -422,16 +441,8 @@ window.execNonprofitSelection = async function execNonprofitSelection(apiKey,
                               @media only screen and (max-width: 400px) {
                                                            
                                 #selection-title{
-                                margin-left: 5px;
-                                font-weight: 600;
-
                                 }
                                 #link-learn-more{
-                                font-weight: 100;
-                                font-size: 12px;
-                                margin-left: 5px;
-                                font-weight: 400;
-
                                 }
                            }
                                 </style>
@@ -439,7 +450,7 @@ window.execNonprofitSelection = async function execNonprofitSelection(apiKey,
           <div class='row'>
                 <div class='col-sm-8'>
                           <div class='content-box__row' id='beam-widget-content-box'>
-                             <p id='beam-widget-header' style=''>
+                             <div id='beam-widget-header'>
                                 <p id="selection-title">
                                 ${chainDonationType?.title_web || "Fight food insecurity with instacart"} </p>
                                 <p id="link-learn-more"> 

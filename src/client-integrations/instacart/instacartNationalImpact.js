@@ -1,7 +1,7 @@
 import * as App from 'widgets';
 import * as components from "../../components";
 
-window.execNationalCommunityImpact = async function execNationalCommunityImpact(apiKey, fontFamily, containerId) {
+window.execNationalCommunityImpact = async function execNationalCommunityImpact(apiKey, fontFamily, language, containerId) {
   const beamImpactWidgetContainerId = 'beam-community-widget-container';
   const chainId = "61";
 

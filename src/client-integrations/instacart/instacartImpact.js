@@ -7,9 +7,9 @@ import Splide from '@splidejs/splide';
 window.execCommunityImpact = async function execCommunityImpact(
   apiKey,
   userId,
-  countryCode,
-  lan = 'en',
+  zipCode,
   fontFamily,
+  lan = 'en',
   containerId
 ) {
   const beamImpactWidgetContainerId = 'beam-community-widget-container';
@@ -27,7 +27,7 @@ window.execCommunityImpact = async function execCommunityImpact(
   }
 
   // console.log(" execCardIntegration FOR Instacart")
-  const impactData = await getImpactData(userId, countryCode);
+  const impactData = await getImpactData(userId, zipCode);
   // console.log(" IMPACT DATA: ", impactData)
   renderImpactScreen();
 
@@ -265,12 +265,12 @@ window.execCommunityImpact = async function execCommunityImpact(
     });
   }
 
-  async function getImpactData(userId, countryCode) {
+  async function getImpactData(userId, zipCode) {
     const beamWebSdkBaseUrl = process.env.BEAM_BACKEND_BASE_URL;
     let fullUrl = new URL('api/v2/users/impact/instacart', beamWebSdkBaseUrl);
     const params = {
       user: userId,
-      zip_code: countryCode,
+      zip_code: zipCode,
       lan: lan
     }
     if (params)
@@ -296,7 +296,6 @@ window.execCommunityImpact = async function execCommunityImpact(
   function renderCommunityImpactWidget() {
     let widget = new beamApps.InstacartCommunityImpactWidget({
       fontFamily: fontFamily || 'inherit',
-      // widgetId: widgetId,
       containerId: beamImpactWidgetContainerId,
       chainId: chainId,
       lan: lan,
