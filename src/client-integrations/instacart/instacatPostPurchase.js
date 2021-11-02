@@ -60,12 +60,11 @@ window.execPostPurchaseView = async function execPostPurchaseView(userId,
       id: "beam-post-purchase-view-container",
       style: {
         width: '100%',
-        height: '100%',
       },
       children: [
         // successfulPurchaseInfo(),
         // fundedMealsCounterSection(),
-        footer()
+        footer(data)
       ]
     });
     const outerContainer = document.getElementById(containerId);
@@ -75,7 +74,7 @@ window.execPostPurchaseView = async function execPostPurchaseView(userId,
       document.body.append(container.view);
     }
 
-    function footer() {
+    function footer(data) {
       return new components.BeamFlexWrapper({
         style: {
           flexDirection: 'column !important'
@@ -90,13 +89,13 @@ window.execPostPurchaseView = async function execPostPurchaseView(userId,
             }
           }),
           new components.BeamText({
-            text: 'Your order has funded a meal </br> for someone in need.',
+            text: data?.confirmation_message || 'Your order has funded a meal </br> for someone in need.',
             textAlign: 'center',
-
+            
             fontWeight: '600'
           }),
-          new components.BeamText({
-            text: 'LA Regional Food Bank',
+         data && new components.BeamText({
+            text: data.favorite_nonprofit,
             textAlign: 'center',
             color: themeColorConfig.lightTextColor,
             fontSize: '12px'
