@@ -136,12 +136,12 @@ window.execCardIntegration = async function execCardIntegration(userId,
         });
       };
 
-      persistTransactionRequest.open("POST", `${beamWebSdkBaseUrl}/api/v2/users/selection`, true);
+      persistTransactionRequest.open("POST", `${beamWebSdkBaseUrl}/api/v2/users/favorite-nonprofit`, true);
       persistTransactionRequest.setRequestHeader('Content-type', 'application/json')
       persistTransactionRequest.setRequestHeader('Authorization', `Api-Key ${apiKey}`)
       let body = JSON.stringify({
-        ...widget.transactionData,
-        selection_id: transactionId
+        nonprofit: widget.transactionData.nonprofit,
+        partner_user_id: userId
       });
       console.log(" BODY: ", body)
       persistTransactionRequest.send(body);
