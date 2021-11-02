@@ -10,8 +10,8 @@ window.execPostPurchaseView = async function execPostPurchaseView(userId,
                                                                   }) {
   console.log(" execPostPurchaseView FOR Instacart")
   const widgetId = 'e9738b7ffed2476bbec748b1ccc1a046';
-  const storeId = "13";
-  const chainId = "7";
+  const storeId = "89";
+  const chainId = "61";
   const beamContainerId = 'internal-beam-widget-wrapper';
   const apiKey = 'Fez0xn9XFhur.4c90bd46-40f4-4cd7-a755-4800ea5ad1e3';
 
