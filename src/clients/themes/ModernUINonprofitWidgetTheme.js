@@ -262,7 +262,7 @@ class ModernUINonprofitWidgetTheme extends BaseTheme {
           children: [
             // description
             new components.BeamText({
-              text: nonprofit.impact_description + " via " + nonprofit.name,
+              text: nonprofit.impact_description + (this.options.description?.includeViaNonprofit ? " via " + nonprofit.name : ""),
               style: {
                 overflow: "hidden",
                 textOverflow: "ellipsis",
