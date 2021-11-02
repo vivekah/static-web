@@ -132,7 +132,8 @@ class ModernUINonprofitWidgetTheme extends BaseTheme {
             style: {
               display: 'inline',
               paddingTop: '4px',
-              ...this.options.learnMore?.icon?.style
+              ...this.options.learnMore?.icon?.style,
+              ...this.isMobile ? this.options.learnMore?.icon?.mobileStyle : {},
             }
           }),
           new components.BeamText({
@@ -145,7 +146,8 @@ class ModernUINonprofitWidgetTheme extends BaseTheme {
               fontSize: "12px",
               paddingLeft: '5px',
               fontWeight: '100',
-              ...this.options.learnMore?.style
+              ...this.options.learnMore?.style,
+              ...this.isMobile ? this.options.learnMore?.mobileStyle : {},
             }
           })
         ]
@@ -164,7 +166,11 @@ class ModernUINonprofitWidgetTheme extends BaseTheme {
             fontFamily: this.options.fontFamily,
             fontWeight: '100',
             fontSize: this.options.poweredByFontSize || "12px",// this.options.tileCauseFontSize || "small",
-            style: {...this.options.poweredBy?.style}
+            style: {
+              ...this.options.poweredBy?.style,
+              ...this.isMobile ? this.options?.poweredBy?.mobileStyle : {},
+
+            }
           })
         ]
       });
@@ -256,7 +262,7 @@ class ModernUINonprofitWidgetTheme extends BaseTheme {
           children: [
             // description
             new components.BeamText({
-              text: (this.options.lan ? nonprofit.impact_description + " via " + nonprofit.name : "Fund " + nonprofit.impact_description) + " via " + nonprofit.name,
+              text: nonprofit.impact_description + " via " + nonprofit.name,
               style: {
                 overflow: "hidden",
                 textOverflow: "ellipsis",
@@ -333,7 +339,7 @@ class ModernUINonprofitWidgetTheme extends BaseTheme {
         }),
         // percentage text
         new components.BeamText({
-          text: `${nonprofit?.impact?.percentage}%`,
+          text: `${nonprofit?.impact?.percentage || 0}%`,
           style: {
             textAlign: "left",
             fontFamily: "inherit",

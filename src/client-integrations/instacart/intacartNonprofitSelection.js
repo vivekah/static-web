@@ -178,8 +178,9 @@ window.execCardIntegration = async function execCardIntegration(userId,
       chain: chainId,
       user: beamUser,
       store: storeId,
-      showCommunityImpact: true,
-      postalCode: countryCode,
+      show_community_impact: true,
+      postal_code: postalCode,
+      country_code: countryCode,
       lan: lan
     };
     if (params)
@@ -305,7 +306,16 @@ window.execCardIntegration = async function execCardIntegration(userId,
           }
         },
         learnMore: {
-          text: chainDonationType?.compliance_cta || "Learn more"
+          text: chainDonationType?.compliance_cta || "Learn more",
+          style: {
+            fontSize: '10px',
+            paddingBottom: '15px'
+          }
+        },
+        poweredBy: {
+          style: {
+            fontSize: '10px',
+          }
         }
       }
     });
@@ -353,20 +363,7 @@ window.execCardIntegration = async function execCardIntegration(userId,
       beamContentBox.className = "content-box";
       beamContentBox.id = "beam-wrapper-content-box";
       beamContentBox.innerHTML = `
-          <div class='row'>
-                <div class='col-sm-8'>
-                          <div class='content-box__row' id='beam-widget-content-box'>
-                             <p id='beam-widget-header' style=''>
-                                <p style="text-align: left; margin-bottom: -11px; font-size: 20px; font-weight: bold; font-family: inherit;">
-                                ${chainDonationType?.title_web || "Fight food insecurity with instacart"} </p>
-                                <p id="link-learn-more" style="font-size: 15px; font-weight: 600; margin: 20px 0 20px 0; width: 100%; font-family: ${fontFamily}; color: ${themeColorConfig.lightTextColor}"> 
-                                ${chainDonationType?.description_web || `Choose a cause to contribute to with your next order, and one meal will be donated there at no extra cost to you. <a style="color:${themeColorConfig.progressBarColor}" href="#">Learn more </a>`}
-                                </p>
-                              </p>
-                          
-                          <div id="beam-container"  style="max-width: 500px">
-                              <div id="internal-beam-widget-wrapper"></div>
-                              <style>
+ <style>
                               
                               #chose-nonprofit-button{
                                   background: #e3e3e3; 
@@ -376,12 +373,23 @@ window.execCardIntegration = async function execCardIntegration(userId,
                                   border: none; 
                                   height: 40px;
                               }
-                              
+                                #selection-title{
+                                text-align: left; margin-bottom: -11px; font-family: inherit;
+                                position:static;
+                                left:0px;
+                                top:0px;
+                                font-size:22px;
+                                font-weight: 900;
+                                }
+                                
+                                #link-learn-more{
+                                font-size: 15px; font-weight: 600; margin: 20px 0 20px 0; width: 100%; font-family: ${fontFamily}; color: ${themeColorConfig.lightTextColor}
+                                }
                               @media only screen and (max-width: 600px) {
                                  #internal-beam-widget-wrapper{
                                   margin-bottom: 70px;
                                  }
-                                 #chose-nonprofit-button {
+                                   #chose-nonprofit-button {
                                        width: 100%;
                                        max-width: 500px;
                                       }
@@ -394,6 +402,8 @@ window.execCardIntegration = async function execCardIntegration(userId,
                                               display: flex;
                                               align-items: center;
                                               flex-direction: column;
+                                        
+
                                   }    
                                    #button-wrapper{
                                         width: 100%;
@@ -411,8 +421,37 @@ window.execCardIntegration = async function execCardIntegration(userId,
                                     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#f1f1f1",endColorstr="#ffffff",GradientType=1);
                                    }  
                                   }
-                              
+                                                                 
+                              @media only screen and (max-width: 400px) {
+                                                           
+                                #selection-title{
+                                margin-left: 5px;
+                                font-weight: 600;
+
+                                }
+                                #link-learn-more{
+                                font-weight: 100;
+                                font-size: 12px;
+                                margin-left: 5px;
+                                font-weight: 400;
+
+                                }
+                           }
                                 </style>
+
+          <div class='row'>
+                <div class='col-sm-8'>
+                          <div class='content-box__row' id='beam-widget-content-box'>
+                             <p id='beam-widget-header' style=''>
+                                <p id="selection-title">
+                                ${chainDonationType?.title_web || "Fight food insecurity with instacart"} </p>
+                                <p id="link-learn-more"> 
+                                ${chainDonationType?.description_web || `Choose a cause to contribute to with your next order, and one meal will be donated there at no extra cost to you. <a style="color:${themeColorConfig.progressBarColor}" href="#">Learn more </a>`}
+                                </p>
+                              </p>
+                             <div id="beam-container"  style="max-width: 500px">
+                              <div id="internal-beam-widget-wrapper" style="max-width: 500px"></div>
+                            
                                 <div id="selection-page-footer">
                                 <div id="button-divider"></div>
                                 <div id="button-wrapper">
@@ -491,7 +530,7 @@ window.execCardIntegration = async function execCardIntegration(userId,
   }
 
   let nonprofits = await getNonprofits();
-    addStylesheets();
+  addStylesheets();
   console.log(" ** NONPROFITS: ", nonprofits)
   await insertBeamWidget(nonprofits);
   listenToNonprofitSelectedEvent();
