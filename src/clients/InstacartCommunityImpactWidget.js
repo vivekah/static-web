@@ -468,7 +468,7 @@ class InstacartCommunityImpactWidget extends BaseImpactWidget {
           style: {
             display: 'flex',
             flexDirection: 'column-reverse',
-            margin: "40px 0 40px 10px",
+            margin: "30px 0 30px 10px",
             ...this.options?.themeConfig?.headerContainer?.style,
             ...isMobile ? this.options.themeConfig.headerContainer?.mobileStyle : {}
           },
@@ -518,6 +518,16 @@ class InstacartCommunityImpactWidget extends BaseImpactWidget {
               ],
             }),
           ]
+        }),
+        // Header
+        this.options.themeConfig.showCommunityImpactHeader && new components.BeamText({
+          text: this.options.themeConfig.community_impact_title,
+          fontFamily: "Eina01-Regular !important",
+          fontSize: "23px",
+          lineHeight: "28px",
+          textAlign: "center",
+          color: "#343538",
+          fontWeight: 700
         }),
         // nonprofits
         new components.BeamFlexWrapper({

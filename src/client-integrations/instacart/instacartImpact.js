@@ -53,7 +53,7 @@ window.execCommunityImpact = async function execCommunityImpact(
       document.body.append(impactScreenContainer.view);
     }
     createCarousel();
-    renderCommunityImpactWidget();
+    renderCommunityImpactWidget(impactData);
   }
 
   function getPartnerSummarySection(impactData) {
@@ -168,7 +168,7 @@ window.execCommunityImpact = async function execCommunityImpact(
             display: flex;
             flex-direction: column;
             width: 50%;
-            background-color: cadetblue;
+            background-color: #FFF0BD;
             justify-content: center;
             text-align: center;
             position: absolute;
@@ -364,7 +364,7 @@ window.execCommunityImpact = async function execCommunityImpact(
     return null;
   }
 
-  function renderCommunityImpactWidget() {
+  function renderCommunityImpactWidget(impactData) {
     let widget = new beamApps.InstacartCommunityImpactWidget({
       fontFamily: fontFamily || 'inherit',
       containerId: beamImpactWidgetContainerId,
@@ -372,6 +372,8 @@ window.execCommunityImpact = async function execCommunityImpact(
       lan: lan,
       themeConfig: {
         id: 'instacart-community-impact',
+        showCommunityImpactHeader: true,
+        community_impact_title: impactData.community_impact_title,
         maxContainerWidth: 600,
         impactCardWidth: '256px !important',
         hideLogo: true,
