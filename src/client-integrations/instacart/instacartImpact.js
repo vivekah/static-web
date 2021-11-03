@@ -28,14 +28,14 @@ window.execCommunityImpact = async function execCommunityImpact(
 
   // console.log(" execCardIntegration FOR Instacart")
   const impactData = await getImpactData(userId, zipCode);
-  // console.log(" IMPACT DATA: ", impactData)
   renderImpactScreen();
 
   function renderImpactScreen() {
-    let impactScreenContainer = new components.BeamFlexWrapper({
+    let impactScreenContainer = new components.BeamContainer({
       style: {
-        flexDirection: 'column !important',
-        flexWrap: 'wrap'
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center'
       },
       children: [
         getJoinUsSection(impactData),
@@ -64,9 +64,6 @@ window.execCommunityImpact = async function execCommunityImpact(
         justifyContent: 'center',
         // margin: 'auto',
         marginTop: '45px',
-        padding: '0px 20px',
-        maxWidth: '700px',
-
       },
       mobileStyle: {
         // maxWidth: '400px',
@@ -147,7 +144,7 @@ window.execCommunityImpact = async function execCommunityImpact(
               }
             }),
             new components.BeamText({
-              text: `${impactData.personal_impact_description || 'Food meals this holiday season by simply placing your order.'} <a href='' style='color: green;'>Select a nonprofit </a>`,
+              text: `${impactData.personal_impact_description || 'Food meals this holiday season by simply placing your order.'} <a href='' style='color: green;'>${impactData.personal_impact_cta} </a>`,
               style: {
                 fontSize: '12px',
                 fontFamily: fontFamily || 'inherit'
@@ -160,43 +157,112 @@ window.execCommunityImpact = async function execCommunityImpact(
   }
 
   function getTutorialSection(tutorial) {
-    if (tutorial) {
-      let slider = new components.BeamContainer({
-        id: beamSliderId,
-      });
-      slider.view.innerHTML = `
+
+    let slider = new components.BeamContainer({
+      id: beamSliderId,
+    });
+    slider.view.innerHTML = `
+          <style>
+          #tutorial-step{
+            fontFamily: ${fontFamily},
+            display: flex;
+            flex-direction: column;
+            width: 50%;
+            background-color: cadetblue;
+            justify-content: center;
+            text-align: center;
+            position: absolute;
+            right: 0px;
+            top: 0px;
+            border-radius: 0px 10px 10px 0px;
+            height:100%;
+            }
+            #tutorial-step-title{
+            margin: 0;
+           font-size: 31px;
+           line-height: 40px;
+           font-weight: bold;
+          }
+          #tutorial-step-descrtiption{
+          margin: 0;
+          font-size: 18px;
+          line-height: 26px;
+          }
+          
+          #tutorial-step-text-container{
+           padding: 70px 80px 0 30px;    
+           width: 70%;
+          }
+          
+          .slider_img{
+          width:50%;
+          border-radius: 10px 0px 0px 10px;
+          }
+          
+       @media only screen and (max-width:600px) {
+          #tutorial-step{
+            position: relative;
+            background: transparent;
+            display: flex;
+            width: 100%;
+
+            align-items: center;
+          }
+          #tutorial-step-text-container{
+          width: 70%;
+          margin: 20px auto;
+          padding: 0px;
+          justify-content: center;
+          }
+           .slider_img{
+          width:100%;
+          border-radius: 10px;
+          }
+          #tutorial-step-title{
+            font-size: 23px;
+            line-height:28px;
+          }
+          
+       }
+</style>  
+
           <div class="splide">
             <div class="splide__track">
           <ul class="splide__list">
-          ${ tutorial.map(tutorialStep => {
-        return `<li class="splide__slide"><img class="slider_img " src="${tutorialStep.image}">`
-      }) }
-          <li class="splide__slide"><img class="slider_img " src="https://images.unsplash.com/photo-1478827217976-7214a0556393?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8dG9wfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&w=1000&q=80"></img></li>
-          <li class="splide__slide"><img class="slider_img" src="https://thumbs.dreamstime.com/z/lovely-pink-gerbera-germini-flower-isolated-light-gray-background-isolated-pink-gerbera-germini-flower-99116487.jpg"></img></li>
-          <li class="splide__slide"><img class="slider_img" src="https://images.unsplash.com/photo-1495539406979-bf61750d38ad?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjN8fGZyZWV8ZW58MHx8MHx8&ixlib=rb-1.2.1&w=1000&q=80"></img></li>
+          ${tutorial && tutorial.map(tutorialStep => {
+      return `<li class="splide__slide"><img class="slider_img " src="${tutorialStep.image}" onError="this.onerror=null;this.src='https://images.unsplash.com/photo-1478827217976-7214a0556393?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8dG9wfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&w=1000&q=80';">
+            <div id="tutorial-step">
+            <div id="tutorial-step-text-container">
+            <p id="tutorial-step-title">${tutorialStep.title}</p>
+            <p id="tutorial-step-descrtiption">${tutorialStep.description}</p>
+</div>
+</div>
+</li>`
+    })
+    }
           </ul>
             </div>
           </div>`
-      return new components.BeamFlexWrapper({
-        style: {
-          flexDirection: 'column !important',
-          flexWrap: 'nowrap !important'
-          // width: '100%',
-          // height: '100%'
-        },
-        children: [
-          new components.BeamText({
-            text: 'How it works',
-            style: {
-              fontSize: '20px',
-              // margin: 'auto',
-              fontWeight: '600'
-            }
-          }),
-          slider
-        ]
-      });
-    }
+    return new components.BeamFlexWrapper({
+      style: {
+        flexDirection: 'column !important',
+        flexWrap: 'nowrap !important'
+        // width: '100%',
+        // height: '100%'
+      },
+      children: [
+        new components.BeamText({
+          text: 'How it works',
+          style: {
+            fontSize: '20px',
+            // margin: 'auto',
+            fontWeight: '600'
+          }
+        }),
+        slider
+      ]
+    });
+
   }
 
   function createCarousel() {
@@ -306,24 +372,30 @@ window.execCommunityImpact = async function execCommunityImpact(
       lan: lan,
       themeConfig: {
         id: 'instacart-community-impact',
+        maxContainerWidth: 600,
+        impactCardWidth: '256px !important',
         hideLogo: true,
         noWrap: false,
         impactCard: {
           style: {
-            width: '280px'
+            borderRadius: '10px',
+            margin: '10px',
           },
-          mobileStyle: {}
+          mobileStyle: {
+            width: '311px',
+            maxWidth: '311px',
+          }
         },
         title: {
           style: {
-            fontSize: '14px',
+            fontSize: '15px',
             fontWeight: '500',
             color: themeColorConfig.textColor
           }
         },
         cause: {
           style: {
-            fontSize: '11px',
+            fontSize: '12px',
             fontWeight: '500',
             color: themeColorConfig.causeTestColor
           }
@@ -336,23 +408,51 @@ window.execCommunityImpact = async function execCommunityImpact(
         },
         impact: {
           style: {
-            fontSize: '11px',
+            fontSize: '12px',
             fontWeight: '300',
-            color: themeColorConfig.textColor
+            color: themeColorConfig.textColor,
+            width: '100%'
           }
         },
+        // impactImageHeight: '100%',
         cardImage: {
           style: {
-            maxHeight: '240px',
-            padding: '10px',
-            borderRadius: '25px',
-            width: '100%',
-            objectFit: 'contain'
+            borderRadius: '10px',
+            width: 'auto',
+            height: 'auto',
+            // maxWidth: '246px',
+            // maxHeight: '152px',
+            // objectFit: 'contain',
+            margin: '10px',
+          },
+          // mobileStyle: {
+          //   width: '311px',
+          //   height: '152px',
+          //   maxWidth: '311px',
+          //   maxHeight: '152px',
+          // }
+        },
+        cardOverlay: {
+          style: {
+            display: 'none'
           }
         },
+        innerCard: {
+          style: {
+            height: 'auto',
+          }
+        },
+        tileHeight: 'inherit',
         cardbody: {
           style: {
-            padding: '10px'
+            padding: '0px 10px 10px 10px',
+          }
+        },
+        outerCard: {
+          style: {
+            borderRadius: '10px',
+            width: '256px',
+            maxWidth: '256px',
           }
         },
         border: `1px solid ${themeColorConfig.progressBarBackgroundColor}`,
@@ -360,7 +460,8 @@ window.execCommunityImpact = async function execCommunityImpact(
         nonprofitsContainer: {
           style: {
             // flexFlow: "nowrap !important"
-            alignItems: 'flex-start !important',
+            // alignItems: 'flex-start !important',
+            justifyContent: 'center !important',
             margin: 'auto',
             maxWidth: '1200px'
           },
@@ -368,6 +469,12 @@ window.execCommunityImpact = async function execCommunityImpact(
             flexDirection: 'column !important',
             margin: 'auto',
             alignItems: 'center !important',
+            justifyContent: 'center !important',
+          }
+        },
+        nonprofitRow: {
+          style: {
+            justifyContent: 'center !important'
           }
         },
         fontFamily: fontFamily || "inherit",
@@ -411,10 +518,17 @@ window.execCommunityImpact = async function execCommunityImpact(
         goalInfo: {
           text: 'Help Instacart reach this goal!',
           completedText: '✅ Instacart has reached 100% goal!',
-          contributeText: `<a href="${nonprofit}" style="color: ${themeColorConfig.progressBarColor}"> Contribute to this effort with your next order > </a>`,
+          contributeText: `<a href="${'nonprofit'}" style="color: ${themeColorConfig.progressBarColor}"> Contribute to this effort with your next order > </a>`,
           style: {
-            fontSize: '11px',
+            fontSize: '12px',
             color: themeColorConfig.textColor
+          }
+        },
+        titleNonprofits: {
+          style: {
+            margin: '10px 0px',
+            fontSize: '14px',
+            fontWeight: "600"
           }
         }
       }
