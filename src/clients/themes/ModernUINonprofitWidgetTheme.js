@@ -396,11 +396,12 @@ class ModernUINonprofitWidgetTheme extends BaseTheme {
 
   mobileComponent(nonprofits, lastNonprofit) {
     console.log(" mobile view")
-    return this.desktopListComponent(nonprofits, lastNonprofit, true);
+    return this.desktopListComponent(nonprofits, lastNonprofit, true, true);
   }
 
-  desktopListComponent(nonprofits, selectedNonprofit, wrap = false) {
-    this.isMobile = wrap;
+  desktopListComponent(nonprofits, selectedNonprofit, wrap = false, isMobile = false) {
+    this.isMobile = isMobile;
+    wrap = this.options.cards?.wrap || isMobile;
     this.showProgress = this.options.showCommunityImpact || nonprofits.some(
       (nonprofit) => parseInt(nonprofit?.impact?.percentage) > 0
     );

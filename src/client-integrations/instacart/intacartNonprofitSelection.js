@@ -22,7 +22,7 @@ window.execNonprofitSelection = async function execNonprofitSelection(apiKey,
   const confirmButtonId = "chose-nonprofit-button";
 
   // shop config
-  const fontFamily = instacartFontFamily || "'Poppins', sans-serif";
+  const fontFamily = instacartFontFamily || "inherit";
 
   // widget config
   let beamUser = null;
@@ -35,8 +35,8 @@ window.execNonprofitSelection = async function execNonprofitSelection(apiKey,
   const themeColorConfig = {
     progressBarColor: '#16ad0b',
     confirmationButtonColor: '#16ad0b',
-    causeTestColor: '#f0a358',
-    textColor: '#6a6b6d',
+    causeTestColor: '#E97300',
+    textColor: '#343538',
     lightTextColor: '#bbbbbd',
     progressBarBackgroundColor: '#e3e3e3'
   }
@@ -218,11 +218,15 @@ window.execNonprofitSelection = async function execNonprofitSelection(apiKey,
         window.dispatchEvent(event);
       },
       isPreCheckout: false,
-      forceMobileView: true,
+      forceMobileView: false,
       fontFamily: fontFamily,
       themeConfig: {
         id: "modern-ui-nonprofit",
         headerText: "",
+        maxContainerWidth: 400,
+        cards: {
+          wrap: true
+        },
         headerTextStyle: {
           display: 'none'
         },
@@ -233,12 +237,18 @@ window.execNonprofitSelection = async function execNonprofitSelection(apiKey,
         cardTitle: {
           textStyle: {
             color: themeColorConfig.textColor,
-            fontSize: '14px'
+            fontSize: '15px'
           }
         },
         image: {
           style: {
             borderRadius: '12px',
+            maxWidth: '104px',
+            maxHeight: '104px'
+          },
+          mobileStyle: {
+            maxWidth: '100%',
+            maxHeight: '100%'
           }
         },
         card: {
@@ -263,7 +273,10 @@ window.execNonprofitSelection = async function execNonprofitSelection(apiKey,
           style: {
             height: '6px',
             border: '0px',
-            backgroundColor: themeColorConfig.progressBarBackgroundColor
+            backgroundColor: themeColorConfig.progressBarBackgroundColor,
+          },
+          wrapperStyle: {
+            paddingTop: "0px"
           },
           textStyle: {
             color: themeColorConfig.textColor,
@@ -274,7 +287,6 @@ window.execNonprofitSelection = async function execNonprofitSelection(apiKey,
         region: {
           style: {
             display: 'block',
-            marginBottom: '5px'
           },
           textStyle: {
             color: themeColorConfig.textColor,
@@ -309,13 +321,21 @@ window.execNonprofitSelection = async function execNonprofitSelection(apiKey,
         learnMore: {
           text: chainDonationType?.compliance_cta || "Learn more",
           style: {
-            fontSize: '10px',
-            paddingBottom: '15px'
+            fontSize: '12px',
+          },
+          icon: {
+            style: {
+              width: '10px !important',
+              height: '10px !important',
+              paddingTop: '0px !important',
+              marginLeft: '8px',
+            }
           }
         },
         poweredBy: {
           style: {
-            fontSize: '10px',
+            fontSize: '12px',
+            marginRight: '8px',
           }
         }
       }

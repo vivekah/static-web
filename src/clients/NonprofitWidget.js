@@ -232,7 +232,7 @@ class NonprofitWidget extends BaseWidget {
       this.options.themeConfig.showCommunityImpact = args.showCommunityImpact
         ? true
         : false;
-
+      console.log(" BUILD ISMOVILE: ",this.isMobile)
       if (this.isMobile) {
         return this.lastNonprofit
           ? THEMES_WITH_LISTS_IN_MOBILE_VIEW.includes(this.options.themeConfig.id)
@@ -366,8 +366,8 @@ class NonprofitWidget extends BaseWidget {
 
     let container = new components.BeamContainer({
       children: [
-        this.theme.headerComponent({
-          headerLogo: this.headerLogoComponent(this.data.store.logo),
+       this.options.themeConfig.showLogo && this.theme.headerComponent({
+          headerLogo: this.headerLogoComponent(this.data.chain_info.logo),
           text: this.headerText,
         }),
         // nonprofits
@@ -395,7 +395,7 @@ class NonprofitWidget extends BaseWidget {
           text: this.options.themeConfig.nonprofitSelectionTextTemplate
             ? this.options.themeConfig.nonprofitSelectionTextTemplate.replace(/<cause>/g, this.lastNonprofit.cause).replace(/<nonprofit>/g, this.lastNonprofit.name)
             : `<b>Thanks for supporting ${this.lastNonprofit.cause} with ${this.lastNonprofit.name}!
-            </b> <br />${this.data.store.chain_donation_type.name} of this purchase, 
+            </b> <br />${this.data.chain_donation_type.name} of this purchase, 
             and all future purchases, will be donated there for you. Don’t worry, 
             there’s no extra cost to you and you can change your nonprofit with any order.`,
           fontFamily: this.options.fontFamily,

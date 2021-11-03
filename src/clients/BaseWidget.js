@@ -100,7 +100,7 @@ class BaseWidget {
     this.webBaseUrl = process.env.WEB_BASE_URL;
     console.log("BEAM_BACKEND_BASE_URL: ", this.baseUrl)
     this.renderViewRef = null;
-    this.maxContainerWidth = 750;
+    this.maxContainerWidth = 400;
   }
 
   async getData(args = {}) {
@@ -155,6 +155,9 @@ class BaseWidget {
 
   get isMobile() {
     const containerWidth = this.getContainerWidth();
+    console.log(" containerWidth < this.maxContainerWidth: ",  containerWidth < this.maxContainerWidth)
+    console.log(" containerWidth : ",  containerWidth )
+    console.log(" maxContainerWidth : ",  this.maxContainerWidth )
     return this.options.forceMobileView
       ? true
       : /iPhone|iPad|iPod|Android/i.test(window.navigator.userAgent) ? true : containerWidth < this.maxContainerWidth;
