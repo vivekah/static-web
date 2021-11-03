@@ -275,7 +275,7 @@ window.execCommunityImpact = async function execCommunityImpact(
     return new components.BeamFlexWrapper({
       style: {
         borderRadius: '15px',
-        backgroundColor: '#efefef',
+        backgroundColor: '#F2F7ED',
         maxWidth: '700px',
         height: '100px',
         justifyContent: 'center',
