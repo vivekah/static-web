@@ -38,10 +38,10 @@ window.execCommunityImpact = async function execCommunityImpact(
         flexWrap: 'wrap'
       },
       children: [
-        getJoinUsSection(),
+        getJoinUsSection(impactData),
         devider(),
         getPartnerSummarySection(),
-        getTutorialSection(),
+        getTutorialSection(impactData?.tutorial),
         getImpactSummarySection(),
         getCommunityImpactSection()
       ]
@@ -56,7 +56,7 @@ window.execCommunityImpact = async function execCommunityImpact(
     renderCommunityImpactWidget();
   }
 
-  function getPartnerSummarySection() {
+  function getPartnerSummarySection(impactData) {
 
     return new components.BeamFlexWrapper({
       style: {
@@ -74,7 +74,7 @@ window.execCommunityImpact = async function execCommunityImpact(
       },
       children: [
         new components.BeamText({
-          text: 'Help us fight food insecurity',
+          text: impactData?.copy?.impactTitleWeb || 'Help us fight food insecurity',
           style: {
             fontSize: '40px',
             margin: 'auto',
@@ -86,7 +86,7 @@ window.execCommunityImpact = async function execCommunityImpact(
           }
         }),
         new components.BeamText({
-          text: "This holiday season, Instacart has partnered with 4 non-profits in support of our mission to create" +
+          text: impactData?.copy?.impactDescriptionWeb || "This holiday season, Instacart has partnered with 4 non-profits in support of our mission to create" +
             " a world where everyone has access to the food they love and more time to enjoy it together.",
           style: {
             fontSize: '14px',
@@ -106,7 +106,7 @@ window.execCommunityImpact = async function execCommunityImpact(
     })
   }
 
-  function getJoinUsSection() {
+  function getJoinUsSection(impactData) {
     return new components.BeamFlexWrapper({
       style: {
         maxWidth: '600px',
@@ -141,13 +141,13 @@ window.execCommunityImpact = async function execCommunityImpact(
           },
           children: [
             new components.BeamText({
-              text: 'Join us in the fight against food insecurity',
+              text: impactData.personal_impact_header || 'Join us in the fight against food insecurity',
               style: {
                 fontFamily: fontFamily || 'inherit'
               }
             }),
             new components.BeamText({
-              text: "Food meals this holiday season by simply placing your order. <a href='' style='color: green;'>Select a nonprofit </a>",
+              text: `${impactData.personal_impact_description || 'Food meals this holiday season by simply placing your order.'} <a href='' style='color: green;'>Select a nonprofit </a>`,
               style: {
                 fontSize: '12px',
                 fontFamily: fontFamily || 'inherit'
@@ -159,39 +159,44 @@ window.execCommunityImpact = async function execCommunityImpact(
     });
   }
 
-  function getTutorialSection() {
-    let slider = new components.BeamContainer({
-      id: beamSliderId,
-    });
-    slider.view.innerHTML = `
+  function getTutorialSection(tutorial) {
+    if (tutorial) {
+      let slider = new components.BeamContainer({
+        id: beamSliderId,
+      });
+      slider.view.innerHTML = `
           <div class="splide">
             <div class="splide__track">
           <ul class="splide__list">
+          ${ tutorial.map(tutorialStep => {
+        return `<li class="splide__slide"><img class="slider_img " src="${tutorialStep.image}">`
+      }) }
           <li class="splide__slide"><img class="slider_img " src="https://images.unsplash.com/photo-1478827217976-7214a0556393?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8dG9wfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&w=1000&q=80"></img></li>
           <li class="splide__slide"><img class="slider_img" src="https://thumbs.dreamstime.com/z/lovely-pink-gerbera-germini-flower-isolated-light-gray-background-isolated-pink-gerbera-germini-flower-99116487.jpg"></img></li>
           <li class="splide__slide"><img class="slider_img" src="https://images.unsplash.com/photo-1495539406979-bf61750d38ad?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjN8fGZyZWV8ZW58MHx8MHx8&ixlib=rb-1.2.1&w=1000&q=80"></img></li>
           </ul>
             </div>
           </div>`
-    return new components.BeamFlexWrapper({
-      style: {
-        flexDirection: 'column !important',
-        flexWrap: 'nowrap !important'
-        // width: '100%',
-        // height: '100%'
-      },
-      children: [
-        new components.BeamText({
-          text: 'How it works',
-          style: {
-            fontSize: '20px',
-            // margin: 'auto',
-            fontWeight: '600'
-          }
-        }),
-        slider
-      ]
-    });
+      return new components.BeamFlexWrapper({
+        style: {
+          flexDirection: 'column !important',
+          flexWrap: 'nowrap !important'
+          // width: '100%',
+          // height: '100%'
+        },
+        children: [
+          new components.BeamText({
+            text: 'How it works',
+            style: {
+              fontSize: '20px',
+              // margin: 'auto',
+              fontWeight: '600'
+            }
+          }),
+          slider
+        ]
+      });
+    }
   }
 
   function createCarousel() {
@@ -220,7 +225,7 @@ window.execCommunityImpact = async function execCommunityImpact(
       },
       children: [
         new components.BeamText({
-          text: `Together we funded ${impactData.aggregate_impact || '0'} meals nationwide`,
+          text: impactData.cummulative_impact_title || `Together we funded ${impactData.aggregate_impact || '0'} meals nationwide`,
           style: {
             fontSize: '22px',
             fontWeight: '600',
@@ -232,7 +237,7 @@ window.execCommunityImpact = async function execCommunityImpact(
           }
         }),
         new components.BeamText({
-          text: "FPO we've partnered with hunderds of local and national charitys. <a href='' style='color: green;'>Review national impact </a>",
+          text: `${impactData.cummulative_impact_description} <a href='' style='color: green;'>${impactData.cummulative_impact_cta} </a>`,
           style: {
             fontSize: '14px',
             color: 'gray',
@@ -406,7 +411,7 @@ window.execCommunityImpact = async function execCommunityImpact(
         goalInfo: {
           text: 'Help Instacart reach this goal!',
           completedText: '✅ Instacart has reached 100% goal!',
-          contributeText: `<a style="color: ${themeColorConfig.progressBarColor}"> Contribute to this effort with your next order > </a>`,
+          contributeText: `<a href="${nonprofit}" style="color: ${themeColorConfig.progressBarColor}"> Contribute to this effort with your next order > </a>`,
           style: {
             fontSize: '11px',
             color: themeColorConfig.textColor
