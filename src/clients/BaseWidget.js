@@ -98,7 +98,6 @@ class BaseWidget {
     this.cacheKey = null;
     this.baseUrl = process.env.BEAM_BACKEND_BASE_URL;
     this.webBaseUrl = process.env.WEB_BASE_URL;
-    console.log("BEAM_BACKEND_BASE_URL: ", this.baseUrl)
     this.renderViewRef = null;
     this.maxContainerWidth = 400;
   }
@@ -141,9 +140,7 @@ class BaseWidget {
   }
 
   getContainerWidth() {
-    let widgetContainer = document.querySelector(
-      `#${this.options.containerId}`
-    );
+    let widgetContainer = document.body;
     const {width} = widgetContainer.getBoundingClientRect();
     return width;
   }
@@ -155,9 +152,6 @@ class BaseWidget {
 
   get isMobile() {
     const containerWidth = this.getContainerWidth();
-    console.log(" containerWidth < this.maxContainerWidth: ",  containerWidth < this.maxContainerWidth)
-    console.log(" containerWidth : ",  containerWidth )
-    console.log(" maxContainerWidth : ",  this.maxContainerWidth )
     return this.options.forceMobileView
       ? true
       : /iPhone|iPad|iPod|Android/i.test(window.navigator.userAgent) ? true : containerWidth < this.maxContainerWidth;

@@ -71,32 +71,39 @@ class ModernUINonprofitWidgetTheme extends BaseTheme {
                                       // should not have any border as the border is added with background image for gradients
       },
       children: [
-        // card image
-        new components.BeamCardImage({
-          src: nonprofit.image,
-          style: {
-            minWidth: '0',
-            objectFit: "cover",
-            borderRadius: '3px',
-            aspectRatio: '1 / 1',
-            flex: '1',
-            ...this.options?.image?.style,
-            ...this.isMobile ? this.options?.image?.mobileStyle : {},
-          }
+        new components.BeamFlexWrapper({
+          children: [
+            // card image
+            new components.BeamCardImage({
+              src: nonprofit.image,
+              style: {
+                minWidth: '0',
+                objectFit: "cover",
+                borderRadius: '3px',
+                aspectRatio: '1 / 1',
+                flex: '1',
+                ...this.options?.image?.style,
+                ...this.isMobile ? this.options?.image?.mobileStyle : {},
+              }
+            }),
+            // card text wrapper
+            new components.BeamContainer({
+              style: {
+                display: 'flex',
+                flexDirection: 'column',
+                width: '100%',
+                margin: '0 0 0 0.8rem',
+                flex: "2",
+                ...this.options?.card?.textWrapperStyle,
+                ...this.isMobile ? this.options?.card?.textWrapperMobileStyle : {},
+              },
+              children: this.getOrderedContent(nonprofit, margin, selectedNonprofit),
+            }),
+            this.isMobile && this.getDescription(nonprofit, margin = "0", selectedNonprofit),
+            this.isMobile && this.getProgressBar(nonprofit, margin = "0", selectedNonprofit),
+          ]
         }),
-        // card text wrapper
-        new components.BeamContainer({
-          style: {
-            display: 'flex',
-            flexDirection: 'column',
-            width: '100%',
-            margin: '0 0 0 0.8rem',
-            flex: "2",
-            ...this.options?.card?.textWrapperStyle,
-            ...this.isMobile ? this.options?.card?.textWrapperMobileStyle : {},
-          },
-          children: this.getOrderedContent(nonprofit, margin, selectedNonprofit),
-        }),
+
       ]
     });
 
@@ -120,8 +127,8 @@ class ModernUINonprofitWidgetTheme extends BaseTheme {
       this.getRegion(nonprofit, margin = "0", selectedNonprofit),
       this.getTitle(nonprofit, margin = "0", selectedNonprofit),
       this.getCause(nonprofit, margin = "0", selectedNonprofit),
-      this.getDescription(nonprofit, margin = "0", selectedNonprofit),
-      this.getProgressBar(nonprofit, margin = "0", selectedNonprofit),
+      !this.isMobile && this.getDescription(nonprofit, margin = "0", selectedNonprofit),
+      !this.isMobile && this.getProgressBar(nonprofit, margin = "0", selectedNonprofit),
     ]
   }
 
@@ -257,7 +264,8 @@ class ModernUINonprofitWidgetTheme extends BaseTheme {
           style: {
             flexGrow: 3,
             width: "100%",
-            ...this.options?.description?.wrapperStyle
+            ...this.options?.description?.wrapperStyle,
+            ...this.isMobile ? this.options?.description?.wrapperMobileStyle : {},
           },
           children: [
             // description

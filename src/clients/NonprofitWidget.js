@@ -232,7 +232,6 @@ class NonprofitWidget extends BaseWidget {
       this.options.themeConfig.showCommunityImpact = args.showCommunityImpact
         ? true
         : false;
-      console.log(" BUILD ISMOVILE: ",this.isMobile)
       if (this.isMobile) {
         return this.lastNonprofit
           ? THEMES_WITH_LISTS_IN_MOBILE_VIEW.includes(this.options.themeConfig.id)

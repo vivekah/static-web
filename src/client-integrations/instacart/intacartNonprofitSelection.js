@@ -223,7 +223,8 @@ window.execNonprofitSelection = async function execNonprofitSelection(apiKey,
       themeConfig: {
         id: "modern-ui-nonprofit",
         headerText: "",
-        maxContainerWidth: 400,
+        displayThankYouMessageForSelectingNonProfit: false,
+        maxContainerWidth: 600,
         cards: {
           wrap: true
         },
@@ -237,24 +238,29 @@ window.execNonprofitSelection = async function execNonprofitSelection(apiKey,
         cardTitle: {
           textStyle: {
             color: themeColorConfig.textColor,
-            fontSize: '15px'
+            fontSize: '15px',
+            fontWeight: 600
           }
         },
         image: {
           style: {
             borderRadius: '12px',
-            maxWidth: '104px',
-            maxHeight: '104px'
+            width: '104px !important',
+            height: '104px !important',
+            maxWidth: '104px !important',
+            maxHeight: '104px !important'
           },
           mobileStyle: {
-            maxWidth: '100%',
-            maxHeight: '100%'
+            width: '76px !important',
+            height: '76px !important',
+            maxWidth: '76px !important',
+            maxHeight: '76px !important'
           }
         },
         card: {
           backgroundStyle: {
             borderRadius: '12px',
-            height: '124px !important',
+            // height: '124px !important',
             width: 'width: 508px',
             padding: '2px !important'
           },
@@ -276,7 +282,10 @@ window.execNonprofitSelection = async function execNonprofitSelection(apiKey,
             backgroundColor: themeColorConfig.progressBarBackgroundColor,
           },
           wrapperStyle: {
-            paddingTop: "0px"
+            paddingTop: "0px",
+          },
+          wrapperMobileStyle:{
+            width: '100%',
           },
           textStyle: {
             color: themeColorConfig.textColor,
@@ -297,6 +306,9 @@ window.execNonprofitSelection = async function execNonprofitSelection(apiKey,
         description: {
           style: {
             fontSize: '12px'
+          },
+          wrapperMobileStyle:{
+            paddingTop: '4px'
           }
         },
         cause: {
@@ -306,7 +318,7 @@ window.execNonprofitSelection = async function execNonprofitSelection(apiKey,
           },
           style: {
             fontSize: '12px',
-            fontWeight: 'bold',
+            fontWeight: '600',
             color: themeColorConfig.causeTestColor,
             paddingTop: '0px'
           }
@@ -384,6 +396,7 @@ window.execNonprofitSelection = async function execNonprofitSelection(apiKey,
       beamContentBox.innerHTML = `
  <style>
                               #internal-beam-widget-wrapper{
+                                  margin-bottom: 6px;
                               }
                               #chose-nonprofit-button{
                                   background: #e3e3e3; 
@@ -404,7 +417,7 @@ window.execNonprofitSelection = async function execNonprofitSelection(apiKey,
                                 left:0px;
                                 top:0px;
                                 font-size: 31px !important;
-                                font-weight: 900;
+                                font-weight: 600;
                                 color: #343538 !important;
                                 font-family: ${fontFamily};
                                 line-height:40px !important;
