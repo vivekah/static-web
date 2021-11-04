@@ -234,22 +234,28 @@ window.execCommunityImpact = async function execCommunityImpact(
           }
           
           #tutorial-step-text-container{
-           padding: 70px 80px 0 30px;    
            width: 70%;
+           display: flex;
+           justify-content: center;
+           height: 100%;
+           flex-direction: column;
           }
           
           .slider_img{
           width:50%;
           border-radius: 10px 0px 0px 10px;
           }
+          .splide__track {
+            border-radius: 10px;
+          }
           
-       @media only screen and (max-width:600px) {
+       @media only screen and (max-width:800px) {
           #tutorial-step{
             position: relative;
             background: transparent;
             display: flex;
             width: 100%;
-
+            border-radius: 0px 0px 10px 10px;
             align-items: center;
           }
           #tutorial-step-text-container{
@@ -257,11 +263,16 @@ window.execCommunityImpact = async function execCommunityImpact(
           margin: 20px auto;
           padding: 0px;
           justify-content: center;
+          background-color: #fff;
           }
            .slider_img{
           width:100%;
           border-radius: 10px;
           }
+          #tutorial-step {
+            background-color: #FFF;
+          }
+
           #tutorial-step-title{
             font-size: 31px;
             line-height:28px;
@@ -275,7 +286,7 @@ window.execCommunityImpact = async function execCommunityImpact(
             <div class="splide__track">
           <ul class="splide__list">
           ${tutorial && tutorial.map(tutorialStep => {
-      return `<li class="splide__slide"><img class="slider_img " src="${tutorialStep.image}" onError="this.onerror=null;this.src='https://staging-beam-widgets.beamimpact.com/assets/img/Artwork%20(1).png';">
+      return `<li class="splide__slide" style="background-color: #FFF0BD;"><img class="slider_img " src="${tutorialStep.image}" onError="this.onerror=null;this.src='https://staging-beam-widgets.beamimpact.com/assets/img/Artwork%20(1).png';">
             <div id="tutorial-step">
             <div id="tutorial-step-text-container">
             <p id="tutorial-step-title">${tutorialStep.title}</p>
