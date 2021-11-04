@@ -358,10 +358,12 @@ window.execCommunityImpact = async function execCommunityImpact(
         flexDirection: 'row !important',
         flexWrap: 'nowrap !important',
         fontFamily: fontFamily || 'inherit',
+        alignItems: 'flex-start'
       },
       mobileStyle: {
         flexDirection: 'column !important',
         backgroundColor: '#fff',
+        margin: '15px auto auto',
       },
       children: [
         new components.BeamText({
@@ -369,6 +371,7 @@ window.execCommunityImpact = async function execCommunityImpact(
           style: {
             fontSize: '23px',
             fontWeight: '500',
+            margin: '0px',
             marginRight: '10px',
             textAlign: 'left',
             fontFamily: fontFamily || 'inherit',
@@ -376,19 +379,20 @@ window.execCommunityImpact = async function execCommunityImpact(
           },
           mobileStyle: {
             textAlign: 'center',
-            width: '100%'
+            width: '100%',
+            margin: '0px 0px 15px 0px',
           }
         }),
         new components.BeamText({
-          text: `${impactData.cummulative_impact_description} <a href='' style='color: green;'>${impactData.cummulative_impact_cta} </a>`,
+          text: `${impactData.cummulative_impact_description}</br> <a href='' style='color: green;'>${impactData.cummulative_impact_cta} </a>`,
           style: {
             fontSize: '15px',
             color: '#72767E',
             fontWeight: '400',
             marginLeft: '10px',
-            textAlign: isMobile ? 'center' : 'left',
+            textAlign: 'left',
             fontFamily: fontFamily || 'inherit',
-            width: '50%'
+            width: '50%',
           },
           mobileStyle: {
             textAlign: 'center',
