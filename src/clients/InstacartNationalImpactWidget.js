@@ -119,7 +119,7 @@ class InstacartNationalImpactWidget extends BaseImpactWidget {
       children: [
         // card image
         new components.BeamCardImage({
-          src: nonprofit.chain_target_image,
+          src: nonprofit.image,
           height,
           objectFit: "cover",
           style: {
@@ -210,7 +210,7 @@ class InstacartNationalImpactWidget extends BaseImpactWidget {
 
     function region(options, nonprofit, isMobile) {
       return new components.BeamText({
-        text: nonprofit.badge,
+        text: nonprofit.badge || 'Local nonprofit',
         style: {
           ...options.region?.style,
           ...isMobile ? options.region?.mobileStyle : {}
@@ -468,7 +468,7 @@ class InstacartNationalImpactWidget extends BaseImpactWidget {
           style: {
             display: 'flex',
             flexDirection: 'column-reverse',
-            margin: "40px 0 40px 10px",
+            margin: "30px 0 30px 10px",
             ...this.options?.themeConfig?.headerContainer?.style,
             ...isMobile ? this.options.themeConfig.headerContainer?.mobileStyle : {}
           },
@@ -521,7 +521,7 @@ class InstacartNationalImpactWidget extends BaseImpactWidget {
         }),
         // nonprofits
         new components.BeamFlexWrapper({
-          alignItems: "flex-end",
+          alignItems: "flex-start",
           style: {
             ...this.options.themeConfig.nonprofitsContainer?.style,
             ...isMobile ? this.options.themeConfig.nonprofitsContainer?.mobileStyle : {}

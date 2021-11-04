@@ -41,6 +41,7 @@ window.execNationalCommunityImpact = async function execNationalCommunityImpact(
 
     renderCommunityImpactWidget();
   }
+
   function getJoinUsSection(impactData) {
     return new components.BeamFlexWrapper({
       alignItems: 'flex-start',
@@ -97,28 +98,29 @@ window.execNationalCommunityImpact = async function execNationalCommunityImpact(
               alignItems: 'center',
               alignContent: 'center',
               children: [
-              impactData?.personal_impact && new components.BeamProgressWrapper({
-              percentage: impactData?.personal_impact,
-              height: "4px",
-              backgroundColor: themeColorConfig.progressBarBackgroundColor,
-              border: "none",
-              cornerRadius: undefined,
-              style: {
-                width: '90%',
-                height: '4px',
-                display: 'flex',
-                marginTop: '0px',
-                marginRight: '12px'
-              }
+                impactData?.personal_impact && new components.BeamProgressWrapper({
+                  percentage: impactData?.personal_impact,
+                  height: "4px",
+                  backgroundColor: themeColorConfig.progressBarBackgroundColor,
+                  border: "none",
+                  cornerRadius: undefined,
+                  style: {
+                    width: '90%',
+                    height: '4px',
+                    display: 'flex',
+                    marginTop: '0px',
+                    marginRight: '12px'
+                  }
+                }),
+                // percent text
+                impactData.personal_impact && new components.BeamText({
+                  tag: "h6",
+                  text: impactData?.personal_impact + "&#37;",
+                  fontSize: '12px',
+                  color: '#343538',
+                  fontWeight: '200',
+                })]
             }),
-            // percent text
-          impactData.personal_impact && new components.BeamText({
-            tag: "h6",
-            text: impactData?.personal_impact + "&#37;",
-            fontSize: '12px',
-            color: '#343538',
-            fontWeight: '200',
-          })]}),
             new components.BeamText({
               style: {
                 fontSize: '12px',
@@ -132,6 +134,7 @@ window.execNationalCommunityImpact = async function execNationalCommunityImpact(
       ]
     });
   }
+
   function getPartnerSummarySection() {
 
     return new components.BeamFlexWrapper({
@@ -145,7 +148,7 @@ window.execNationalCommunityImpact = async function execNationalCommunityImpact(
 
       },
       mobileStyle: {
-        maxWidth: '400px',
+        // maxWidth: '400px',
         textAlign: 'center'
       },
       children: [
@@ -238,49 +241,54 @@ window.execNationalCommunityImpact = async function execNationalCommunityImpact(
         showNational: true,
         filterByRegion: true,
         noWrap: false,
+        maxContainerWidth: 600,
+        impactCardWidth: '256px !important',
         impactCard: {
           style: {
-            width: '280px'
+            borderRadius: '10px',
+            margin: '10px',
           },
           mobileStyle: {
-            width: '340px'
+            width: '311px',
+            maxWidth: '311px',
           }
         },
         title: {
           style: {
-            fontSize: '14px',
-            fontWeight: '500',
+            fontSize: '15px',
+            fontWeight: '700',
             color: themeColorConfig.textColor
           }
         },
         cause: {
           style: {
-            fontSize: '11px',
-            fontWeight: '500',
+            fontSize: '12px',
+            fontWeight: '600',
             color: themeColorConfig.causeTestColor
           }
         },
         region: {
           style: {
             fontSize: '10px',
-            fontWeight: '300'
+            fontWeight: '400'
           }
         },
         impact: {
           style: {
-            fontSize: '11px',
+            fontSize: '12px',
             fontWeight: '300',
-            color: themeColorConfig.textColor
+            color: themeColorConfig.textColor,
+            width: '100%'
           }
         },
-        impactImageHeight: '100%',
+        // impactImageHeight: '100%',
         cardImage: {
           style: {
             borderRadius: '10px',
-            height: '130px',
+            height: 'auto',
             width: 'auto',
             // objectFit: 'contain',
-            margin: '10px 10px',
+            margin: '10px',
           }
         },
         cardOverlay: {
@@ -296,7 +304,14 @@ window.execNationalCommunityImpact = async function execNationalCommunityImpact(
         tileHeight: 'inherit',
         cardbody: {
           style: {
-            padding: '0px 10px 10px 10px'
+            padding: '16px'
+          }
+        },
+        outerCard: {
+          style: {
+            borderRadius: '10px',
+            width: '256px',
+            maxWidth: '256px',
           }
         },
         border: `1px solid ${themeColorConfig.progressBarBackgroundColor}`,
@@ -343,7 +358,7 @@ window.execNationalCommunityImpact = async function execNationalCommunityImpact(
         },
         progressBar: {
           style: {
-            height: '6px',
+            height: '4px',
             border: '0px',
             backgroundColor: themeColorConfig.progressBarBackgroundColor
           },
@@ -398,13 +413,10 @@ window.execNationalCommunityImpact = async function execNationalCommunityImpact(
         },
         titleNonprofits: {
           style: {
-            margin: '10px 0px 0px 0px',
             fontFamily: `${fontFamily} !important`,
-            fontSize: "23px",
-            lineHeight: "28px",
-            textAlign: "center",
-            color: "#343538",
-            fontWeight: 700
+            margin: '10px 0px',
+            fontSize: '14px',
+            fontWeight: "600"
           }
         }
       }

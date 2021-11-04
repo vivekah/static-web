@@ -427,7 +427,6 @@ class InstacartCommunityImpactWidget extends BaseImpactWidget {
           },
           clickListener: () => {
             this.currentTabData = tabData;
-            console.log(" NONNN PROFITTT:", this.input.nonprofit)
             this.render({nonprofit: this.input.nonprofit, user: null, chain: this.input.chain});
           },
         }),

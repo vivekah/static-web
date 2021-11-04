@@ -506,7 +506,7 @@ window.execCommunityImpact = async function execCommunityImpact(
         tileHeight: 'inherit',
         cardbody: {
           style: {
-            padding: '16px 16px 16px 16px',
+            padding: '16px',
           }
         },
         outerCard: {
