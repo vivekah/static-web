@@ -35,7 +35,8 @@
   },
   "dependencies": {
     "@splidejs/splide": "^3.1.9",
-    "crypto": "^1.0.1"
+    "crypto": "^1.0.1",
+    "dotenv-webpack": "^7.0.3"
   },
   "directories": {
     "test": "tests"

@@ -53,12 +53,13 @@ window.execCommunityImpact = async function execCommunityImpact(
       document.body.append(impactScreenContainer.view);
     }
     createCarousel();
-    renderCommunityImpactWidget();
+    renderCommunityImpactWidget(impactData);
   }
 
   function getPartnerSummarySection(impactData) {
 
     return new components.BeamFlexWrapper({
+      flexDirection: 'column',
       style: {
         flexDirection: 'column',
         justifyContent: 'center',
@@ -73,9 +74,10 @@ window.execCommunityImpact = async function execCommunityImpact(
         new components.BeamText({
           text: impactData?.copy?.impactTitleWeb || 'Help us fight food insecurity',
           style: {
-            fontSize: '40px',
-            margin: 'auto',
-            fontWeight: '600'
+            fontSize: '44px',
+            marginBottom: '16px',
+            fontWeight: '700',
+            lineHeight: '61px'
           },
           mobileStyle: {
             fontSize: '30px',
@@ -86,13 +88,14 @@ window.execCommunityImpact = async function execCommunityImpact(
           text: impactData?.copy?.impactDescriptionWeb || "This holiday season, Instacart has partnered with 4 non-profits in support of our mission to create" +
             " a world where everyone has access to the food they love and more time to enjoy it together.",
           style: {
-            fontSize: '14px',
+            fontSize: '15px',
             color: 'grey',
             margin: 'auto',
-            padding: '20px',
-            paddingTop: '10px',
             textAlign: 'center',
-            fontWeight: '200',
+            fontWeight: '500',
+            marginLeft: '28%',
+            marginRight: '28%',
+            lineHeight: '22px',
             fontFamily: fontFamily || 'inherit'
           },
           mobileStyle: {
@@ -105,13 +108,13 @@ window.execCommunityImpact = async function execCommunityImpact(
 
   function getJoinUsSection(impactData) {
     return new components.BeamFlexWrapper({
+      alignItems: 'flex-start',
       style: {
         maxWidth: '600px',
         height: '100px',
         justifyContent: 'center',
         margin: 'auto',
         marginTop: '0px',
-        flexDirection: 'row',
         flexWrap: 'nowrap !important',
         padding: '0px 20px',
         fontFamily: fontFamily || 'inherit'
@@ -120,7 +123,7 @@ window.execCommunityImpact = async function execCommunityImpact(
         new components.BeamFlexWrapper({
           children: [
             new components.BeamImage({
-              alt: 'Beam Logo',
+              alt: 'Instacart Purchase Icon',
               src: pathUtil.getAsset('instacart_purchase_icon.png'),
               style: {
                 borderRadius: '50%',
@@ -133,25 +136,65 @@ window.execCommunityImpact = async function execCommunityImpact(
           ]
         }),
         new components.BeamFlexWrapper({
-          style: {
-            flexDirection: 'column',
-          },
+          flexDirection: 'column',
+          alignItems: 'flex-start',
           children: [
             new components.BeamText({
               text: impactData.personal_impact_header || 'Join us in the fight against food insecurity',
               style: {
-                fontFamily: fontFamily || 'inherit'
+                fontFamily: fontFamily || 'inherit',
+                fontSize: '18px',
+                lineHeight: '26px',
+                fontWeight: '600'
               }
             }),
             new components.BeamText({
-              text: `${impactData.personal_impact_description || 'Food meals this holiday season by simply placing your order.'} <a href='' style='color: green;'>${impactData.personal_impact_cta} </a>`,
+              text: `${impactData.personal_impact_description || 'Food meals this holiday season by simply placing your order.'}`,
               style: {
                 fontSize: '12px',
+                lineHeight: '18px',
                 fontFamily: fontFamily || 'inherit'
               }
+            }),
+            new components.BeamFlexWrapper({
+              noWrap: true,
+              width: '100%',
+              alignItems: 'center',
+              alignContent: 'center',
+              children: [
+              impactData.personal_impact && new components.BeamProgressWrapper({
+              percentage: impactData.personal_impact,
+              height: "4px",
+              backgroundColor: themeColorConfig.progressBarBackgroundColor,
+              border: "none",
+              cornerRadius: undefined,
+              style: {
+                width: '90%',
+                height: '4px',
+                marginTop: '11px',
+                display: 'flex',
+                marginTop: '0px',
+                marginRight: '12px'
+              }
+            }),
+            // percent text
+          impactData.personal_impact && new components.BeamText({
+            tag: "h6",
+            text: impactData.personal_impact + "&#37;",
+            fontSize: '12px',
+            color: '#343538',
+            fontWeight: '200',
+          })]}),
+            new components.BeamText({
+              style: {
+                fontSize: '12px',
+                lineHeight: '18px',
+                marginTop: '11px',
+              },
+              text: `<a href='results' style='color: green; text-decoration: none;'>${impactData.personal_impact_cta} </a>`
             })
           ]
-        })
+        }),
       ]
     });
   }
@@ -168,7 +211,7 @@ window.execCommunityImpact = async function execCommunityImpact(
             display: flex;
             flex-direction: column;
             width: 50%;
-            background-color: cadetblue;
+            background-color: #FFF0BD;
             justify-content: center;
             text-align: center;
             position: absolute;
@@ -179,7 +222,7 @@ window.execCommunityImpact = async function execCommunityImpact(
             }
             #tutorial-step-title{
             margin: 0;
-           font-size: 31px;
+           font-size: 28px;
            line-height: 40px;
            font-weight: bold;
           }
@@ -187,25 +230,32 @@ window.execCommunityImpact = async function execCommunityImpact(
           margin: 0;
           font-size: 18px;
           line-height: 26px;
+          font-weight: 400;
           }
           
           #tutorial-step-text-container{
-           padding: 70px 80px 0 30px;    
            width: 70%;
+           display: flex;
+           justify-content: center;
+           height: 100%;
+           flex-direction: column;
           }
           
           .slider_img{
           width:50%;
           border-radius: 10px 0px 0px 10px;
           }
+          .splide__track {
+            border-radius: 10px;
+          }
           
-       @media only screen and (max-width:600px) {
+       @media only screen and (max-width:800px) {
           #tutorial-step{
             position: relative;
             background: transparent;
             display: flex;
             width: 100%;
-
+            border-radius: 0px 0px 10px 10px;
             align-items: center;
           }
           #tutorial-step-text-container{
@@ -213,14 +263,20 @@ window.execCommunityImpact = async function execCommunityImpact(
           margin: 20px auto;
           padding: 0px;
           justify-content: center;
+          background-color: #fff;
           }
            .slider_img{
           width:100%;
           border-radius: 10px;
           }
+          #tutorial-step {
+            background-color: #FFF;
+          }
+
           #tutorial-step-title{
-            font-size: 23px;
+            font-size: 31px;
             line-height:28px;
+            font-weight: 700;
           }
           
        }
@@ -230,7 +286,7 @@ window.execCommunityImpact = async function execCommunityImpact(
             <div class="splide__track">
           <ul class="splide__list">
           ${tutorial && tutorial.map(tutorialStep => {
-      return `<li class="splide__slide"><img class="slider_img " src="${tutorialStep.image}" onError="this.onerror=null;this.src='https://images.unsplash.com/photo-1478827217976-7214a0556393?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8dG9wfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&w=1000&q=80';">
+      return `<li class="splide__slide" style="background-color: #FFF0BD;"><img class="slider_img " src="${tutorialStep.image}" onError="this.onerror=null;this.src='https://staging-beam-widgets.beamimpact.com/assets/img/Artwork%20(1).png';">
             <div id="tutorial-step">
             <div id="tutorial-step-text-container">
             <p id="tutorial-step-title">${tutorialStep.title}</p>
@@ -254,9 +310,11 @@ window.execCommunityImpact = async function execCommunityImpact(
         new components.BeamText({
           text: 'How it works',
           style: {
-            fontSize: '20px',
-            // margin: 'auto',
-            fontWeight: '600'
+            fontSize: '23px',
+            lineHeight: '28px',
+            height: '28px',
+            fontWeight: '700',
+            marginTop: '48px'
           }
         }),
         slider
@@ -293,10 +351,10 @@ window.execCommunityImpact = async function execCommunityImpact(
         new components.BeamText({
           text: impactData.cummulative_impact_title || `Together we funded ${impactData.aggregate_impact || '0'} meals nationwide`,
           style: {
-            fontSize: '22px',
-            fontWeight: '600',
+            fontSize: '23px',
+            fontWeight: '700',
             marginRight: '10px',
-            textAlign: 'left'
+            textAlign: 'left',
           },
           mobileStyle: {
             textAlign: 'center'
@@ -305,9 +363,9 @@ window.execCommunityImpact = async function execCommunityImpact(
         new components.BeamText({
           text: `${impactData.cummulative_impact_description} <a href='' style='color: green;'>${impactData.cummulative_impact_cta} </a>`,
           style: {
-            fontSize: '14px',
-            color: 'gray',
-            fontWeight: '200',
+            fontSize: '15px',
+            color: '#72767E',
+            fontWeight: '400',
             marginLeft: '10px',
             textAlign: isMobile ? 'center' : 'left'
           }
@@ -364,14 +422,17 @@ window.execCommunityImpact = async function execCommunityImpact(
     return null;
   }
 
-  function renderCommunityImpactWidget() {
+  function renderCommunityImpactWidget(impactData) {
     let widget = new beamApps.InstacartCommunityImpactWidget({
+      impactData,
       fontFamily: fontFamily || 'inherit',
       containerId: beamImpactWidgetContainerId,
       chainId: chainId,
       lan: lan,
       themeConfig: {
         id: 'instacart-community-impact',
+        showCommunityImpactHeader: true,
+        community_impact_title: impactData.community_impact_title,
         maxContainerWidth: 600,
         impactCardWidth: '256px !important',
         hideLogo: true,
@@ -389,27 +450,27 @@ window.execCommunityImpact = async function execCommunityImpact(
         title: {
           style: {
             fontSize: '15px',
-            fontWeight: '500',
+            fontWeight: '700',
             color: themeColorConfig.textColor
           }
         },
         cause: {
           style: {
             fontSize: '12px',
-            fontWeight: '500',
+            fontWeight: '600',
             color: themeColorConfig.causeTestColor
           }
         },
         region: {
           style: {
             fontSize: '10px',
-            fontWeight: '300'
+            fontWeight: '400'
           }
         },
         impact: {
           style: {
             fontSize: '12px',
-            fontWeight: '300',
+            fontWeight: '400',
             color: themeColorConfig.textColor,
             width: '100%'
           }
@@ -445,7 +506,7 @@ window.execCommunityImpact = async function execCommunityImpact(
         tileHeight: 'inherit',
         cardbody: {
           style: {
-            padding: '0px 10px 10px 10px',
+            padding: '16px 16px 16px 16px',
           }
         },
         outerCard: {
@@ -498,7 +559,7 @@ window.execCommunityImpact = async function execCommunityImpact(
         },
         progressBar: {
           style: {
-            height: '6px',
+            height: '4px',
             border: '0px',
             backgroundColor: themeColorConfig.progressBarBackgroundColor
           },
@@ -516,12 +577,11 @@ window.execCommunityImpact = async function execCommunityImpact(
           }
         },
         goalInfo: {
-          text: 'Help Instacart reach this goal!',
-          completedText: '✅ Instacart has reached 100% goal!',
-          contributeText: `<a href="${'nonprofit'}" style="color: ${themeColorConfig.progressBarColor}"> Contribute to this effort with your next order > </a>`,
           style: {
             fontSize: '12px',
-            color: themeColorConfig.textColor
+            color: themeColorConfig.textColor,
+            textDecoration: 'none',
+            paddingTop: '12px'
           }
         },
         titleNonprofits: {
@@ -533,7 +593,8 @@ window.execCommunityImpact = async function execCommunityImpact(
         }
       }
     });
-    widget.render({chain: chainId});
+    widget.render({chain: chainId, impactData });
   }
 }
+
 export default window.execCommunityImpact;
