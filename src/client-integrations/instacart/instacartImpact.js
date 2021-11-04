@@ -53,6 +53,7 @@ window.execCommunityImpact = async function execCommunityImpact(
       document.body.append(impactScreenContainer.view);
     }
     createCarousel();
+    console.log(impactData)
     renderCommunityImpactWidget(impactData);
   }
 
@@ -518,12 +519,10 @@ window.execCommunityImpact = async function execCommunityImpact(
           }
         },
         goalInfo: {
-          text: 'Help Instacart reach this goal!',
-          completedText: '✅ Instacart has reached 100% goal!',
-          contributeText: `<a href="${'nonprofit'}" style="color: ${themeColorConfig.progressBarColor}"> Contribute to this effort with your next order > </a>`,
           style: {
             fontSize: '12px',
-            color: themeColorConfig.textColor
+            color: `themeColorConfig.textColor !important`,
+            textDecoration: 'none !important'
           }
         },
         titleNonprofits: {

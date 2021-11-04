@@ -182,6 +182,7 @@ class InstacartCommunityImpactWidget extends BaseImpactWidget {
   }
 
   cardBody(nonprofit) {
+    console.log('nonprofit = ', nonprofit)
     const tileHeight = this.options.themeConfig.tileHeight || "300px";
     const height = parseInt(tileHeight.replace("px", ""));
     const percentageTextBottom = `${(height - 150) / 2 - 7}px`;
@@ -387,13 +388,15 @@ class InstacartCommunityImpactWidget extends BaseImpactWidget {
     }
 
     function goalInfo(options, nonprofit, isMobile) {
+      console.log('goal info ', options.themeConfig.goalInfo.style)
       return new components.BeamText({
-        text: (nonprofit?.impact?.percentage === 100 ? options.themeConfig.goalInfo?.completedText : options.themeConfig.goalInfo?.text) + options.themeConfig.goalInfo?.contributeText,
-        style: {
-          display: options.themeConfig.showNational ? 'none' : 'flex',
-          ...options.themeConfig.goalInfo?.style,
-          ...isMobile ? options.themeConfig.goalInfo?.mobileStyle : {}
-        },
+        text: nonprofit && nonprofit.impact ? `<a href='nonprofit'>${nonprofit.impact.impact_cta}</a>` : '',
+        ...options.themeConfig.goalInfo?.style
+        // style: {
+        //   display: options.themeConfig.showNational ? 'none' : 'flex',
+        //   ...options.themeConfig.goalInfo?.style,
+        //   ...isMobile ? options.themeConfig.goalInfo?.mobileStyle : {}
+        // },
       })
     }
   }
