@@ -368,7 +368,7 @@ window.execCommunityImpact = async function execCommunityImpact(
           text: impactData.cummulative_impact_title || `Together we funded ${impactData.aggregate_impact || '0'} meals nationwide`,
           style: {
             fontSize: '23px',
-            fontWeight: '700',
+            fontWeight: '500',
             marginRight: '10px',
             textAlign: 'left',
             fontFamily: fontFamily || 'inherit',
