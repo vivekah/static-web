@@ -413,7 +413,7 @@ class InstacartNationalImpactWidget extends BaseImpactWidget {
 
   titleNonprofits() {
     return new components.BeamText({
-      text: this.options.themeConfig.titleNonprofits?.text || 'National',
+      text: this.currentTabData || 'National',
       style: {...this.options.themeConfig.titleNonprofits?.style}
     })
   }

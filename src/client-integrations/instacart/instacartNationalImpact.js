@@ -28,7 +28,7 @@ window.execNationalCommunityImpact = async function execNationalCommunityImpact(
       },
       children: [
         getJoinUsSection(impactData),
-        getPartnerSummarySection(),
+        getPartnerSummarySection(impactData),
         getCommunityImpactSection()
       ]
     });
@@ -81,15 +81,18 @@ window.execNationalCommunityImpact = async function execNationalCommunityImpact(
                 fontFamily: fontFamily || 'inherit',
                 fontSize: '18px',
                 lineHeight: '26px',
-                fontWeight: '600'
+                fontWeight: '600',
+                marginTop: '10px'
               }
             }),
             new components.BeamText({
-              text: `${impactData?.personal_impact_description || 'Food meals this holiday season by simply placing your order.'}`,
+              text: `${impactData?.personal_impact_description || 'Food meals this holiday season by simply placing your order.'}` +
+                `<a href='results' style='color: green; text-decoration: none; display: inline;'>${"   "+impactData.personal_impact_cta} </a>`,
               style: {
                 fontSize: '12px',
                 lineHeight: '18px',
-                fontFamily: fontFamily || 'inherit'
+                fontFamily: fontFamily || 'inherit',
+                display: 'inline'
               }
             }),
             new components.BeamFlexWrapper({
@@ -121,21 +124,13 @@ window.execNationalCommunityImpact = async function execNationalCommunityImpact(
                   fontWeight: '200',
                 })]
             }),
-            new components.BeamText({
-              style: {
-                fontSize: '12px',
-                lineHeight: '18px',
-                marginTop: '11px',
-              },
-              text: `<a href='results' style='color: green; text-decoration: none;'>${impactData.personal_impact_cta} </a>`
-            })
           ]
         }),
       ]
     });
   }
 
-  function getPartnerSummarySection() {
+  function getPartnerSummarySection(impactData) {
 
     return new components.BeamFlexWrapper({
       style: {
@@ -153,7 +148,7 @@ window.execNationalCommunityImpact = async function execNationalCommunityImpact(
       },
       children: [
         new components.BeamText({
-          text: `${impactData.aggregate_impact || '0'} meals and counting!`,
+          text: impactData?.global_impact_title || `${impactData.aggregate_impact || '0'} meals and counting!`,
           style: {
             fontSize: '44px',
             margin: 'auto',
@@ -165,7 +160,7 @@ window.execNationalCommunityImpact = async function execNationalCommunityImpact(
           }
         }),
         new components.BeamText({
-          text: "Check out the impact we're making in the fight against food insecutiry—together.",
+          text: impactData?.global_impact_description || "Check out the impact we're making in the fight against food insecutiry—together.",
           style: {
             fontSize: '15px',
             color: 'grey',
@@ -205,8 +200,8 @@ window.execNationalCommunityImpact = async function execNationalCommunityImpact(
 
   async function getImpactData() {
     const beamWebSdkBaseUrl = process.env.BEAM_BACKEND_BASE_URL;
-    // let fullUrl = new URL('api/v2/users/impact/instacart/community', beamWebSdkBaseUrl);
-    let fullUrl = new URL('api/v2/chains/impact/all', beamWebSdkBaseUrl);
+    let fullUrl = new URL('api/v2/users/impact/instacart/community', beamWebSdkBaseUrl);
+    // let fullUrl = new URL('api/v2/chains/impact/all', beamWebSdkBaseUrl);
     const params = {
       chain: chainId
     }
@@ -385,14 +380,16 @@ window.execNationalCommunityImpact = async function execNationalCommunityImpact(
             margin: '0',
             // marginBottom: '15px',
             flexDirection: 'column !important',
-            flexWrap: 'wrap !important'
+            flexWrap: 'wrap !important',
           }
         },
         tabsContainer: {
           style: {
             margin: '20px 10px 14px 10px',
             flexDirection: 'row !important',
-            flexWrap: 'wrap !important'
+            flexWrap: 'wrap !important',
+            maxWidth: '343px'
+
           }
         },
         tab: {
@@ -415,7 +412,7 @@ window.execNationalCommunityImpact = async function execNationalCommunityImpact(
           style: {
             fontFamily: `${fontFamily} !important`,
             margin: '10px 0px',
-            fontSize: '14px',
+            fontSize: '23px',
             fontWeight: "600"
           }
         }
