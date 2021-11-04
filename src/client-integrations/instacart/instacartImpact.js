@@ -10,7 +10,11 @@ window.execCommunityImpact = async function execCommunityImpact(
   zipCode,
   fontFamily,
   lan = 'en',
-  containerId
+  containerId,
+  reviewResultsCallback = () => {
+  },
+  clickedNonprofitGoalCallback = () => {
+  }
 ) {
   const beamImpactWidgetContainerId = 'beam-community-widget-container';
   const beamSliderId = 'beam-slider';
@@ -53,7 +57,12 @@ window.execCommunityImpact = async function execCommunityImpact(
       document.body.append(impactScreenContainer.view);
     }
     createCarousel();
+    addCallbacks();
     renderCommunityImpactWidget(impactData);
+  }
+
+  function addCallbacks() {
+    document.getElementById('review-results-link').addEventListener('click', reviewResultsCallback);
   }
 
   function getPartnerSummarySection(impactData) {
@@ -196,7 +205,7 @@ window.execCommunityImpact = async function execCommunityImpact(
                 marginTop: '11px',
                 fontFamily: fontFamily || 'inherit'
               },
-              text: `<a href='results' style='color: green; text-decoration: none;'>${impactData.personal_impact_cta} </a>`
+              text: `<a href='#' id="review-results-link" style='color: green; text-decoration: none;'>${impactData.personal_impact_cta} </a>`
             })
           ]
         }),
@@ -347,7 +356,8 @@ window.execCommunityImpact = async function execCommunityImpact(
         margin: 'auto',
         marginTop: '0px',
         flexDirection: 'row',
-        flexWrap: 'nowrap !important'
+        flexWrap: 'nowrap !important',
+        fontFamily: fontFamily || 'inherit'
       },
       mobileStyle: {
         flexDirection: 'column !important',
@@ -361,6 +371,7 @@ window.execCommunityImpact = async function execCommunityImpact(
             fontWeight: '700',
             marginRight: '10px',
             textAlign: 'left',
+            fontFamily: fontFamily || 'inherit'
           },
           mobileStyle: {
             textAlign: 'center'
@@ -373,7 +384,8 @@ window.execCommunityImpact = async function execCommunityImpact(
             color: '#72767E',
             fontWeight: '400',
             marginLeft: '10px',
-            textAlign: isMobile ? 'center' : 'left'
+            textAlign: isMobile ? 'center' : 'left',
+            fontFamily: fontFamily || 'inherit'
           }
         })
       ]
@@ -470,7 +482,8 @@ window.execCommunityImpact = async function execCommunityImpact(
         region: {
           style: {
             fontSize: '10px',
-            fontWeight: '400'
+            fontWeight: '400',
+            fontFamily: fontFamily || 'inherit'
           }
         },
         impact: {
@@ -583,18 +596,21 @@ window.execCommunityImpact = async function execCommunityImpact(
           }
         },
         goalInfo: {
+          clickListener: clickedNonprofitGoalCallback,
           style: {
             fontSize: '12px',
             color: themeColorConfig.textColor,
             textDecoration: 'none',
-            paddingTop: '12px'
+            paddingTop: '12px',
+            fontFamily: fontFamily || 'inherit'
           }
         },
         titleNonprofits: {
           style: {
             margin: '10px 0px',
             fontSize: '14px',
-            fontWeight: "600"
+            fontWeight: "600",
+            fontFamily: fontFamily || 'inherit'
           }
         }
       }

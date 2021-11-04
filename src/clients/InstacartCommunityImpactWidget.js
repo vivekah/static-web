@@ -198,6 +198,7 @@ class InstacartCommunityImpactWidget extends BaseImpactWidget {
     function region(options, nonprofit, isMobile) {
       return new components.BeamText({
         text: nonprofit.badge,
+        fontFamily: options.themeConfig.fontFamily,
         style: {
           ...options.themeConfig.region?.style,
           ...isMobile ? this.options.themeConfig.region?.mobileStyle : {}
@@ -375,9 +376,12 @@ class InstacartCommunityImpactWidget extends BaseImpactWidget {
 
     function goalInfo(options, nonprofit, isMobile) {
       return new components.BeamText({
-        text: nonprofit && nonprofit.impact ? `<a href='nonprofit' style='text-decoration: none; color: ${options.themeConfig.goalInfo.style.color}'>${nonprofit.impact.impact_cta}</a>` : '',
+        clickListener: options.themeConfig.goalInfo.clickListener,
+        clickListenerParams: {nonprofit: nonprofit.nonprofit_id},
+        text: nonprofit && nonprofit.impact ? `<a href='#' style='text-decoration: none; color: ${options.themeConfig.goalInfo.style.color}'>${nonprofit.impact.impact_cta}</a>` : '',
         tag: 'div',
         href: 'nonprofit',
+        fontFamily: options.themeConfig.fontFamily,
         style: {
           paddingTop: '8px',
           fontSize: '12px'

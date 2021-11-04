@@ -27,7 +27,13 @@ class Text extends Component {
     `;
     this._element.innerHTML = options.text;
     if (options.clickListener) {
-      this._element.addEventListener("click", options.clickListener);
+      if (options.clickListenerParams) {
+        this._element.addEventListener("click", () => {
+          options.clickListener(options.clickListenerParams)
+        });
+      } else {
+        this._element.addEventListener("click", options.clickListener);
+      }
     }
     if (options.addAttribute) {
       this._element.setAttribute("data-start", options.dataStart);
@@ -36,7 +42,7 @@ class Text extends Component {
     if (options.className) {
       this._element.className = options.className;
     }
-    if(options.id){
+    if (options.id) {
       this._element.id = options.id;
     }
 

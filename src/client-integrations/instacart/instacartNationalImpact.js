@@ -2,7 +2,9 @@ import * as App from 'widgets';
 import * as components from "../../components";
 import {pathUtil} from "../../utils";
 
-window.execNationalCommunityImpact = async function execNationalCommunityImpact(apiKey, fontFamily, language, containerId) {
+window.execNationalCommunityImpact = async function execNationalCommunityImpact(apiKey, fontFamily, language, containerId,
+                                                                                selectANonprofitCallback = () => {
+                                                                                }) {
   const beamImpactWidgetContainerId = 'beam-community-widget-container';
   const chainId = "61";
 
@@ -38,8 +40,12 @@ window.execNationalCommunityImpact = async function execNationalCommunityImpact(
     } else {
       document.body.append(impactScreenContainer.view);
     }
-
+    addCallbacks();
     renderCommunityImpactWidget();
+  }
+
+  function addCallbacks() {
+    document.getElementById('link-to-select-nonprofit').addEventListener('click', selectANonprofitCallback);
   }
 
   function getJoinUsSection(impactData) {
@@ -87,7 +93,7 @@ window.execNationalCommunityImpact = async function execNationalCommunityImpact(
             }),
             new components.BeamText({
               text: `${impactData?.personal_impact_description || 'Food meals this holiday season by simply placing your order.'}` +
-                `<a href='results' style='color: green; text-decoration: none; display: inline;'>${"   " + impactData.personal_impact_cta} </a>`,
+                `<a href='#' id="link-to-select-nonprofit" style='color: green; text-decoration: none; display: inline;'>${"   " + impactData.personal_impact_cta} </a>`,
               style: {
                 fontSize: '12px',
                 lineHeight: '18px',
@@ -203,8 +209,7 @@ window.execNationalCommunityImpact = async function execNationalCommunityImpact(
   async function getImpactData() {
     const beamWebSdkBaseUrl = process.env.BEAM_BACKEND_BASE_URL;
     let fullUrl = new URL('api/v2/users/impact/instacart/community', beamWebSdkBaseUrl);
-    const params = {
-    }
+    const params = {}
     if (params)
       fullUrl.search = new URLSearchParams(params)
         .toString()
@@ -395,7 +400,10 @@ window.execNationalCommunityImpact = async function execNationalCommunityImpact(
         tab: {
           style: {
             color: themeColorConfig.progressBarColor,
-            fontSize: '12px'
+            fontSize: '12px',
+            lineHeight: '26px',
+            letterSpacing: '0em',
+            textAlign: 'center'
           },
           selected: {
             style: {
