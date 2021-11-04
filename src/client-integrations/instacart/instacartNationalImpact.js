@@ -1,5 +1,6 @@
 import * as App from 'widgets';
 import * as components from "../../components";
+import {pathUtil} from "../../utils";
 
 window.execNationalCommunityImpact = async function execNationalCommunityImpact(apiKey, fontFamily, language, containerId) {
   const beamImpactWidgetContainerId = 'beam-community-widget-container';
@@ -7,25 +8,26 @@ window.execNationalCommunityImpact = async function execNationalCommunityImpact(
 
   //theme
   const themeColorConfig = {
-    progressBarColor: '#16ad0b',
-    confirmationButtonColor: '#16ad0b',
+    progressBarColor: '#0AAD0A',
+    confirmationButtonColor: '#0AAD0A',
     causeTestColor: '#f0a358',
-    textColor: '#6a6b6d',
-    lightTextColor: '#bbbbbd',
+    textColor: '#343538',
+    lightTextColor: '#72767E',
     progressBarBackgroundColor: '#e3e3e3'
   }
 
   // console.log(" execCardIntegration FOR Instacart")
   const impactData = await getImpactData();
-  renderImpactScreen();
+  renderImpactScreen(impactData);
 
-  function renderImpactScreen() {
+  function renderImpactScreen(impactData) {
     let impactScreenContainer = new components.BeamFlexWrapper({
       style: {
         flexDirection: 'column !important',
         flexWrap: 'wrap'
       },
       children: [
+        getJoinUsSection(impactData),
         getPartnerSummarySection(),
         getCommunityImpactSection()
       ]
@@ -39,7 +41,97 @@ window.execNationalCommunityImpact = async function execNationalCommunityImpact(
 
     renderCommunityImpactWidget();
   }
-
+  function getJoinUsSection(impactData) {
+    return new components.BeamFlexWrapper({
+      alignItems: 'flex-start',
+      style: {
+        maxWidth: '600px',
+        height: '100px',
+        justifyContent: 'center',
+        margin: 'auto',
+        marginTop: '0px',
+        flexWrap: 'nowrap !important',
+        padding: '0px 20px',
+        fontFamily: fontFamily || 'inherit'
+      },
+      children: [
+        new components.BeamFlexWrapper({
+          children: [
+            new components.BeamImage({
+              alt: 'Instacart Purchase Icon',
+              src: pathUtil.getAsset('instacart_purchase_icon.png'),
+              style: {
+                borderRadius: '50%',
+                width: '60px',
+                height: '60px',
+                display: 'flex',
+                margin: '0 10px 0 10px'
+              }
+            })
+          ]
+        }),
+        new components.BeamFlexWrapper({
+          flexDirection: 'column',
+          alignItems: 'flex-start',
+          children: [
+            new components.BeamText({
+              text: impactData?.personal_impact_header || 'Join us in the fight against food insecurity',
+              style: {
+                fontFamily: fontFamily || 'inherit',
+                fontSize: '18px',
+                lineHeight: '26px',
+                fontWeight: '600'
+              }
+            }),
+            new components.BeamText({
+              text: `${impactData?.personal_impact_description || 'Food meals this holiday season by simply placing your order.'}`,
+              style: {
+                fontSize: '12px',
+                lineHeight: '18px',
+                fontFamily: fontFamily || 'inherit'
+              }
+            }),
+            new components.BeamFlexWrapper({
+              noWrap: true,
+              width: '100%',
+              alignItems: 'center',
+              alignContent: 'center',
+              children: [
+              impactData?.personal_impact && new components.BeamProgressWrapper({
+              percentage: impactData?.personal_impact,
+              height: "4px",
+              backgroundColor: themeColorConfig.progressBarBackgroundColor,
+              border: "none",
+              cornerRadius: undefined,
+              style: {
+                width: '90%',
+                height: '4px',
+                display: 'flex',
+                marginTop: '0px',
+                marginRight: '12px'
+              }
+            }),
+            // percent text
+          impactData.personal_impact && new components.BeamText({
+            tag: "h6",
+            text: impactData?.personal_impact + "&#37;",
+            fontSize: '12px',
+            color: '#343538',
+            fontWeight: '200',
+          })]}),
+            new components.BeamText({
+              style: {
+                fontSize: '12px',
+                lineHeight: '18px',
+                marginTop: '11px',
+              },
+              text: `<a href='results' style='color: green; text-decoration: none;'>${impactData.personal_impact_cta} </a>`
+            })
+          ]
+        }),
+      ]
+    });
+  }
   function getPartnerSummarySection() {
 
     return new components.BeamFlexWrapper({
@@ -60,19 +152,19 @@ window.execNationalCommunityImpact = async function execNationalCommunityImpact(
         new components.BeamText({
           text: `${impactData.aggregate_impact || '0'} meals and counting!`,
           style: {
-            fontSize: '30px',
+            fontSize: '44px',
             margin: 'auto',
             fontWeight: '600'
           },
           mobileStyle: {
-            fontSize: '30px',
+            fontSize: '31px',
             textAlign: 'center'
           }
         }),
         new components.BeamText({
           text: "Check out the impact we're making in the fight against food insecutiry—together.",
           style: {
-            fontSize: '14px',
+            fontSize: '15px',
             color: 'grey',
             margin: 'auto',
             padding: '20px',
@@ -110,6 +202,7 @@ window.execNationalCommunityImpact = async function execNationalCommunityImpact(
 
   async function getImpactData() {
     const beamWebSdkBaseUrl = process.env.BEAM_BACKEND_BASE_URL;
+    // let fullUrl = new URL('api/v2/users/impact/instacart/community', beamWebSdkBaseUrl);
     let fullUrl = new URL('api/v2/chains/impact/all', beamWebSdkBaseUrl);
     const params = {
       chain: chainId
@@ -135,7 +228,7 @@ window.execNationalCommunityImpact = async function execNationalCommunityImpact(
   }
 
   function renderCommunityImpactWidget() {
-    let widget = new beamApps.InstacartCommunityImpactWidget({
+    let widget = new beamApps.InstacartNationalImpactWidget({
       fontFamily: fontFamily || 'inherit',
       noAjax: true,
       containerId: beamImpactWidgetContainerId,
@@ -239,8 +332,8 @@ window.execNationalCommunityImpact = async function execNationalCommunityImpact(
         borderRadius: "15px",
         percentageTextColor: themeColorConfig.textColor,
         showLink: true,
-        headerPartnerLogoMargin: '0px 0px -23px',
-        headerBeamLogoMargin: '0px 0px 0px 15px',
+        headerPartnerLogoMargin: '0px',
+        headerBeamLogoMargin: '0px',
         headerContainer: {
           style: {
             display: 'flex',
@@ -275,21 +368,27 @@ window.execNationalCommunityImpact = async function execNationalCommunityImpact(
         tabsSection: {
           style: {
             margin: '0',
-            marginBottom: '15px',
+            // marginBottom: '15px',
             flexDirection: 'column !important',
             flexWrap: 'wrap !important'
           }
         },
         tabsContainer: {
           style: {
-            margin: '10px',
+            margin: '20px 10px 14px 10px',
             flexDirection: 'row !important',
             flexWrap: 'wrap !important'
           }
         },
         tab: {
           style: {
-            color: themeColorConfig.progressBarColor
+            color: themeColorConfig.progressBarColor,
+            fontSize: '12px'
+          },
+          selected: {
+            style: {
+              color: themeColorConfig.textColor
+            }
           },
           underline: {
             style: {
@@ -299,9 +398,13 @@ window.execNationalCommunityImpact = async function execNationalCommunityImpact(
         },
         titleNonprofits: {
           style: {
-            margin: '10px 0px',
-            fontSize: '14px',
-            fontWeight: "600"
+            margin: '10px 0px 0px 0px',
+            fontFamily: `${fontFamily} !important`,
+            fontSize: "23px",
+            lineHeight: "28px",
+            textAlign: "center",
+            color: "#343538",
+            fontWeight: 700
           }
         }
       }

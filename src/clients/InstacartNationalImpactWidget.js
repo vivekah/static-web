@@ -2,7 +2,7 @@ import BaseImpactWidget from "./BaseImpactWidget";
 import * as components from "../components";
 import {nonprofitUtil, translations} from '../utils/';
 
-class InstacartCommunityImpactWidget extends BaseImpactWidget {
+class InstacartNationalImpactWidget extends BaseImpactWidget {
   constructor(
     options = {
       beamCommunityData: null,
@@ -42,8 +42,7 @@ class InstacartCommunityImpactWidget extends BaseImpactWidget {
 
 
   get causes() {
-    // return [null, ...new Set(this.data.nonprofits.map((x) => x.cause))];
-    return [null, ...new Set(this.options.impactData.community_impact.map((x) => x.cause))];
+    return [null, ...new Set(this.data.nonprofits.map((x) => x.cause))];
   }
 
   async fetchRegions() {
@@ -58,14 +57,28 @@ class InstacartCommunityImpactWidget extends BaseImpactWidget {
   }
 
   get nonprofits() {
-    return this.options.impactData.community_impact
+    let visibleNonprofits = this.data.nonprofits.filter((x) => {
+      return !x.regions?.find(region => this.options.regionsToIgnore?.includes(region))
+    });
+
+    // console.log(" filters ", this.options.regionsToIgnore)
+    // console.log(" nonprofits ", this.data.nonprofits)
+    // console.log(" visible nonprofits ", visibleNonprofits)
+
+    if (!this.currentTabData) {
+      return visibleNonprofits;
+    } else {
+      return this.options.themeConfig?.filterByRegion
+        ? visibleNonprofits.filter((x) => x.regions?.includes(this.currentTabData))
+        : visibleNonprofits.filter((x) => x.cause === this.currentTabData);
+    }
 
   }
 
   async render(args) {
-    // this.regions = await this.fetchRegions();
+    this.regions = await this.fetchRegions();
     await super.render(args, () => {
-      return this.buildDesktopView(this.isMobile, args.impactData);
+      return this.buildDesktopView(this.isMobile);
     });
   }
 
@@ -106,7 +119,7 @@ class InstacartCommunityImpactWidget extends BaseImpactWidget {
       children: [
         // card image
         new components.BeamCardImage({
-          src: nonprofit.image,
+          src: nonprofit.chain_target_image,
           height,
           objectFit: "cover",
           style: {
@@ -199,8 +212,8 @@ class InstacartCommunityImpactWidget extends BaseImpactWidget {
       return new components.BeamText({
         text: nonprofit.badge,
         style: {
-          ...options.themeConfig.region?.style,
-          ...isMobile ? this.options.themeConfig.region?.mobileStyle : {}
+          ...options.region?.style,
+          ...isMobile ? options.region?.mobileStyle : {}
         },
       })
     }
@@ -218,7 +231,7 @@ class InstacartCommunityImpactWidget extends BaseImpactWidget {
         margin: options.themeConfig.causeTypeMargin || "0",
         style: {
           ...options?.themeConfig?.cause?.style,
-          ...isMobile ? this.options.themeConfig.cause?.mobileStyle : {}
+          ...isMobile ? options.themeConfig.cause?.mobileStyle : {}
         },
       });
     }
@@ -375,23 +388,18 @@ class InstacartCommunityImpactWidget extends BaseImpactWidget {
 
     function goalInfo(options, nonprofit, isMobile) {
       return new components.BeamText({
-        text: nonprofit && nonprofit.impact ? `<a href='nonprofit' style='text-decoration: none; color: ${options.themeConfig.goalInfo.style.color}'>${nonprofit.impact.impact_cta}</a>` : '',
-        tag: 'div',
-        href: 'nonprofit',
+        text: (nonprofit?.impact?.percentage === 100 ? options.themeConfig.goalInfo?.completedText : options.themeConfig.goalInfo?.text) + options.themeConfig.goalInfo?.contributeText,
         style: {
-          paddingTop: '8px',
-          fontSize: '12px'
-        }
-        // style: {
-        //   display: options.themeConfig.showNational ? 'none' : 'flex',
-        //   ...options.themeConfig.goalInfo?.style,
-        //   ...isMobile ? options.themeConfig.goalInfo?.mobileStyle : {}
-        // },
+          display: options.themeConfig.showNational ? 'none' : 'flex',
+          ...options.themeConfig.goalInfo?.style,
+          ...isMobile ? options.themeConfig.goalInfo?.mobileStyle : {}
+        },
       })
     }
   }
 
   titleDevider() {
+    console.log(" NATIONAL DEVIDER, ", this.options.themeConfig.titleDevider.style)
     return new components.BeamDivider({
       style: {
         margin: '15px 20px 5px 20px',
@@ -423,11 +431,11 @@ class InstacartCommunityImpactWidget extends BaseImpactWidget {
           cursor: "pointer",
           style: {
             textColor: "black",
-            ...this.options?.themeConfig?.tab?.style
+            ...this.options?.themeConfig?.tab?.style,
+            ...tabData === this.currentTabData ? this.options.themeConfig.tab?.selected?.style : {}
           },
           clickListener: () => {
             this.currentTabData = tabData;
-            console.log(" NONNN PROFITTT:", this.input.nonprofit)
             this.render({nonprofit: this.input.nonprofit, user: null, chain: this.input.chain});
           },
         }),
@@ -460,7 +468,7 @@ class InstacartCommunityImpactWidget extends BaseImpactWidget {
           style: {
             display: 'flex',
             flexDirection: 'column-reverse',
-            margin: "30px 0 30px 10px",
+            margin: "40px 0 40px 10px",
             ...this.options?.themeConfig?.headerContainer?.style,
             ...isMobile ? this.options.themeConfig.headerContainer?.mobileStyle : {}
           },
@@ -474,11 +482,10 @@ class InstacartCommunityImpactWidget extends BaseImpactWidget {
                 ...isMobile ? this.options.themeConfig.logoContainer?.mobileStyle : {}
               },
               children: [
-                // TODO: if chain logos are needed, add them to impact/instacart endpoint
-                // this.headerLogoComponent(
-                //   this.options.themeConfig.usePartnerRectLogo
-                //     ? this.data.chain.rect_logo
-                //     : this.data.chain.logo),
+                this.headerLogoComponent(
+                  this.options.themeConfig.usePartnerRectLogo
+                    ? this.data.chain.rect_logo
+                    : this.data.chain.logo),
               ],
             }),
             // tabs
@@ -506,25 +513,15 @@ class InstacartCommunityImpactWidget extends BaseImpactWidget {
                       this.regions : this.causes).map((tabData) => this.tab(tabData)),
                   ]
                 }),
-                this.options.themeConfig.showNational && this.titleDevider(),
+                this.options.themeConfig.showTitleDevider && this.titleDevider(),
                 this.options.themeConfig.showNational && this.titleNonprofits(),
               ],
             }),
           ]
         }),
-        // Header
-        this.options.themeConfig.showCommunityImpactHeader && new components.BeamText({
-          text: this.options.themeConfig.community_impact_title,
-          fontFamily: "Eina01-Regular !important",
-          fontSize: "23px",
-          lineHeight: "28px",
-          textAlign: "center",
-          color: "#343538",
-          fontWeight: 700
-        }),
         // nonprofits
         new components.BeamFlexWrapper({
-          alignItems: "flex-start",
+          alignItems: "flex-end",
           style: {
             ...this.options.themeConfig.nonprofitsContainer?.style,
             ...isMobile ? this.options.themeConfig.nonprofitsContainer?.mobileStyle : {}
@@ -592,4 +589,4 @@ class InstacartCommunityImpactWidget extends BaseImpactWidget {
   }
 }
 
-export default InstacartCommunityImpactWidget;
+export default InstacartNationalImpactWidget;
