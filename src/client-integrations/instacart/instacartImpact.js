@@ -77,7 +77,8 @@ window.execCommunityImpact = async function execCommunityImpact(
             fontSize: '44px',
             marginBottom: '16px',
             fontWeight: '700',
-            lineHeight: '61px'
+            lineHeight: '61px',
+            fontFamily: fontFamily || 'inherit'
           },
           mobileStyle: {
             fontSize: '30px',
@@ -162,34 +163,38 @@ window.execCommunityImpact = async function execCommunityImpact(
               alignItems: 'center',
               alignContent: 'center',
               children: [
-              impactData.personal_impact && new components.BeamProgressWrapper({
-              percentage: impactData.personal_impact,
-              height: "4px",
-              backgroundColor: themeColorConfig.progressBarBackgroundColor,
-              border: "none",
-              cornerRadius: undefined,
-              style: {
-                width: '90%',
-                height: '4px',
-                marginTop: '11px',
-                display: 'flex',
-                marginTop: '0px',
-                marginRight: '12px'
-              }
+                impactData.personal_impact && new components.BeamProgressWrapper({
+                  percentage: impactData.personal_impact,
+                  height: "4px",
+                  backgroundColor: themeColorConfig.progressBarBackgroundColor,
+                  border: "none",
+                  cornerRadius: undefined,
+                  style: {
+                    width: '90%',
+                    height: '4px',
+                    marginTop: '11px',
+                    display: 'flex',
+                    marginTop: '0px',
+                    marginRight: '12px',
+                    fontFamily: fontFamily || 'inherit'
+                  }
+                }),
+                // percent text
+                impactData.personal_impact && new components.BeamText({
+                  tag: "h6",
+                  text: impactData.personal_impact + "&#37;",
+                  fontSize: '12px',
+                  color: '#343538',
+                  fontWeight: '200',
+                  fontFamily: fontFamily || 'inherit'
+                })]
             }),
-            // percent text
-          impactData.personal_impact && new components.BeamText({
-            tag: "h6",
-            text: impactData.personal_impact + "&#37;",
-            fontSize: '12px',
-            color: '#343538',
-            fontWeight: '200',
-          })]}),
             new components.BeamText({
               style: {
                 fontSize: '12px',
                 lineHeight: '18px',
                 marginTop: '11px',
+                fontFamily: fontFamily || 'inherit'
               },
               text: `<a href='results' style='color: green; text-decoration: none;'>${impactData.personal_impact_cta} </a>`
             })
@@ -314,7 +319,8 @@ window.execCommunityImpact = async function execCommunityImpact(
             lineHeight: '28px',
             height: '28px',
             fontWeight: '700',
-            marginTop: '48px'
+            marginTop: '48px',
+            fontFamily: fontFamily || 'inherit'
           }
         }),
         slider
@@ -593,7 +599,7 @@ window.execCommunityImpact = async function execCommunityImpact(
         }
       }
     });
-    widget.render({chain: chainId, impactData });
+    widget.render({chain: chainId, impactData});
   }
 }
 
