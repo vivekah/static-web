@@ -475,7 +475,7 @@ window.execCommunityImpact = async function execCommunityImpact(
         title: {
           style: {
             fontSize: '15px',
-            fontWeight: '700',
+            fontWeight: '600',
             color: themeColorConfig.textColor
           }
         },
