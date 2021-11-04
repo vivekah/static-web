@@ -201,7 +201,7 @@ class InstacartCommunityImpactWidget extends BaseImpactWidget {
         fontFamily: options.themeConfig.fontFamily,
         style: {
           ...options.themeConfig.region?.style,
-          ...isMobile ? this.options.themeConfig.region?.mobileStyle : {}
+          ...isMobile ? options.themeConfig.region?.mobileStyle : {}
         },
       })
     }
@@ -219,7 +219,7 @@ class InstacartCommunityImpactWidget extends BaseImpactWidget {
         margin: options.themeConfig.causeTypeMargin || "0",
         style: {
           ...options?.themeConfig?.cause?.style,
-          ...isMobile ? this.options.themeConfig.cause?.mobileStyle : {}
+          ...isMobile ? options.themeConfig.cause?.mobileStyle : {}
         },
       });
     }

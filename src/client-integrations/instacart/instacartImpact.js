@@ -349,15 +349,15 @@ window.execCommunityImpact = async function execCommunityImpact(
       style: {
         borderRadius: '15px',
         backgroundColor: '#F2F7ED',
-        maxWidth: '700px',
+        maxWidth: '781px',
         height: '100px',
         justifyContent: 'center',
         padding: '20px',
         margin: 'auto',
         marginTop: '0px',
-        flexDirection: 'row',
+        flexDirection: 'row !important',
         flexWrap: 'nowrap !important',
-        fontFamily: fontFamily || 'inherit'
+        fontFamily: fontFamily || 'inherit',
       },
       mobileStyle: {
         flexDirection: 'column !important',
@@ -371,10 +371,12 @@ window.execCommunityImpact = async function execCommunityImpact(
             fontWeight: '700',
             marginRight: '10px',
             textAlign: 'left',
-            fontFamily: fontFamily || 'inherit'
+            fontFamily: fontFamily || 'inherit',
+            width: '50%'
           },
           mobileStyle: {
-            textAlign: 'center'
+            textAlign: 'center',
+            width: '100%'
           }
         }),
         new components.BeamText({
@@ -385,7 +387,12 @@ window.execCommunityImpact = async function execCommunityImpact(
             fontWeight: '400',
             marginLeft: '10px',
             textAlign: isMobile ? 'center' : 'left',
-            fontFamily: fontFamily || 'inherit'
+            fontFamily: fontFamily || 'inherit',
+            width: '50%'
+          },
+          mobileStyle: {
+            textAlign: 'center',
+            width: '100%'
           }
         })
       ]
