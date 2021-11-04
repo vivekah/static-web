@@ -73,7 +73,7 @@ cd $SCRIPT_DIR/..
 
 # PUT YOUR BUILD SCRIPT HERE
 # E.G. npm run build
-npm run build-dev
+npm run build-stag
 
 echo "aws profile = $AWS_PROFILE"
 echo "environment = $ENVIRONMENT"

@@ -5,6 +5,7 @@ class Text extends Component {
   constructor(options = {}) {
     super(options);
     this._element = document.createElement(options.tag || "p");
+    if (options.href) this._element.href = options.href
     this._element.style.cssText = `
       font-family: ${options.fontFamily || "poppins"};
       font-size: ${options.fontSize || "medium"};
