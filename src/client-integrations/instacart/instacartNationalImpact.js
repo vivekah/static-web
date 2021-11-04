@@ -87,7 +87,7 @@ window.execNationalCommunityImpact = async function execNationalCommunityImpact(
             }),
             new components.BeamText({
               text: `${impactData?.personal_impact_description || 'Food meals this holiday season by simply placing your order.'}` +
-                `<a href='results' style='color: green; text-decoration: none; display: inline;'>${"   "+impactData.personal_impact_cta} </a>`,
+                `<a href='results' style='color: green; text-decoration: none; display: inline;'>${"   " + impactData.personal_impact_cta} </a>`,
               style: {
                 fontSize: '12px',
                 lineHeight: '18px',
@@ -122,6 +122,7 @@ window.execNationalCommunityImpact = async function execNationalCommunityImpact(
                   fontSize: '12px',
                   color: '#343538',
                   fontWeight: '200',
+                  fontFamily: fontFamily || 'inherit'
                 })]
             }),
           ]
@@ -140,7 +141,6 @@ window.execNationalCommunityImpact = async function execNationalCommunityImpact(
         marginTop: '45px',
         padding: '0px 20px',
         maxWidth: '700px',
-
       },
       mobileStyle: {
         // maxWidth: '400px',
@@ -149,6 +149,7 @@ window.execNationalCommunityImpact = async function execNationalCommunityImpact(
       children: [
         new components.BeamText({
           text: impactData?.global_impact_title || `${impactData.aggregate_impact || '0'} meals and counting!`,
+          fontFamily: fontFamily || 'inherit',
           style: {
             fontSize: '44px',
             margin: 'auto',
@@ -161,6 +162,7 @@ window.execNationalCommunityImpact = async function execNationalCommunityImpact(
         }),
         new components.BeamText({
           text: impactData?.global_impact_description || "Check out the impact we're making in the fight against food insecutiry—together.",
+          fontFamily: fontFamily || 'inherit',
           style: {
             fontSize: '15px',
             color: 'grey',
@@ -201,9 +203,7 @@ window.execNationalCommunityImpact = async function execNationalCommunityImpact(
   async function getImpactData() {
     const beamWebSdkBaseUrl = process.env.BEAM_BACKEND_BASE_URL;
     let fullUrl = new URL('api/v2/users/impact/instacart/community', beamWebSdkBaseUrl);
-    // let fullUrl = new URL('api/v2/chains/impact/all', beamWebSdkBaseUrl);
     const params = {
-      chain: chainId
     }
     if (params)
       fullUrl.search = new URLSearchParams(params)
@@ -264,13 +264,13 @@ window.execNationalCommunityImpact = async function execNationalCommunityImpact(
         },
         region: {
           style: {
-            fontSize: '10px',
+            fontSize: '10px !important',
             fontWeight: '400'
           }
         },
         impact: {
           style: {
-            fontSize: '12px',
+            fontSize: '12px  !important',
             fontWeight: '300',
             color: themeColorConfig.textColor,
             width: '100%'
@@ -279,9 +279,9 @@ window.execNationalCommunityImpact = async function execNationalCommunityImpact(
         // impactImageHeight: '100%',
         cardImage: {
           style: {
-            borderRadius: '10px',
-            height: 'auto',
-            width: 'auto',
+            borderRadius: '10px  !important',
+            height: '152px',
+            width: '236px',
             // objectFit: 'contain',
             margin: '10px',
           }

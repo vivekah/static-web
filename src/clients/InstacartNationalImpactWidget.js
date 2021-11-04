@@ -212,8 +212,8 @@ class InstacartNationalImpactWidget extends BaseImpactWidget {
       return new components.BeamText({
         text: nonprofit.badge || 'Local nonprofit',
         style: {
-          ...options.region?.style,
-          ...isMobile ? options.region?.mobileStyle : {}
+          ...options.themeConfig.region?.style,
+          ...isMobile ? options.themeConfig.region?.mobileStyle : {}
         },
       })
     }
@@ -413,7 +413,7 @@ class InstacartNationalImpactWidget extends BaseImpactWidget {
 
   titleNonprofits() {
     return new components.BeamText({
-      text: this.currentTabData || 'National',
+      text: this.currentTabData || 'See All Nonprofits',
       style: {...this.options.themeConfig.titleNonprofits?.style}
     })
   }
