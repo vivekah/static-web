@@ -76,7 +76,7 @@ class InstacartNationalImpactWidget extends BaseImpactWidget {
   }
 
   async render(args) {
-    this.regions = await this.fetchRegions();
+    this.regions = !this.regions ? await this.fetchRegions() : this.regions;
     await super.render(args, () => {
       return this.buildDesktopView(this.isMobile);
     });
