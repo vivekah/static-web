@@ -276,7 +276,7 @@ window.execNationalCommunityImpact = async function execNationalCommunityImpact(
         impact: {
           style: {
             fontSize: '12px  !important',
-            fontWeight: '300',
+            fontWeight: '400',
             color: themeColorConfig.textColor,
             width: '100%'
           }
@@ -423,7 +423,7 @@ window.execNationalCommunityImpact = async function execNationalCommunityImpact(
             fontSize: '23px',
             fontWeight: "600"
           }
-        }
+        },
       }
     });
     widget.data = impactData;
