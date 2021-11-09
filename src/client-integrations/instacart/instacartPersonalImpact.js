@@ -49,7 +49,7 @@ window.execPersonalImpact = async function execPersonalImpact(apiKey,
     const beamWebSdkBaseUrl = process.env.BEAM_BACKEND_BASE_URL;
     let fullUrl = new URL('api/v2/users/personal-impact/instacart', beamWebSdkBaseUrl);
     const params = {
-      partner_user_id: userId,
+      user: userId,
       lan: lan
     }
     if (params)
@@ -90,7 +90,7 @@ window.execPersonalImpact = async function execPersonalImpact(apiKey,
           children: [
             new components.BeamImage({
               alt: 'Instacart Purchase Icon',
-              src: impactData?.image || pathUtil.getAsset('instacart_purchase_icon.png'),
+              src: impactData?.personal_impact_image || pathUtil.getAsset('instacart_purchase_icon.png'),
               style: {
                 borderRadius: '50%',
                 width: '60px',
@@ -106,7 +106,7 @@ window.execPersonalImpact = async function execPersonalImpact(apiKey,
           alignItems: 'flex-start',
           children: [
             new components.BeamText({
-              text: impactData?.header || 'Join us in the fight against food insecurity',
+              text: impactData?.personal_impact_header || 'Join us in the fight against food insecurity',
               style: {
                 fontFamily: fontFamily || 'inherit',
                 fontSize: '18px',
@@ -114,15 +114,15 @@ window.execPersonalImpact = async function execPersonalImpact(apiKey,
                 fontWeight: '600'
               }
             }),
-            new components.BeamText({
-              text: `${impactData?.description || 'Food meals this holiday season by simply placing your order.'}`,
+           impactData?.personal_impact_description && new components.BeamText({
+              text: `${impactData?.personal_impact_description || 'Food meals this holiday season by simply placing your order.'}`,
               style: {
                 fontSize: '12px',
                 lineHeight: '18px',
                 fontFamily: fontFamily || 'inherit'
               }
             }),
-            new components.BeamFlexWrapper({
+            impactData?.percentage && new components.BeamFlexWrapper({
               noWrap: true,
               width: '100%',
               alignItems: 'center',
@@ -160,7 +160,7 @@ window.execPersonalImpact = async function execPersonalImpact(apiKey,
                 marginTop: '11px',
                 fontFamily: fontFamily || 'inherit'
               },
-              text: `<a href='#' id="${reviewResultsId}" style='color: green; text-decoration: none;'>${impactData?.cta} </a>`
+              text: `<a href='#' id="${reviewResultsId}" style='color: green; text-decoration: none;'>${impactData?.personal_impact_cta} </a>`
             })
           ]
         }),
