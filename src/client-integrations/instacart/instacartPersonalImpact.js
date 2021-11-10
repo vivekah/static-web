@@ -6,9 +6,10 @@ window.execPersonalImpact = async function execPersonalImpact(apiKey,
                                                               fontFamily,
                                                               lan = 'en',
                                                               containerId,
+                                                              showCta = true,
                                                               reviewResultsCallback = () => {
                                                               }) {
-    const themeColorConfig = {
+  const themeColorConfig = {
     progressBarColor: '#16ad0b',
     confirmationButtonColor: '#16ad0b',
     causeTestColor: '#f0a358',
@@ -47,7 +48,7 @@ window.execPersonalImpact = async function execPersonalImpact(apiKey,
 
   async function getImpactData(userId) {
     const beamWebSdkBaseUrl = process.env.BEAM_BACKEND_BASE_URL;
-    let fullUrl = new URL('api/v2/users/personal-impact/instacart', beamWebSdkBaseUrl);
+    let fullUrl = new URL('api/v2/users/personal/instacart', beamWebSdkBaseUrl);
     const params = {
       user: userId,
       lan: lan
@@ -114,7 +115,7 @@ window.execPersonalImpact = async function execPersonalImpact(apiKey,
                 fontWeight: '600'
               }
             }),
-           impactData?.personal_impact_description && new components.BeamText({
+            impactData?.personal_impact_description && new components.BeamText({
               text: `${impactData?.personal_impact_description || 'Food meals this holiday season by simply placing your order.'}`,
               style: {
                 fontSize: '12px',
@@ -153,7 +154,7 @@ window.execPersonalImpact = async function execPersonalImpact(apiKey,
                   fontFamily: fontFamily || 'inherit'
                 })]
             }),
-            new components.BeamText({
+            showCta && new components.BeamText({
               style: {
                 fontSize: '12px',
                 lineHeight: '18px',
