@@ -1,2 +1,2 @@
-import beamsApp from './app';
-import * as instacart from "./client-integrations/instacart";
+export *  from './app';
+export * from "./client-integrations/instacart";

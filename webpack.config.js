@@ -51,7 +51,7 @@ module.exports = (env) => {
     },
     resolve: {
       alias: {
-        widgets: path.resolve(__dirname, 'src/app.js')
+        widgets: path.resolve(__dirname, 'src/index.js')
       },
       extensions: ['.js'],
     },
