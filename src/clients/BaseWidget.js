@@ -258,6 +258,9 @@ class BaseWidget {
                     vertical: true,
                     height: "30px",
                     margin: "0 5px",
+                    style: {
+                      ...this.options.themeConfig.logoDevider?.style
+                    }
                   }),
                 new components.BeamAnchor({
                   href: "https://beamimpact.com/",
@@ -293,6 +296,9 @@ class BaseWidget {
                     vertical: true,
                     height: "30px",
                     margin: "0 5px",
+                    style: {
+                      ...this.options.themeConfig.logoDevider?.style
+                    }
                   }),
                 new components.BeamAnchor({
                   href: "https://beamimpact.com/",
@@ -327,6 +333,9 @@ class BaseWidget {
                     vertical: true,
                     height: "30px",
                     margin: "0 5px",
+                    style: {
+                      ...this.options.themeConfig.logoDevider?.style
+                    }
                   }),
                 new components.BeamAnchor({
                   href: "https://beamimpact.com/",

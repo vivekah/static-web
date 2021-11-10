@@ -25,7 +25,7 @@ class MinimalUIImpactOverviewWidgetTheme extends BaseTheme {
   purchaseMessage(data) {
     return new components.BeamText({
       padding: "10px 0 0 0",
-      text: this.options.promoText ? `${this.options.promoText.replace(/BEAM_NONPROFIT/g, data.personal.name)}` : `You just made an impact for ${data.personal.name}${this.options.hidePurchaseMessageChainName ? "!" :` with your ${data.chain.name} purchase!`} ${this.options.purchaseMessageText || ''}`,
+      text: this.options.promoText ? `${this.options.promoText.replace(/BEAM_NONPROFIT/g, data.personal?.name)}` : `You just made an impact for ${data.personal.name}${this.options.hidePurchaseMessageChainName ? "!" :` with your ${data.chain.name} purchase!`} ${this.options.purchaseMessageText || ''}`,
       color: this.options.purchaseMessageTextColor || this.options.textColor || "#000",
       fontFamily: this.options.fontFamily,
       fontWeight: this.options.purchaseMessageFontWeight || "normal",
@@ -67,12 +67,12 @@ class MinimalUIImpactOverviewWidgetTheme extends BaseTheme {
   getPersonalLinkText(data) {
     return this.link(
       this.options.personalLinkText ||
-        `Learn more about ${data.personal.name} `,
+        `Learn more about ${data.personal?.name} `,
       data.personal.website
     );
   }
 
-    getCommunityLinkText(data, url) {
+  getCommunityLinkText(data, url) {
       return this.link(
         this.options.communityLinkText ||
           `See all the impact by the ${data.chain.name} community `,
@@ -120,14 +120,14 @@ class MinimalUIImpactOverviewWidgetTheme extends BaseTheme {
                   children: [
                     // progress
                     new components.BeamProgressWrapper({
-                      percentage: nonprofit.impact.percentage,
+                      percentage: nonprofit?.impact?.percentage,
                       height: "7px",
                     }),
                   ],
                 }),
                 // percentage text
                 new components.BeamText({
-                  text: `${nonprofit.impact.percentage}% ${this.options.lan ? translations.translateFunded(this.options.lan) : 'funded'}`,
+                  text: `${nonprofit?.impact?.percentage}% ${this.options.lan ? translations.translateFunded(this.options.lan) : 'funded'}`,
                   fontFamily: this.options.fontFamily,
                   color: this.options.tileTextColor || "#000",
                   fontSize: this.options.tilePercentageFontSize || "x-small",
@@ -140,7 +140,7 @@ class MinimalUIImpactOverviewWidgetTheme extends BaseTheme {
             isCommunity &&
               nonprofit.impact.goal_completion > 0 &&
               new components.BeamText({
-                text: `Funded <b>${nonprofit.impact.goal_completion}</b> time${
+                text: `Funded <b>${nonprofit.goal_completion}</b> time${
                   nonprofit.impact.goal_completion > 1 ? "s" : ""
                 } so far`,
                 fontFamily: this.options.fontFamily,
@@ -222,7 +222,7 @@ class MinimalUIImpactOverviewWidgetTheme extends BaseTheme {
         // this.headerText(
         //   this.options.headerText || `You made an impact for ${data.personal.name} with your ${data.chain.name} purchase!`
         // ),
-        this.purchaseMessage(),
+        this.purchaseMessage(data),
         this.personalCard(data),
         this.communityCard(data, communityImpactUrl),
       ],
