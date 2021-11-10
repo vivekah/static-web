@@ -119,7 +119,7 @@ class NonprofitWidget extends BaseWidget {
   get transactionData() {
     let tranData = this.data
       ? {
-        store: this.data.store.id,
+        store: this.input.store,
         cart_total: this.cartTotal,
       }
       : null;
