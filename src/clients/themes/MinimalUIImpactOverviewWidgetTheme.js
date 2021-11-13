@@ -140,7 +140,7 @@ class MinimalUIImpactOverviewWidgetTheme extends BaseTheme {
             isCommunity &&
               nonprofit.impact.goal_completion > 0 &&
               new components.BeamText({
-                text: `Funded <b>${nonprofit.goal_completion}</b> time${
+                text: `Funded <b>${nonprofit?.impact?.goal_completion || 0}</b> time${
                   nonprofit.impact.goal_completion > 1 ? "s" : ""
                 } so far`,
                 fontFamily: this.options.fontFamily,
