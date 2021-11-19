@@ -3,6 +3,7 @@ import * as App from 'widgets';
 window.execNonprofitSelection = async function execNonprofitSelection(apiKey,
                                                                       userId,
                                                                       postalCode,
+                                                                      countryCode,
                                                                       instacartFontFamily,
                                                                       lan = 'en',
                                                                       learnMoreCallback = () => {
@@ -175,9 +176,9 @@ window.execNonprofitSelection = async function execNonprofitSelection(apiKey,
     let params = {
       chain: chainId,
       user: beamUser,
-      store: storeId,
       show_community_impact: true,
       postal_code: postalCode,
+      country_code: countryCode,
       lan: lan
     };
     if (params)
@@ -228,10 +229,11 @@ window.execNonprofitSelection = async function execNonprofitSelection(apiKey,
         cards: {
           wrap: true
         },
+
         headerTextStyle: {
           display: 'none'
         },
-        gradientColors: [themeColorConfig.textColor, themeColorConfig.textColor],
+        gradientColors: ['#72767E', '#72767E'],
         progressBarColors: [
           {color: themeColorConfig.progressBarColor, offset: "100%"},
         ],
@@ -262,13 +264,18 @@ window.execNonprofitSelection = async function execNonprofitSelection(apiKey,
             borderRadius: '12px',
             // height: '124px !important',
             width: 'width: 508px',
-            padding: '2px !important'
+            padding: '2px !important',
+            margin: '5px 0px'
           },
           style: {
             borderRadius: '12px',
-            padding: '8px !important'
-
-          }
+            padding: '6px !important',
+            // margin: '0px'
+          },
+          selectedStyle: {
+            backgroundColor: '#F6F7F8',
+            background: '#F6F7F8'
+          },
         },
         checkbox: {
           style: {
@@ -284,7 +291,7 @@ window.execNonprofitSelection = async function execNonprofitSelection(apiKey,
           wrapperStyle: {
             paddingTop: "0px",
           },
-          wrapperMobileStyle:{
+          wrapperMobileStyle: {
             width: '100%',
           },
           textStyle: {
@@ -307,7 +314,7 @@ window.execNonprofitSelection = async function execNonprofitSelection(apiKey,
           style: {
             fontSize: '12px'
           },
-          wrapperMobileStyle:{
+          wrapperMobileStyle: {
             paddingTop: '4px'
           }
         },
@@ -406,6 +413,7 @@ window.execNonprofitSelection = async function execNonprofitSelection(apiKey,
                                   border: none; 
                                   height: 40px;
                                  font-family: ${fontFamily};
+                                 font-size: 18px;
                               }
                               #beam-widget-header{
                               padding: 0 15px;
@@ -436,7 +444,14 @@ window.execNonprofitSelection = async function execNonprofitSelection(apiKey,
                                }
                               @media only screen and (max-width: 600px) {
                                  #internal-beam-widget-wrapper{
-                                  margin-bottom: 70px;
+                                  margin-bottom: 8px;
+                                 }
+                                 #beam-disclosure{
+                                  margin: 0px 0px 70px 0px;
+                                 
+                                  font-size: 12px;
+                                  line-height: 18px;
+
                                  }
                                    #chose-nonprofit-button {
                                        width: 100%;
@@ -492,7 +507,7 @@ window.execNonprofitSelection = async function execNonprofitSelection(apiKey,
                               </p>
                              <div id="beam-container"  style="max-width: 500px">
                               <div id="internal-beam-widget-wrapper" style="max-width: 500px"></div>
-                            
+                                <p id="beam-disclosure">${chainDonationType?.instacart_disclosure}</p>                        
                                 <div id="selection-page-footer">
                                 <div id="button-divider"></div>
                                 <div id="button-wrapper">
