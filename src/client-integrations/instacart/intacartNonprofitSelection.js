@@ -416,7 +416,7 @@ window.execNonprofitSelection = async function execNonprofitSelection(apiKey,
                                  font-size: 18px;
                               }
                               #beam-widget-header{
-                              padding: 0 15px;
+                              padding: 0 16px;
                               }
                                 #selection-title{
                                 margin: 4px 5px;
@@ -472,7 +472,7 @@ window.execNonprofitSelection = async function execNonprofitSelection(apiKey,
                                    #button-wrapper{
                                         width: 100%;
                                         max-width: 500px;
-                                        padding: 10px;
+                                        padding: 10px 16px;
                                    }   
                                    #button-divider{
                                     width: 100%;
