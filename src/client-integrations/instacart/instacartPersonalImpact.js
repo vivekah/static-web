@@ -7,6 +7,10 @@ window.execPersonalImpact = async function execPersonalImpact(apiKey,
                                                               lan = 'en',
                                                               containerId,
                                                               showCta = true,
+                                                              closeWindowCallback = () => {
+                                                              },
+                                                              chooseANonprofitCallback = () => {
+                                                              },
                                                               reviewResultsCallback = () => {
                                                               }) {
   const themeColorConfig = {
