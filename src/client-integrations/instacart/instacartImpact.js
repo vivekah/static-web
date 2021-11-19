@@ -25,7 +25,23 @@ window.execCommunityImpact = async function execCommunityImpact(
   const beamImpactWidgetContainerId = 'beam-community-widget-container';
   const beamSliderId = 'beam-slider';
   const chainId = "61";
+
   let isMobile = screenResolutionUtil.isMobile();
+
+  function reportWindowSize() {
+    let isMobileNew = screenResolutionUtil.isMobile();
+
+    if (isMobile !== isMobileNew) {
+      isMobile = isMobileNew;
+      let impactContainer = document.getElementById("impact-screen-container");
+      impactContainer.parentNode.removeChild(impactContainer);
+      renderImpactScreen();
+    }
+
+  }
+
+  window.onresize = reportWindowSize;
+
   //theme
   const themeColorConfig = {
     progressBarColor: '#0AAD0A',
@@ -42,6 +58,7 @@ window.execCommunityImpact = async function execCommunityImpact(
 
   function renderImpactScreen() {
     let impactScreenContainer = new components.BeamContainer({
+      id: "impact-screen-container",
       style: {
         display: 'flex',
         flexDirection: 'column',
@@ -49,7 +66,7 @@ window.execCommunityImpact = async function execCommunityImpact(
         padding: '10px'
       },
       children: [
-        getHeader(),
+        isMobile && getHeader(),
         getJoinUsSection(impactData),
         devider(),
         getPartnerSummarySection(),
@@ -146,10 +163,12 @@ window.execCommunityImpact = async function execCommunityImpact(
             textAlign: 'center',
             fontWeight: '400',
             lineHeight: '22px',
-            fontFamily: fontFamily || 'inherit'
+            fontFamily: fontFamily || 'inherit',
+            maxWidth: '580px'
           },
           mobileStyle: {
-            textAlign: 'center !important'
+            textAlign: 'center !important',
+            maxWidth: '100%'
           }
         })
       ]
@@ -423,7 +442,7 @@ window.execCommunityImpact = async function execCommunityImpact(
         justifyContent: 'center',
         padding: '10px 0px',
         margin: 'auto',
-        marginTop: '0px',
+        marginTop: '49px',
         flexDirection: 'row !important',
         flexWrap: 'nowrap !important',
         fontFamily: fontFamily || 'inherit',
@@ -436,6 +455,7 @@ window.execCommunityImpact = async function execCommunityImpact(
       },
       children: [
         new components.BeamText({
+          id: 'cummulative_impact_title',
           text: impactData.cummulative_impact_title || `Together we funded ${impactData.aggregate_impact || '0'} meals nationwide`,
           style: {
             fontSize: '23px',
@@ -444,7 +464,8 @@ window.execCommunityImpact = async function execCommunityImpact(
             marginRight: '10px',
             textAlign: 'left',
             fontFamily: fontFamily || 'inherit',
-            width: '50%'
+            width: '50%',
+            padding: '24px 33px'
           },
           mobileStyle: {
             textAlign: 'center',
@@ -536,9 +557,11 @@ window.execCommunityImpact = async function execCommunityImpact(
           style: {
             fontSize: '15px',
             lineHeight: '22px',
-            color: '#000'
+            color: '#000',
+            marginBottom: '16px'
           }
         },
+        impactCardWidth: '278px',
         maxContainerWidth: 600,
         hideLogo: true,
         noWrap: false,
@@ -609,7 +632,12 @@ window.execCommunityImpact = async function execCommunityImpact(
           style: {
             borderRadius: '10px',
             // width: '100%',
-            padding: '16px'
+            padding: '16px',
+            maxWidth: '278px',
+            margin: '0px'
+          },
+          mobileStyle: {
+            maxWidth: '100%'
           }
         },
         border: `1px solid ${themeColorConfig.progressBarBackgroundColor}`,
