@@ -357,8 +357,8 @@ class BaseWidget {
     return crypto.createHash("sha1").update(str).digest("hex");
   }
 
-  async makeAPIRequest(path, params = null) {
-    let beam_url = new URL(path, this.baseUrl);
+  async makeAPIRequest(path, params = null, url = null) {
+    let beam_url = url ? url : new URL(path, this.baseUrl);
     if (params)
       beam_url.search = new URLSearchParams(params)
         .toString()

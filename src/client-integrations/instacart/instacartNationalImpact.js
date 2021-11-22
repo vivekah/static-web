@@ -4,9 +4,10 @@ import {pathUtil} from "../../utils";
 
 window.execNationalCommunityImpact = async function execNationalCommunityImpact(apiKey, fontFamily, language, containerId,
                                                                                 selectANonprofitCallback = () => {
-                                                                                }) {
+                                                                                },  production = true) {
   const beamImpactWidgetContainerId = 'beam-community-widget-container';
   const chainId = "61";
+  const beamWebSdkBaseUrl = production ? process.env.BEAM_BACKEND_BASE_URL : process.env.STAGE_BEAM_BACKEND_BASE_URL;
 
   //theme
   const themeColorConfig = {
@@ -207,7 +208,6 @@ window.execNationalCommunityImpact = async function execNationalCommunityImpact(
   }
 
   async function getImpactData() {
-    const beamWebSdkBaseUrl = process.env.BEAM_BACKEND_BASE_URL;
     let fullUrl = new URL('api/v2/users/impact/instacart/community', beamWebSdkBaseUrl);
     const params = {}
     if (params)

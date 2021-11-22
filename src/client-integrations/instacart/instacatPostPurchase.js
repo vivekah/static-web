@@ -6,11 +6,11 @@ window.execPostPurchaseView = async function execPostPurchaseView(apiKey,
                                                                   userId,
                                                                   instacartFontFamily,
                                                                   lan = "en",
-                                                                  containerId) {
+                                                                  containerId,  production = true) {
   // console.log(" execPostPurchaseView FOR Instacart")
   const storeId = "89";
   const chainId = "61";
-
+  const beamWebSdkBaseUrl = production ? process.env.BEAM_BACKEND_BASE_URL : process.env.STAGE_BEAM_BACKEND_BASE_URL;
   // shop config
   const fontFamily = instacartFontFamily || 'Poppins';
   //theme
@@ -100,7 +100,6 @@ window.execPostPurchaseView = async function execPostPurchaseView(apiKey,
   }
 
   async function getTransactionInfo() {
-    const beamWebSdkBaseUrl = process.env.BEAM_BACKEND_BASE_URL;
     let fullUrl = new URL('api/v2/users/transaction-info', beamWebSdkBaseUrl);
     const params = {
       partner_user_id: userId,

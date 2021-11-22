@@ -50,7 +50,7 @@ class InstacartCommunityImpactWidget extends BaseImpactWidget {
     console.log(" OPTIONS", this.options)
     const data = await this.makeAPIRequest("api/v2/chains/impact/regional", {
       chain: this.options.chainId,
-    });
+    } );
 
     console.log(" REGIONS ", Object.keys(data))
 
@@ -63,7 +63,7 @@ class InstacartCommunityImpactWidget extends BaseImpactWidget {
   }
 
   async render(args) {
-    // this.regions = await this.fetchRegions();
+
     await super.render(args, () => {
       return this.buildDesktopView(this.isMobile, args.impactData);
     });

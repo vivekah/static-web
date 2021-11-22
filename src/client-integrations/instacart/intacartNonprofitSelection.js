@@ -10,13 +10,13 @@ window.execNonprofitSelection = async function execNonprofitSelection(apiKey,
                                                                       },
                                                                       chosenNonprofitCallback = () => {
                                                                       },
-                                                                      containerId) {
+                                                                      containerId, production = true) {
   // console.log(" execCardIntegration FOR Instacart")
 
   const EVENTS = {
     nonProfitSelected: 'nonprofit-selected'
   }
-  const beamWebSdkBaseUrl = process.env.BEAM_BACKEND_BASE_URL;
+  const beamWebSdkBaseUrl = production ? process.env.BEAM_BACKEND_BASE_URL : process.env.STAGE_BEAM_BACKEND_BASE_URL;
   const storeId = "89";
   const chainId = "61";
   const beamContainerId = 'internal-beam-widget-wrapper';

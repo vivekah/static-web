@@ -23,11 +23,13 @@ window.execCommunityImpact = async function execCommunityImpact(
   },
   changeToNonprofit = () => {
 
-  }
+  },
+    production = true
 ) {
   const beamImpactWidgetContainerId = 'beam-community-widget-container';
   const beamSliderId = 'beam-slider';
   const chainId = "61";
+  const beamWebSdkBaseUrl = production ? process.env.BEAM_BACKEND_BASE_URL : process.env.STAGE_BEAM_BACKEND_BASE_URL;
 
   let isMobile = screenResolutionUtil.isMobile();
 
@@ -200,7 +202,7 @@ window.execCommunityImpact = async function execCommunityImpact(
           children: [
             new components.BeamImage({
               alt: 'Instacart Purchase Icon',
-              src: pathUtil.getAsset('instacart_purchase_icon.png'),
+              src: impactData.personal_impact_image,
               style: {
                 borderRadius: '50%',
                 maxWidth: '52px',
@@ -515,7 +517,6 @@ window.execCommunityImpact = async function execCommunityImpact(
   }
 
   async function getImpactData(userId, zipCode) {
-    const beamWebSdkBaseUrl = process.env.BEAM_BACKEND_BASE_URL;
     let fullUrl = new URL('api/v2/users/impact/instacart', beamWebSdkBaseUrl);
     const params = {
       user: userId,

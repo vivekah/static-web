@@ -9,7 +9,7 @@
     "delete-dist": "rimraf public/js",
     "build-stag": "npm run delete-dist &&  webpack --env.environment=stag",
     "build-dev": "npm run delete-dist &&  webpack --env.environment=dev",
-    "start": "npm run delete-dist &&  webpack-dev-server --env.environment=stag"
+    "start": "npm run delete-dist &&  webpack-dev-server --env.environment=prod"
   },
   "keywords": [],
   "author": "Alex Salvatore",

@@ -12,7 +12,9 @@ window.execPersonalImpact = async function execPersonalImpact(apiKey,
                                                               chooseANonprofitCallback = () => {
                                                               },
                                                               reviewResultsCallback = () => {
-                                                              }) {
+                                                              }, production = true) {
+
+  const beamWebSdkBaseUrl = production ? process.env.BEAM_BACKEND_BASE_URL : process.env.STAGE_BEAM_BACKEND_BASE_URL;
   const themeColorConfig = {
     progressBarColor: '#16ad0b',
     confirmationButtonColor: '#16ad0b',
@@ -51,7 +53,6 @@ window.execPersonalImpact = async function execPersonalImpact(apiKey,
   }
 
   async function getImpactData(userId) {
-    const beamWebSdkBaseUrl = process.env.BEAM_BACKEND_BASE_URL;
     let fullUrl = new URL('api/v2/users/personal/instacart', beamWebSdkBaseUrl);
     const params = {
       user: userId,
