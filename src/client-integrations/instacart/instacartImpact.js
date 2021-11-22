@@ -20,6 +20,9 @@ window.execCommunityImpact = async function execCommunityImpact(
   clickedNonprofitGoalCallback = () => {
   },
   seeNationalImpactCallback = () => {
+  },
+  changeToNonprofit = ()=>{
+
   }
 ) {
   const beamImpactWidgetContainerId = 'beam-community-widget-container';
@@ -124,6 +127,7 @@ window.execCommunityImpact = async function execCommunityImpact(
   function addCallbacks() {
     document.getElementById('review-results-link')?.addEventListener('click', reviewResultsCallback);
     document.getElementById('select-nonprofit-impact-overview')?.addEventListener('click', clickedNonprofitGoalCallback);
+    document.getElementById('nationa-impact')?.addEventListener('click', seeNationalImpactCallback);
   }
 
   function getPartnerSummarySection(impactData) {
@@ -474,7 +478,7 @@ window.execCommunityImpact = async function execCommunityImpact(
           }
         }),
         new components.BeamText({
-          text: `${impactData.cummulative_impact_description}</br> <a href='' style='color: green;'>${impactData.cummulative_impact_cta} </a>`,
+          text: `${impactData.cummulative_impact_description}</br> <a id="nationa-impact" href='' style='color: green;'>${impactData.cummulative_impact_cta} </a>`,
           style: {
             fontSize: '15px',
             color: '#72767E',
@@ -634,7 +638,7 @@ window.execCommunityImpact = async function execCommunityImpact(
             // width: '100%',
             padding: '16px',
             maxWidth: '278px',
-            margin: '0px'
+            marginBott0m: '10px'
           },
           mobileStyle: {
             maxWidth: '100%'
@@ -706,7 +710,7 @@ window.execCommunityImpact = async function execCommunityImpact(
           }
         },
         goalInfo: {
-          clickListener: clickedNonprofitGoalCallback,
+          clickListener: changeToNonprofit,
           style: {
             fontSize: '12px',
             color: themeColorConfig.textColor,
