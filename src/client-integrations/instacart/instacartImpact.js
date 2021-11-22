@@ -17,11 +17,11 @@ window.execCommunityImpact = async function execCommunityImpact(
   },
   reviewResultsCallback = () => {
   },
-  clickedNonprofitGoalCallback = () => {
+  chooseNonprofitCallback= () => {
   },
   seeNationalImpactCallback = () => {
   },
-  changeToNonprofit = () => {
+  clickedNonprofitGoalCallback = () => {
 
   },
     production = true
@@ -128,8 +128,8 @@ window.execCommunityImpact = async function execCommunityImpact(
 
   function addCallbacks() {
     document.getElementById('review-results-link')?.addEventListener('click', reviewResultsCallback);
-    document.getElementById('select-nonprofit-impact-overview')?.addEventListener('click', clickedNonprofitGoalCallback);
-    document.getElementById('nationa-impact')?.addEventListener('click', seeNationalImpactCallback);
+    document.getElementById('select-nonprofit-impact-overview')?.addEventListener('click', chooseNonprofitCallback);
+    document.getElementById('national-impact')?.addEventListener('click', seeNationalImpactCallback);
   }
 
   function getPartnerSummarySection(impactData) {
@@ -476,7 +476,7 @@ window.execCommunityImpact = async function execCommunityImpact(
           }
         }),
         new components.BeamText({
-          text: `${impactData.cummulative_impact_description}</br> <a id="nationa-impact" href='' style='color: green;'>${impactData.cummulative_impact_cta} </a>`,
+          text: `${impactData.cummulative_impact_description}</br> <a id="national-impact" href='' style='color: green;'>${impactData.cummulative_impact_cta} </a>`,
           style: {
             fontSize: '15px',
             color: '#72767E',
@@ -707,7 +707,7 @@ window.execCommunityImpact = async function execCommunityImpact(
           }
         },
         goalInfo: {
-          clickListener: changeToNonprofit,
+          clickListener: clickedNonprofitGoalCallback,
           style: {
             fontSize: '12px',
             color: themeColorConfig.textColor,
