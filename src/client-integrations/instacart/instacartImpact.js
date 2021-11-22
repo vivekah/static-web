@@ -21,7 +21,7 @@ window.execCommunityImpact = async function execCommunityImpact(
   },
   seeNationalImpactCallback = () => {
   },
-  changeToNonprofit = ()=>{
+  changeToNonprofit = () => {
 
   }
 ) {
@@ -295,20 +295,10 @@ window.execCommunityImpact = async function execCommunityImpact(
     slider.view.innerHTML = `
           <style>
           #tutorial-step{
-            fontFamily: ${fontFamily},
-            display: flex;
-            flex-direction: column;
-            width: 50%;
-            background-color: #FFF0BD;
-            justify-content: center;
-            text-align: center;
-            position: absolute;
-            right: 0px;
-            top: 0px;
-            border-radius: 0px 10px 10px 0px;
-            height:100%;
+            fontFamily: ${fontFamily};
+            display: none;
             }
-            #tutorial-step-title{
+          #tutorial-step-title{
             margin: 0;
            font-size: 28px;
            line-height: 40px;
@@ -330,7 +320,7 @@ window.execCommunityImpact = async function execCommunityImpact(
           }
           
           .slider_img{
-          width:50%;
+          /*width:50%;*/
           border-radius: 10px 0px 0px 10px;
           }
           .splide__track {
@@ -346,6 +336,12 @@ window.execCommunityImpact = async function execCommunityImpact(
             border-radius: 0px 0px 10px 10px;
             align-items: center;
             height: fit-content;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            text-align: center;
+            right: 0px;
+            top: 0px;
           }
           #tutorial-step-text-container{
           width: 70%;
@@ -392,7 +388,7 @@ window.execCommunityImpact = async function execCommunityImpact(
             <div class="splide__track">
           <ul class="splide__list">
           ${tutorial && tutorial.map(tutorialStep => {
-      return `<li class="splide__slide" style="background-color: #FFF0BD;"><img class="slider_img " src="${tutorialStep.image}" onError="this.onerror=null;this.src='https://staging-beam-widgets.beamimpact.com/assets/img/Artwork%20(1).png';">
+      return `<li class="splide__slide" style="background-color: #FFF0BD;"><img class="slider_img " src="${isMobile ? tutorialStep.image : tutorialStep.desktopWebImage}" onError="this.onerror=null;this.src='https://staging-beam-widgets.beamimpact.com/assets/img/Artwork%20(1).png';">
                 <div id="tutorial-step">
                     <div id="tutorial-step-text-container">
                       <p id="tutorial-step-title">${tutorialStep.title}</p>
