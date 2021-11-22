@@ -446,12 +446,9 @@ window.execNonprofitSelection = async function execNonprofitSelection(apiKey,
                                  #internal-beam-widget-wrapper{
                                   margin-bottom: 8px;
                                  }
-                                 #beam-disclosure{
+                                 #beam-disclosure {
                                   margin: 0px 0px 70px 0px;
-                                 
                                   font-size: 12px;
-                                  line-height: 18px;
-
                                  }
                                    #chose-nonprofit-button {
                                        width: 100%;

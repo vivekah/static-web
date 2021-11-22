@@ -193,7 +193,7 @@ class ModernUINonprofitWidgetTheme extends BaseTheme {
         // region text
         new components.BeamText({
           tag: "h4",
-          text: (nonprofit.badge || 'Local') + " nonprofit",
+          text: (nonprofit.badge || 'Local nonprofit'),
           style: {
             fontFamily: "inherit",
             fontWeight: "bold",
