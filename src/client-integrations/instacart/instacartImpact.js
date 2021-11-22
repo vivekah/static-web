@@ -727,11 +727,11 @@ window.execCommunityImpact = async function execCommunityImpact(
         impactCard: {
           style: {
             borderRadius: '10px',
-            margin: '0px 0px 10px 0px',
           },
           mobileStyle: {
             width: '100%',
             // maxWidth: '343px',
+            margin: '0px 0px 10px 0px',
           }
         },
         title: {
