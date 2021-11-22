@@ -6,7 +6,7 @@ window.execPostPurchaseView = async function execPostPurchaseView(apiKey,
                                                                   userId,
                                                                   instacartFontFamily,
                                                                   lan = "en",
-                                                                  containerId,  production = true) {
+                                                                  containerId, production = true) {
   // console.log(" execPostPurchaseView FOR Instacart")
   const storeId = "89";
   const chainId = "61";
@@ -87,7 +87,7 @@ window.execPostPurchaseView = async function execPostPurchaseView(apiKey,
 
             fontWeight: '600'
           }),
-         data && new components.BeamText({
+          data && new components.BeamText({
             text: data.favorite_nonprofit,
             textAlign: 'center',
             color: themeColorConfig.lightTextColor,
@@ -118,8 +118,15 @@ window.execPostPurchaseView = async function execPostPurchaseView(apiKey,
         "Authorization": `Api-Key ${apiKey}`
       }
     });
-    if (response.status == 200) return await response.json();
-    else return null;
+    if (response.status == 200)
+    try {
+    return await  response.json();
+
+    } catch (e) {
+    return await  response.statusText;
+    }
+  else
+    return null;
   }
 
 }

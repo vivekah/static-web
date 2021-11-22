@@ -4,7 +4,7 @@ import {pathUtil} from "../../utils";
 
 window.execNationalCommunityImpact = async function execNationalCommunityImpact(apiKey, fontFamily, language, containerId,
                                                                                 selectANonprofitCallback = () => {
-                                                                                },  production = true) {
+                                                                                }, production = true) {
   const beamImpactWidgetContainerId = 'beam-community-widget-container';
   const chainId = "61";
   const beamWebSdkBaseUrl = production ? process.env.BEAM_BACKEND_BASE_URL : process.env.STAGE_BEAM_BACKEND_BASE_URL;
@@ -28,12 +28,14 @@ window.execNationalCommunityImpact = async function execNationalCommunityImpact(
     let impactScreenContainer = new components.BeamFlexWrapper({
       style: {
         flexDirection: 'column !important',
-        flexWrap: 'wrap'
+        flexWrap: 'wrap',
+        padding: '10px 20px'
       },
       children: [
         getJoinUsSection(impactData),
         getPartnerSummarySection(impactData),
-        getCommunityImpactSection()
+        getCommunityImpactSection(),
+        getDisclosure(impactData)
       ]
     });
     let container = document.getElementById(containerId);
@@ -44,6 +46,23 @@ window.execNationalCommunityImpact = async function execNationalCommunityImpact(
     }
     addCallbacks();
     renderCommunityImpactWidget();
+  }
+
+  function getDisclosure(impactData) {
+    return new components.BeamText({
+      text: impactData.instacart_disclosure,
+      id: 'beam-disclosure',
+      style: {
+        fontSize: '12px',
+        fontFamily: fontFamily,
+        color: themeColorConfig.textColor,
+        maxWidth: '1200px',
+        padding: '32px 0px 82px 0px'
+      },
+      mobileStyle: {
+        padding: '32px 0px 82px 0px'
+      }
+    })
   }
 
   function addCallbacks() {
@@ -60,7 +79,7 @@ window.execNationalCommunityImpact = async function execNationalCommunityImpact(
         margin: 'auto',
         marginTop: '0px',
         flexWrap: 'nowrap !important',
-        padding: '0px 20px',
+        // padding: '0px 20px',
         fontFamily: fontFamily || 'inherit'
       },
       children: [
@@ -147,7 +166,7 @@ window.execNationalCommunityImpact = async function execNationalCommunityImpact(
         justifyContent: 'center',
         margin: 'auto',
         marginTop: '45px',
-        padding: '0px 20px',
+        // padding: '0px 20px',
         maxWidth: '700px',
       },
       mobileStyle: {
@@ -175,7 +194,7 @@ window.execNationalCommunityImpact = async function execNationalCommunityImpact(
             fontSize: '15px',
             color: 'grey',
             margin: 'auto',
-            padding: '20px',
+            padding: '20px 0px',
             paddingTop: '10px',
             textAlign: 'center',
             fontWeight: '200'
@@ -200,7 +219,7 @@ window.execNationalCommunityImpact = async function execNationalCommunityImpact(
   function devider() {
     return new components.BeamDivider({
       style: {
-        margin: '15px 20px 5px 20px',
+        margin: '15px 0px 5px 0px',
         borderTop: `1px solid ${themeColorConfig.progressBarBackgroundColor} `,
         borderBottom: '0',
         maxWidth: '700px'
@@ -224,7 +243,7 @@ window.execNationalCommunityImpact = async function execNationalCommunityImpact(
           "Authorization": `Api-Key ${apiKey}`
         }
       });
-      if (response.status == 200) return await response.json();
+      if (response.status == 200) return await response?.json();
     } catch (err) {
       console.error(err);
     }
@@ -244,15 +263,15 @@ window.execNationalCommunityImpact = async function execNationalCommunityImpact(
         filterByRegion: true,
         noWrap: false,
         maxContainerWidth: 600,
-        impactCardWidth: '256px !important',
+        // impactCardWidth: '256px',
         impactCard: {
           style: {
             borderRadius: '10px',
-            margin: '10px',
           },
           mobileStyle: {
-            width: '311px',
-            maxWidth: '311px',
+            width: '100% !important',
+            // maxWidth: '343px',
+            margin: '0px 0px 10px 0px',
           }
         },
         title: {
@@ -286,11 +305,14 @@ window.execNationalCommunityImpact = async function execNationalCommunityImpact(
         // impactImageHeight: '100%',
         cardImage: {
           style: {
-            borderRadius: '10px  !important',
-            height: '152px',
-            width: '236px',
-            // objectFit: 'contain',
-            margin: '10px',
+            borderRadius: '10px',
+            // height: '152px',
+            // width: '236px',
+            objectFit: 'cover'
+          },
+          mobileStyle: {
+            width: '100%',
+            height: '100%',
           }
         },
         cardOverlay: {
@@ -306,14 +328,20 @@ window.execNationalCommunityImpact = async function execNationalCommunityImpact(
         tileHeight: 'inherit',
         cardbody: {
           style: {
-            padding: '16px'
+            padding: '16px 0px 0px 0px'
           }
         },
         outerCard: {
           style: {
             borderRadius: '10px',
-            width: '256px',
-            maxWidth: '256px',
+            // width: '100%',
+            padding: '16px',
+            maxWidth: '278px',
+            marginBottom: '10px',
+            margin: '0px'
+          },
+          mobileStyle: {
+            maxWidth: '100%'
           }
         },
         border: `1px solid ${themeColorConfig.progressBarBackgroundColor}`,

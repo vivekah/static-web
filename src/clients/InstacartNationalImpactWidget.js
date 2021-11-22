@@ -554,7 +554,7 @@ class InstacartNationalImpactWidget extends BaseImpactWidget {
                       // column1
                       nonprofit1 &&
                       new components.BeamContainer({
-                        width: this.options.themeConfig.impactCardWidth || "400px",
+                        width: this.options.themeConfig.impactCardWidth,
                         margin: this.options.themeConfig.impactCardColumn1Margin || "0 10px 0",
                         style: {
                           ...this.options.themeConfig.impactCard?.style,

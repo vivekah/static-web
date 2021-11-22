@@ -818,11 +818,6 @@ window.execCommunityImpact = async function execCommunityImpact(
             justifyContent: 'center !important',
           }
         },
-        nonprofitRow: {
-          style: {
-            justifyContent: 'center !important'
-          }
-        },
         fontFamily: fontFamily || "inherit",
         gradientColors: [themeColorConfig.progressBarColor],
         progressBarColors: [
