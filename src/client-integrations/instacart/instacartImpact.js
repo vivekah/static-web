@@ -32,7 +32,6 @@ window.execCommunityImpact = async function execCommunityImpact(
   const beamWebSdkBaseUrl = production ? process.env.BEAM_BACKEND_BASE_URL : process.env.STAGE_BEAM_BACKEND_BASE_URL;
 
   let isMobile = screenResolutionUtil.isMobile();
-  loadStyle();
 
   function loadStyle() {
     document.head.innerHTML += `<style>
@@ -80,6 +79,7 @@ window.execCommunityImpact = async function execCommunityImpact(
                                 border-color: transparent transparent #1F5A96 transparent;
                               }
                               </style>`
+    document.getElementById('impact-screen-container').style.fontFamily = fontFamily;
   }
 
   function reportWindowSize() {
@@ -138,6 +138,7 @@ window.execCommunityImpact = async function execCommunityImpact(
     } else {
       document.body.append(impactScreenContainer.view);
     }
+    loadStyle();
     createCarousel();
     addTooltip(impactData);
     addCallbacks();

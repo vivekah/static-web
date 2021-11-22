@@ -43,6 +43,7 @@ window.execNonprofitSelection = async function execNonprofitSelection(apiKey,
   }
 
   function addStylesheets() {
+
     const viewPortMetaTag = document.querySelector("meta[name='viewport']");
     if (!viewPortMetaTag) {
       let meta = document.createElement('meta');
@@ -359,6 +360,7 @@ window.execNonprofitSelection = async function execNonprofitSelection(apiKey,
         }
       }
     });
+     document.getElementById(beamContainerId).style.fontFamily = fontFamily;
   }
 
   async function confirmNonProfit() {
@@ -441,6 +443,10 @@ window.execNonprofitSelection = async function execNonprofitSelection(apiKey,
                                 color:#72767E;
                                 font-weight: 400!important;
                                 letter-spacing: normal !important;
+                               }
+                               #beam-disclosure{
+                               font-family: ${fontFamily};
+                               font-size: 12px;
                                }
                               @media only screen and (max-width: 600px) {
                                  #internal-beam-widget-wrapper{

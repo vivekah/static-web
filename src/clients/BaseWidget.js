@@ -146,7 +146,7 @@ class BaseWidget {
   }
 
   getAsset(fileName) {
-    console.log("assets: ", `${this.webBaseUrl}/assets/img/${fileName}`)
+    // console.log("assets: ", `${this.webBaseUrl}/assets/img/${fileName}`)
     return `${this.webBaseUrl}/assets/img/${fileName}`;
   }
 

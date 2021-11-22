@@ -67,7 +67,7 @@ window.execNationalCommunityImpact = async function execNationalCommunityImpact(
           children: [
             new components.BeamImage({
               alt: 'Instacart Purchase Icon',
-              src: pathUtil.getAsset('instacart_purchase_icon.png'),
+              src: impactData.personal_impact_image,
               style: {
                 borderRadius: '50%',
                 width: '60px',

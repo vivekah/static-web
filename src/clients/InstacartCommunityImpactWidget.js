@@ -47,12 +47,12 @@ class InstacartCommunityImpactWidget extends BaseImpactWidget {
   }
 
   async fetchRegions() {
-    console.log(" OPTIONS", this.options)
+    // console.log(" OPTIONS", this.options)
     const data = await this.makeAPIRequest("api/v2/chains/impact/regional", {
       chain: this.options.chainId,
     } );
 
-    console.log(" REGIONS ", Object.keys(data))
+    // console.log(" REGIONS ", Object.keys(data))
 
     return [null, ...new Set(Object.keys(data))]
   }
