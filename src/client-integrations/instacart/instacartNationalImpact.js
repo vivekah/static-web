@@ -8,6 +8,7 @@ window.execNationalCommunityImpact = async function execNationalCommunityImpact(
   const beamImpactWidgetContainerId = 'beam-community-widget-container';
   const chainId = "61";
   const beamWebSdkBaseUrl = production ? process.env.BEAM_BACKEND_BASE_URL : process.env.STAGE_BEAM_BACKEND_BASE_URL;
+  const beamWebUrl = production ? process.env.WEB_BASE_URL : process.env.STAGE_WEB_BASE_URL;
 
   //theme
   const themeColorConfig = {
@@ -232,6 +233,7 @@ window.execNationalCommunityImpact = async function execNationalCommunityImpact(
 
   function renderCommunityImpactWidget() {
     let widget = new beamApps.InstacartNationalImpactWidget({
+      webBaseUrl: beamWebUrl,
       fontFamily: fontFamily || 'inherit',
       noAjax: true,
       containerId: beamImpactWidgetContainerId,

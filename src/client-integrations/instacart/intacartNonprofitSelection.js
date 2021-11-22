@@ -360,7 +360,7 @@ window.execNonprofitSelection = async function execNonprofitSelection(apiKey,
         }
       }
     });
-     document.getElementById(beamContainerId).style.fontFamily = fontFamily;
+    document.getElementById(beamContainerId).style.fontFamily = fontFamily;
   }
 
   async function confirmNonProfit() {
@@ -455,6 +455,8 @@ window.execNonprofitSelection = async function execNonprofitSelection(apiKey,
                                  #beam-disclosure {
                                   margin: 0px 0px 70px 0px;
                                   font-size: 12px;
+                                 font-family: ${fontFamily};
+
                                  }
                                    #chose-nonprofit-button {
                                        width: 100%;

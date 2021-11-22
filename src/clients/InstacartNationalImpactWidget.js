@@ -46,14 +46,8 @@ class InstacartNationalImpactWidget extends BaseImpactWidget {
   }
 
   async fetchRegions() {
-    console.log(" OPTIONS", this.options)
-    const data = await this.makeAPIRequest("api/v2/chains/impact/regional", {
-      chain: this.options.chainId,
-    });
-
-    console.log(" REGIONS ", Object.keys(data))
-
-    return [null, ...new Set(Object.keys(data))]
+   const regions = [].concat(this.data.nonprofits.map((x) => x.regions)).flat(1).filter(e => e);
+    return [null, ...new Set(regions)];
   }
 
   get nonprofits() {

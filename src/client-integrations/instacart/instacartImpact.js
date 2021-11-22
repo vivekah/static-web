@@ -35,6 +35,7 @@ window.execCommunityImpact = async function execCommunityImpact(
 
   function loadStyle() {
     document.head.innerHTML += `<style>
+
                           /* Tooltip container */
                               .tooltip {
                                 position: relative;
@@ -117,7 +118,7 @@ window.execCommunityImpact = async function execCommunityImpact(
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        padding: '10px'
+        padding: '10px 20px'
       },
       children: [
         isMobile && getHeader(),
@@ -129,7 +130,8 @@ window.execCommunityImpact = async function execCommunityImpact(
         isMobile ? getInfoSection(impactData) : false,
         getImpactSummarySection(),
         !isMobile ? getInfoSection(impactData) : false,
-        getCommunityImpactSection()
+        getCommunityImpactSection(),
+        getDisclosure(impactData)
       ]
     });
     let container = document.getElementById(containerId);
@@ -143,6 +145,23 @@ window.execCommunityImpact = async function execCommunityImpact(
     addTooltip(impactData);
     addCallbacks();
     renderCommunityImpactWidget(impactData);
+  }
+
+  function getDisclosure(impactData) {
+    return new components.BeamText({
+      text: impactData.instacart_disclosure,
+      id: 'beam-disclosure',
+      style: {
+        fontSize: '12px',
+        fontFamily: fontFamily,
+        color: themeColorConfig.textColor,
+        maxWidth: '1200px',
+        padding: '32px 0px 82px 0px'
+      },
+      mobileStyle: {
+        padding: '32px 0px 82px 0px'
+      }
+    })
   }
 
   function getHeader() {
@@ -353,6 +372,7 @@ window.execCommunityImpact = async function execCommunityImpact(
           #tutorial-step{
             fontFamily: ${fontFamily};
             display: none;
+            
             }
           #tutorial-step-title{
             margin: 0;
@@ -378,6 +398,7 @@ window.execCommunityImpact = async function execCommunityImpact(
           .slider_img{
           /*width:50%;*/
           border-radius: 10px 0px 0px 10px;
+         
           }
           .splide__track {
             border-radius: 10px;
@@ -425,8 +446,8 @@ window.execCommunityImpact = async function execCommunityImpact(
 
           }
           .slider_img{
-          margin:10px;
-          width: calc(90% + 15px);
+          margin:10px 0px;
+          width: 100%;
           }
           .splide__slide{
           height: fit-content;
@@ -706,11 +727,11 @@ window.execCommunityImpact = async function execCommunityImpact(
         impactCard: {
           style: {
             borderRadius: '10px',
-            // margin: '0px 0px 10px 0px',
+            margin: '0px 0px 10px 0px',
           },
           mobileStyle: {
             width: '100%',
-            maxWidth: '343px',
+            // maxWidth: '343px',
           }
         },
         title: {
@@ -746,8 +767,9 @@ window.execCommunityImpact = async function execCommunityImpact(
         cardImage: {
           style: {
             borderRadius: '10px',
-            width: 'auto',
-            height: 'auto',
+            width: '100%',
+            height: '100%',
+            objectFit: 'contain'
           }
         },
         cardOverlay: {
@@ -772,7 +794,8 @@ window.execCommunityImpact = async function execCommunityImpact(
             // width: '100%',
             padding: '16px',
             maxWidth: '278px',
-            marginBott0m: '10px'
+            marginBottom: '10px',
+            margin: '0px'
           },
           mobileStyle: {
             maxWidth: '100%'
