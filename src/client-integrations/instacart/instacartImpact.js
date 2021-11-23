@@ -606,13 +606,26 @@ window.execCommunityImpact = async function execCommunityImpact(
 
   function getLearnMore(impactData) {
     return new components.BeamContainer({
+        style: {
+          position: 'relative',
+        },
         children: [
-          new components.BeamInfoIcon({
+          new components.BeamContainer({
             style: {
               display: 'inline',
-              width: '11px',
-              height: '11px'
-            }
+              position: 'absolute',
+              bottom: '2.5px'
+            },
+            children: [
+              new components.BeamInfoIcon({
+                style: {
+                  display: 'inline',
+                  width: '11px',
+                  height: '11px',
+                  paddingTop: '2px'
+                }
+              })
+            ]
           }),
           new components.BeamText({
             text: impactData?.copy.complianceCtaWeb,
@@ -623,8 +636,8 @@ window.execCommunityImpact = async function execCommunityImpact(
               fontFamily: fontFamily,
               fontSize: "12px",
               paddingRight: '5px',
-              paddingLeft: '5px',
-              fontWeight: '100'
+              paddingLeft: '15px',
+              fontWeight: '100',
             }
           })
         ]
@@ -644,7 +657,7 @@ window.execCommunityImpact = async function execCommunityImpact(
           fontSize: "12px",
           style: {
             paddingLeft: '5px',
-            paddingTop: '3px'
+            paddingBottom: '0.5px'
           }
         })
       ]
