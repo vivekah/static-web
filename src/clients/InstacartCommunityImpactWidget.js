@@ -518,7 +518,7 @@ class InstacartCommunityImpactWidget extends BaseImpactWidget {
         // Header
         this.options.themeConfig.showCommunityImpactHeader && new components.BeamText({
           text: this.options.themeConfig.communityImpactTitle?.text,
-          fontFamily: "Eina01-Regular !important",
+          fontFamily: this.options.themeConfig.fontFamily,
           fontSize: "23px",
           lineHeight: "28px",
           textAlign: "center",

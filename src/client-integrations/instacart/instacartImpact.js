@@ -551,7 +551,7 @@ window.execCommunityImpact = async function execCommunityImpact(
           }
         }),
         new components.BeamText({
-          text: `${impactData.cummulative_impact_description}</br> <a id="national-impact" href='' style='color: ${themeColorConfig.progressBarColor}; text-decoration: none;'>${impactData.cummulative_impact_cta} </a>`,
+          text: `${impactData.cummulative_impact_description}</br> <a id="national-impact" href='' style='color: ${themeColorConfig.progressBarColor}; text-decoration: none; font-weight: 500;'>${impactData.cummulative_impact_cta} </a>`,
           style: {
             fontSize: '15px',
             color: '#72767E',
@@ -644,7 +644,7 @@ window.execCommunityImpact = async function execCommunityImpact(
           fontSize: "12px",
           style: {
             paddingLeft: '5px',
-            paddingTop: '4px'
+            paddingTop: '3px'
           }
         })
       ]
@@ -719,11 +719,14 @@ window.execCommunityImpact = async function execCommunityImpact(
         communityImpactTitle: {
           text: impactData.community_impact_title,
           style: {
-            fontSize: '15px',
-            lineHeight: '22px',
+            fontSize: '23px',
             color: '#000',
             marginBottom: '16px',
-            fontFamily: fontFamily
+            fontFamily: fontFamily,
+            fontWeight: '500'
+          }, mobileStyle: {
+            fontSize: '15px',
+
           }
         },
         impactCardWidth: '278px',
@@ -846,6 +849,7 @@ window.execCommunityImpact = async function execCommunityImpact(
           style: {
             display: 'flex',
             justifyContent: 'center',
+            margin: '45px 0px 0px 0px'
           }
         },
         progressBar: {
