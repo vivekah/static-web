@@ -23,7 +23,7 @@ class ModernUINonprofitWidgetTheme extends BaseTheme {
         padding: "10px",
         margin: '10px 0 10px 0 ',
         color: 'black',
-        fontFamily: this.options?.headerTextStyle?.fontFamily,
+        fontFamily: this.options?.headerTextStyle?.fontFamily || this.options.fontFamily,
         fontSize: "medium",
         fontWeight: "normal",
         ...this.options.headerTextStyle,
@@ -195,7 +195,7 @@ class ModernUINonprofitWidgetTheme extends BaseTheme {
           tag: "h4",
           text: (nonprofit.badge || 'Local nonprofit'),
           style: {
-            fontFamily: "inherit",
+            fontFamily: this.options.fontFamily,
             fontWeight: "bold",
             fontSize: "12px",
             color: "black",
@@ -222,7 +222,7 @@ class ModernUINonprofitWidgetTheme extends BaseTheme {
               tag: "h4",
               text: nonprofit.name,
               style: {
-                fontFamily: "inherit",
+                fontFamily: this.options.fontFamily,
                 fontWeight: "bold",
                 fontSize: "12px",
                 color: "black",
@@ -264,6 +264,7 @@ class ModernUINonprofitWidgetTheme extends BaseTheme {
           style: {
             flexGrow: 3,
             width: "100%",
+             fontFamily: this.options.fontFamily,
             ...this.options?.description?.wrapperStyle,
             ...this.isMobile ? this.options?.description?.wrapperMobileStyle : {},
           },
@@ -276,7 +277,7 @@ class ModernUINonprofitWidgetTheme extends BaseTheme {
                 textOverflow: "ellipsis",
                 display: "-webkit-box",
                 margin: '3px 0 0 0',
-                fontFamily: 'inherit',
+                 fontFamily: this.options.fontFamily,
                 fontSize: "10px",
                 lineHeight: "1.4em",
                 color: "black",
@@ -294,6 +295,7 @@ class ModernUINonprofitWidgetTheme extends BaseTheme {
     return new components.BeamContainer({
       style: {
         flexWrap: 'nowrap !important',
+        fontFamily: this.options.fontFamily,
         paddingTop: '15px',
         justifyContent: "space-between",
         marginTop: "auto",
@@ -307,7 +309,7 @@ class ModernUINonprofitWidgetTheme extends BaseTheme {
           style: {
             overflow: "hidden",
             margin: '3px 0 0 0',
-            fontFamily: 'inherit',
+            fontFamily: this.options.fontFamily,
             fontSize: "12px",
             lineHeight: "1.4em",
             color: "black",
@@ -350,7 +352,7 @@ class ModernUINonprofitWidgetTheme extends BaseTheme {
           text: `${nonprofit?.impact?.percentage || 0}%`,
           style: {
             textAlign: "left",
-            fontFamily: "inherit",
+            fontFamily: this.options.fontFamily,
             color: "#C0C0C0",
             fontWeight: "bold",
             fontSize: "10px",
