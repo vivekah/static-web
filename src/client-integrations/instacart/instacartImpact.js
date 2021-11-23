@@ -594,7 +594,11 @@ window.execCommunityImpact = async function execCommunityImpact(
       },
       children: [
         getLearnMore(impactData),
-        !isMobile ? new components.BeamText({text: '|', color: "#999"}) : false,
+        !isMobile ? new components.BeamText({
+          text: '|',
+          color: "#999",
+          height: '16px'
+        }) : false,
         getPoweredByBeam(impactData)
       ]
     })
@@ -639,7 +643,8 @@ window.execCommunityImpact = async function execCommunityImpact(
           fontWeight: '100',
           fontSize: "12px",
           style: {
-            paddingLeft: '5px'
+            paddingLeft: '5px',
+            paddingTop: '4px'
           }
         })
       ]
@@ -669,7 +674,7 @@ window.execCommunityImpact = async function execCommunityImpact(
         margin: '37px 0px 0px 0px !important',
         borderTop: `1px solid ${themeColorConfig.progressBarBackgroundColor} `,
         borderBottom: '0',
-        maxWidth: '700px'
+        maxWidth: '700px',
       }
     });
   }
