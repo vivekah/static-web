@@ -606,8 +606,8 @@ window.execCommunityImpact = async function execCommunityImpact(
           new components.BeamInfoIcon({
             style: {
               display: 'inline',
-              width: '12px',
-              height: '12px'
+              width: '11px',
+              height: '11px'
             }
           }),
           new components.BeamText({
