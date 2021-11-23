@@ -34,8 +34,8 @@ window.execNonprofitSelection = async function execNonprofitSelection(apiKey,
 
   //theme
   const themeColorConfig = {
-    progressBarColor: '#16ad0b',
-    confirmationButtonColor: '#16ad0b',
+    progressBarColor: '#0AAD0A',
+    confirmationButtonColor: '#0AAD0A',
     causeTestColor: '#E97300',
     textColor: '#343538',
     lightTextColor: '#bbbbbd',

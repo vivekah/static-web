@@ -301,7 +301,7 @@ window.execCommunityImpact = async function execCommunityImpact(
             }),
             new components.BeamText({
               text: `${impactData.personal_impact_description || 'Food meals this holiday season by simply placing your order.'}` + (!impactData.personal_impact &&
-                `<a href='#' id="${impactData.personal_impact_cta?.indexOf('nonprofit') === -1 ? 'review-results-link' : 'select-nonprofit-impact-overview'}" style='color: green; text-decoration: none; font-weight: bold;'> ${impactData.personal_impact_cta} </a>`),
+                `<a href='#' id="${impactData.personal_impact_cta?.indexOf('nonprofit') === -1 ? 'review-results-link' : 'select-nonprofit-impact-overview'}" style='color: ${themeColorConfig.progressBarColor}; text-decoration: none; font-weight: bold;'> ${impactData.personal_impact_cta} </a>`),
               style: {
                 fontSize: '12px',
                 lineHeight: '18px',
@@ -551,7 +551,7 @@ window.execCommunityImpact = async function execCommunityImpact(
           }
         }),
         new components.BeamText({
-          text: `${impactData.cummulative_impact_description}</br> <a id="national-impact" href='' style='color: green;'>${impactData.cummulative_impact_cta} </a>`,
+          text: `${impactData.cummulative_impact_description}</br> <a id="national-impact" href='' style='color: ${themeColorConfig.progressBarColor}; text-decoration: none;'>${impactData.cummulative_impact_cta} </a>`,
           style: {
             fontSize: '15px',
             color: '#72767E',

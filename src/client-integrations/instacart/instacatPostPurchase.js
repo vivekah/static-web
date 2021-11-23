@@ -15,8 +15,8 @@ window.execPostPurchaseView = async function execPostPurchaseView(apiKey,
   const fontFamily = instacartFontFamily || 'Poppins';
   //theme
   const themeColorConfig = {
-    progressBarColor: '#16ad0b',
-    confirmationButtonColor: '#16ad0b',
+    progressBarColor: '#0AAD0A',
+    confirmationButtonColor: '#0AAD0A',
     causeTestColor: '#f0a358',
     textColor: '#4b4b4e',
     lightTextColor: '#bbbbbd',
