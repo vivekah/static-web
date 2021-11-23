@@ -677,7 +677,7 @@ window.execCommunityImpact = async function execCommunityImpact(
           fontSize: "12px",
           style: {
             paddingLeft: '5px',
-            paddingBottom: '0px'
+            paddingBottom: '1px'
           }
         })
       ]
