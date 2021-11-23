@@ -579,8 +579,10 @@ window.execNonprofitSelection = async function execNonprofitSelection(apiKey,
 
   function listenToLearnMoreLinkClickEvent() {
     let linkLearnMore = document.getElementById('link-learn-more');
-    linkLearnMore.addEventListener('click', function () {
+    linkLearnMore.addEventListener('click', function (e) {
       learnMoreCallback();
+      e.preventDefault();
+      return false;
     })
   }
 

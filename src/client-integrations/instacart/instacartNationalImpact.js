@@ -66,7 +66,11 @@ window.execNationalCommunityImpact = async function execNationalCommunityImpact(
   }
 
   function addCallbacks() {
-    document.getElementById('link-to-select-nonprofit').addEventListener('click', selectANonprofitCallback);
+    document.getElementById('link-to-select-nonprofit').addEventListener('click', function(e){
+      selectANonprofitCallback();
+      e.preventDefault();
+      return false;
+    });
   }
 
   function getJoinUsSection(impactData) {

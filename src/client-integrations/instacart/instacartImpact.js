@@ -102,7 +102,7 @@ window.execCommunityImpact = async function execCommunityImpact(
     progressBarColor: '#0AAD0A',
     confirmationButtonColor: '#0AAD0A',
     causeTestColor: '#f0a358',
-    textColor: '#6a6b6d',
+    textColor: '#343538',
     lightTextColor: '#bbbbbd',
     progressBarBackgroundColor: '#e3e3e3'
   }
@@ -200,9 +200,24 @@ window.execCommunityImpact = async function execCommunityImpact(
   }
 
   function addCallbacks() {
-    document.getElementById('review-results-link')?.addEventListener('click', reviewResultsCallback);
-    document.getElementById('select-nonprofit-impact-overview')?.addEventListener('click', chooseNonprofitCallback);
-    document.getElementById('national-impact')?.addEventListener('click', seeNationalImpactCallback);
+    document.getElementById('review-results-link')?.addEventListener('click', function (e) {
+      reviewResultsCallback();
+      e.preventDefault(); // Cancel the native event
+      // e.stopPropagation()
+      return false;
+    });
+    document.getElementById('select-nonprofit-impact-overview')?.addEventListener('click', function (e) {
+      chooseNonprofitCallback();
+      e.preventDefault(); // Cancel the native event
+      // e.stopPropagation()
+      return false;
+    });
+    document.getElementById('national-impact')?.addEventListener('click', function (e) {
+      seeNationalImpactCallback();
+      e.preventDefault(); // Cancel the native event
+      // e.stopPropagation()
+      return false;
+    });
   }
 
   function getPartnerSummarySection(impactData) {
@@ -225,7 +240,8 @@ window.execCommunityImpact = async function execCommunityImpact(
             marginBottom: '8px',
             fontWeight: '700',
             lineHeight: '40px',
-            fontFamily: fontFamily || 'inherit'
+            fontFamily: fontFamily || 'inherit',
+            color: themeColorConfig.textColor
           },
           mobileStyle: {
             fontSize: '30px',
@@ -296,7 +312,8 @@ window.execCommunityImpact = async function execCommunityImpact(
                 fontFamily: fontFamily || 'inherit',
                 fontSize: '18px',
                 lineHeight: '26px',
-                fontWeight: '600'
+                fontWeight: '600',
+                color: themeColorConfig.textColor
               }
             }),
             new components.BeamText({
@@ -305,7 +322,8 @@ window.execCommunityImpact = async function execCommunityImpact(
               style: {
                 fontSize: '12px',
                 lineHeight: '18px',
-                fontFamily: fontFamily || 'inherit'
+                fontFamily: fontFamily || 'inherit',
+                color: themeColorConfig.textColor
               }
             }),
             impactData.personal_impact && new components.BeamFlexWrapper({
@@ -334,15 +352,15 @@ window.execCommunityImpact = async function execCommunityImpact(
                   tag: "h6",
                   text: impactData.personal_impact + "&#37;",
                   fontSize: '12px',
-                  color: '#343538',
+                  color: themeColorConfig.textColor,
                   fontWeight: '200',
-                  fontFamily: fontFamily || 'inherit'
+                  fontFamily: fontFamily || 'inherit',
                 }),
                 new components.BeamText({
                   style: {
                     fontSize: '12px',
                     lineHeight: '18px',
-                    fontFamily: fontFamily || 'inherit'
+                    fontFamily: fontFamily || 'inherit',
                   },
                   text: `<a href='#' id="${impactData.personal_impact_cta?.indexOf('nonprofit') === -1 ? 'review-results-link' : 'select-nonprofit-impact-overview'}" style='color: ${themeColorConfig.progressBarColor}; text-decoration: none;'>${impactData.personal_impact_cta} </a>`
                 })]
@@ -542,7 +560,8 @@ window.execCommunityImpact = async function execCommunityImpact(
             textAlign: 'left',
             fontFamily: fontFamily || 'inherit',
             width: '50%',
-            padding: '24px 33px'
+            padding: '24px 33px',
+            color: themeColorConfig.textColor
           },
           mobileStyle: {
             textAlign: 'center',
@@ -551,7 +570,7 @@ window.execCommunityImpact = async function execCommunityImpact(
           }
         }),
         new components.BeamText({
-          text: `${impactData.cummulative_impact_description}</br> <a id="national-impact" href='' style='color: ${themeColorConfig.progressBarColor}; text-decoration: none; font-weight: 500;'>${impactData.cummulative_impact_cta} </a>`,
+          text: `${impactData.cummulative_impact_description}</br> <a id="national-impact" href='' style='color: ${themeColorConfig.progressBarColor}; text-decoration: none; font-weight: 600;'>${impactData.cummulative_impact_cta} </a>`,
           style: {
             fontSize: '15px',
             color: '#72767E',
@@ -608,13 +627,14 @@ window.execCommunityImpact = async function execCommunityImpact(
     return new components.BeamContainer({
         style: {
           position: 'relative',
+          paddingBottom: '3px'
         },
         children: [
           new components.BeamContainer({
             style: {
               display: 'inline',
               position: 'absolute',
-              bottom: '2.5px'
+              // bottom: '2.5px'
             },
             children: [
               new components.BeamInfoIcon({
@@ -657,7 +677,7 @@ window.execCommunityImpact = async function execCommunityImpact(
           fontSize: "12px",
           style: {
             paddingLeft: '5px',
-            paddingBottom: '0.5px'
+            paddingBottom: '0px'
           }
         })
       ]
@@ -733,10 +753,10 @@ window.execCommunityImpact = async function execCommunityImpact(
           text: impactData.community_impact_title,
           style: {
             fontSize: '23px',
-            color: '#000',
+            color: themeColorConfig.textColor,
             marginBottom: '16px',
             fontFamily: fontFamily,
-            fontWeight: '500'
+            fontWeight: 'bold'
           }, mobileStyle: {
             fontSize: '15px',
 
@@ -862,7 +882,7 @@ window.execCommunityImpact = async function execCommunityImpact(
           style: {
             display: 'flex',
             justifyContent: 'center',
-            margin: '45px 0px 0px 0px'
+            margin: '25px 0px 0px 0px'
           }
         },
         progressBar: {
