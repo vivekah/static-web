@@ -12,8 +12,8 @@ window.execPersonalImpact = async function execPersonalImpact(apiKey,
 
   const beamWebSdkBaseUrl = production ? process.env.BEAM_BACKEND_BASE_URL : process.env.STAGE_BEAM_BACKEND_BASE_URL;
   const themeColorConfig = {
-    progressBarColor: '#16ad0b',
-    confirmationButtonColor: '#16ad0b',
+    progressBarColor: '#0AAD0A',
+    confirmationButtonColor: '#0AAD0A',
     causeTestColor: '#f0a358',
     textColor: '#6a6b6d',
     lightTextColor: '#bbbbbd',
@@ -162,7 +162,7 @@ window.execPersonalImpact = async function execPersonalImpact(apiKey,
                 marginTop: '11px',
                 fontFamily: fontFamily || 'inherit'
               },
-              text: `<a href='#' id="${reviewResultsId}" style='color: green; text-decoration: none;'>${impactData?.personal_impact_cta} </a>`
+              text: `<a href='#' id="${reviewResultsId}" style='color: ${themeColorConfig.progressBarColor}; text-decoration: none;'>${impactData?.personal_impact_cta} </a>`
             })
           ]
         }),
