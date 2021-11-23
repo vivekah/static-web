@@ -66,7 +66,7 @@ class ModernUINonprofitWidgetTheme extends BaseTheme {
         ...cardDefaultStyle,
         ...this.options?.card?.style,
         ...this.isMobile ? this.options?.card?.mobileStyle : {},
-        ...(nonprofit.id === selectedNonprofit.id) ? this.options?.card?.selectedStyle : {},
+        ...(nonprofit.id === selectedNonprofit?.id) ? this.options?.card?.selectedStyle : {},
         ...{border: 'none!important'} //do not change, this contanier
                                       // should not have any border as the border is added with background image for gradients
       },

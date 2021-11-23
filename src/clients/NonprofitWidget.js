@@ -108,7 +108,7 @@ class NonprofitWidget extends BaseWidget {
       data = await this.makeAPIRequest("/api/v2/chains/nonprofits", queryParams);
 
       // get last nonprofit
-      if (data && data.last_nonprofit)
+      if (data && data?.last_nonprofit)
         this.lastNonprofit = data.nonprofits.find(
           (x) => x.id === data.last_nonprofit
         );

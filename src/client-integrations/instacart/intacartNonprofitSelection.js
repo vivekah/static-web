@@ -122,7 +122,7 @@ window.execNonprofitSelection = async function execNonprofitSelection(apiKey,
           window.localStorage.setItem(nonprofitKey, JSON.stringify(widget.lastNonprofit));
           console.debug("lastNonprofit:  ", widget.lastNonprofit)
           console.debug("persistTransactionRequest:  ", transaction)
-          resolve(transaction.id);
+          resolve(transaction?.id);
         } else {
           reject({
             status: persistTransactionRequest.status,
@@ -370,7 +370,7 @@ window.execNonprofitSelection = async function execNonprofitSelection(apiKey,
       let lastNonprofitInStorage = window.localStorage.getItem(nonprofitKey);
       let lastNonprofit = JSON.parse(lastNonprofitInStorage);
       console.debug("Transaction persisted.");
-      chosenNonprofitCallback({nonprofit_id: lastNonprofit.id})
+      chosenNonprofitCallback({nonprofit_id: lastNonprofit?.id})
     } else {
       console.error("Transaction could not be persisted");
     }
@@ -447,6 +447,7 @@ window.execNonprofitSelection = async function execNonprofitSelection(apiKey,
                                #beam-disclosure{
                                font-family: ${fontFamily};
                                font-size: 12px;
+                               line-height: normal;
                                }
                               @media only screen and (max-width: 600px) {
                                  #internal-beam-widget-wrapper{
