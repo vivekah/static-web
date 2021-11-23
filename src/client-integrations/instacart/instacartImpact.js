@@ -344,7 +344,7 @@ window.execCommunityImpact = async function execCommunityImpact(
                     lineHeight: '18px',
                     fontFamily: fontFamily || 'inherit'
                   },
-                  text: `<a href='#' id="${impactData.personal_impact_cta?.indexOf('nonprofit') === -1 ? 'review-results-link' : 'select-nonprofit-impact-overview'}" style='color: green; text-decoration: none;'>${impactData.personal_impact_cta} </a>`
+                  text: `<a href='#' id="${impactData.personal_impact_cta?.indexOf('nonprofit') === -1 ? 'review-results-link' : 'select-nonprofit-impact-overview'}" style='color: ${themeColorConfig.progressBarColor}; text-decoration: none;'>${impactData.personal_impact_cta} </a>`
                 })]
             }),
             // !impactData.personal_impact && new components.BeamText({

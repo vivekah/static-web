@@ -114,7 +114,7 @@ window.execNationalCommunityImpact = async function execNationalCommunityImpact(
             }),
             new components.BeamText({
               text: `${impactData?.personal_impact_description || 'Food meals this holiday season by simply placing your order.'}` +
-                `<a href='#' id="link-to-select-nonprofit" style='color: green; text-decoration: none; display: inline;'>${"   " + impactData.personal_impact_cta} </a>`,
+                `<a href='#' id="link-to-select-nonprofit" style='color: ${themeColorConfig.progressBarColor}; text-decoration: none; display: inline;'>${"   " + impactData.personal_impact_cta} </a>`,
               style: {
                 fontSize: '12px',
                 lineHeight: '18px',
