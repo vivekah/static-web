@@ -30,14 +30,15 @@ window.execCommunityImpact = async function execCommunityImpact(
   const beamSliderId = 'beam-slider';
   const chainId = "61";
   const beamWebSdkBaseUrl = production ? process.env.BEAM_BACKEND_BASE_URL : process.env.STAGE_BEAM_BACKEND_BASE_URL;
-
+  const beamImpactScreenContainerId = 'beam-impact-container'
   let isMobile = screenResolutionUtil.isMobile();
 
   function loadStyle() {
-    document.head.innerHTML += `<style>
+    let beamScreenContainer = document.getElementById(beamImpactScreenContainerId)
+    beamScreenContainer.innerHTML += `<style scoped>
 
                           /* Tooltip container */
-                              .tooltip {
+                              .beam-impact-tooltip {
                                 position: relative;
                                 display: inline-block;
                                 border-bottom: 1px dotted black; /* If you want dots under the hoverable text */
@@ -45,7 +46,7 @@ window.execCommunityImpact = async function execCommunityImpact(
                               }
 
                               /* Tooltip text */
-                              .tooltip .tooltip-text {
+                              .beam-impact-tooltip .beam-impact-tooltip-text {
                                 visibility: hidden;
                                 width: 180px;
                                 background-color: #1F5A96;
@@ -66,10 +67,10 @@ window.execCommunityImpact = async function execCommunityImpact(
                               }
                               
                               /* Show the tooltip text when you mouse over the tooltip container */
-                              .tooltip:hover .tooltip-text {
+                              .beam-impact-tooltip:hover .beam-impact-tooltip-text {
                                 visibility: visible;
                               }
-                              .tooltip .tooltip-text::after {
+                              .beam-impact-tooltip .beam-impact-tooltip-text::after {
                                 content: " ";
                                 position: absolute;
                                 bottom: 100%;  /* At the top of the tooltip */
@@ -80,7 +81,7 @@ window.execCommunityImpact = async function execCommunityImpact(
                                 border-color: transparent transparent #1F5A96 transparent;
                               }
                               </style>`
-    document.getElementById('impact-screen-container').style.fontFamily = fontFamily;
+    document.getElementById(beamImpactScreenContainerId).style.fontFamily = fontFamily;
   }
 
   function reportWindowSize() {
@@ -88,7 +89,7 @@ window.execCommunityImpact = async function execCommunityImpact(
 
     if (isMobile !== isMobileNew) {
       isMobile = isMobileNew;
-      let impactContainer = document.getElementById("impact-screen-container");
+      let impactContainer = document.getElementById(beamImpactScreenContainerId);
       impactContainer.parentNode.removeChild(impactContainer);
       renderImpactScreen();
     }
@@ -113,7 +114,7 @@ window.execCommunityImpact = async function execCommunityImpact(
 
   function renderImpactScreen() {
     let impactScreenContainer = new components.BeamContainer({
-      id: "impact-screen-container",
+      id: beamImpactScreenContainerId,
       style: {
         display: 'flex',
         flexDirection: 'column',
@@ -500,21 +501,8 @@ window.execCommunityImpact = async function execCommunityImpact(
       style: {
         flexDirection: 'column !important',
         flexWrap: 'nowrap !important'
-        // width: '100%',
-        // height: '100%'
       },
       children: [
-        // new components.BeamText({
-        //   text: 'How it works',
-        //   style: {
-        //     fontSize: '23px',
-        //     lineHeight: '28px',
-        //     height: '28px',
-        //     fontWeight: '700',
-        //     marginTop: '48px',
-        //     fontFamily: fontFamily || 'inherit'
-        //   }
-        // }),
         slider
       ]
     });
@@ -693,8 +681,8 @@ window.execCommunityImpact = async function execCommunityImpact(
         let learnMoreTooltipText = document.createElement('div');
         learnMoreTooltipText.id = 'beam-tooltip';
         learnMoreTooltipText.textContent = data?.copy?.complianceDescriptionWeb;
-        learnMoreElem.classList.add('tooltip');
-        learnMoreTooltipText.classList.add('tooltip-text');
+        learnMoreElem.classList.add('beam-impact-tooltip');
+        learnMoreTooltipText.classList.add('beam-impact-tooltip-text');
         learnMoreElem.appendChild(learnMoreTooltipText)
       }
     }
