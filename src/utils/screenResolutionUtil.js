@@ -5,7 +5,7 @@ const getContainerWidth = (containerId) => {
   return width;
 }
 const isMobile = (containerId) => {
-  const maxContainerWid = 750;
+  const maxContainerWid = 450;
   return /iPhone|iPad|iPod|Android/i.test(window.navigator.userAgent) || getContainerWidth(containerId) < maxContainerWid;
 }
 

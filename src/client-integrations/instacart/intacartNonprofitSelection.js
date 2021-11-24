@@ -1,5 +1,6 @@
 import * as App from 'widgets';
 import * as components from "../../components";
+import {screenResolutionUtil} from "../../utils";
 
 window.execNonprofitSelection = async function execNonprofitSelection(apiKey,
                                                                       userId,
@@ -39,9 +40,10 @@ window.execNonprofitSelection = async function execNonprofitSelection(apiKey,
     confirmationButtonColor: '#0AAD0A',
     causeTestColor: '#E97300',
     textColor: '#343538',
-    lightTextColor: '#bbbbbd',
+    lightTextColor: '#72767E',
     progressBarBackgroundColor: '#e3e3e3'
   }
+  let isMobile = screenResolutionUtil.isMobile();
 
   function addStylesheets() {
 
@@ -399,7 +401,8 @@ window.execNonprofitSelection = async function execNonprofitSelection(apiKey,
         },
         description: {
           style: {
-            fontSize: '12px'
+            fontSize: '12px',
+            color: themeColorConfig.textColor,
           },
           wrapperMobileStyle: {
             paddingTop: '4px'
@@ -417,33 +420,6 @@ window.execNonprofitSelection = async function execNonprofitSelection(apiKey,
             paddingTop: '0px'
           }
         },
-        infoArea: {
-          style: {
-            display: 'block',
-            justifyContent: 'space-between',
-            width: '100%'
-          }
-        },
-        learnMore: {
-          text: chainDonationType?.compliance_cta || "Learn more",
-          style: {
-            fontSize: '12px',
-          },
-          icon: {
-            style: {
-              width: '10px !important',
-              height: '10px !important',
-              paddingTop: '0px !important',
-              marginLeft: '8px',
-            }
-          }
-        },
-        poweredBy: {
-          style: {
-            fontSize: '12px',
-            marginRight: '8px',
-          }
-        }
       }
     });
     document.getElementById(beamContainerId).style.fontFamily = fontFamily;
@@ -544,12 +520,23 @@ window.execNonprofitSelection = async function execNonprofitSelection(apiKey,
     let infoSection = new components.BeamFlexWrapper({
       style: {
         display: 'block',
-        justifyContent: 'space-between',
+        justifyContent: 'start',
         width: '100%',
         marginBottom: '-10px'
       },
+      mobileStyle: {
+        justifyContent: 'space-between',
+      },
       children: [
         getLearnMore(chainDonationType?.compliance_cta),
+        !isMobile ? new components.BeamText({
+          text: '|',
+          color: "#72767E",
+          height: '8px',
+          paddingBottom: '2px',
+          fontWeight: '200',
+          fontSize: '12px'
+        }) : false,
         getPoweredByBeam()
       ]
     });
@@ -569,6 +556,7 @@ window.execNonprofitSelection = async function execNonprofitSelection(apiKey,
                 height: '10px !important',
                 paddingTop: '0px !important',
                 marginLeft: '8px',
+                color: "#72767E",
               }
             }),
             new components.BeamText({
@@ -576,11 +564,12 @@ window.execNonprofitSelection = async function execNonprofitSelection(apiKey,
               id: 'beam-learn-more',
               style: {
                 display: 'inline',
-                color: "#999999",
+                color: "#72767E",
                 fontFamily: instacartFontFamily,
                 fontSize: "12px",
                 paddingLeft: '5px',
-                fontWeight: 'normal',
+                paddingRight: '4px',
+                fontWeight: '200',
               }
             })
           ]
@@ -594,13 +583,13 @@ window.execNonprofitSelection = async function execNonprofitSelection(apiKey,
         children: [
           new components.BeamText({
             text: poweredByText || "Powered by Beam Impact",
-            color: "#999999",
+            color: "#72767E",
             fontFamily: instacartFontFamily,
-            fontWeight: 'normal',
+            fontWeight: '200',
             style: {
               fontSize: '12px',
               marginRight: '8px',
-
+              padding: '0.5px 0px 0px 4px'
             }
           })
         ]
