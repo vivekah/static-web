@@ -205,6 +205,7 @@ class InstacartNationalImpactWidget extends BaseImpactWidget {
     function region(options, nonprofit, isMobile) {
       return new components.BeamText({
         text: nonprofit.badge || 'Local nonprofit',
+        fontFamily: options.themeConfig.fontFamily,
         style: {
           ...options.themeConfig.region?.style,
           ...isMobile ? options.themeConfig.region?.mobileStyle : {}

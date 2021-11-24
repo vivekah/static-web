@@ -32,7 +32,8 @@ window.execNationalCommunityImpact = async function execNationalCommunityImpact(
         padding: '10px 20px'
       },
       children: [
-        getJoinUsSection(impactData),
+        // getJoinUsSection(impactData),
+        getTitle(),
         getPartnerSummarySection(impactData),
         getCommunityImpactSection(),
         getDisclosure(impactData)
@@ -44,8 +45,25 @@ window.execNationalCommunityImpact = async function execNationalCommunityImpact(
     } else {
       document.body.append(impactScreenContainer.view);
     }
-    addCallbacks();
+    // addCallbacks();
     renderCommunityImpactWidget();
+  }
+
+  function getTitle() {
+    return new components.BeamText({
+      text: "Powered by Beam Impact",
+      fontFamily: fontFamily || 'inherit',
+      style: {
+        fontSize: '12px',
+        color: themeColorConfig.lightTextColor,
+        margin: 'auto',
+        padding: '0px',
+        textAlign: 'center',
+      },
+      mobileStyle: {
+        textAlign: 'center !important'
+      }
+    });
   }
 
   function getDisclosure(impactData) {
@@ -66,7 +84,7 @@ window.execNationalCommunityImpact = async function execNationalCommunityImpact(
   }
 
   function addCallbacks() {
-    document.getElementById('beam-link-to-select-nonprofit').addEventListener('click', function(e){
+    document.getElementById('beam-link-to-select-nonprofit').addEventListener('click', function (e) {
       selectANonprofitCallback();
       e.preventDefault();
       return false;
@@ -169,7 +187,7 @@ window.execNationalCommunityImpact = async function execNationalCommunityImpact(
         flexDirection: 'column',
         justifyContent: 'center',
         margin: 'auto',
-        marginTop: '45px',
+        marginTop: '23px',
         // padding: '0px 20px',
         maxWidth: '700px',
       },
