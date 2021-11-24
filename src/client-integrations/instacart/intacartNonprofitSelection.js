@@ -1,4 +1,5 @@
 import * as App from 'widgets';
+import * as components from "../../components";
 
 window.execNonprofitSelection = async function execNonprofitSelection(apiKey,
                                                                       userId,
@@ -48,7 +49,7 @@ window.execNonprofitSelection = async function execNonprofitSelection(apiKey,
     nonprofitSelectionScreen.innerHTML += `
     <style>
       /* Tooltip container */
-                              .beam-impact-tooltip {
+                              #beam-learn-more {
                                 position: relative;
                                 display: inline-block;
                                 border-bottom: 1px dotted black; /* If you want dots under the hoverable text */
@@ -56,7 +57,7 @@ window.execNonprofitSelection = async function execNonprofitSelection(apiKey,
                               }
 
                               /* Tooltip text */
-                              .beam-impact-tooltip .beam-impact-tooltip-text {
+                              #beam-learn-more .beam-impact-tooltip-text {
                                 visibility: hidden;
                                 width: 180px;
                                 background-color: #1F5A96;
@@ -77,10 +78,10 @@ window.execNonprofitSelection = async function execNonprofitSelection(apiKey,
                               }
                               
                               /* Show the tooltip text when you mouse over the tooltip container */
-                              .beam-impact-tooltip:hover .beam-impact-tooltip-text {
+                              #beam-learn-more:hover .beam-impact-tooltip-text {
                                 visibility: visible;
                               }
-                              .beam-impact-tooltip .beam-impact-tooltip-text::after {
+                              #beam-learn-more .beam-impact-tooltip-text::after {
                                 content: " ";
                                 position: absolute;
                                 bottom: 100%;  /* At the top of the tooltip */
@@ -297,6 +298,8 @@ window.execNonprofitSelection = async function execNonprofitSelection(apiKey,
       renderAfterSelection: true,
       selectedNonprofitCallback: async (nonprofit, store) => {
         console.debug(nonprofit);
+        addTooltip(chainDonationType);
+        console.log("chainDonationType ", chainDonationType)
         // create new event
         let event = new Event(EVENTS.nonProfitSelected);
         // Dispatch the event.
@@ -478,16 +481,17 @@ window.execNonprofitSelection = async function execNonprofitSelection(apiKey,
     const beamContentBox = getBeamWidgetHTML(nonprofits?.chain_donation_type);
     nonprofitWidgetContainer.prepend(beamContentBox);
     addStylesheets();
+    addInfoSection(nonprofits?.chain_donation_type)
+    addTooltip(nonprofits?.chain_donation_type);
+
     await executeBeamWidget(nonprofits);
     await registerUser(userId);
-    addTooltip(nonprofits?.chain_donation_type);
 
     function getBeamWidgetHTML(chainDonationType) {
       const beamContentBox = document.createElement("div");
       beamContentBox.className = "content-box";
       beamContentBox.id = "beam-wrapper-content-box";
       beamContentBox.innerHTML = `
-       
                           <div class='content-box__row' id='beam-widget-content-box'>
                              <div id='beam-widget-header'>
                                 <p id="beam-selection-title">
@@ -519,18 +523,88 @@ window.execNonprofitSelection = async function execNonprofitSelection(apiKey,
   function addTooltip(data) {
 
     let beamTooltip = document.getElementById("beam-tooltip");
+    console.log("beamTooltip: ", beamTooltip)
     if (!beamTooltip) {
-      let learnMoreElem = document.getElementById("learn-more");
+      let learnMoreElem = document.getElementById("beam-learn-more");
       if (learnMoreElem) {
         let learnMoreTooltipText = document.createElement('div');
         learnMoreTooltipText.id = 'beam-tooltip';
         learnMoreTooltipText.textContent = data?.compliance_description_web || `
       To support local nonprofits across the country, donations are made to PayPal Giving Fund, a registered 501(c)(3) nonprofit organization. PPGF receives the donation and distributes 100% to the nonprofit of your choice, with Instacart covering all applicable processing fees. In the extremely rare event your nonprofit shuts down or PPGF is otherwise unable to fund it, PPGF will reassign the funds to similar nonprofit in your area.
       `;
-        learnMoreElem.classList.add('beam-impact-tooltip');
         learnMoreTooltipText.classList.add('beam-impact-tooltip-text');
         learnMoreElem.appendChild(learnMoreTooltipText)
       }
+    }
+  }
+
+  function addInfoSection(chainDonationType) {
+    let beamContainer = document.getElementById("beam-container");
+
+    let infoSection = new components.BeamFlexWrapper({
+      style: {
+        display: 'block',
+        justifyContent: 'space-between',
+        width: '100%',
+        marginBottom: '-10px'
+      },
+      children: [
+        getLearnMore(chainDonationType?.compliance_cta),
+        getPoweredByBeam()
+      ]
+    });
+
+    beamContainer.prepend(infoSection.view)
+///
+
+
+    ////
+    function getLearnMore(compliance_cta) {
+      return new components.BeamContainer({
+          children: [
+            new components.BeamInfoIcon({
+              style: {
+                display: 'inline',
+                width: '10px !important',
+                height: '10px !important',
+                paddingTop: '0px !important',
+                marginLeft: '8px',
+              }
+            }),
+            new components.BeamText({
+              text: `Learn more` || compliance_cta,
+              id: 'beam-learn-more',
+              style: {
+                display: 'inline',
+                color: "#999999",
+                fontFamily: instacartFontFamily,
+                fontSize: "12px",
+                paddingLeft: '5px',
+                fontWeight: 'normal',
+              }
+            })
+          ]
+        }
+      )
+        ;
+    }
+
+    function getPoweredByBeam(poweredByText) {
+      return new components.BeamContainer({
+        children: [
+          new components.BeamText({
+            text: poweredByText || "Powered by Beam Impact",
+            color: "#999999",
+            fontFamily: instacartFontFamily,
+            fontWeight: 'normal',
+            style: {
+              fontSize: '12px',
+              marginRight: '8px',
+
+            }
+          })
+        ]
+      });
     }
   }
 

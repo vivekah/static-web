@@ -132,56 +132,7 @@ class ModernUINonprofitWidgetTheme extends BaseTheme {
     ]
   }
 
-  getLearnMore() {
-    return new components.BeamContainer({
-        children: [
-          new components.BeamInfoIcon({
-            style: {
-              display: 'inline',
-              paddingTop: '4px',
-              ...this.options.learnMore?.icon?.style,
-              ...this.isMobile ? this.options.learnMore?.icon?.mobileStyle : {},
-            }
-          }),
-          new components.BeamText({
-            text: `Learn more` || this.options?.learnMore?.text,
-            id: 'learn-more',
-            style: {
-              display: 'inline',
-              color: "#999",
-              fontFamily: this.options.fontFamily,
-              fontSize: "12px",
-              paddingLeft: '5px',
-              fontWeight: '100',
-              ...this.options.learnMore?.style,
-              ...this.isMobile ? this.options.learnMore?.mobileStyle : {},
-            }
-          })
-        ]
-      }
-    )
-      ;
-  }
 
-  getPoweredByBeam() {
-    return !this.options.hidePoweredBy &&
-      new components.BeamContainer({
-        children: [
-          new components.BeamText({
-            text: this.options.poweredByText || "Powered by Beam Impact",
-            color: this.options.poweredByTextColor || "#999",
-            fontFamily: this.options.fontFamily,
-            fontWeight: '100',
-            fontSize: this.options.poweredByFontSize || "12px",// this.options.tileCauseFontSize || "small",
-            style: {
-              ...this.options.poweredBy?.style,
-              ...this.isMobile ? this.options?.poweredBy?.mobileStyle : {},
-
-            }
-          })
-        ]
-      });
-  }
 
   getRegion(nonprofit, margin = "0", selectedNonprofit) {
     return new components.BeamFlexWrapper({
@@ -448,16 +399,6 @@ class ModernUINonprofitWidgetTheme extends BaseTheme {
           justifyContent: 'center',
           flexDirection: 'column',
           children: [
-            new components.BeamFlexWrapper({
-              style: {
-                display: 'none',
-                ...this.options.infoArea?.style
-              },
-              children: [
-                this.getLearnMore(),
-                this.getPoweredByBeam()
-              ]
-            }),
             ...nonprofits.map((nonprofit, index) =>
               column(
                 nonprofit,
