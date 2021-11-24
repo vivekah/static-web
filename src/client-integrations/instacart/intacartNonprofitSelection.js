@@ -62,7 +62,7 @@ window.execNonprofitSelection = async function execNonprofitSelection(apiKey,
     document.head.innerHTML += `
     <style>
       /* Tooltip container */
-                              .tooltip {
+                              .beam-impact-tooltip {
                                 position: relative;
                                 display: inline-block;
                                 border-bottom: 1px dotted black; /* If you want dots under the hoverable text */
@@ -70,7 +70,7 @@ window.execNonprofitSelection = async function execNonprofitSelection(apiKey,
                               }
 
                               /* Tooltip text */
-                              .tooltip .tooltip-text {
+                              .beam-impact-tooltip .beam-impact-tooltip-text {
                                 visibility: hidden;
                                 width: 180px;
                                 background-color: #1F5A96;
@@ -91,10 +91,10 @@ window.execNonprofitSelection = async function execNonprofitSelection(apiKey,
                               }
                               
                               /* Show the tooltip text when you mouse over the tooltip container */
-                              .tooltip:hover .tooltip-text {
+                              .beam-impact-tooltip:hover .beam-impact-tooltip-text {
                                 visibility: visible;
                               }
-                              .tooltip .tooltip-text::after {
+                              .beam-impact-tooltip .beam-impact-tooltip-text::after {
                                 content: " ";
                                 position: absolute;
                                 bottom: 100%;  /* At the top of the tooltip */
@@ -544,8 +544,8 @@ window.execNonprofitSelection = async function execNonprofitSelection(apiKey,
         learnMoreTooltipText.textContent = data?.compliance_description_web || `
       To support local nonprofits across the country, donations are made to PayPal Giving Fund, a registered 501(c)(3) nonprofit organization. PPGF receives the donation and distributes 100% to the nonprofit of your choice, with Instacart covering all applicable processing fees. In the extremely rare event your nonprofit shuts down or PPGF is otherwise unable to fund it, PPGF will reassign the funds to similar nonprofit in your area.
       `;
-        learnMoreElem.classList.add('tooltip');
-        learnMoreTooltipText.classList.add('tooltip-text');
+        learnMoreElem.classList.add('beam-impact-tooltip');
+        learnMoreTooltipText.classList.add('beam-impact-tooltip-text');
         learnMoreElem.appendChild(learnMoreTooltipText)
       }
     }
