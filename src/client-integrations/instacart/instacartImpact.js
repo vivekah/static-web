@@ -141,6 +141,8 @@ window.execCommunityImpact = async function execCommunityImpact(
     } else {
       document.body.append(impactScreenContainer.view);
     }
+
+    console.log(" impact data: ", impactData)
     loadStyle();
     createCarousel();
     addTooltip(impactData);
@@ -732,6 +734,7 @@ window.execCommunityImpact = async function execCommunityImpact(
       containerId: beamImpactWidgetContainerId,
       chainId: chainId,
       lan: lan,
+      favoriteNonprofit: impactData.favorite_nonprofit,
       themeConfig: {
         id: 'beam-community-impact-widget',
         showCommunityImpactHeader: true,
@@ -746,6 +749,11 @@ window.execCommunityImpact = async function execCommunityImpact(
           }, mobileStyle: {
             fontSize: '15px',
 
+          }
+        },
+        favoriteNonprofit:{
+          style: {
+            border: '3px solid #72767E'
           }
         },
         impactCardWidth: '278px',
@@ -848,7 +856,6 @@ window.execCommunityImpact = async function execCommunityImpact(
           }
         },
         fontFamily: fontFamily || "inherit",
-        gradientColors: [themeColorConfig.progressBarColor],
         progressBarColors: [
           {color: themeColorConfig.progressBarColor, offset: "100%"}
         ],

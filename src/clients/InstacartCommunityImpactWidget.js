@@ -50,7 +50,7 @@ class InstacartCommunityImpactWidget extends BaseImpactWidget {
     // console.log(" OPTIONS", this.options)
     const data = await this.makeAPIRequest("api/v2/chains/impact/regional", {
       chain: this.options.chainId,
-    }, this.options.webBaseUrl );
+    }, this.options.webBaseUrl);
 
     // console.log(" REGIONS ", Object.keys(data))
 
@@ -156,8 +156,8 @@ class InstacartCommunityImpactWidget extends BaseImpactWidget {
       style: {
         margin: "10px 10px 10px 10px",
         ...this.options?.themeConfig?.outerCard?.style,
-        ...this.isMobile ? this.options.themeConfig.outerCard?.mobileStyle : {}
-
+        ...this.isMobile ? this.options.themeConfig.outerCard?.mobileStyle : {},
+        ...(this.options.favoriteNonprofit === nonprofit.id) ? this.options.themeConfig?.favoriteNonprofit?.style : {},
       },
       children: [
         // inner card
@@ -525,7 +525,7 @@ class InstacartCommunityImpactWidget extends BaseImpactWidget {
           color: "#343538",
           fontWeight: 700,
           style: {
-            ... this.options.themeConfig.communityImpactTitle?.style
+            ...this.options.themeConfig.communityImpactTitle?.style
           }
         }),
         // nonprofits
