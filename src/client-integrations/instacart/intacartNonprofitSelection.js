@@ -487,8 +487,7 @@ window.execNonprofitSelection = async function execNonprofitSelection(apiKey,
       beamContentBox.className = "content-box";
       beamContentBox.id = "beam-wrapper-content-box";
       beamContentBox.innerHTML = `
-          <div class='row'>
-                <div class='col-sm-8'>
+       
                           <div class='content-box__row' id='beam-widget-content-box'>
                              <div id='beam-widget-header'>
                                 <p id="beam-selection-title">
@@ -511,8 +510,7 @@ window.execNonprofitSelection = async function execNonprofitSelection(apiKey,
                       
                               <div id="beam-loading-content" style='display: none;'></div>
                             </div>
-                            </div>
-                          </div>
+                          
                       </div>`
       return beamContentBox;
     }
