@@ -44,22 +44,8 @@ window.execNonprofitSelection = async function execNonprofitSelection(apiKey,
 
   function addStylesheets() {
 
-    const viewPortMetaTag = document.querySelector("meta[name='viewport']");
-    if (!viewPortMetaTag) {
-      let meta = document.createElement('meta');
-      meta.name = "viewport";
-      meta.content = "width=device-width,initial-scale=1.0";
-      document.getElementsByTagName('head')[0].appendChild(meta);
-    }
-    if (!instacartFontFamily) {
-      let link = document.createElement('link');
-      link.setAttribute('rel', 'stylesheet');
-      link.setAttribute('type', 'text/css');
-      link.setAttribute('href', 'https://fonts.googleapis.com/css2?family=Poppins:wght@400&display=swap');
-
-      document.head.appendChild(link);
-    }
-    document.head.innerHTML += `
+    let nonprofitSelectionScreen = document.getElementById(beamContainerId);
+    nonprofitSelectionScreen.innerHTML += `
     <style>
       /* Tooltip container */
                               .beam-impact-tooltip {
@@ -104,6 +90,103 @@ window.execNonprofitSelection = async function execNonprofitSelection(apiKey,
                                 border-style: solid;
                                 border-color: transparent transparent #1F5A96 transparent;
                               }
+
+                              #internal-beam-widget-wrapper{
+                                  margin-bottom: 6px;
+                              }
+                              #chose-nonprofit-button{
+                                  background: #e3e3e3; 
+                                  color: #6a6b6d; 
+                                  border-radius:10px; 
+                                  width: 100%; 
+                                  border: none; 
+                                  height: 40px;
+                                 font-family: ${fontFamily};
+                                 font-size: 18px;
+                              }
+                              #beam-widget-header{
+                              padding: 0 16px;
+                              }
+                                #selection-title{
+                                margin: 4px 5px;
+                                text-align: left; 
+                                position:static;
+                                left:0px;
+                                top:0px;
+                                font-size: 31px !important;
+                                font-weight: 600;
+                                color: #343538 !important;
+                                font-family: ${fontFamily};
+                                line-height:40px !important;
+                                letter-spacing: normal !important;
+                                }
+                                
+                                #link-learn-more{
+                                margin: 8px 5px; 
+                                width: 100%;
+                                font-family: ${fontFamily} !important; 
+                                font-size:15px !important;
+                                line-height:22px !important;
+                                color:#72767E;
+                                font-weight: 400!important;
+                                letter-spacing: normal !important;
+                               }
+                               #beam-disclosure{
+                               font-family: ${fontFamily};
+                               font-size: 12px;
+                               line-height: normal;
+                               }
+                              @media only screen and (max-width: 600px) {
+                                 #internal-beam-widget-wrapper{
+                                  margin-bottom: 8px;
+                                 }
+                                 #beam-disclosure {
+                                  margin: 0px 0px 70px 0px;
+                                  font-size: 12px;
+                                 font-family: ${fontFamily};
+
+                                 }
+                                   #chose-nonprofit-button {
+                                       width: 100%;
+                                       max-width: 500px;
+                                      }
+                                  #selection-page-footer{
+                                      position: fixed;
+                                              bottom: 0;
+                                              right: 0; 
+                                              width:100%;
+                                              background-color: white;
+                                              display: flex;
+                                              align-items: center;
+                                              flex-direction: column;
+                                        
+
+                                  }    
+                                   #button-wrapper{
+                                        width: 100%;
+                                        max-width: 500px;
+                                        padding: 10px 16px;
+                                   }   
+                                   #button-divider{
+                                    width: 100%;
+                                    display: inline-block !important;
+                                    height: 15px;
+                                    background: rgb(241,241,241);
+                                    background: -moz-linear-gradient(0deg, rgba(241,241,241,1) 3%, rgba(255,255,255,1) 98%);
+                                    background: -webkit-linear-gradient(0deg, rgba(241,241,241,1) 3%, rgba(255,255,255,1) 98%);
+                                    background: linear-gradient(0deg, rgba(241,241,241,1) 3%, rgba(255,255,255,1) 98%);
+                                    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#f1f1f1",endColorstr="#ffffff",GradientType=1);
+                                   }  
+                                  }
+                                                                 
+                              @media only screen and (max-width: 400px) {
+                                                           
+                                #selection-title{
+                                }
+                                #link-learn-more{
+                                }
+                           }
+                                
                               
     </style>`
   }
@@ -394,6 +477,7 @@ window.execNonprofitSelection = async function execNonprofitSelection(apiKey,
 
     const beamContentBox = getBeamWidgetHTML(nonprofits?.chain_donation_type);
     nonprofitWidgetContainer.prepend(beamContentBox);
+    addStylesheets();
     await executeBeamWidget(nonprofits);
     await registerUser(userId);
     addTooltip(nonprofits?.chain_donation_type);
@@ -403,104 +487,6 @@ window.execNonprofitSelection = async function execNonprofitSelection(apiKey,
       beamContentBox.className = "content-box";
       beamContentBox.id = "beam-wrapper-content-box";
       beamContentBox.innerHTML = `
- <style>
-                              #internal-beam-widget-wrapper{
-                                  margin-bottom: 6px;
-                              }
-                              #chose-nonprofit-button{
-                                  background: #e3e3e3; 
-                                  color: #6a6b6d; 
-                                  border-radius:10px; 
-                                  width: 100%; 
-                                  border: none; 
-                                  height: 40px;
-                                 font-family: ${fontFamily};
-                                 font-size: 18px;
-                              }
-                              #beam-widget-header{
-                              padding: 0 16px;
-                              }
-                                #selection-title{
-                                margin: 4px 5px;
-                                text-align: left; 
-                                position:static;
-                                left:0px;
-                                top:0px;
-                                font-size: 31px !important;
-                                font-weight: 600;
-                                color: #343538 !important;
-                                font-family: ${fontFamily};
-                                line-height:40px !important;
-                                letter-spacing: normal !important;
-                                }
-                                
-                                #link-learn-more{
-                                margin: 8px 5px; 
-                                width: 100%;
-                                font-family: ${fontFamily} !important; 
-                                font-size:15px !important;
-                                line-height:22px !important;
-                                color:#72767E;
-                                font-weight: 400!important;
-                                letter-spacing: normal !important;
-                               }
-                               #beam-disclosure{
-                               font-family: ${fontFamily};
-                               font-size: 12px;
-                               line-height: normal;
-                               }
-                              @media only screen and (max-width: 600px) {
-                                 #internal-beam-widget-wrapper{
-                                  margin-bottom: 8px;
-                                 }
-                                 #beam-disclosure {
-                                  margin: 0px 0px 70px 0px;
-                                  font-size: 12px;
-                                 font-family: ${fontFamily};
-
-                                 }
-                                   #chose-nonprofit-button {
-                                       width: 100%;
-                                       max-width: 500px;
-                                      }
-                                  #selection-page-footer{
-                                      position: fixed;
-                                              bottom: 0;
-                                              right: 0; 
-                                              width:100%;
-                                              background-color: white;
-                                              display: flex;
-                                              align-items: center;
-                                              flex-direction: column;
-                                        
-
-                                  }    
-                                   #button-wrapper{
-                                        width: 100%;
-                                        max-width: 500px;
-                                        padding: 10px 16px;
-                                   }   
-                                   #button-divider{
-                                    width: 100%;
-                                    display: inline-block !important;
-                                    height: 15px;
-                                    background: rgb(241,241,241);
-                                    background: -moz-linear-gradient(0deg, rgba(241,241,241,1) 3%, rgba(255,255,255,1) 98%);
-                                    background: -webkit-linear-gradient(0deg, rgba(241,241,241,1) 3%, rgba(255,255,255,1) 98%);
-                                    background: linear-gradient(0deg, rgba(241,241,241,1) 3%, rgba(255,255,255,1) 98%);
-                                    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#f1f1f1",endColorstr="#ffffff",GradientType=1);
-                                   }  
-                                  }
-                                                                 
-                              @media only screen and (max-width: 400px) {
-                                                           
-                                #selection-title{
-                                }
-                                #link-learn-more{
-                                }
-                           }
-                                </style>
-
           <div class='row'>
                 <div class='col-sm-8'>
                           <div class='content-box__row' id='beam-widget-content-box'>
@@ -528,7 +514,6 @@ window.execNonprofitSelection = async function execNonprofitSelection(apiKey,
                             </div>
                           </div>
                       </div>`
-
       return beamContentBox;
     }
   }
@@ -593,7 +578,6 @@ window.execNonprofitSelection = async function execNonprofitSelection(apiKey,
   }
 
   let nonprofits = await getNonprofits();
-  addStylesheets();
   await insertBeamWidget(nonprofits);
   listenToNonprofitSelectedEvent();
   listenToNonprofitConfirmedEvent();
