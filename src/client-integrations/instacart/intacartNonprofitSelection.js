@@ -535,7 +535,7 @@ window.execNonprofitSelection = async function execNonprofitSelection(apiKey,
           height: '8px',
           paddingBottom: '2px',
           fontWeight: '200',
-          fontSize: '12px'
+          fontSize: '13.5px'
         }) : false,
         getPoweredByBeam()
       ]
@@ -589,7 +589,7 @@ window.execNonprofitSelection = async function execNonprofitSelection(apiKey,
             style: {
               fontSize: '12px',
               marginRight: '8px',
-              padding: '0.5px 0px 0px 4px'
+              padding: '1px 0px 0px 4px'
             }
           })
         ]
