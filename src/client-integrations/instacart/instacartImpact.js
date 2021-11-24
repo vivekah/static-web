@@ -692,7 +692,7 @@ window.execCommunityImpact = async function execCommunityImpact(
       // margin:'37px 0px 0px 0px !important',
       style: {
         margin: '37px 0px 0px 0px !important',
-        border: '0',
+        border: '0px',
         maxWidth: '700px',
       }
     });
@@ -888,7 +888,8 @@ window.execCommunityImpact = async function execCommunityImpact(
           style: {
             margin: '15px 0px 5px 0px',
             borderTop: `1px solid ${themeColorConfig.progressBarBackgroundColor} `,
-            borderBottom: '0'
+            borderBottom: '0',
+            border: '0px'
           }
         },
         goalInfo: {
