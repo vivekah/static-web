@@ -157,7 +157,7 @@ class InstacartCommunityImpactWidget extends BaseImpactWidget {
         margin: "10px 10px 10px 10px",
         ...this.options?.themeConfig?.outerCard?.style,
         ...this.isMobile ? this.options.themeConfig.outerCard?.mobileStyle : {},
-        ...(this.options.favoriteNonprofit === nonprofit.id) ? this.options.themeConfig?.favoriteNonprofit?.style : {},
+        ...(this.options.favoriteNonprofit === nonprofit.nonprofit_id) ? this.options.themeConfig?.favoriteNonprofit?.style : {},
       },
       children: [
         // inner card

@@ -753,7 +753,7 @@ window.execCommunityImpact = async function execCommunityImpact(
         },
         favoriteNonprofit:{
           style: {
-            border: '3px solid #72767E'
+            border: '3px solid #72767E !important'
           }
         },
         impactCardWidth: '278px',
