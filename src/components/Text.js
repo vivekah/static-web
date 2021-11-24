@@ -28,11 +28,17 @@ class Text extends Component {
     this._element.innerHTML = options.text;
     if (options.clickListener) {
       if (options.clickListenerParams) {
-        this._element.addEventListener("click", () => {
+        this._element.addEventListener("click", (e) => {
           options.clickListener(options.clickListenerParams)
+          e.preventDefault(); // Cancel the native event
+          return false;
         });
       } else {
-        this._element.addEventListener("click", options.clickListener);
+        this._element.addEventListener("click", function (e) {
+          options.clickListener();
+          e.preventDefault(); // Cancel the native event
+          return false;
+        })
       }
     }
     if (options.addAttribute) {

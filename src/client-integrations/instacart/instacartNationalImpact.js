@@ -202,7 +202,8 @@ window.execNationalCommunityImpact = async function execNationalCommunityImpact(
           style: {
             fontSize: '44px',
             margin: 'auto',
-            fontWeight: '600'
+            fontWeight: '600',
+            color: themeColorConfig.textColor
           },
           mobileStyle: {
             fontSize: '31px',
@@ -289,6 +290,7 @@ window.execNationalCommunityImpact = async function execNationalCommunityImpact(
         impactCard: {
           style: {
             borderRadius: '10px',
+            color: themeColorConfig.textColor,
           },
           mobileStyle: {
             width: '100% !important',
@@ -313,7 +315,8 @@ window.execNationalCommunityImpact = async function execNationalCommunityImpact(
         region: {
           style: {
             fontSize: '10px !important',
-            fontWeight: '400'
+            fontWeight: '400',
+            color: themeColorConfig.textColor,
           }
         },
         impact: {
@@ -473,7 +476,8 @@ window.execNationalCommunityImpact = async function execNationalCommunityImpact(
             fontFamily: `${fontFamily} !important`,
             margin: '10px 0px',
             fontSize: '23px',
-            fontWeight: "600"
+            fontWeight: "600",
+            color: themeColorConfig.textColor
           }
         },
       }

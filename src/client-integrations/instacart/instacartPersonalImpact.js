@@ -15,7 +15,7 @@ window.execPersonalImpact = async function execPersonalImpact(apiKey,
     progressBarColor: '#0AAD0A',
     confirmationButtonColor: '#0AAD0A',
     causeTestColor: '#f0a358',
-    textColor: '#6a6b6d',
+    textColor: '#343538',
     lightTextColor: '#bbbbbd',
     progressBarBackgroundColor: '#e3e3e3'
   }

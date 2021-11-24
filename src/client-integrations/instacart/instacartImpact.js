@@ -174,14 +174,13 @@ window.execCommunityImpact = async function execCommunityImpact(
         height: '44px'
       },
       children: [
-        new components.BeamCloseIcon({
-          clickListener: dismissWindowCallback,
-          style: {}
-        }),
+        // new components.BeamCloseIcon({
+        //   clickListener: dismissWindowCallback,
+        //   style: {}
+        // }),
         new components.BeamFlexWrapper({
           style: {
-            flexGrow: '1',
-            width: 'calc( 100% - 16px)'
+            width: '100%'
           },
           children: [
             new components.BeamText({
@@ -693,8 +692,7 @@ window.execCommunityImpact = async function execCommunityImpact(
       // margin:'37px 0px 0px 0px !important',
       style: {
         margin: '37px 0px 0px 0px !important',
-        borderTop: `1px solid ${themeColorConfig.progressBarBackgroundColor} `,
-        borderBottom: '0',
+        border: '0',
         maxWidth: '700px',
       }
     });
@@ -782,7 +780,8 @@ window.execCommunityImpact = async function execCommunityImpact(
           style: {
             fontSize: '10px',
             fontWeight: '400',
-            fontFamily: fontFamily || 'inherit'
+            fontFamily: fontFamily || 'inherit',
+            color: themeColorConfig.causeTestColor
           }
         },
         impact: {
