@@ -1,6 +1,6 @@
 {
   "name": "@beamimpact/widget",
-  "version": "1.0.14",
+  "version": "1.0.15",
   "description": "The Beam SDK enables brands to connect with their customers over shared values, not transactional discounts, to build stronger loyalty. Our integration achieves this by allowing customers (a) choose a nonprofit where the brand will donate part of their purchase from a set of curated options, which can be tailored to be local to the customer, and (b) track their cumulative impact with every order towards quantifiable goals. Customers are motivated that they have a free way to tangibly make an impact for social issues they otherwise feel powerless to improve and feel a deeper connection to brands who've helped them do so, resulting in higher purchase frequency, average order value, and cart completion rate.",
   "main": "index.js",
   "scripts": {
