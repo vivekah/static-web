@@ -735,7 +735,7 @@ window.execCommunityImpact = async function execCommunityImpact(
       chainId: chainId,
       lan: lan,
       themeConfig: {
-        id: 'instacart-community-impact',
+        id: 'beam-community-impact-widget',
         showCommunityImpactHeader: true,
         communityImpactTitle: {
           text: impactData.community_impact_title,

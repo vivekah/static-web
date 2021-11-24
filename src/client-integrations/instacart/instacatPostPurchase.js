@@ -12,7 +12,7 @@ window.execPostPurchaseView = async function execPostPurchaseView(apiKey,
   const chainId = "61";
   const beamWebSdkBaseUrl = production ? process.env.BEAM_BACKEND_BASE_URL : process.env.STAGE_BEAM_BACKEND_BASE_URL;
   // shop config
-  const fontFamily = instacartFontFamily || 'Poppins';
+  const fontFamily = instacartFontFamily;
   //theme
   const themeColorConfig = {
     progressBarColor: '#0AAD0A',
@@ -27,26 +27,7 @@ window.execPostPurchaseView = async function execPostPurchaseView(apiKey,
   await renderView();
 
   function addStylesheets() {
-    const fontLink = document.createElement('link');
-    fontLink.href = 'https://fonts.googleapis.com/css?family=Poppins';
-    fontLink.rel = 'stylesheet';
-    document.getElementsByTagName('head')[0].appendChild(fontLink);
-
-
-    const viewPortMetaTag = document.querySelector("meta[name='viewport']");
-    if (!viewPortMetaTag) {
-      let meta = document.createElement('meta');
-      meta.name = "viewport";
-      meta.content = "width=device-width,initial-scale=1.0";
-      document.getElementsByTagName('head')[0].appendChild(meta);
-    }
-    const fontStyle = document.createElement("style");
-    fontStyle.innerHTML = `
-         body {
-              font-family: ${fontFamily};
-            }
-    `;
-    document.head.appendChild(fontStyle);
+    //add styles here
   }
 
   async function renderView() {
@@ -84,14 +65,15 @@ window.execPostPurchaseView = async function execPostPurchaseView(apiKey,
           new components.BeamText({
             text: data?.confirmation_message || 'Your order has funded a meal </br> for someone in need.',
             textAlign: 'center',
-
+            fontFamily: fontFamily,
             fontWeight: '600'
           }),
           data && new components.BeamText({
             text: data.favorite_nonprofit,
             textAlign: 'center',
             color: themeColorConfig.lightTextColor,
-            fontSize: '12px'
+            fontSize: '12px',
+            fontFamily: fontFamily,
           })
 
         ]
@@ -119,14 +101,14 @@ window.execPostPurchaseView = async function execPostPurchaseView(apiKey,
       }
     });
     if (response.status == 200)
-    try {
-    return await  response.json();
+      try {
+        return await response.json();
 
-    } catch (e) {
-    return await  response.statusText;
-    }
-  else
-    return null;
+      } catch (e) {
+        return await response.statusText;
+      }
+    else
+      return null;
   }
 
 }

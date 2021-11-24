@@ -20,7 +20,7 @@ window.execNonprofitSelection = async function execNonprofitSelection(apiKey,
   const storeId = "89";
   const chainId = "61";
   const beamContainerId = 'internal-beam-widget-wrapper';
-  const confirmButtonId = "chose-nonprofit-button";
+  const confirmButtonId = "beam-chose-nonprofit-button";
 
   // shop config
   const fontFamily = instacartFontFamily || "inherit";
@@ -94,7 +94,7 @@ window.execNonprofitSelection = async function execNonprofitSelection(apiKey,
                               #internal-beam-widget-wrapper{
                                   margin-bottom: 6px;
                               }
-                              #chose-nonprofit-button{
+                              #beam-chose-nonprofit-button{
                                   background: #e3e3e3; 
                                   color: #6a6b6d; 
                                   border-radius:10px; 
@@ -107,7 +107,7 @@ window.execNonprofitSelection = async function execNonprofitSelection(apiKey,
                               #beam-widget-header{
                               padding: 0 16px;
                               }
-                                #selection-title{
+                                #beam-selection-title{
                                 margin: 4px 5px;
                                 text-align: left; 
                                 position:static;
@@ -121,7 +121,7 @@ window.execNonprofitSelection = async function execNonprofitSelection(apiKey,
                                 letter-spacing: normal !important;
                                 }
                                 
-                                #link-learn-more{
+                                #beam-link-learn-more{
                                 margin: 8px 5px; 
                                 width: 100%;
                                 font-family: ${fontFamily} !important; 
@@ -146,11 +146,11 @@ window.execNonprofitSelection = async function execNonprofitSelection(apiKey,
                                  font-family: ${fontFamily};
 
                                  }
-                                   #chose-nonprofit-button {
+                                   #beam-chose-nonprofit-button {
                                        width: 100%;
                                        max-width: 500px;
                                       }
-                                  #selection-page-footer{
+                                  #beam-selection-page-footer{
                                       position: fixed;
                                               bottom: 0;
                                               right: 0; 
@@ -162,12 +162,12 @@ window.execNonprofitSelection = async function execNonprofitSelection(apiKey,
                                         
 
                                   }    
-                                   #button-wrapper{
+                                   #beam-confirm-button-wrapper{
                                         width: 100%;
                                         max-width: 500px;
                                         padding: 10px 16px;
                                    }   
-                                   #button-divider{
+                                   #beam-confirm-button-divider{
                                     width: 100%;
                                     display: inline-block !important;
                                     height: 15px;
@@ -181,9 +181,9 @@ window.execNonprofitSelection = async function execNonprofitSelection(apiKey,
                                                                  
                               @media only screen and (max-width: 400px) {
                                                            
-                                #selection-title{
+                                #beam-selection-title{
                                 }
-                                #link-learn-more{
+                                #beam-link-learn-more{
                                 }
                            }
                                 
@@ -200,11 +200,11 @@ window.execNonprofitSelection = async function execNonprofitSelection(apiKey,
 
         if (persistTransactionRequest.status >= 200 && persistTransactionRequest.status < 300) {
           let transaction = JSON.parse(persistTransactionRequest.responseText);
-          console.debug("Transaction id:", transaction?.id);
+          // console.debug("Transaction id:", transaction?.id);
           window.localStorage.setItem(key, transaction?.id);
           window.localStorage.setItem(nonprofitKey, JSON.stringify(widget.lastNonprofit));
-          console.debug("lastNonprofit:  ", widget.lastNonprofit)
-          console.debug("persistTransactionRequest:  ", transaction)
+          // console.debug("lastNonprofit:  ", widget.lastNonprofit)
+          // console.debug("persistTransactionRequest:  ", transaction)
           resolve(transaction?.id);
         } else {
           reject({
@@ -491,19 +491,19 @@ window.execNonprofitSelection = async function execNonprofitSelection(apiKey,
                 <div class='col-sm-8'>
                           <div class='content-box__row' id='beam-widget-content-box'>
                              <div id='beam-widget-header'>
-                                <p id="selection-title">
+                                <p id="beam-selection-title">
                                 ${chainDonationType?.title_web || "Fight food insecurity with instacart"} </p>
-                                <p id="link-learn-more"> 
+                                <p id="beam-link-learn-more"> 
                                 ${chainDonationType?.description_web || `Choose a cause to contribute to with your next order, and one meal will be donated there at no extra cost to you. <a style="color:${themeColorConfig.progressBarColor}" href="#">Learn more </a>`}
                                 </p>
                               </p>
                              <div id="beam-container"  style="max-width: 500px">
                               <div id="internal-beam-widget-wrapper" style="max-width: 500px"></div>
                                 <p id="beam-disclosure">${chainDonationType?.instacart_disclosure}</p>                        
-                                <div id="selection-page-footer">
-                                <div id="button-divider"></div>
-                                <div id="button-wrapper">
-                                    <button id="chose-nonprofit-button" disabled>${chainDonationType?.choose_cta || "Choose nonprofit"}
+                                <div id="beam-selection-page-footer">
+                                <div id="beam-confirm-button-divider"></div>
+                                <div id="beam-confirm-button-wrapper">
+                                    <button id="beam-chose-nonprofit-button" disabled>${chainDonationType?.choose_cta || "Choose nonprofit"}
                                  </button>
                                 </div>
                                 
@@ -563,7 +563,7 @@ window.execNonprofitSelection = async function execNonprofitSelection(apiKey,
   }
 
   function listenToLearnMoreLinkClickEvent() {
-    let linkLearnMore = document.getElementById('link-learn-more');
+    let linkLearnMore = document.getElementById('beam-link-learn-more');
     linkLearnMore.addEventListener('click', function (e) {
       learnMoreCallback();
       e.preventDefault();

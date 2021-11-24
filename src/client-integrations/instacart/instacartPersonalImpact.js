@@ -19,7 +19,7 @@ window.execPersonalImpact = async function execPersonalImpact(apiKey,
     lightTextColor: '#bbbbbd',
     progressBarBackgroundColor: '#e3e3e3'
   }
-  const reviewResultsId = 'review-results-link-personal-impact';
+  const reviewResultsId = 'beam-review-results-link-personal-impact';
   await renderImpactScreen();
 
   async function renderImpactScreen() {

@@ -5,7 +5,7 @@ import {pathUtil} from "../../utils";
 window.execNationalCommunityImpact = async function execNationalCommunityImpact(apiKey, fontFamily, language, containerId,
                                                                                 selectANonprofitCallback = () => {
                                                                                 }, production = true) {
-  const beamImpactWidgetContainerId = 'beam-community-widget-container';
+  const beamImpactWidgetContainerId = 'beam-national-impact-container';
   const chainId = "61";
   const beamWebSdkBaseUrl = production ? process.env.BEAM_BACKEND_BASE_URL : process.env.STAGE_BEAM_BACKEND_BASE_URL;
   const beamWebUrl = production ? process.env.WEB_BASE_URL : process.env.STAGE_WEB_BASE_URL;
@@ -66,7 +66,7 @@ window.execNationalCommunityImpact = async function execNationalCommunityImpact(
   }
 
   function addCallbacks() {
-    document.getElementById('link-to-select-nonprofit').addEventListener('click', function(e){
+    document.getElementById('beam-link-to-select-nonprofit').addEventListener('click', function(e){
       selectANonprofitCallback();
       e.preventDefault();
       return false;
@@ -118,7 +118,7 @@ window.execNationalCommunityImpact = async function execNationalCommunityImpact(
             }),
             new components.BeamText({
               text: `${impactData?.personal_impact_description || 'Food meals this holiday season by simply placing your order.'}` +
-                `<a href='#' id="link-to-select-nonprofit" style='color: ${themeColorConfig.progressBarColor}; text-decoration: none; display: inline;'>${"   " + impactData.personal_impact_cta} </a>`,
+                `<a href='#' id="beam-link-to-select-nonprofit" style='color: ${themeColorConfig.progressBarColor}; text-decoration: none; display: inline;'>${"   " + impactData.personal_impact_cta} </a>`,
               style: {
                 fontSize: '12px',
                 lineHeight: '18px',
