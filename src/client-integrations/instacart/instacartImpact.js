@@ -807,7 +807,7 @@ window.execCommunityImpact = async function execCommunityImpact(
             objectFit: 'cover',
           },
           mobileStyle: {
-            width: '311px',
+            width: '100%',
             height: '152px'
           }
         },

@@ -334,7 +334,7 @@ window.execNationalCommunityImpact = async function execNationalCommunityImpact(
             objectFit: 'cover',
           },
           mobileStyle: {
-            width: '311px',
+            width: '100%',
             height: '152px'
           }
         },
