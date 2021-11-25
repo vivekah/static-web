@@ -256,13 +256,12 @@ window.execNonprofitSelection = async function execNonprofitSelection(apiKey,
     return null;
   }
 
-
   async function getNonprofits() {
     // console.log("getNonprofits ", userId)
     let beam_url = new URL('api/v2/chains/nonprofits', beamWebSdkBaseUrl);
     let params = {
       chain: chainId,
-      user: beamUser,
+      partner_user_id: userId,
       show_community_impact: true,
       postal_code: postalCode,
       country_code: countryCode,
@@ -439,14 +438,12 @@ window.execNonprofitSelection = async function execNonprofitSelection(apiKey,
   }
 
   async function executeBeamWidget(data) {
-
     widget = getBeamWidget(true, data?.chain_donation_type);
     widget.data = data;
-    let lastNonprofitInStorage = window.localStorage.getItem(nonprofitKey);
-    if (lastNonprofitInStorage) {
+    widget.lastNonprofit = data?.nonprofits?.find(nonprofit => nonprofit.id == data.last_nonprofit);
+    if (widget.lastNonprofit) {
       userRegistered = true;
       enableConfirmButton();
-      widget.lastNonprofit = JSON.parse(lastNonprofitInStorage);
     }
     return widget.render();
   }
@@ -636,6 +633,33 @@ window.execNonprofitSelection = async function execNonprofitSelection(apiKey,
     window.addEventListener('resize', function (event) {
       addTooltip();
     }, true);
+  }
+
+  async function getUserTransactionInfo() {
+    let beam_url = new URL('api/v2/users/transaction-info', beamWebSdkBaseUrl);
+    let params = {
+      chain: chainId,
+      user: beamUser,
+      lan: lan,
+      partner_user_id: userId
+    };
+    if (params)
+      beam_url.search = new URLSearchParams(params)
+        .toString()
+        .replace(/null/g, "")
+        .replace(/undefined/g, "");
+
+    let response = await window.fetch(beam_url, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Api-Key ${apiKey}`
+      },
+    });
+    if (response.status === 200) {
+      return await response.json();
+    } else
+      return null;
   }
 
   let nonprofits = await getNonprofits();
