@@ -751,7 +751,7 @@ window.execCommunityImpact = async function execCommunityImpact(
 
           }
         },
-        favoriteNonprofit:{
+        favoriteNonprofit: {
           style: {
             border: '3px solid #72767E !important'
           }
@@ -762,7 +762,7 @@ window.execCommunityImpact = async function execCommunityImpact(
         noWrap: false,
         impactCard: {
           style: {
-            borderRadius: '10px',
+            borderRadius: '12px',
           },
           mobileStyle: {
             width: '100%',
@@ -803,10 +803,12 @@ window.execCommunityImpact = async function execCommunityImpact(
         // impactImageHeight: '100%',
         cardImage: {
           style: {
-            borderRadius: '10px',
-            width: '100%',
-            height: '100%',
-            objectFit: 'contain'
+            borderRadius: '12px',
+            objectFit: 'cover',
+          },
+          mobileStyle: {
+            width: '311px',
+            height: '152px'
           }
         },
         cardOverlay: {
@@ -827,7 +829,7 @@ window.execCommunityImpact = async function execCommunityImpact(
         },
         outerCard: {
           style: {
-            borderRadius: '10px',
+            borderRadius: '12px',
             // width: '100%',
             padding: '16px',
             maxWidth: '278px',
@@ -862,7 +864,7 @@ window.execCommunityImpact = async function execCommunityImpact(
         hideTabs: true,
         hideBorders: true,
         textColor: themeColorConfig.textColor,
-        borderRadius: "15px",
+        borderRadius: "12px",
         percentageTextColor: themeColorConfig.textColor,
         showLink: true,
         headerPartnerLogoMargin: '0px 0px -23px',

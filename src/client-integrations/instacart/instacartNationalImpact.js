@@ -289,7 +289,7 @@ window.execNationalCommunityImpact = async function execNationalCommunityImpact(
         // impactCardWidth: '256px',
         impactCard: {
           style: {
-            borderRadius: '10px',
+            borderRadius: '12px',
             color: themeColorConfig.textColor,
           },
           mobileStyle: {
@@ -330,14 +330,12 @@ window.execNationalCommunityImpact = async function execNationalCommunityImpact(
         // impactImageHeight: '100%',
         cardImage: {
           style: {
-            borderRadius: '10px',
-            // height: '152px',
-            // width: '236px',
-            objectFit: 'cover'
+            borderRadius: '12px',
+            objectFit: 'cover',
           },
           mobileStyle: {
-            width: '100%',
-            height: '100%',
+            width: '311px',
+            height: '152px'
           }
         },
         cardOverlay: {
@@ -358,7 +356,7 @@ window.execNationalCommunityImpact = async function execNationalCommunityImpact(
         },
         outerCard: {
           style: {
-            borderRadius: '10px',
+            borderRadius: '12px',
             // width: '100%',
             padding: '16px',
             maxWidth: '278px',
@@ -399,7 +397,7 @@ window.execNationalCommunityImpact = async function execNationalCommunityImpact(
         hideTabs: false,
         hideBorders: true,
         textColor: themeColorConfig.textColor,
-        borderRadius: "15px",
+        borderRadius: "12px",
         percentageTextColor: themeColorConfig.textColor,
         showLink: true,
         headerPartnerLogoMargin: '0px',
