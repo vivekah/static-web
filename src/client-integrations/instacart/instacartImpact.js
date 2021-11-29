@@ -677,12 +677,12 @@ window.execCommunityImpact = async function execCommunityImpact(
 
   function addTooltip(data) {
 
-    let beamTooltip = document.getElementById("beam-tooltip");
+    let beamTooltip = document.getElementById("beam-selection-tooltip");
     if (!beamTooltip) {
       let learnMoreElem = document.getElementById("learn-more");
       if (learnMoreElem) {
         let learnMoreTooltipText = document.createElement('div');
-        learnMoreTooltipText.id = 'beam-tooltip';
+        learnMoreTooltipText.id = 'beam-selection-tooltip';
         learnMoreTooltipText.textContent = data?.copy?.complianceDescriptionWeb;
         learnMoreElem.classList.add('beam-impact-tooltip');
         learnMoreTooltipText.classList.add('beam-impact-tooltip-text');
