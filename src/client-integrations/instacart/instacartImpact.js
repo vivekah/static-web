@@ -125,7 +125,7 @@ window.execCommunityImpact = async function execCommunityImpact(
         isMobile && getHeader(),
         getJoinUsSection(impactData),
         devider(),
-        getPartnerSummarySection(),
+        getPartnerSummarySection(impactData),
         getTutorialSection(impactData?.tutorial),
         isMobile ? devider() : false,
         isMobile ? getInfoSection(impactData) : false,
