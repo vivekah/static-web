@@ -252,7 +252,7 @@ window.execNationalCommunityImpact = async function execNationalCommunityImpact(
 
   async function getImpactData() {
     let fullUrl = new URL('api/v2/users/impact/instacart/community', beamWebSdkBaseUrl);
-    const params = {}
+    const params = {lan: language}
     if (params)
       fullUrl.search = new URLSearchParams(params)
         .toString()
@@ -280,6 +280,7 @@ window.execNationalCommunityImpact = async function execNationalCommunityImpact(
       noAjax: true,
       containerId: beamImpactWidgetContainerId,
       chainId: chainId,
+      lan: language,
       themeConfig: {
         hideLogo: true,
         showNational: true,
