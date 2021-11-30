@@ -142,7 +142,7 @@ window.execCommunityImpact = async function execCommunityImpact(
       document.body.append(impactScreenContainer.view);
     }
 
-    console.log(" impact data: ", impactData)
+    console.log(" IMPACT DATA: ", impactData)
     loadStyle();
     createCarousel();
     addTooltip(impactData);
@@ -319,8 +319,7 @@ window.execCommunityImpact = async function execCommunityImpact(
               }
             }),
             new components.BeamText({
-              text: `${impactData.personal_impact_description || 'Food meals this holiday season by simply placing your order.'}` + (!impactData.personal_impact &&
-                `<a href='#' id="${impactData.personal_impact_cta?.indexOf('nonprofit') === -1 ? 'review-results-link' : 'select-nonprofit-impact-overview'}" style='color: ${themeColorConfig.progressBarColor}; text-decoration: none; font-weight: bold;'> ${impactData.personal_impact_cta} </a>`),
+              text: impactData.personal_impact_description || 'Fund meals this holiday season by simply placing your order.',
               style: {
                 fontSize: '12px',
                 lineHeight: '18px',
