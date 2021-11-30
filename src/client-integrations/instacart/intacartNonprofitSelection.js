@@ -495,13 +495,13 @@ window.execNonprofitSelection = async function execNonprofitSelection(apiKey,
 
   function addTooltip(data) {
 
-    let beamTooltip = document.getElementById("beam-tooltip");
+    let beamTooltip = document.getElementById("beam-selection-tooltip");
     console.log("beamTooltip: ", beamTooltip)
     if (!beamTooltip) {
       let learnMoreElem = document.getElementById("beam-learn-more");
       if (learnMoreElem) {
         let learnMoreTooltipText = document.createElement('div');
-        learnMoreTooltipText.id = 'beam-tooltip';
+        learnMoreTooltipText.id = 'beam-selection-tooltip';
         learnMoreTooltipText.textContent = data?.compliance_description_web || `
       To support local nonprofits across the country, donations are made to PayPal Giving Fund, a registered 501(c)(3) nonprofit organization. PPGF receives the donation and distributes 100% to the nonprofit of your choice, with Instacart covering all applicable processing fees. In the extremely rare event your nonprofit shuts down or PPGF is otherwise unable to fund it, PPGF will reassign the funds to similar nonprofit in your area.
       `;
