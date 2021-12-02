@@ -4,15 +4,17 @@ class ProgressBar extends Component {
   constructor(
     progressWrapper,
     colors = [
-      { color: "#85bcd7", offset: "0%" },
-      { color: "#fbeb63", offset: "50%" },
-      { color: "#ff944b", offset: "100%" },
+      {color: "#85bcd7", offset: "0%"},
+      {color: "#fbeb63", offset: "50%"},
+      {color: "#ff944b", offset: "100%"},
     ]
   ) {
     super();
 
     const percentage = progressWrapper.dataset.percentage;
-    const { width, height } = progressWrapper.getBoundingClientRect();
+    // const { width, height } = progressWrapper.getBoundingClientRect();
+    const height = progressWrapper.clientHeight;
+    const width = progressWrapper.clientWidth;
     const svgNS = "http://www.w3.org/2000/svg";
 
     this._element = document.createElementNS(svgNS, "svg");
@@ -51,7 +53,7 @@ class ProgressBar extends Component {
     clipRect.setAttributeNS(null, "height", height);
     clipRect.setAttributeNS(null, "x", "0");
     clipRect.setAttributeNS(null, "y", "0");
-    clipRect.setAttributeNS(null, "rx", progressWrapper.style.borderRadius == "0px" || progressWrapper.style.borderRadius == "0" ? 0 :  height / 2);
+    clipRect.setAttributeNS(null, "rx", progressWrapper.style.borderRadius == "0px" || progressWrapper.style.borderRadius == "0" ? 0 : height / 2);
 
     clipPath.appendChild(clipRect);
 
