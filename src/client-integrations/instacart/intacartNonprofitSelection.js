@@ -108,8 +108,8 @@ window.execNonprofitSelection = async function execNonprofitSelection(apiKey,
                                   width: 100%; 
                                   border: none; 
                                   height: 40px;
-                                 font-family: ${fontFamily};
-                                 font-size: 18px;
+                                  font-family: ${fontFamily};
+                                  font-size: 18px;
                               }
                               #beam-widget-header{
                               padding: 0 16px;
@@ -145,16 +145,16 @@ window.execNonprofitSelection = async function execNonprofitSelection(apiKey,
                                }
                                #beam-selection-page-footer{
                                  position: sticky;
-                                 width: calc( 100% + 32px );
-                                 margin: 0px -16px;
-                                 bottom: -1;
+                                 width: 100%;
+                                 /*margin: 0px -16px;*/
+                                
+                                 bottom: 0;
                                  right: 0; 
                                  background-color: white;
                                }
                                
                                 #beam-confirm-button-wrapper{
                                         width: 100%;
-                                        max-width: 500px;
                                         padding: 10px 16px;
                                    }   
                                    #beam-confirm-button-divider{
@@ -506,11 +506,6 @@ window.execNonprofitSelection = async function execNonprofitSelection(apiKey,
                              <div id="beam-container"  style="max-width: 500px">
                               <div id="internal-beam-widget-wrapper" style="max-width: 500px"></div>
                                 <p id="beam-disclosure">${chainDonationType?.instacart_disclosure}</p>                        
-                                <div id="beam-selection-page-footer">
-                                <div id="beam-confirm-button-divider"></div>
-                                <div id="beam-confirm-button-wrapper">
-                                    <button id="beam-chose-nonprofit-button" disabled>${chainDonationType?.choose_cta || "Choose nonprofit"}
-                                 </button>
                                 </div>
                                 
                                 </div>
@@ -518,7 +513,13 @@ window.execNonprofitSelection = async function execNonprofitSelection(apiKey,
                               <div id="beam-loading-content" style='display: none;'></div>
                             </div>
                           
-                      </div>`
+                      </div>
+                                <div id="beam-selection-page-footer">
+                                <div id="beam-confirm-button-divider"></div>
+                                <div id="beam-confirm-button-wrapper">
+                                    <button id="beam-chose-nonprofit-button" disabled>${chainDonationType?.choose_cta || "Choose nonprofit"}
+                                 </button>
+`
       return beamContentBox;
     }
   }
