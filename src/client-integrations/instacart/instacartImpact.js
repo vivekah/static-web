@@ -142,7 +142,7 @@ window.execCommunityImpact = async function execCommunityImpact(
       document.body.append(impactScreenContainer.view);
     }
 
-    console.log(" impact data: ", impactData)
+    // console.log(" impact data: ", impactData)
     loadStyle();
     createCarousel();
     addTooltip(impactData);

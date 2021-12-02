@@ -330,7 +330,7 @@ window.execNonprofitSelection = async function execNonprofitSelection(apiKey,
       selectedNonprofitCallback: async (nonprofit, store) => {
         console.debug(nonprofit);
         addTooltip(chainDonationType);
-        console.log("chainDonationType ", chainDonationType)
+        // console.log("chainDonationType ", chainDonationType)
         // create new event
         let event = new Event(EVENTS.nonProfitSelected);
         // Dispatch the event.
@@ -527,7 +527,7 @@ window.execNonprofitSelection = async function execNonprofitSelection(apiKey,
   function addTooltip(data) {
 
     let beamTooltip = document.getElementById("beam-selection-tooltip");
-    console.log("beamTooltip: ", beamTooltip)
+    // console.log("beamTooltip: ", beamTooltip)
     if (!beamTooltip) {
       let learnMoreElem = document.getElementById("beam-learn-more");
       if (learnMoreElem) {
