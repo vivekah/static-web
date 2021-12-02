@@ -23,7 +23,7 @@ window.execNonprofitSelection = async function execNonprofitSelection(apiKey,
   const chainId = "61";
   const beamContainerId = 'internal-beam-widget-wrapper';
   const confirmButtonId = "beam-chose-nonprofit-button";
-
+  const beamSelectionScreenContainerId = "beam-wrapper-content-box";
   // shop config
   const fontFamily = instacartFontFamily || "inherit";
 
@@ -51,6 +51,10 @@ window.execNonprofitSelection = async function execNonprofitSelection(apiKey,
     nonprofitSelectionScreen.innerHTML += `
     <style>
       /* Tooltip container */
+      
+                              #beam-wrapper-content-box{
+                              position: relative;
+                              }  
                               #beam-learn-more {
                                 position: relative;
                                 display: inline-block;
@@ -139,6 +143,30 @@ window.execNonprofitSelection = async function execNonprofitSelection(apiKey,
                                font-size: 12px;
                                line-height: normal;
                                }
+                               #beam-selection-page-footer{
+                                 position: sticky;
+                                 width: calc( 100% + 32px );
+                                 margin: 0px -16px;
+                                 bottom: -1;
+                                 right: 0; 
+                                 background-color: white;
+                               }
+                               
+                                #beam-confirm-button-wrapper{
+                                        width: 100%;
+                                        max-width: 500px;
+                                        padding: 10px 16px;
+                                   }   
+                                   #beam-confirm-button-divider{
+                                    width: 100%;
+                                    display: inline-block !important;
+                                    height: 15px;
+                                    background: rgb(241,241,241);
+                                    background: -moz-linear-gradient(0deg, rgba(241,241,241,1) 3%, rgba(255,255,255,1) 98%);
+                                    background: -webkit-linear-gradient(0deg, rgba(241,241,241,1) 3%, rgba(255,255,255,1) 98%);
+                                    background: linear-gradient(0deg, rgba(241,241,241,1) 3%, rgba(255,255,255,1) 98%);
+                                    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#f1f1f1",endColorstr="#ffffff",GradientType=1);
+                                   } 
                               @media only screen and (max-width: 600px) {
                                  #internal-beam-widget-wrapper{
                                   margin-bottom: 8px;
@@ -162,6 +190,7 @@ window.execNonprofitSelection = async function execNonprofitSelection(apiKey,
                                               display: flex;
                                               align-items: center;
                                               flex-direction: column;
+                                              margin: 0px;
                                         
 
                                   }    
@@ -234,6 +263,7 @@ window.execNonprofitSelection = async function execNonprofitSelection(apiKey,
       persistTransactionRequest.send(body);
     });
   }
+
 
   async function registerUser(userId) {
     // console.log("Registering user: ", userId)
@@ -463,7 +493,7 @@ window.execNonprofitSelection = async function execNonprofitSelection(apiKey,
     function getBeamWidgetHTML(chainDonationType) {
       const beamContentBox = document.createElement("div");
       beamContentBox.className = "content-box";
-      beamContentBox.id = "beam-wrapper-content-box";
+      beamContentBox.id = beamSelectionScreenContainerId;
       beamContentBox.innerHTML = `
                           <div class='content-box__row' id='beam-widget-content-box'>
                              <div id='beam-widget-header'>
