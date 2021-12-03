@@ -89,10 +89,15 @@ window.execPersonalImpact = async function execPersonalImpact(apiKey,
         marginTop: '0px',
         flexWrap: 'nowrap !important',
         padding: '0px 20px',
-        fontFamily: fontFamily || 'inherit'
+        fontFamily: fontFamily || 'inherit',
+        flexDirection: 'column !important'
       },
       children: [
         new components.BeamFlexWrapper({
+          style: {
+            flexDirection: 'row',
+             flexWrap: 'nowrap !important',
+          },
           children: [
             new components.BeamImage({
               alt: 'Instacart Purchase Icon',
@@ -104,22 +109,27 @@ window.execPersonalImpact = async function execPersonalImpact(apiKey,
                 display: 'flex',
                 margin: '0 10px 0 10px'
               }
+            }),
+             new components.BeamText({
+              text: impactData?.personal_impact_header || 'Join us in the fight against food insecurity',
+              style: {
+                fontFamily: fontFamily || 'inherit',
+                fontSize: '15px',
+                lineHeight: '26px',
+                fontWeight: '600'
+              }
             })
           ]
         }),
         new components.BeamFlexWrapper({
           flexDirection: 'column',
           alignItems: 'flex-start',
+          style: {
+            width: '100%',
+            marginTop: '4px',
+            paddingLeft: '10px'
+          },
           children: [
-            new components.BeamText({
-              text: impactData?.personal_impact_header || 'Join us in the fight against food insecurity',
-              style: {
-                fontFamily: fontFamily || 'inherit',
-                fontSize: '18px',
-                lineHeight: '26px',
-                fontWeight: '600'
-              }
-            }),
             impactData?.personal_impact_description && new components.BeamText({
               text: `${impactData?.personal_impact_description || 'Food meals this holiday season by simply placing your order.'}`,
               style: {
@@ -163,7 +173,7 @@ window.execPersonalImpact = async function execPersonalImpact(apiKey,
               style: {
                 fontSize: '12px',
                 lineHeight: '18px',
-                marginTop: '11px',
+                marginTop: '4px',
                 fontFamily: fontFamily || 'inherit'
               },
               text: `<a href='#' id="${reviewResultsId}" style='color: ${themeColorConfig.progressBarColor}; text-decoration: none;'>${impactData?.personal_impact_cta} </a>`
