@@ -83,7 +83,7 @@ window.execPersonalImpact = async function execPersonalImpact(apiKey,
       alignItems: 'flex-start',
       style: {
         maxWidth: '600px',
-        height: '100px',
+        // height: '100px',
         justifyContent: 'center',
         margin: 'auto',
         marginTop: '0px',

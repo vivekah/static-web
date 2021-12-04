@@ -376,7 +376,7 @@ window.execCommunityImpact = async function execCommunityImpact(
                 fontFamily: fontFamily || 'inherit',
 
               },
-              text: `<a href='#' id="${impactData.personal_impact_cta?.indexOf('nonprofit') === -1 ? 'review-results-link' : 'select-nonprofit-impact-overview'}" style='color: ${themeColorConfig.progressBarColor}; text-decoration: none;'>${impactData.personal_impact_cta} </a>`
+              text: impactData?.personal_impact_completion || `<a href='#' id="${impactData.personal_impact_cta?.indexOf('nonprofit') === -1 ? 'review-results-link' : 'select-nonprofit-impact-overview'}" style='color: ${themeColorConfig.progressBarColor}; text-decoration: none;'>${impactData.personal_impact_cta} </a>`
             })
           ]
         }),
