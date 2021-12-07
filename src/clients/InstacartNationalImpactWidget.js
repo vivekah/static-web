@@ -385,7 +385,7 @@ class InstacartNationalImpactWidget extends BaseImpactWidget {
       return new components.BeamText({
         clickListener: options.themeConfig.goalInfo?.clickListener,
         clickListenerParams: {nonprofit: nonprofit?.nonprofit_id},
-        text: nonprofit && nonprofit.impact ? `<a href='#' style='text-decoration: none; color: ${options.themeConfig.goalInfo?.style?.color}'>${nonprofit.impact?.impact_cta}</a>` : '',
+        text: nonprofit && nonprofit.impact ? `<span style='text-decoration: none; color: ${options.themeConfig.impact?.style?.color}'>${nonprofit.impact?.impact_cta}</span>` : '',
         tag: 'div',
         href: 'nonprofit',
         fontFamily: options.themeConfig.fontFamily,

@@ -45,7 +45,7 @@ window.execPersonalImpact = async function execPersonalImpact(apiKey,
   }
 
   function addCallbacks() {
-    document.getElementById(reviewResultsId).addEventListener('click', function(e){
+    document.getElementById(reviewResultsId)?.addEventListener('click', function(e){
       reviewResultsCallback();
       e.preventDefault();
       return false;
