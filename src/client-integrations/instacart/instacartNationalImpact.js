@@ -424,7 +424,10 @@ window.execNationalCommunityImpact = async function execNationalCommunityImpact(
         },
         devider: {
           style: {
-            display: 'none'
+            margin: '15px 0px 5px 0px',
+            borderTop: `1px solid ${themeColorConfig.progressBarBackgroundColor} `,
+            borderBottom: '0',
+            border: '0px'
           }
         }, //TODO: rename to nonprofits cause devider
         titleDevider: {

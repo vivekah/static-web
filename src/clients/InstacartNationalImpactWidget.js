@@ -46,7 +46,7 @@ class InstacartNationalImpactWidget extends BaseImpactWidget {
   }
 
   async fetchRegions() {
-   const regions = [].concat(this.data.nonprofits.map((x) => x.regions)).flat(1).filter(e => e);
+    const regions = [].concat(this.data.nonprofits.map((x) => x.regions)).flat(1).filter(e => e);
     return [null, ...new Set(regions)];
   }
 
@@ -196,9 +196,9 @@ class InstacartNationalImpactWidget extends BaseImpactWidget {
         cause(this.options, nonprofit, this.isMobile),
         impactDescription(this.options, nonprofit, this.isMobile),
         progressBar(this.options, nonprofit, this.isMobile),
-        devider(this.options, this.isMobile),
+        nonprofit.impact?.impact_cta && devider(this.options, this.isMobile),
         // moreInfo(this.options, nonprofit)
-        goalInfo(this.options, nonprofit, this.isMobile)
+        nonprofit.impact?.impact_cta && goalInfo(this.options, nonprofit, this.isMobile)
       ],
     });
 
@@ -383,14 +383,28 @@ class InstacartNationalImpactWidget extends BaseImpactWidget {
 
     function goalInfo(options, nonprofit, isMobile) {
       return new components.BeamText({
-        text: (nonprofit?.impact?.percentage === 100 ? options.themeConfig.goalInfo?.completedText : options.themeConfig.goalInfo?.text) + options.themeConfig.goalInfo?.contributeText,
+        clickListener: options.themeConfig.goalInfo?.clickListener,
+        clickListenerParams: {nonprofit: nonprofit?.nonprofit_id},
+        text: nonprofit && nonprofit.impact ? `<a href='#' style='text-decoration: none; color: ${options.themeConfig.goalInfo?.style?.color}'>${nonprofit.impact?.impact_cta}</a>` : '',
+        tag: 'div',
+        href: 'nonprofit',
+        fontFamily: options.themeConfig.fontFamily,
         style: {
-          display: options.themeConfig.showNational ? 'none' : 'flex',
+          paddingTop: '8px',
+          fontSize: '12px',
+          display: 'flex',
           ...options.themeConfig.goalInfo?.style,
           ...isMobile ? options.themeConfig.goalInfo?.mobileStyle : {}
-        },
+        }
+        // style: {
+        //   display: options.themeConfig.showNational ? 'none' : 'flex',
+        //   ...options.themeConfig.goalInfo?.style,
+        //   ...isMobile ? options.themeConfig.goalInfo?.mobileStyle : {}
+        // },
       })
     }
+
+
   }
 
   titleDevider() {
