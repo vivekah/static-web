@@ -4,9 +4,9 @@ class ProgressBar extends Component {
   constructor(
     progressWrapper,
     colors = [
-      {color: "#85bcd7", offset: "0%"},
-      {color: "#fbeb63", offset: "50%"},
-      {color: "#ff944b", offset: "100%"},
+      { color: "#85bcd7", offset: "0%" },
+      { color: "#fbeb63", offset: "50%" },
+      { color: "#ff944b", offset: "100%" },
     ]
   ) {
     super();
@@ -19,7 +19,11 @@ class ProgressBar extends Component {
 
     this._element = document.createElementNS(svgNS, "svg");
 
-    this._element.setAttributeNS(null, "style", `width: ${width}px!important;height: ${height}px!important;`);
+    this._element.setAttributeNS(
+      null,
+      "style",
+      `width: ${width}px!important;height: ${height}px!important;`
+    );
     this._element.setAttributeNS(null, "viewBox", `0 0 ${width} ${height}`);
     this._element.setAttributeNS(null, "preserveAspectRatio", "none");
 
@@ -53,7 +57,14 @@ class ProgressBar extends Component {
     clipRect.setAttributeNS(null, "height", height);
     clipRect.setAttributeNS(null, "x", "0");
     clipRect.setAttributeNS(null, "y", "0");
-    clipRect.setAttributeNS(null, "rx", progressWrapper.style.borderRadius == "0px" || progressWrapper.style.borderRadius == "0" ? 0 : height / 2);
+    clipRect.setAttributeNS(
+      null,
+      "rx",
+      progressWrapper.style.borderRadius == "0px" ||
+        progressWrapper.style.borderRadius == "0"
+        ? 0
+        : height / 2
+    );
 
     clipPath.appendChild(clipRect);
 
@@ -72,15 +83,10 @@ class ProgressBar extends Component {
     this._element.appendChild(rect1);
 
     let rect2 = document.createElementNS(svgNS, "rect");
-    rect2.setAttributeNS(null, "width", width);
+    rect2.setAttributeNS(null, "width", percentage + "%");
     rect2.setAttributeNS(null, "height", height);
     rect2.setAttributeNS(null, "x", "0");
     rect2.setAttributeNS(null, "y", "0");
-    rect2.setAttributeNS(
-      null,
-      "clip-path",
-      `url(#progress-clip-${percentage})`
-    );
     rect2.setAttributeNS(null, "fill", "url(#progress-grad)");
 
     this._element.appendChild(rect2);
