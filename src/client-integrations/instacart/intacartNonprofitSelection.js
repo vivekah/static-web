@@ -563,7 +563,7 @@ window.execNonprofitSelection = async function execNonprofitSelection(apiKey,
           height: '8px',
           paddingBottom: '2px',
           marginBottom: "0px", 
-          marginTop: "15px",
+          marginTop: "3px",
           fontWeight: '200',
           fontSize: '13.5px'
         }) : false,
