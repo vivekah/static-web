@@ -791,7 +791,7 @@ window.execCommunityImpact = async function execCommunityImpact(
             fontSize: '10px',
             fontWeight: '400',
             fontFamily: fontFamily || 'inherit',
-            color: themeColorConfig.causeTestColor
+            color: themeColorConfig.textColor
           }
         },
         impact: {
