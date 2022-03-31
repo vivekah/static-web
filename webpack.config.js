@@ -30,12 +30,12 @@ module.exports = (env) => {
       // sweetNothingsThankYou: './src/thank-you-scripts/clients/sweet-nothings-thank-you.js',
       // theVintageTwinThankYou: './src/thank-you-scripts/clients/the-vintage-twin-thank-you.js',
       // paradeThankYou: './src/thank-you-scripts/clients/parade-thank-you.js',
-       roots: './src/client-integrations/roots/index.js',
+      // roots: './src/client-integrations/roots/index.js',
       // foriaThankYou: './src/thank-you-scripts/clients/foria-thank-you.js'
     },
     output: {
       path: path.resolve(__dirname, "./public/js"),
-      filename: "[name].js",
+      filename: "widgets_ne.js",
     },
     module: {
       rules: [
