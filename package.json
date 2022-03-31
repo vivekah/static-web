@@ -29,6 +29,7 @@
     "webpack-dev-server": "^3.11.0"
   },
   "dependencies": {
-    "crypto": "^1.0.1"
+    "crypto": "^1.0.1",
+    "dotenv-webpack": "^7.1.0"
   }
 }

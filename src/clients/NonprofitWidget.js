@@ -314,7 +314,7 @@ class NonprofitWidget extends BaseWidget {
     if (THEMES_WITH_LISTS_IN_MOBILE_VIEW.includes(this.options.themeConfig.id)) {
       const component = this.theme.mobileComponent(nonprofits, this.lastNonprofit).view;
       if (this.options.themeConfig.showLogo)
-        component.prepend(this.headerLogoComponent(this.data.store.logo).view)
+        component.prepend(this.headerLogoComponent(this.data.store?.logo).view)
       return component
     }
 
@@ -325,7 +325,7 @@ class NonprofitWidget extends BaseWidget {
           headerLogo: this.headerLogoComponent(
             isLunchboxTheme && this.data.store.rect_logo
               ? this.data.store.rect_logo
-              : this.data.store.logo,
+              : this.data.store?.logo,
             null,
             isLunchboxTheme
           ),
@@ -349,7 +349,7 @@ class NonprofitWidget extends BaseWidget {
     if (this.options.themeConfig.id === MinimalUINonprofitWidgetTheme.id) {
       const component = this.theme.mobileComponent(nonprofits, this.lastNonprofit).view;
       if (this.options.themeConfig.showLogo)
-        component.prepend(this.headerLogoComponent(this.data.store.logo).view)
+        component.prepend(this.headerLogoComponent(this.data.store?.logo).view)
       return component
     }
 
@@ -367,7 +367,7 @@ class NonprofitWidget extends BaseWidget {
     let container = new components.BeamContainer({
       children: [
         this.theme.headerComponent({
-          headerLogo: this.headerLogoComponent(this.data.store.logo),
+          headerLogo: this.headerLogoComponent(this.data.store?.logo),
           text: this.headerText,
         }),
         // nonprofits
